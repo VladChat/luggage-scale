@@ -1,0 +1,577 @@
+<body>
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Baggage Limits</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #0a1a2f;
+      color: #f0f8ff;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #4db8ff;
+      margin-bottom: 1rem;
+    }
+    .airline-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem 0;
+    }
+    .airline-list li {
+      background: #11294d;
+      margin-bottom: 0.75rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .airline-list li:hover {
+      background: #1a3a66;
+    }
+    .airline-list li h2 {
+      font-size: 1.2rem;
+      margin: 0;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .airline-logo {
+      height: 24px;
+      border-radius: 4px;
+      background: #fff;
+      padding: 2px;
+    }
+    .details {
+      display: none;
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      background: #0f223d;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+    .details p {
+      margin: 0.3rem 0;
+      line-height: 1.4;
+    }
+
+  /* Top 3-page tiles (Manual / Shop / Current page) */
+  .nav-tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 0 0 1rem 0;
+  }
+  .tile {
+    background: #11294d;
+    color: #f0f8ff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+  .tile:hover { background: #1a3a66; transform: translateY(-1px); }
+  .tile svg { width: 22px; height: 22px; display: block; }
+  .tile.active {
+    background: #14335a;
+    outline: 2px solid #4db8ff;
+    cursor: default;
+  }
+  .tile.active:hover { background: #14335a; transform: none; }
+  @media (max-width: 640px) {
+    .nav-tiles { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- PASTE this block directly ABOVE your <h1>🌏 Flight Baggage Limits</h1> -->
+<nav class="nav-tiles" role="navigation" aria-label="Top pages">
+  <!-- Manual -->
+  <a href="manual.html" class="tile">
+    <!-- Book icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22V6.5z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4V20" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span class="label">Manual</span>
+  </a>
+
+  <!-- Shop -->
+  <a href="shop.html" class="tile">
+    <!-- Shopping bag icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 8h12l-1.2 11H7.2L6 8z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M9 8a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span class="label">Shop</span>
+  </a>
+
+  <!-- Current page (Flight Baggage Limits) -->
+  <span class="tile active" aria-current="page">
+    <!-- Suitcase icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="6" y="7" width="12" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M9 7V5h6v2" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <span class="label">Flight Baggage Limits</span>
+  </span>
+</nav>
+
+  <h1>Flight Baggage Limits</h1>
+
+  <ul class="airline-list">
+    <li onclick="toggleDetails('aa')">
+      <h2>
+        <img src="https://logo.clearbit.com/aa.com" alt="American Airlines" class="airline-logo">
+        American Airlines
+      </h2>
+      <div class="details" id="aa">
+        <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+        <p><strong>Carry-On Weight:</strong> No limit</p>
+        <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+        <p><strong>Checked Weight:</strong> 50 lbs</p>
+      </div>
+    </li>
+    <li onclick="toggleDetails('delta')">
+      <h2>
+        <img src="https://logo.clearbit.com/delta.com" alt="Delta" class="airline-logo">
+        Delta
+      </h2>
+      <div class="details" id="delta">
+        <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+        <p><strong>Carry-On Weight:</strong> No limit</p>
+        <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+        <p><strong>Checked Weight:</strong> 50 lbs</p>
+      </div>
+    </li>
+    <li onclick="toggleDetails('united')">
+      <h2>
+        <img src="https://logo.clearbit.com/united.com" alt="United Airlines" class="airline-logo">
+        United Airlines
+      </h2>
+      <div class="details" id="united">
+        <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+        <p><strong>Carry-On Weight:</strong> No limit</p>
+        <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+        <p><strong>Checked Weight:</strong> 50 lbs</p>
+      </div>
+    </li>
+    <li onclick="toggleDetails('southwest')">
+      <h2>
+        <img src="https://logo.clearbit.com/southwest.com" alt="Southwest" class="airline-logo">
+        Southwest
+      </h2>
+      <div class="details" id="southwest">
+        <p><strong>Carry-On Dims:</strong> 24 x 16 x 10 in</p>
+        <p><strong>Carry-On Weight:</strong> No limit</p>
+        <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+        <p><strong>Checked Weight:</strong> 50 lbs</p>
+      </div>
+    </li>
+    <li onclick="toggleDetails('jetblue')">
+      <h2>
+        <img src="https://logo.clearbit.com/jetblue.com" alt="JetBlue" class="airline-logo">
+        JetBlue
+      </h2>
+      <div class="details" id="jetblue">
+        <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+        <p><strong>Carry-On Weight:</strong> No limit</p>
+        <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+        <p><strong>Checked Weight:</strong> 50 lbs</p>
+      </div>
+    </li>
+	<li onclick="toggleDetails('alaska')">
+  <h2>
+    <img src="https://logo.clearbit.com/alaskaair.com" alt="Alaska Airlines" class="airline-logo">
+    Alaska Airlines
+  </h2>
+  <div class="details" id="alaska">
+    <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> No limit</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('spirit')">
+  <h2>
+    <img src="https://logo.clearbit.com/spirit.com" alt="Spirit Airlines" class="airline-logo">
+    Spirit Airlines
+  </h2>
+  <div class="details" id="spirit">
+    <p><strong>Carry-On Dims:</strong> 22 x 18 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 40 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 40 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('frontier')">
+  <h2>
+    <img src="https://logo.clearbit.com/flyfrontier.com" alt="Frontier Airlines" class="airline-logo">
+    Frontier Airlines
+  </h2>
+  <div class="details" id="frontier">
+    <p><strong>Carry-On Dims:</strong> 24 x 16 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 35 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('allegiant')">
+  <h2>
+    <img src="https://logo.clearbit.com/allegiantair.com" alt="Allegiant Air" class="airline-logo">
+    Allegiant Air
+  </h2>
+  <div class="details" id="allegiant">
+    <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> No limit</p>
+    <p><strong>Checked Dims:</strong> 80 in linear <em>(means total length + width + height = 80 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('hawaiian')">
+  <h2>
+    <img src="https://logo.clearbit.com/hawaiianairlines.com" alt="Hawaiian Airlines" class="airline-logo">
+    Hawaiian Airlines
+  </h2>
+  <div class="details" id="hawaiian">
+    <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 25 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+<li onclick="toggleDetails('aircanada')">
+  <h2>
+    <img src="https://logo.clearbit.com/aircanada.com" alt="Air Canada" class="airline-logo">
+    Air Canada
+  </h2>
+  <div class="details" id="aircanada">
+    <p><strong>Carry-On Dims:</strong> 21.5 x 15.5 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 22 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('westjet')">
+  <h2>
+    <img src="https://logo.clearbit.com/westjet.com" alt="WestJet" class="airline-logo">
+    WestJet
+  </h2>
+  <div class="details" id="westjet">
+    <p><strong>Carry-On Dims:</strong> 21 x 15 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> No limit</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('british')">
+  <h2>
+    <img src="https://logo.clearbit.com/britishairways.com" alt="British Airways" class="airline-logo">
+    British Airways
+  </h2>
+  <div class="details" id="british">
+    <p><strong>Carry-On Dims:</strong> 22 x 18 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 51 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('lufthansa')">
+  <h2>
+    <img src="https://logo.clearbit.com/lufthansa.com" alt="Lufthansa" class="airline-logo">
+    Lufthansa
+  </h2>
+  <div class="details" id="lufthansa">
+    <p><strong>Carry-On Dims:</strong> 21.6 x 15.7 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 17.6 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('airfrance')">
+  <h2>
+    <img src="https://logo.clearbit.com/airfrance.com" alt="Air France" class="airline-logo">
+    Air France
+  </h2>
+  <div class="details" id="airfrance">
+    <p><strong>Carry-On Dims:</strong> 21.6 x 13.7 x 9.8 in</p>
+    <p><strong>Carry-On Weight:</strong> 26 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+<li onclick="toggleDetails('klm')">
+  <h2>
+    <img src="https://logo.clearbit.com/klm.com" alt="KLM Royal Dutch Airlines" class="airline-logo">
+    KLM Royal Dutch Airlines
+  </h2>
+  <div class="details" id="klm">
+    <p><strong>Carry-On Dims:</strong> 21.5 x 13.5 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 26 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('turkish')">
+  <h2>
+    <img src="https://logo.clearbit.com/turkishairlines.com" alt="Turkish Airlines" class="airline-logo">
+    Turkish Airlines
+  </h2>
+  <div class="details" id="turkish">
+    <p><strong>Carry-On Dims:</strong> 22 x 15 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 17.6 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('qatar')">
+  <h2>
+    <img src="https://logo.clearbit.com/qatarairways.com" alt="Qatar Airways" class="airline-logo">
+    Qatar Airways
+  </h2>
+  <div class="details" id="qatar">
+    <p><strong>Carry-On Dims:</strong> 20 x 15 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 15 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('emirates')">
+  <h2>
+    <img src="https://logo.clearbit.com/emirates.com" alt="Emirates" class="airline-logo">
+    Emirates
+  </h2>
+  <div class="details" id="emirates">
+    <p><strong>Carry-On Dims:</strong> 22 x 15 x 8 in</p>
+    <p><strong>Carry-On Weight:</strong> 15 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('etihad')">
+  <h2>
+    <img src="https://logo.clearbit.com/etihad.com" alt="Etihad Airways" class="airline-logo">
+    Etihad Airways
+  </h2>
+  <div class="details" id="etihad">
+    <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 15 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+<li onclick="toggleDetails('jal')">
+  <h2>
+    <img src="https://logo.clearbit.com/jal.co.jp" alt="Japan Airlines" class="airline-logo">
+    Japan Airlines
+  </h2>
+  <div class="details" id="jal">
+    <p><strong>Carry-On Dims:</strong> 22 x 14 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 22 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('ana')">
+  <h2>
+    <img src="https://logo.clearbit.com/ana.co.jp" alt="ANA (All Nippon Airways)" class="airline-logo">
+    ANA (All Nippon Airways)
+  </h2>
+  <div class="details" id="ana">
+    <p><strong>Carry-On Dims:</strong> 22 x 16 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 22 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('koreanair')">
+  <h2>
+    <img src="https://logo.clearbit.com/koreanair.com" alt="Korean Air" class="airline-logo">
+    Korean Air
+  </h2>
+  <div class="details" id="koreanair">
+    <p><strong>Carry-On Dims:</strong> 21.6 x 15.7 x 7.8 in</p>
+    <p><strong>Carry-On Weight:</strong> 25 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('singapore')">
+  <h2>
+    <img src="https://logo.clearbit.com/singaporeair.com" alt="Singapore Airlines" class="airline-logo">
+    Singapore Airlines
+  </h2>
+  <div class="details" id="singapore">
+    <p><strong>Carry-On Dims:</strong> 22 x 15 x 8 in</p>
+    <p><strong>Carry-On Weight:</strong> 15 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+<li onclick="toggleDetails('aeromexico')">
+  <h2>
+    <img src="https://logo.clearbit.com/aeromexico.com" alt="Aeroméxico" class="airline-logo">
+    Aeroméxico
+  </h2>
+  <div class="details" id="aeromexico">
+    <p><strong>Carry-On Dims:</strong> 21.5 x 15.7 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 22–33 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50–70 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('volaris')">
+  <h2>
+    <img src="https://logo.clearbit.com/volaris.com" alt="Volaris" class="airline-logo">
+    Volaris
+  </h2>
+  <div class="details" id="volaris">
+    <p><strong>Carry-On Dims:</strong> 22 x 16 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 22 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 55 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('avianca')">
+  <h2>
+    <img src="https://logo.clearbit.com/avianca.com" alt="Avianca" class="airline-logo">
+    Avianca
+  </h2>
+  <div class="details" id="avianca">
+    <p><strong>Carry-On Dims:</strong> 22 x 14 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 22 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('latam')">
+  <h2>
+    <img src="https://logo.clearbit.com/latamairlines.com" alt="LATAM Airlines" class="airline-logo">
+    LATAM Airlines
+  </h2>
+  <div class="details" id="latam">
+    <p><strong>Carry-On Dims:</strong> 21.7 x 13.8 x 9.9 in</p>
+    <p><strong>Carry-On Weight:</strong> 26 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('iberia')">
+  <h2>
+    <img src="https://logo.clearbit.com/iberia.com" alt="Iberia" class="airline-logo">
+    Iberia
+  </h2>
+  <div class="details" id="iberia">
+    <p><strong>Carry-On Dims:</strong> 22 x 17.7 x 9.8 in</p>
+    <p><strong>Carry-On Weight:</strong> 22 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+<li onclick="toggleDetails('finnair')">
+  <h2>
+    <img src="https://logo.clearbit.com/finnair.com" alt="Finnair" class="airline-logo">
+    Finnair
+  </h2>
+  <div class="details" id="finnair">
+    <p><strong>Carry-On Dims:</strong> 22 x 16 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 17.6 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('swiss')">
+  <h2>
+    <img src="https://logo.clearbit.com/swiss.com" alt="Swiss International Air Lines" class="airline-logo">
+    Swiss International Air Lines
+  </h2>
+  <div class="details" id="swiss">
+    <p><strong>Carry-On Dims:</strong> 21 x 15 x 9 in</p>
+    <p><strong>Carry-On Weight:</strong> 17 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('ita')">
+  <h2>
+    <img src="https://logo.clearbit.com/ita-airways.com" alt="ITA Airways" class="airline-logo">
+    ITA Airways
+  </h2>
+  <div class="details" id="ita">
+    <p><strong>Carry-On Dims:</strong> 21.7 x 13.8 x 9.8 in</p>
+    <p><strong>Carry-On Weight:</strong> 17.6 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('tap')">
+  <h2>
+    <img src="https://logo.clearbit.com/flytap.com" alt="TAP Air Portugal" class="airline-logo">
+    TAP Air Portugal
+  </h2>
+  <div class="details" id="tap">
+    <p><strong>Carry-On Dims:</strong> 22 x 16 x 8 in</p>
+    <p><strong>Carry-On Weight:</strong> 17.6 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+<li onclick="toggleDetails('copa')">
+  <h2>
+    <img src="https://logo.clearbit.com/copaair.com" alt="Copa Airlines" class="airline-logo">
+    Copa Airlines
+  </h2>
+  <div class="details" id="copa">
+    <p><strong>Carry-On Dims:</strong> 22 x 14 x 10 in</p>
+    <p><strong>Carry-On Weight:</strong> 22 lbs</p>
+    <p><strong>Checked Dims:</strong> 62 in linear <em>(means total length + width + height = 62 in or less)</em></p>
+    <p><strong>Checked Weight:</strong> 50 lbs</p>
+  </div>
+</li>
+
+  </ul>
+
+  <script>
+    function toggleDetails(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+
+</body>
