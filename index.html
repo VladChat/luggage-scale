@@ -1,0 +1,123 @@
+<p><meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+<style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #0a1a2f;
+      color: #f0f8ff;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #4db8ff;
+      margin-bottom: 1rem;
+    }
+
+    /* Top 3-page tiles (Manual / Shop / Flight Baggage Limits) */
+    .nav-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 0 0 1rem 0;
+    }
+    .tile {
+      background: #11294d;
+      color: #f0f8ff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .tile:hover { background: #1a3a66; transform: translateY(-1px); }
+    .tile svg { width: 22px; height: 22px; display: block; }
+    .tile.active {
+      background: #14335a;
+      outline: 2px solid #4db8ff;
+      cursor: default;
+    }
+    .tile.active:hover { background: #14335a; transform: none; }
+
+    @media (max-width: 640px) {
+      .nav-tiles { grid-template-columns: 1fr; }
+    }
+
+    /* Content cards match page style */
+    .section {
+      background: #11294d;
+      margin-bottom: 0.75rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    .section h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: #ffffff;
+    }
+    .section p { margin: 0.35rem 0; line-height: 1.5; }
+    .section ul { margin: 0.4rem 0 0 1.1rem; }
+    .muted { opacity: 0.85; font-style: italic; }
+
+    /* Responsive video */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .video-wrap iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      border: 0;
+    }
+  </style>
+<!-- Top tiles --><nav aria-label="Top pages" role="navigation" class="nav-tiles"><!-- Manual (active) --> <span aria-current="page" class="tile active"> <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22V6.5z"></path>
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M4 6.5A2.5 2.5 0 0 1 6.5 4V20"></path>
+      </svg> <span class="label">Manual</span> </span> <!-- Shop --> <a class="tile" href="shop.html"> <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M6 8h12l-1.2 11H7.2L6 8z"></path>
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M9 8a3 3 0 0 1 6 0"></path>
+      </svg> <span class="label">Shop</span> </a> <!-- Flight Baggage Limits --> <a class="tile" href="index.html"> <svg aria-hidden="true" viewBox="0 0 24 24">
+        <rect stroke-width="2" stroke="currentColor" fill="none" ry="2" rx="2" height="12" width="12" y="7" x="6"></rect>
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M9 7V5h6v2"></path>
+      </svg> <span class="label">Flight Baggage Limits</span> </a></nav>
+<h1>uPatch Luggage Scale — User Manual</h1>
+<!-- Product Overview -->
+<section class="section">
+<h2>Product Overview</h2>
+<p>Battery-free digital luggage scale for home and travel. <b>Shake to activate</b>; no batteries required. Max capacity <b>50 kg / 110 lb</b>.</p>
+</section>
+<!-- Quick Start -->
+<section class="section">
+<h2>Quick Start (Shake to Activate)</h2>
+<ul>
+<li>Hold the scale and <b>shake firmly several times</b> to power on. <span class="muted">Feeling the internal mechanism bounce is normal operation.</span></li>
+<li>Wait for <b>0.0</b> on the display.</li>
+<li>Press <b>UNIT</b> to choose <b>kg</b> or <b>lb</b>.</li>
+</ul>
+</section>
+<!-- How to Weigh -->
+<section class="section">
+<h2>How to Weigh (Strap Hook)</h2>
+<p><b>Using the Strap</b></p>
+<ul>
+<li>Thread the strap through the luggage handle and clip it back to the scale.</li>
+<li>Lift the bag by the scale body. Keep the scale <b>vertical</b> and steady.</li>
+<li>When the reading stabilizes, note the value and lower the bag.</li>
+</ul>
+<p class="muted">Tip: Lift slowly, keep the scale vertical, and let the number settle before reading.</p>
+</section>
+<!-- Video -->
+<section class="section">
+<h2>Video Guide</h2>
+<div class="video-wrap"><iframe title="uPatch Luggage Scale — How to Use" src="https://www.youtube.com/embed/gn0iKLbz6S8?rel=0&amp;modestbranding=1"></iframe></div>
+<p style="margin-top: 0.5rem;"><a rel="noopener" href="https://youtu.be/gn0iKLbz6S8" target="_blank">Watch on YouTube</a></p>
+</section>

@@ -1,0 +1,151 @@
+<p>&nbsp;</p>
+<style>
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+      margin: 0;
+      background: #0a1a2f;
+      color: #f0f8ff;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #4db8ff;
+      margin-bottom: 1rem;
+    }
+
+    /* Top 3-page tiles (Manual / Shop / Flight Baggage Limits) */
+    .nav-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 0 0 1rem 0;
+    }
+    .tile {
+      background: #11294d;
+      color: #f0f8ff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .tile:hover { background: #1a3a66; transform: translateY(-1px); }
+    .tile svg { width: 22px; height: 22px; display: block; }
+    .tile.active {
+      background: #14335a;
+      outline: 2px solid #4db8ff;
+      cursor: default;
+    }
+    .tile.active:hover { background: #14335a; transform: none; }
+
+    @media (max-width: 640px) {
+      .nav-tiles { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .section {
+      background: #11294d;
+      margin-bottom: 0.75rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+    .section h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: #ffffff;
+    }
+    .section p { margin: 0.35rem 0; line-height: 1.5; }
+    .muted { opacity: 0.85; font-style: italic; }
+
+    /* Product grid */
+    .grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+    @media (min-width: 720px) {
+      .grid {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;
+    }
+    .btn {
+      display: inline-block;
+      background: #1e88e5;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.55rem 0.9rem;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+      transition: transform 0.1s ease, background 0.2s ease;
+    }
+    .btn:hover { background: #2496ff; transform: translateY(-1px); }
+    .btn.secondary {
+      background: #27466f;
+    }
+    .btn.secondary:hover { background: #2f5588; }
+    .btn.disabled {
+      pointer-events: none;
+      opacity: 0.6;
+      background: #27466f;
+    }
+
+    /* Feature list */
+    ul.features { margin: 0.4rem 0 0 1.1rem; }
+  </style>
+<!-- Top tiles --><nav aria-label="Top pages" role="navigation" class="nav-tiles"><!-- Manual --> <a class="tile" href="index.html"> <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22V6.5z"></path>
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M4 6.5A2.5 2.5 0 0 1 6.5 4V20"></path>
+      </svg> <span class="label">Manual</span> </a> <!-- Shop (active) --> <span aria-current="page" class="tile active"> <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M6 8h12l-1.2 11H7.2L6 8z"></path>
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M9 8a3 3 0 0 1 6 0"></path>
+      </svg> <span class="label">Shop</span> </span> <!-- Flight Baggage Limits --> <a class="tile" href="index.html"> <svg aria-hidden="true" viewBox="0 0 24 24">
+        <rect stroke-width="2" stroke="currentColor" fill="none" ry="2" rx="2" height="12" width="12" y="7" x="6"></rect>
+        <path stroke-width="2" stroke="currentColor" fill="none" d="M9 7V5h6v2"></path>
+      </svg> <span class="label">Flight Baggage Limits</span> </a></nav>
+<h1>Shop — uPatch Luggage Scale</h1>
+<!-- Featured product -->
+<section class="section">
+<h2>Featured</h2>
+<div class="grid">
+<div>
+<p><b>uPatch Luggage Scale (Battery-Free)</b></p>
+<ul class="features">
+<li>No batteries required — shake to activate</li>
+<li>Capacity: <b>50 kg / 110 lb</b> · Division: <b>50 g</b></li>
+<li>Compact and durable, with hook or strap options</li>
+<li>Large, easy-to-read display</li>
+</ul>
+<div class="btn-row"><!-- Safe homepage link — replace with your product page when ready --> <a rel="noopener" href="https://equalle.com/" class="btn" target="_blank">Buy on eQualle</a> <!-- Placeholders — replace # with real URLs when live --> <a rel="noopener" href="#" class="btn secondary" target="_blank">Amazon (soon)</a> <a rel="noopener" href="#" class="btn secondary" target="_blank">Walmart (soon)</a></div>
+<p class="muted">Replace the button links with your live product URLs when available.</p>
+</div>
+<div style="background: #0f2342;" class="section">
+<h2 style="font-size: 1rem; margin-top: 0;">Specs</h2>
+<p>Units: kg / lb</p>
+<p>Division: 50 g</p>
+<p>Max: 50 kg / 110 lb</p>
+<p>Power: Battery-free (shake to activate)</p>
+<p>Includes: Hook &amp; Strap</p>
+<div style="margin-top: 0.75rem;" class="btn-row"><a href="index.html" class="btn">View Manual</a> <a rel="noopener" href="https://youtu.be/gn0iKLbz6S8" class="btn secondary" target="_blank">Watch Video</a></div>
+</div>
+</div>
+</section>
+<!-- Shipping / Returns (optional text you can edit) -->
+<section class="section">
+<h2>Shipping &amp; Returns</h2>
+<p>Fast domestic shipping. Hassle-free returns within 30 days of delivery. Policies may vary by marketplace—please check the listing page for details.</p>
+</section>
+<!-- Footer (optional) -->
+<section style="display: flex; justify-content: space-between; gap: 0.5rem; align-items: center;" class="section"><span class="muted">© <script>document.write(new Date().getFullYear())</script> uPatch</span> <a href="index.html" class="btn secondary">Open Manual</a></section>
