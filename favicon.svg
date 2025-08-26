@@ -1,0 +1,8 @@
+<!-- /favicon.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background to match your dark theme (#0a1a2f). Delete this rect for transparent. -->
+  <rect width="64" height="64" rx="12" fill="#0a1a2f"/>
+  <text x="50%" y="52%" text-anchor="middle" dominant-baseline="middle"
+        font-size="46"
+        font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, EmojiOne Color, Twemoji Mozilla, sans-serif">⚖️</text>
+</svg>
