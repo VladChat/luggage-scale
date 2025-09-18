@@ -9,7 +9,7 @@ on:
       - 'package-lock.json'
       - 'scripts/**'
   schedule:
-    - cron: '0 6 * * *'   # rebuild every night at 06:00 UTC
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -29,13 +29,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Build Eleventy
-        run: npm run build
-
-      - name: Generate OG images
-        run: npm run build:og
+      - name: Build site (Eleventy + OG)
+        run: npm run build:all
 
       - name: Commit blog output
         run: |
