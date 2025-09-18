@@ -31,8 +31,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build site (Eleventy + OG)
-        run: npm run build:all
+      - name: Build with Eleventy
+        run: npx @11ty/eleventy --input=blog-src --output=blog
+
+      - name: Generate OG images
+        run: npm run build:og
 
       - name: Commit blog output
         run: |
