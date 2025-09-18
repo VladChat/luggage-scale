@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Travel Blog & Tips
+description: Guides on packing lighter, airline weight rules, and avoiding baggage fees.
+permalink: /blog/index.html
+---
+<div class="prose mb-8">
+  <h1>Travel Blog & Tips</h1>
+  <p>Guides to pack lighter, avoid fees, and fly stress-free.</p>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+  {% for post in collections.post | reverse %}
+  <article class="p-5 border rounded-2xl shadow-sm">
+    <h2 class="text-xl font-semibold mb-2"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+    <p class="text-sm text-slate-600">{{ post.data.description }}</p>
+    <a href="{{ post.url }}" class="inline-block mt-3 text-blue-700 underline">Read</a>
+  </article>
+  {% endfor %}
+</div>

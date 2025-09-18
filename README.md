@@ -1,24 +1,14 @@
-# Blog for luggage-scale.com
+# Blog-only scaffold for luggage-scale.com
 
-This is an Eleventy (11ty) static blog that builds into the `/blog/` subdirectory, leaving your existing `index.html`, `shop.html`, `manual.html` etc untouched.
+Upload the following to the **repo root**:
+- `blog-src/`
+- `.github/workflows/build-blog.yml`
+- `blog/.gitkeep` (keeps the folder)
 
-## How to use
+Keep your existing `index.html`, `shop.html`, `manual.html`, etc.
+Make sure `.nojekyll` stays in the repo root (you already created it).
 
-1. Install Node.js 20+
-2. Run locally:
-   ```
-   npm ci
-   npm run dev
-   ```
-3. Deploy: Commit & push. GitHub Actions workflow `deploy-blog.yml` will build into `/blog/`.
-4. Visit: https://luggage-scale.com/blog/
-
-## Content
-
-- Posts: `blogsrc/blog/*.md`
-- Layouts: `blogsrc/_includes/layouts`
-
-## Notes
-
-- Existing site root pages remain intact.
-- Blog appears at `/blog/` path only.
+## After upload
+1) Settings → Actions → Workflow permissions = **Read and write** (so auto-commit can write to `/blog/`).
+2) Edit any file inside `blog-src/` and commit → workflow runs → HTML appears in `/blog/`.
+3) Open https://luggage-scale.com/blog/
