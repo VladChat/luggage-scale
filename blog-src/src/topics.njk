@@ -1,0 +1,28 @@
+---
+pagination:
+  data: keywords
+  size: 1
+  alias: topic
+permalink: "/blog/topics/{{ topic.title | slug }}/index.html"
+layout: layouts/base.njk
+title: "{{ topic.title }}"
+description: "{{ topic.title }} — tips and tools."
+jsonld: |
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"{{ topic.title }}",
+    "mainEntityOfPage":"{{ site.domain }}{{ page.url }}"
+  }
+---
+<div class="prose">
+  <h1>{{ topic.title }}</h1>
+  <p>Actionable guide about “{{ topic.title }}”.</p>
+  <h2>Key points</h2>
+  <ul>
+    <li>Practical tips tailored to the query.</li>
+    <li>Internal links: <a href="/blog/">Blog</a> and <a href="/shop.html">Shop</a>.</li>
+  </ul>
+  <h2>Best tool for the job</h2>
+  <p><a href="https://www.amazon.com/dp/EXAMPLE/?tag=YOURTAG-20" target="_blank" rel="sponsored noopener">uPatch Battery-Free Luggage Scale on Amazon</a></p>
+</div>
