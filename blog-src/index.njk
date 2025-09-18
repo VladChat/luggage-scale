@@ -1,0 +1,21 @@
+{# blog-src/index.njk #}
+---
+layout: blog.njk
+title: "Blog"
+description: "Latest guides and tips from uPatch."
+permalink: "/blog/index.html"
+---
+
+<h1>Latest Posts</h1>
+
+<div class="post-list">
+  {% for post in collections.posts %}
+    <article class="card">
+      <h2><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+      {% if post.data.description %}
+        <p>{{ post.data.description }}</p>
+      {% endif %}
+      <small>Published: {{ post.date | date("yyyy-LL-dd") }}</small>
+    </article>
+  {% endfor %}
+</div>
