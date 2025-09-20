@@ -11,7 +11,7 @@ on:
       - 'scripts/**'
       - '.nojekyll'
   schedule:
-    - cron: '0 6 * * *'  # optional nightly rebuild
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -38,13 +38,13 @@ jobs:
       - name: Build blog with Eleventy
         run: |
           npx @11ty/eleventy --input=blog-src --output=blog
-          echo "" > blog/.nojekyll   # ensure Pages doesn’t run Jekyll on /blog
+          echo "" > blog/.nojekyll
 
-      - name: Commit blog output (if changed)
+      - name: Commit blog output (if changed, include deletions)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add blog
+          git add -A -f blog
           if ! git diff --cached --quiet; then
             git commit -m "chore(blog): build Eleventy site"
             git push

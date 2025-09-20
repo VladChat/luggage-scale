@@ -1,5 +1,5 @@
 ---
-permalink: "/blog/sitemap.xml"
+permalink: "/sitemap.xml"
 eleventyExcludeFromCollections: true
 ---
 
@@ -13,6 +13,6 @@ eleventyExcludeFromCollections: true
   {% endfor %}
   <url>
     <loc>{{ (config.site.base + "/") | absoluteUrl(config.site) }}</loc>
-    <lastmod>{{ collections.posts[0].date | isoDate }}</lastmod>
+    <lastmod>{{ (collections.posts[0] and collections.posts[0].date) ? (collections.posts[0].date | isoDate) : ("now" | isoDate) }}</lastmod>
   </url>
 </urlset>
