@@ -1,21 +1,28 @@
-{# blog-src/index.njk #}
 ---
-layout: blog.njk
+layout: "blog.njk"
 title: "Blog"
-description: "Latest guides and tips from uPatch."
-permalink: "/blog/index.html"
+description: "Latest articles, guides, and tips from the uPatch luggage scale team."
+permalink: "/blog/"
 ---
 
-<h1>Latest Posts</h1>
+{% block content %}
+  <h1>Latest Posts</h1>
 
-<div class="post-list">
-  {% for post in collections.posts %}
-    <article class="card">
-      <h2><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
-      {% if post.data.description %}
-        <p>{{ post.data.description }}</p>
-      {% endif %}
-      <small>Published: {{ post.date | date("yyyy-LL-dd") }}</small>
-    </article>
-  {% endfor %}
-</div>
+  <ul>
+    {% for post in collections.posts %}
+      <li style="margin-bottom:1.5rem;">
+        <h2 style="margin:0;">
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+        </h2>
+        <div class="meta">
+          <time datetime="{{ post.date | isoDate }}">{{ post.date | date("MMMM d, yyyy") }}</time>
+        </div>
+        {% if post.data.description %}
+          <p>{{ post.data.description }}</p>
+        {% else %}
+          <p>{{ post.templateContent | striptags | truncate(160, true, "...") }}</p>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

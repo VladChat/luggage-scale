@@ -1,11 +1,13 @@
 {
-  "siteName": "luggage-scale Blog",
-  "domain": "https://luggage-scale.com",
-  "brandColor": "#002F5F",
-  "authorDefault": "Sam Editorial",
-  "adsenseEnabled": false,
-  "amazonAssociateTag": "",
-  "ga4Id": "",
-  "showTOC": true,
-  "showBreadcrumbs": true
+  "site": {
+    "name": "Luggage Scale Blog",
+    "url": "https://luggage-scale.com",
+    "base": "/blog",
+    "brandColor": "#002F5F",
+    "logoPath": "/blog/static/logo.svg"
+  },
+  "seo": {
+    "twitter": "@upatch_scale",
+    "defaultDescription": "Guides, tips, and insights about luggage scales, travel hacks, and smart packing."
+  }
 }

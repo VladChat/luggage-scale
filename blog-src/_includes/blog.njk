@@ -1,37 +1,84 @@
 {# blog-src/_includes/blog.njk #}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }} | {{ config.siteName }}</title>
-  <meta name="description" content="{{ description }}">
+  <meta charset="utf-8">
+  <title>{{ title }} — {{ config.site.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {# Canonical URL #}
+  {% set canonical = (page.url | absoluteUrl(config.site)) %}
+  <link rel="canonical" href="{{ canonical }}">
+
+  {# Meta description #}
+  {% set desc = description or config.seo.defaultDescription %}
+  <meta name="description" content="{{ desc }}">
+
+  {# Open Graph / Facebook #}
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="{{ config.site.name }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ (config.site.base + '/og/' + (page.fileSlug or page.url | slug) + '.png') | absoluteUrl(config.site) }}">
+
+  {# Twitter Card #}
+  <meta name="twitter:card" content="summary_large_image">
+  {% if config.seo.twitter %}<meta name="twitter:site" content="{{ config.seo.twitter }}">{% endif %}
+
+  {# JSON-LD Article Schema #}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ title | safe }}",
+    "description": "{{ desc | safe }}",
+    "datePublished": "{{ date | isoDate }}",
+    "dateModified": "{{ page.date | isoDate }}",
+    "author": { "@type": "Organization", "name": "uPatch" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "uPatch",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ config.site.url }}/blog/static/logo.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ canonical }}"
+    }
+  }
+  </script>
+
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin:0; color:#111; }
-    header, footer { padding: 16px 20px; background:#f6f7f9; }
-    header a { text-decoration:none; color:#0a3d62; font-weight:700; }
-    main { max-width: 880px; margin: 24px auto; padding: 0 16px; }
-    nav a { margin-right: 12px; color:#0a3d62; text-decoration:none; }
-    h1,h2,h3 { line-height:1.2; }
-    .post-list { display:grid; gap:16px; }
-    .card { border:1px solid #e6e7ea; border-radius:12px; padding:16px; background:#fff; }
-    .card a { color:#0a3d62; text-decoration:none; }
+    body { font-family: system-ui, Arial, sans-serif; margin:0; line-height:1.6; color:#222; }
+    header, footer { background:#f8f8f8; padding:1rem; }
+    .container { max-width: 800px; margin: auto; padding:1rem; }
+    h1,h2,h3 { color: {{ config.site.brandColor }}; }
+    .meta { color:#666; font-size:.9rem; }
+    nav.breadcrumbs { font-size:.85rem; margin-bottom:1rem; }
   </style>
 </head>
 <body>
   <header>
-    <a href="/blog/">{{ config.siteName }}</a>
-    <nav>
-      <a href="/blog/">Home</a>
-    </nav>
+    <div class="container">
+      <a href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
+    </div>
   </header>
 
-  <main>
-    {{ content | safe }}
+  <main class="container">
+    <nav class="breadcrumbs">
+      <a href="{{ config.site.base }}/">Blog</a>
+      {% if title and page.url != config.site.base + '/' %} › <span>{{ title }}</span>{% endif %}
+    </nav>
+    {% block content %}{% endblock %}
   </main>
 
   <footer>
-    <p>© 2025 uPatch. All rights reserved.</p>
+    <div class="container">
+      © {{ "now" | date("yyyy") }} — <a href="{{ config.site.base }}/">Blog Index</a> • <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
+    </div>
   </footer>
 </body>
 </html>
