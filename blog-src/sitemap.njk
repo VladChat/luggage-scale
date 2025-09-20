@@ -13,7 +13,7 @@ eleventyExcludeFromCollections: true
 
   {% set latest = collections.posts[0] %}
   <url>
-    <loc>{{ (config.site.base + "/") | absoluteUrl(config.site) }}</loc>
+    <loc>{{ "/" | absoluteUrl(config.site) }}</loc>
     <lastmod>
       {% if latest and latest.date %}
         {{ latest.date | isoDate }}

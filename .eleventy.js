@@ -2,51 +2,34 @@
 const { DateTime } = require("luxon");
 
 module.exports = function (eleventyConfig) {
-  // Formats a date; accepts Date, ISO string, or "now"
-  eleventyConfig.addFilter("date", (value, format = "MMMM d, yyyy") => {
-    let d =
-      value === "now"
-        ? new Date()
-        : value instanceof Date
-        ? value
-        : new Date(value);
-    return DateTime.fromJSDate(d, { zone: "utc" }).toFormat(format);
+  // Pretty date, e.g., "September 18, 2025"
+  eleventyConfig.addFilter("date", (dateObj, fmt = "MMMM d, yyyy") =>
+    DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(fmt)
+  );
+
+  // ISO date yyyy-mm-dd
+  eleventyConfig.addFilter("isoDate", (dateObj) =>
+    DateTime.fromJSDate(dateObj, { zone: "utc" }).toISODate()
+  );
+
+  // Build absolute URLs safely (no double /blog)
+  // Expects config.site like: { "url": "https://luggage-scale.com", "base": "/blog" }
+  eleventyConfig.addFilter("absoluteUrl", (path, site) => {
+    if (!site || !site.url) return path;
+    // base = https://luggage-scale.com/blog/
+    const base = new URL(site.base || "/", site.url).toString();
+    return new URL(path, base).toString();
   });
 
-  // ISO date (YYYY-MM-DD) for meta/sitemap
-  eleventyConfig.addFilter("isoDate", (value) => {
-    let d =
-      value === "now"
-        ? new Date()
-        : value instanceof Date
-        ? value
-        : new Date(value);
-    return DateTime.fromJSDate(d, { zone: "utc" }).toISODate(); // e.g. 2025-09-18
-  });
-
-  // Make an absolute URL from a page/url and your site config
-  // Usage: {{ page.url | absoluteUrl(config.site) }}
-  eleventyConfig.addFilter("absoluteUrl", (url, site) => {
-    if (!url) return "";
-    if (/^https?:\/\//i.test(url)) return url;
-    const base = (site?.base || "").replace(/\/$/, "");
-    const host = (site?.url || "").replace(/\/$/, "");
-    return new URL(base + url, host + "/").toString();
-  });
-
-  // Collection: all posts; hide future-dated posts
-  eleventyConfig.addCollection("posts", (collectionApi) => {
-    const now = new Date();
-    return collectionApi
-      .getFilteredByGlob("blog-src/posts/**/*.md")
-      .filter((p) => p.date <= now)
-      .sort((a, b) => b.date - a.date);
-  });
+  // Posts collection (newest first)
+  eleventyConfig.addCollection("posts", (api) =>
+    api.getFilteredByGlob("blog-src/posts/**/index.md").sort((a, b) => b.date - a.date)
+  );
 
   return {
-    dir: {
-      input: "blog-src",
-      output: "blog"
-    }
+    dir: { input: "blog-src", output: "blog", includes: "_includes", data: "_data" },
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
+    dataTemplateEngine: "njk",
   };
 };
