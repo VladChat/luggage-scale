@@ -8,8 +8,6 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'scripts/**'
-  schedule:
-    - cron: '0 6 * * *'   # rebuild every night at 06:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -22,19 +20,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Use Node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Debug Eleventy
+      - name: Build blog with Eleventy
         run: |
-          npx @11ty/eleventy --version || echo "Eleventy not installed"
-          npm run build --verbose || true
+          npx @11ty/eleventy --input=blog-src --output=blog
+          echo "" > blog/.nojekyll
 
       - name: Commit blog output
         run: |
@@ -42,8 +39,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add blog
           if ! git diff --cached --quiet; then
-            git commit -m "chore(blog): build at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git commit -m "chore(blog): build Eleventy site"
             git push
           else
-            echo "No changes in /blog to commit."
+            echo "No changes to commit"
           fi
