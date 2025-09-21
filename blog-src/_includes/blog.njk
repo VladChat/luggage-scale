@@ -10,9 +10,7 @@ permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagin
 ---
 
 {# Debug line to verify posts/pagination #}
-<p style="color:red; font-weight:bold;">
-  DEBUG: Found {{ collections.posts | length }} posts. Showing page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}
-</p>
+
 
 <h1>Latest Posts</h1>
 
