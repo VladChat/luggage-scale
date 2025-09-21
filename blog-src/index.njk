@@ -6,41 +6,38 @@ pagination:
   size: 10
   alias: paged
 permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
+layout: false
 ---
 
-{% extends "layouts/base.njk" %}
-
-{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+</head>
+<body>
   <p style="color:red; font-weight:bold;">
     DEBUG: Found {{ collections.posts | length }} posts. Showing page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}
   </p>
 
-  <h1>Latest Posts</h1>
+  <h1>{{ title }}</h1>
 
   <ul>
     {% for post in paged %}
-      <li style="margin-bottom:1.5rem;">
-        <h2 style="margin:0;">
-          <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-        </h2>
-        <div class="meta">
-          <time datetime="{{ post.date | isoDate }}">{{ post.date | date("MMMM d, yyyy") }}</time>
-        </div>
-        {% if post.data.description %}
-          <p>{{ post.data.description }}</p>
-        {% else %}
-          <p>{{ post.templateContent | striptags | truncate(160, true, "...") }}</p>
-        {% endif %}
+      <li>
+        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+        — <time datetime="{{ post.date | isoDate }}">{{ post.date | date("MMMM d, yyyy") }}</time>
       </li>
     {% endfor %}
   </ul>
 
-  <nav aria-label="Pagination" style="margin-top:2rem;">
+  <nav>
     {% if pagination.href.previous %}
       <a href="{{ pagination.href.previous | url }}">← Newer Posts</a>
     {% endif %}
     {% if pagination.href.next %}
-      <a href="{{ pagination.href.next | url }}" style="float:right;">Older Posts →</a>
+      <a href="{{ pagination.href.next | url }}">Older Posts →</a>
     {% endif %}
   </nav>
-{% endblock %}
+</body>
+</html>
