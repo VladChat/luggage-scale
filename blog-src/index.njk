@@ -11,7 +11,10 @@ permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagin
 
 {# Debug block — will appear in HTML and build logs #}
 {% set total = collections.posts | length %}
-<p style="color:red; font-weight:bold;">DEBUG: Rendering blog index. Found {{ total }} posts. Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}</p>
+<p style="color:red; font-weight:bold;">
+  DEBUG: Rendering blog index. Found {{ total }} posts. 
+  Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}
+</p>
 
 {% for p in collections.posts %}
   {% if loop.first %}
