@@ -10,12 +10,10 @@ on:
       - 'package-lock.json'
       - 'scripts/**'
       - '.nojekyll'
+      - '.github/workflows/build-blog.yml'
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
   build:
@@ -30,10 +28,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Clean blog output
+        run: rm -rf blog/* || true
 
       - name: Build blog with Eleventy
         run: |
