@@ -1,0 +1,6 @@
+{% if config.features and config.features.breadcrumbs %}
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+  <a href="{{ '/blog/' | absoluteUrl(config.site) }}">Blog</a>
+  {% if crumbTitle %} › <span>{{ crumbTitle }}</span>{% endif %}
+</nav>
+{% endif %}

@@ -1,0 +1,58 @@
+{# SEO & social meta #}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{# Page title (fallbacks) #}
+{% set pageTitle = title or config.site.defaultTitle or "Blog" %}
+<title>{{ pageTitle }} — {{ config.site.name }}</title>
+
+{# Description (fallback) #}
+<meta name="description" content="{{ description or config.site.description }}">
+
+{# Canonical URL #}
+{% if page.url %}
+  {% set canonical = (config.site.origin + page.url) %}
+{% else %}
+  {% set canonical = (config.site.origin + config.site.base + "/") %}
+{% endif %}
+<link rel="canonical" href="{{ canonical }}">
+
+{# Robots: respect prod toggle and optional draft flag #}
+{% if eleventy.env != "prod" or (draft == true) %}
+  <meta name="robots" content="noindex,nofollow">
+{% else %}
+  <meta name="robots" content="index,follow">
+{% endif %}
+
+{# Open Graph #}
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{{ config.site.name }}">
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ description or config.site.description }}">
+<meta property="og:url" content="{{ canonical }}">
+{% if ogImage %}
+  <meta property="og:image" content="{{ ogImage }}">
+{% elseif config.site.defaultOgImage %}
+  <meta property="og:image" content="{{ config.site.defaultOgImage }}">
+{% endif %}
+
+{# Twitter #}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ pageTitle }}">
+<meta name="twitter:description" content="{{ description or config.site.description }}">
+{% if ogImage %}
+  <meta name="twitter:image" content="{{ ogImage }}">
+{% elseif config.site.defaultOgImage %}
+  <meta name="twitter:image" content="{{ config.site.defaultOgImage }}">
+{% endif %}
+
+{# Optional Google Analytics (config-controlled) #}
+{% if config.analytics and config.analytics.enable and config.analytics.google %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.analytics.google }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ config.analytics.google }}');
+  </script>
+{% endif %}
