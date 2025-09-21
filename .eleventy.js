@@ -24,13 +24,19 @@ module.exports = function (eleventyConfig) {
     DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toISODate()
   );
 
-  // Build absolute URLs safely (no double /blog)
+  // Build absolute URLs safely (always include /blog, no duplicates)
   // Expects config.site like: { "url": "https://luggage-scale.com", "base": "/blog" }
   eleventyConfig.addFilter("absoluteUrl", (path, site) => {
     if (!site || !site.url) return path;
-    // base = https://luggage-scale.com/blog/
-    const base = new URL(site.base || "/", site.url).toString();
-    return new URL(path, base).toString();
+
+    let p = path || "/";
+    // Ensure the path starts with site.base (e.g. /blog)
+    if (!p.startsWith(site.base)) {
+      // Avoid double slashes
+      p = site.base.replace(/\/$/, "") + (p.startsWith("/") ? p : "/" + p);
+    }
+
+    return new URL(p, site.url).toString();
   });
 
   // Posts collection (newest first)
