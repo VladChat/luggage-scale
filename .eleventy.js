@@ -1,10 +1,7 @@
 // .eleventy.js
 const { DateTime } = require("luxon");
 
-/**
- * Normalize different date inputs to a JS Date.
- * Accepts: Date, "now", ISO-ish strings, undefined/null.
- */
+/** Normalize different date inputs to a JS Date. */
 function toJsDate(value) {
   if (value === undefined || value === null || value === "now") return new Date();
   if (value instanceof Date) return value;
@@ -24,25 +21,14 @@ module.exports = function (eleventyConfig) {
     DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toISODate()
   );
 
-  // Always prepend /blog to local URLs so links don’t 404
-  eleventyConfig.addFilter("url", function (url) {
-    const base = "/blog";
-    if (!url) return base + "/";
-    return base + (url.startsWith("/") ? url : "/" + url);
-  });
-
-  // Build absolute URLs safely (always include /blog, no duplicates)
+  // Build absolute URLs safely; ensure site.base (e.g., /blog) is present
   // Expects config.site like: { "url": "https://luggage-scale.com", "base": "/blog" }
   eleventyConfig.addFilter("absoluteUrl", (path, site) => {
     if (!site || !site.url) return path;
-
     let p = path || "/";
-    // Ensure the path starts with site.base (e.g. /blog)
     if (!p.startsWith(site.base)) {
-      // Avoid double slashes
       p = site.base.replace(/\/$/, "") + (p.startsWith("/") ? p : "/" + p);
     }
-
     return new URL(p, site.url).toString();
   });
 
@@ -56,5 +42,7 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
+    // >>> IMPORTANT: this makes the built-in `url` filter prepend /blog <<<
+    pathPrefix: "/blog",
   };
 };
