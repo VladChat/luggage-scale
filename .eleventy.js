@@ -24,6 +24,13 @@ module.exports = function (eleventyConfig) {
     DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toISODate()
   );
 
+  // Always prepend /blog to local URLs so links don’t 404
+  eleventyConfig.addFilter("url", function (url) {
+    const base = "/blog";
+    if (!url) return base + "/";
+    return base + (url.startsWith("/") ? url : "/" + url);
+  });
+
   // Build absolute URLs safely (always include /blog, no duplicates)
   // Expects config.site like: { "url": "https://luggage-scale.com", "base": "/blog" }
   eleventyConfig.addFilter("absoluteUrl", (path, site) => {

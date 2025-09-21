@@ -1,4 +1,3 @@
-{# blog-src/_includes/blog.njk #}
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,7 +45,7 @@
       {% if title and page.url != config.site.base + '/' %} › <span>{{ title }}</span>{% endif %}
     </nav>
 
-    {# IMPORTANT: Eleventy injects the page content here #}
+    {# Inject page content here (e.g., index.njk with posts) #}
     {{ content | safe }}
   </main>
 
