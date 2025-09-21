@@ -5,7 +5,9 @@ description: "Latest guides and tips from uPatch."
 permalink: "/blog/index.html"
 ---
 
-{% include "partials/breadcrumbs.njk" with { crumbTitle: "Blog" } %}
+{# Pass a variable before including the partial #}
+{% set crumbTitle = "Blog" %}
+{% include "partials/breadcrumbs.njk" %}
 
 <h1>Latest Posts</h1>
 
