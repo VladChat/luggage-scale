@@ -1,48 +1,37 @@
-// .eleventy.js
 const { DateTime } = require("luxon");
 
-/** Normalize input to Date (handles Date, "now", ISO-ish strings). */
-function toJsDate(value) {
-  if (value === undefined || value === null || value === "now") return new Date();
-  if (value instanceof Date) return value;
-  const parsed = new Date(value);
-  if (!isNaN(parsed)) return parsed;
-  return new Date();
-}
-
 module.exports = function (eleventyConfig) {
-  // Pretty date e.g. "September 18, 2025"
-  eleventyConfig.addFilter("date", (value, fmt = "MMMM d, yyyy") =>
-    DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toFormat(fmt)
-  );
+  // Copy generated OG images to /blog/og/
+  eleventyConfig.addPassthroughCopy({ "blog-src/_generated": "og" });
 
-  // ISO date yyyy-mm-dd
-  eleventyConfig.addFilter("isoDate", (value) =>
-    DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toISODate()
-  );
-
-  // Build absolute URLs safely (no double /blog)
-  // Expects blog-src/_data/config.json to contain:
-  // { "site": { "url": "https://luggage-scale.com", "base": "/blog" } }
-  eleventyConfig.addFilter("absoluteUrl", (path, site) => {
-    if (!site || !site.url) return path;
-    const base = new URL(site.base || "/", site.url).toString();
-    return new URL(path, base).toString();
+  // Date filter (safe; avoids throwing on bad dates)
+  eleventyConfig.addFilter("date", (dateObj, fmt = "yyyy-LL-dd") => {
+    try {
+      if (!dateObj) return "";
+      const dt = dateObj instanceof Date ? dateObj : new Date(dateObj);
+      return DateTime.fromJSDate(dt, { zone: "utc" }).toFormat(fmt);
+    } catch {
+      return "";
+    }
   });
 
-  // Posts collection: exclude future-dated posts, newest first
-  eleventyConfig.addCollection("posts", (api) => {
+  // Posts collection: exclude future-dated posts
+  eleventyConfig.addCollection("posts", (collection) => {
     const now = new Date();
-    return api
+    return collection
       .getFilteredByGlob("blog-src/posts/**/index.md")
-      .filter((post) => post.date <= now)
-      .sort((a, b) => b.date - a.date);
+      .filter((item) => item.date <= now);
   });
 
   return {
-    dir: { input: "blog-src", output: "blog", includes: "_includes", data: "_data" },
+    dir: {
+      input: "blog-src",
+      includes: "_includes",
+      data: "_data",
+      output: "blog"
+    },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk",
+    passthroughFileCopy: true
   };
 };
