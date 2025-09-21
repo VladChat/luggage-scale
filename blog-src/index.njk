@@ -6,7 +6,7 @@ pagination:
   data: collections.posts
   size: 10
   alias: paged
-permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
+permalink: "blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/index.html{% else %}index.html{% endif %}"
 ---
 
 {% block content %}
