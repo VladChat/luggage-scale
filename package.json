@@ -1,17 +1,20 @@
 {
   "name": "luggage-scale",
   "version": "1.0.0",
-  "private": true,
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "build": "cross-env ELEVENTY_ENV=prod npx @11ty/eleventy --input=blog-src --output=blog",
-    "gen:og": "node scripts/gen-og.mjs"
+    "dev": "cross-env ELEVENTY_ENV=dev npx @11ty/eleventy --serve --input=blog-src --output=blog-local",
+    "build": "cross-env ELEVENTY_ENV=prod npx @11ty/eleventy --input=blog-src --output=blog"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.2",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
-    "@11ty/eleventy": "3.1.2",
-    "cross-env": "^7.0.3",
-    "luxon": "^3.5.0",
-    "@resvg/resvg-js": "^2.6.2",
-    "fast-glob": "^3.3.2",
-    "gray-matter": "^4.0.3"
+    "luxon": "^3.7.2"
   }
 }

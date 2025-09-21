@@ -1,37 +1,47 @@
+// .eleventy.js
 const { DateTime } = require("luxon");
 
+/**
+ * Normalize different date inputs to a JS Date.
+ * Accepts: Date, "now", ISO-ish strings, undefined/null.
+ */
+function toJsDate(value) {
+  if (value === undefined || value === null || value === "now") return new Date();
+  if (value instanceof Date) return value;
+  const parsed = new Date(value);
+  if (!isNaN(parsed)) return parsed;
+  return new Date();
+}
+
 module.exports = function (eleventyConfig) {
-  // Copy generated OG images to /blog/og/
-  eleventyConfig.addPassthroughCopy({ "blog-src/_generated": "og" });
+  // Pretty date, e.g., "September 18, 2025"
+  eleventyConfig.addFilter("date", (value, fmt = "MMMM d, yyyy") =>
+    DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toFormat(fmt)
+  );
 
-  // Date filter (safe; avoids throwing on bad dates)
-  eleventyConfig.addFilter("date", (dateObj, fmt = "yyyy-LL-dd") => {
-    try {
-      if (!dateObj) return "";
-      const dt = dateObj instanceof Date ? dateObj : new Date(dateObj);
-      return DateTime.fromJSDate(dt, { zone: "utc" }).toFormat(fmt);
-    } catch {
-      return "";
-    }
+  // ISO date yyyy-mm-dd
+  eleventyConfig.addFilter("isoDate", (value) =>
+    DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toISODate()
+  );
+
+  // Build absolute URLs safely (no double /blog)
+  // Expects config.site like: { "url": "https://luggage-scale.com", "base": "/blog" }
+  eleventyConfig.addFilter("absoluteUrl", (path, site) => {
+    if (!site || !site.url) return path;
+    // base = https://luggage-scale.com/blog/
+    const base = new URL(site.base || "/", site.url).toString();
+    return new URL(path, base).toString();
   });
 
-  // Posts collection: exclude future-dated posts
-  eleventyConfig.addCollection("posts", (collection) => {
-    const now = new Date();
-    return collection
-      .getFilteredByGlob("blog-src/posts/**/index.md")
-      .filter((item) => item.date <= now);
-  });
+  // Posts collection (newest first)
+  eleventyConfig.addCollection("posts", (api) =>
+    api.getFilteredByGlob("blog-src/posts/**/index.md").sort((a, b) => b.date - a.date)
+  );
 
   return {
-    dir: {
-      input: "blog-src",
-      includes: "_includes",
-      data: "_data",
-      output: "blog"
-    },
+    dir: { input: "blog-src", output: "blog", includes: "_includes", data: "_data" },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    passthroughFileCopy: true
+    dataTemplateEngine: "njk",
   };
 };
