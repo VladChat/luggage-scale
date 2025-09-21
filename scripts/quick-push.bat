@@ -1,2 +1,4 @@
 @echo off
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0quick-push.ps1" -Message "%*"
+set MSG=%*
+if "%MSG%"=="" set MSG=update
+powershell -ExecutionPolicy Bypass -File "%~dp0quick-push.ps1" -Message "%MSG%"
