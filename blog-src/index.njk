@@ -5,14 +5,13 @@ description: "Latest guides and tips from uPatch."
 permalink: "/blog/index.html"
 ---
 
-{# Pass a variable before including the partial #}
 {% set crumbTitle = "Blog" %}
 {% include "partials/breadcrumbs.njk" %}
 
 <h1>Latest Posts</h1>
 
 {% for post in collections.posts %}
-  {% include "partials/post-card.njk" with { post: post } %}
+  {% include "partials/post-card.njk" %}
 {% else %}
   <p>No posts yet.</p>
 {% endfor %}
