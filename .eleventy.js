@@ -37,6 +37,9 @@ module.exports = function (eleventyConfig) {
     api.getFilteredByGlob("blog-src/posts/**/index.md").sort((a, b) => b.date - a.date)
   );
 
+  // Copy static assets (e.g., CSS) to the published blog directory
+  eleventyConfig.addPassthroughCopy({ "blog-src/static": "static" });
+
   return {
     dir: { input: "blog-src", output: "blog", includes: "_includes", data: "_data" },
     markdownTemplateEngine: "njk",
