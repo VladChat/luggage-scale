@@ -40,10 +40,18 @@ jobs:
           npx @11ty/eleventy --input=blog-src --output=blog
           echo "" > blog/.nojekyll
 
+      # 🟢 DEBUG STEP 1: list all files created in /blog
       - name: Debug: list built files
         run: |
           echo "=== FILES IN /blog AFTER BUILD ==="
-          ls -R blog
+          ls -R blog || echo "No files found in /blog"
+
+      # 🟢 DEBUG STEP 2: show the first 20 lines of index.html
+      - name: Debug: show index.html content
+        run: |
+          echo "=== START OF /blog/index.html ==="
+          head -n 20 blog/index.html || echo "index.html not found"
+          echo "=== END OF DEBUG OUTPUT ==="
 
       - name: Commit blog output (if changed, include deletions)
         run: |
