@@ -1,38 +1,16 @@
 ---
-layout: "blog.njk"
-title: "Blog"
-description: "Latest articles, guides, and tips from the uPatch luggage scale team."
-pagination:
-  data: collections.posts
-  size: 10
-  alias: paged
-permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
+layout: false
+permalink: index.html
 ---
 
-<h1>Latest Posts</h1>
-
-{% set total = collections.posts | length %}
-<p style="color:red; font-weight:bold;">
-  DEBUG: Found {{ total }} posts. Rendering page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}.
-</p>
-
-<ul>
-  {% for post in paged %}
-    <li style="margin-bottom:1.5rem;">
-      <h2 style="margin:0;"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-      <div class="meta">
-        <time datetime="{{ post.date | isoDate }}">{{ post.date | date("MMMM d, yyyy") }}</time>
-      </div>
-      {% if post.data.description %}
-        <p>{{ post.data.description }}</p>
-      {% else %}
-        <p>{{ post.templateContent | striptags | truncate(160, true, "...") }}</p>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul>
-
-<nav aria-label="Pagination" style="margin-top:2rem;">
-  {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}">← Newer</a>{% endif %}
-  {% if pagination.href.next %}<a href="{{ pagination.href.next }}" style="float:right;">Older →</a>{% endif %}
-</nav>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TEST BLOG INDEX</title>
+</head>
+<body>
+  <h1 style="color:red;">HELLO — TEST PAGE</h1>
+  <p>If you see this, Eleventy is rendering `blog-src/index.njk` correctly.</p>
+</body>
+</html>
