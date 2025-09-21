@@ -14,48 +14,21 @@
   {% set desc = description or config.seo.defaultDescription %}
   <meta name="description" content="{{ desc }}">
 
-  {# Open Graph / Facebook #}
+  {# Open Graph / Twitter #}
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="{{ config.site.name }}">
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ desc }}">
   <meta property="og:url" content="{{ canonical }}">
-  <meta property="og:image" content="{{ (config.site.base + '/og/' + (page.fileSlug or page.url | slug) + '.png') | absoluteUrl(config.site) }}">
-
-  {# Twitter Card #}
+  <meta property="og:image" content="{{ config.site.url }}{{ config.site.base }}/og/.png">
   <meta name="twitter:card" content="summary_large_image">
-  {% if config.seo.twitter %}<meta name="twitter:site" content="{{ config.seo.twitter }}">{% endif %}
-
-  {# JSON-LD Article Schema #}
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "{{ title | safe }}",
-    "description": "{{ desc | safe }}",
-    "datePublished": "{{ date | isoDate }}",
-    "dateModified": "{{ page.date | isoDate }}",
-    "author": { "@type": "Organization", "name": "uPatch" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "uPatch",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "{{ config.site.url }}/blog/static/logo.svg"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "{{ canonical }}"
-    }
-  }
-  </script>
+  <meta name="twitter:site" content="@upatch_scale">
 
   <style>
     body { font-family: system-ui, Arial, sans-serif; margin:0; line-height:1.6; color:#222; }
     header, footer { background:#f8f8f8; padding:1rem; }
     .container { max-width: 800px; margin: auto; padding:1rem; }
-    h1,h2,h3 { color: {{ config.site.brandColor }}; }
+    h1,h2,h3 { color:#002F5F; }
     .meta { color:#666; font-size:.9rem; }
     nav.breadcrumbs { font-size:.85rem; margin-bottom:1rem; }
   </style>
@@ -72,12 +45,15 @@
       <a href="{{ config.site.base }}/">Blog</a>
       {% if title and page.url != config.site.base + '/' %} › <span>{{ title }}</span>{% endif %}
     </nav>
-    {% block content %}{% endblock %}
+
+    {# IMPORTANT: Eleventy injects the page content here #}
+    {{ content | safe }}
   </main>
 
   <footer>
     <div class="container">
-      © {{ "now" | date("yyyy") }} — <a href="{{ config.site.base }}/">Blog Index</a> • <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
+      © {{ "now" | date("yyyy") }} — <a href="{{ config.site.base }}/">Blog Index</a> •
+      <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
     </div>
   </footer>
 </body>
