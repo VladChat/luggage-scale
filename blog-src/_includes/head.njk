@@ -1,0 +1,18 @@
+{# _includes/head.njk #}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ title or "Luggage Scale Blog" }}</title>
+<meta name="description" content="{{ description or 'Guides, tips, and insights about luggage scales, travel hacks, and smart packing.' }}">
+
+<link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ title or 'Blog' }}">
+<meta property="og:description" content="{{ description or 'Latest articles from the uPatch luggage scale team.' }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url | url }}">
+<meta property="og:image" content="{{ site.url }}/blog/static/logo.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="{{ site.twitter }}">
