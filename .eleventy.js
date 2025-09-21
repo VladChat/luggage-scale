@@ -34,7 +34,24 @@ module.exports = function (eleventyConfig) {
 
   // Posts collection (newest first)
   eleventyConfig.addCollection("posts", (api) =>
-    api.getFilteredByGlob("blog-src/posts/**/index.md").sort((a, b) => b.date - a.date)
+    api
+      .getFilteredByGlob("blog-src/posts/**/index.md")
+      .map((post) => {
+        if (post && post.url && !post.url.startsWith("/blog/")) {
+          post.url = `/blog${post.url}`;
+        }
+        if (
+          post &&
+          post.data &&
+          post.data.page &&
+          typeof post.data.page.url === "string" &&
+          !post.data.page.url.startsWith("/blog/")
+        ) {
+          post.data.page.url = `/blog${post.data.page.url}`;
+        }
+        return post;
+      })
+      .sort((a, b) => b.date - a.date)
   );
 
   // Copy static assets (e.g., CSS) to the published blog directory
