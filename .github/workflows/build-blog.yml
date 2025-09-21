@@ -40,6 +40,11 @@ jobs:
           npx @11ty/eleventy --input=blog-src --output=blog
           echo "" > blog/.nojekyll
 
+      - name: Debug: list built files
+        run: |
+          echo "=== FILES IN /blog AFTER BUILD ==="
+          ls -R blog
+
       - name: Commit blog output (if changed, include deletions)
         run: |
           git config user.name "github-actions[bot]"

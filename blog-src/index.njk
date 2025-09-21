@@ -9,6 +9,17 @@ pagination:
 permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
 ---
 
+{# Debug block — will appear in HTML and build logs #}
+{% set total = collections.posts | length %}
+<p style="color:red; font-weight:bold;">DEBUG: Rendering blog index. Found {{ total }} posts. Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}</p>
+
+{% for p in collections.posts %}
+  {% if loop.first %}
+    {% set sample = p.url %}
+  {% endif %}
+{% endfor %}
+<p style="color:red;">DEBUG: Example first post URL = {{ sample }}</p>
+
 <h1>Latest Posts</h1>
 
 <ul>
