@@ -11,12 +11,15 @@ permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagin
 
 <h1>Latest Posts</h1>
 
+{% set total = collections.posts | length %}
+<p style="color:red; font-weight:bold;">
+  DEBUG: Found {{ total }} posts. Rendering page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}.
+</p>
+
 <ul>
   {% for post in paged %}
     <li style="margin-bottom:1.5rem;">
-      <h2 style="margin:0;">
-        <a href="{{ post.url }}">{{ post.data.title }}</a>
-      </h2>
+      <h2 style="margin:0;"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
       <div class="meta">
         <time datetime="{{ post.date | isoDate }}">{{ post.date | date("MMMM d, yyyy") }}</time>
       </div>
@@ -30,10 +33,6 @@ permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagin
 </ul>
 
 <nav aria-label="Pagination" style="margin-top:2rem;">
-  {% if pagination.href.previous %}
-    <a href="{{ pagination.href.previous }}">← Newer Posts</a>
-  {% endif %}
-  {% if pagination.href.next %}
-    <a href="{{ pagination.href.next }}" style="float:right;">Older Posts →</a>
-  {% endif %}
+  {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}">← Newer</a>{% endif %}
+  {% if pagination.href.next %}<a href="{{ pagination.href.next }}" style="float:right;">Older →</a>{% endif %}
 </nav>
