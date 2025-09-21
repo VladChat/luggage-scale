@@ -1,10 +1,7 @@
 // .eleventy.js
 const { DateTime } = require("luxon");
 
-/**
- * Normalize different date inputs to a JS Date.
- * Accepts: Date, "now", ISO-ish strings, undefined/null.
- */
+/** Normalize input to Date (handles Date, "now", ISO-ish strings). */
 function toJsDate(value) {
   if (value === undefined || value === null || value === "now") return new Date();
   if (value instanceof Date) return value;
@@ -14,7 +11,7 @@ function toJsDate(value) {
 }
 
 module.exports = function (eleventyConfig) {
-  // Pretty date, e.g., "September 18, 2025"
+  // Pretty date e.g. "September 18, 2025"
   eleventyConfig.addFilter("date", (value, fmt = "MMMM d, yyyy") =>
     DateTime.fromJSDate(toJsDate(value), { zone: "utc" }).toFormat(fmt)
   );
@@ -25,18 +22,22 @@ module.exports = function (eleventyConfig) {
   );
 
   // Build absolute URLs safely (no double /blog)
-  // Expects config.site like: { "url": "https://luggage-scale.com", "base": "/blog" }
+  // Expects blog-src/_data/config.json to contain:
+  // { "site": { "url": "https://luggage-scale.com", "base": "/blog" } }
   eleventyConfig.addFilter("absoluteUrl", (path, site) => {
     if (!site || !site.url) return path;
-    // base = https://luggage-scale.com/blog/
     const base = new URL(site.base || "/", site.url).toString();
     return new URL(path, base).toString();
   });
 
-  // Posts collection (newest first)
-  eleventyConfig.addCollection("posts", (api) =>
-    api.getFilteredByGlob("blog-src/posts/**/index.md").sort((a, b) => b.date - a.date)
-  );
+  // Posts collection: exclude future-dated posts, newest first
+  eleventyConfig.addCollection("posts", (api) => {
+    const now = new Date();
+    return api
+      .getFilteredByGlob("blog-src/posts/**/index.md")
+      .filter((post) => post.date <= now)
+      .sort((a, b) => b.date - a.date);
+  });
 
   return {
     dir: { input: "blog-src", output: "blog", includes: "_includes", data: "_data" },
