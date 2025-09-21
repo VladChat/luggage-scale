@@ -1,0 +1,45 @@
+{# Head meta + canonical + social cards.
+   Uses config from blog-src/_data/config.json.
+   Safe defaults so it won’t break if a field is missing. #}
+
+{# --- Page data helpers --- #}
+{% set siteUrl = config.siteUrl or 'https://luggage-scale.com' %}
+{% set siteName = config.siteName or 'Luggage Scale Blog' %}
+{% set defaultDesc = config.siteDescription or 'Travel tips, baggage limits, and packing guides.' %}
+{% set logoPath = config.logoPath or '/favicon.svg' %}
+{% set defaultOg = config.ogDefault or logoPath %}
+
+{% set titleText = title or siteName %}
+{% set descText = description or defaultDesc %}
+{% set canonical = siteUrl ~ page.url %}
+
+{# Determine type: blog index vs post #}
+{% set isBlogIndex = (page.url == '/blog/' or page.url == '/blog/index.html') %}
+{% set ogType = isBlogIndex ? 'website' : 'article' %}
+
+{# Choose OG image (front matter "image" wins, else config, else logo) #}
+{% set ogImagePath = image or defaultOg %}
+{% set ogImage = ogImagePath startswith('http') ? ogImagePath : (siteUrl ~ ogImagePath) %}
+
+{# --- Standard tags --- #}
+<title>{{ titleText }}</title>
+<meta name="description" content="{{ descText }}">
+<link rel="canonical" href="{{ canonical }}">
+
+{# --- Open Graph --- #}
+<meta property="og:title" content="{{ titleText }}">
+<meta property="og:description" content="{{ descText }}">
+<meta property="og:type" content="{{ ogType }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:site_name" content="{{ siteName }}">
+<meta property="og:image" content="{{ ogImage }}">
+
+{# --- Twitter Card --- #}
+<meta name="twitter:card" content="summary_large_image">
+{% if config.twitterHandle %}<meta name="twitter:site" content="@{{ config.twitterHandle | replace('@','') }}">{% endif %}
+<meta name="twitter:title" content="{{ titleText }}">
+<meta name="twitter:description" content="{{ descText }}">
+<meta name="twitter:image" content="{{ ogImage }}">
+
+{# --- Robots (respect your config toggle if you add one later) --- #}
+<meta name="robots" content="index,follow">

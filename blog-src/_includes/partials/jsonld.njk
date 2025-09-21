@@ -1,0 +1,36 @@
+{# JSON-LD (Blog on index, BlogPosting on posts). Minimal, safe, and uses the same config. #}
+{% set siteUrl = config.siteUrl or 'https://luggage-scale.com' %}
+{% set siteName = config.siteName or 'Luggage Scale Blog' %}
+{% set logoPath = config.logoPath or '/favicon.svg' %}
+{% set canonical = siteUrl ~ page.url %}
+{% set isBlogIndex = (page.url == '/blog/' or page.url == '/blog/index.html') %}
+{% set ogImagePath = image or (config.ogDefault or logoPath) %}
+{% set ogImage = ogImagePath startswith('http') ? ogImagePath : (siteUrl ~ ogImagePath) %}
+
+{% if isBlogIndex %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": {{ (title or siteName) | dump | safe }},
+  "url": {{ canonical | dump | safe }}
+}
+</script>
+{% else %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ (title or siteName) | dump | safe }},
+  "url": {{ canonical | dump | safe }},
+  "image": {{ ogImage | dump | safe }},
+  "author": { "@type": "Organization", "name": {{ siteName | dump | safe }} },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ siteName | dump | safe }},
+    "logo": { "@type": "ImageObject", "url": {{ (siteUrl ~ logoPath) | dump | safe }} }
+  },
+  "mainEntityOfPage": {{ canonical | dump | safe }}
+}
+</script>
+{% endif %}
