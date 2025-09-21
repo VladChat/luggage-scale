@@ -1,55 +1,60 @@
+// .eleventy.js
+// Eleventy config with two Nunjucks filters:
+//  - isoDate: format dates as YYYY-MM-DD (UTC)
+//  - absoluteUrl: make absolute URLs using site.url + site.base (no double /blog)
+
 const { DateTime } = require("luxon");
 
+/** @param {import('@11ty/eleventy/src/UserConfig')} eleventyConfig */
 module.exports = function (eleventyConfig) {
-  // === Settings / constants ===
-  // Use your configured site URL, with a safe fallback.
-  const SITE_URL = process.env.SITE_URL || "https://luggage-scale.com";
+  // ---------- Filters ----------
+  eleventyConfig.addNunjucksFilter("isoDate", (value) => {
+    if (!value) return "";
+    const d = value instanceof Date ? value : new Date(value);
+    if (isNaN(d)) return "";
+    return DateTime.fromJSDate(d, { zone: "utc" }).toFormat("yyyy-LL-dd");
+  });
 
-  // === Passthroughs ===
-  // Copy generated OG images to /blog/og/
-  eleventyConfig.addPassthroughCopy({ "blog-src/_generated": "og" });
+  eleventyConfig.addNunjucksFilter("absoluteUrl", (path, overrideBaseUrl, overrideBasePath) => {
+    const g = eleventyConfig.globalData || {};
 
-  // === Filters ===
+    // Prefer your existing structure
+    const siteUrl = overrideBaseUrl || g?.site?.url || g?.config?.baseUrl || "";
+    const basePath = overrideBasePath || g?.site?.base || g?.config?.basePath || "";
 
-  // Date filter (safe; avoids throwing on bad dates)
-  eleventyConfig.addFilter("date", (dateObj, fmt = "yyyy-LL-dd") => {
-    try {
-      if (!dateObj) return "";
-      const dt = dateObj instanceof Date ? dateObj : new Date(dateObj);
-      return DateTime.fromJSDate(dt, { zone: "utc" }).toFormat(fmt);
-    } catch {
-      return "";
+    if (!siteUrl) return path || "";
+
+    const trimmedBase = siteUrl.endsWith("/") ? siteUrl.slice(0, -1) : siteUrl;
+    const prefix = basePath
+      ? (basePath.startsWith("/") ? basePath : `/${basePath}`)
+      : "";
+
+    // Already absolute?
+    if (typeof path === "string" && /^https?:\/\//i.test(path)) {
+      return path;
     }
-  });
 
-  // Absolute URL filter
-  // Usage: {{ "/blog/hello-world/" | absoluteUrl }}  ->  https://luggage-scale.com/blog/hello-world/
-  eleventyConfig.addFilter("absoluteUrl", (path, base = SITE_URL) => {
-    try {
-      if (!path) return base;
-      return new URL(path, base).toString();
-    } catch {
-      return base;
+    // Normalize incoming path to start with a single leading slash
+    const normalizedPath =
+      !path || path === "/"
+        ? "/"
+        : path.startsWith("/")
+        ? path
+        : `/${path}`;
+
+    // Avoid /blog/blog/... if path already includes the base
+    let pathToUse = normalizedPath;
+    if (prefix && (normalizedPath === prefix || normalizedPath.startsWith(prefix + "/"))) {
+      // keep as-is
+    } else if (prefix) {
+      pathToUse = `${prefix}${normalizedPath}`;
     }
+
+    return `${trimmedBase}${pathToUse}`;
   });
 
-  // Backward-compat alias for a misspelling used in some templates.
-  // This prevents "filter not found: absoluturl" build failures.
-  eleventyConfig.addFilter("absoluturl", (path, base) =>
-    eleventyConfig.getFilter("absoluteUrl")(path, base)
-  );
+  // (Keep/restore any passthrough or collections you already had here)
 
-  // === Collections ===
-
-  // Posts collection: exclude future-dated posts
-  eleventyConfig.addCollection("posts", (collection) => {
-    const now = new Date();
-    return collection
-      .getFilteredByGlob("blog-src/posts/**/index.md")
-      .filter((item) => item.date <= now);
-  });
-
-  // === Eleventy dir & engines ===
   return {
     dir: {
       input: "blog-src",
@@ -57,8 +62,5 @@ module.exports = function (eleventyConfig) {
       data: "_data",
       output: "blog",
     },
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk",
-    passthroughFileCopy: true,
   };
 };

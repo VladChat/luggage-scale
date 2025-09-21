@@ -1,25 +1,23 @@
 ---
-permalink: "/sitemap.xml"
+permalink: "/blog/sitemap.xml"
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {# Blog home #}
+  <url>
+    <loc>{{ "/" | absoluteUrl }}</loc>
+    {% set latest = (collections.posts | reverse | first) %}
+    <lastmod>
+      {{ latest and latest.date ? (latest.date | isoDate) : (collections.posts | length ? (collections.posts | reverse | first).date | isoDate : "") }}
+    </lastmod>
+  </url>
+
+  {# Each post #}
   {% for post in collections.posts %}
   <url>
-    <loc>{{ post.url | absoluteUrl(config.site) }}</loc>
+    <loc>{{ post.url | absoluteUrl }}</loc>
     <lastmod>{{ post.date | isoDate }}</lastmod>
   </url>
   {% endfor %}
-
-  {% set latest = collections.posts[0] %}
-  <url>
-    <loc>{{ "/" | absoluteUrl(config.site) }}</loc>
-    <lastmod>
-      {% if latest and latest.date %}
-        {{ latest.date | isoDate }}
-      {% else %}
-        {{ "now" | isoDate }}
-      {% endif %}
-    </lastmod>
-  </url>
 </urlset>

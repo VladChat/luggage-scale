@@ -1,10 +1,8 @@
 ---
-permalink: "/robots.txt"
+permalink: "/blog/robots.txt"
 eleventyExcludeFromCollections: true
 ---
-
 User-agent: *
 Allow: /blog/
 
-Sitemap: {{ (config.site.base + "/sitemap.xml") | absoluteUrl(config.site) }}
-
+Sitemap: {{ "/sitemap.xml" | absoluteUrl }}
