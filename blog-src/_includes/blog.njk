@@ -1,59 +1,44 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{{ title }} — {{ config.site.name }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+---
+layout: "blog.njk"
+title: "Blog"
+description: "Latest articles, guides, and tips from the uPatch luggage scale team."
+pagination:
+  data: collections.posts
+  size: 10
+  alias: paged
+permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
+---
 
-  {# Canonical URL #}
-  {% set canonical = (page.url | absoluteUrl(config.site)) %}
-  <link rel="canonical" href="{{ canonical }}">
+{# Debug line to verify posts/pagination #}
+<p style="color:red; font-weight:bold;">
+  DEBUG: Found {{ collections.posts | length }} posts. Showing page {{ pagination.pageNumber + 1 }} of {{ pagination.pages | length }}
+</p>
 
-  {# Meta description #}
-  {% set desc = description or config.seo.defaultDescription %}
-  <meta name="description" content="{{ desc }}">
+<h1>Latest Posts</h1>
 
-  {# Open Graph / Twitter #}
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="{{ config.site.name }}">
-  <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="{{ desc }}">
-  <meta property="og:url" content="{{ canonical }}">
-  <meta property="og:image" content="{{ config.site.url }}{{ config.site.base }}/og/.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@upatch_scale">
+<ul>
+  {% for post in paged %}
+    <li style="margin-bottom:1.5rem;">
+      <h2 style="margin:0;">
+        <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+      </h2>
+      <div class="meta">
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | date("MMMM d, yyyy") }}</time>
+      </div>
+      {% if post.data.description %}
+        <p>{{ post.data.description }}</p>
+      {% else %}
+        <p>{{ post.templateContent | striptags | truncate(160, true, "...") }}</p>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
 
-  <style>
-    body { font-family: system-ui, Arial, sans-serif; margin:0; line-height:1.6; color:#222; }
-    header, footer { background:#f8f8f8; padding:1rem; }
-    .container { max-width: 800px; margin: auto; padding:1rem; }
-    h1,h2,h3 { color:#002F5F; }
-    .meta { color:#666; font-size:.9rem; }
-    nav.breadcrumbs { font-size:.85rem; margin-bottom:1rem; }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container">
-      <a href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
-    </div>
-  </header>
-
-  <main class="container">
-    <nav class="breadcrumbs">
-      <a href="{{ config.site.base }}/">Blog</a>
-      {% if title and page.url != config.site.base + '/' %} › <span>{{ title }}</span>{% endif %}
-    </nav>
-
-    {# Inject page content here (e.g., index.njk with posts) #}
-    {{ content | safe }}
-  </main>
-
-  <footer>
-    <div class="container">
-      © {{ "now" | date("yyyy") }} — <a href="{{ config.site.base }}/">Blog Index</a> •
-      <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
-    </div>
-  </footer>
-</body>
-</html>
+<nav aria-label="Pagination" style="margin-top:2rem;">
+  {% if pagination.href.previous %}
+    <a href="{{ pagination.href.previous | url }}">← Newer Posts</a>
+  {% endif %}
+  {% if pagination.href.next %}
+    <a href="{{ pagination.href.next | url }}" style="float:right;">Older Posts →</a>
+  {% endif %}
+</nav>
