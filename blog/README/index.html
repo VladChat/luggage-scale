@@ -47,3 +47,29 @@
 <li><code>authorTwitter</code> / <code>twitterCreator</code> – handle shown in the <code>twitter:creator</code> tag when the post has an author-specific account.</li>
 </ul>
 <p>All paths and URLs pass through the <code>absoluteUrl</code> filter, so relative paths under <code>/blog</code> automatically expand to fully-qualified URLs using the values in <code>_data/config.json</code>.</p>
+<h2>Batch post generation</h2>
+<p>Use the Node script in <code>scripts/generate-posts.js</code> to create dated post folders in <code>blog-src/posts/</code> from a JSON or CSV topic list. The batch generator enforces the 10-post-per-day ceiling described below, so a single run produces up to ten Markdown files for the requested date.</p>
+<h3>1. Prepare a topics file</h3>
+<p><strong>JSON</strong> files accept either an array or an object with a <code>topics</code> array:</p>
+<pre><code class="language-jsonc">[
+  {
+    &quot;title&quot;: &quot;Packing checklist for spring getaways&quot;,
+    &quot;description&quot;: &quot;A light-weight packing list tailored for mild weather trips.&quot;,
+    &quot;excerpt&quot;: &quot;Use this 10-item checklist to keep your luggage under the airline limit.&quot;,
+    &quot;author&quot;: &quot;Jamie Rivers&quot;,
+    &quot;tags&quot;: [&quot;checklist&quot;, &quot;packing&quot;],
+    &quot;body&quot;: &quot;Intro paragraph...\n\n## Section heading\nMore guidance here.&quot;,
+    &quot;date&quot;: &quot;2024-05-13&quot;
+  }
+]
+</code></pre>
+<p><strong>CSV</strong> files should provide a header row with matching columns. List multiple tags with commas (e.g., <code>tags=&quot;gear,packing&quot;</code>).</p>
+<h3>2. Run the generator (max 10 posts per day)</h3>
+<pre><code class="language-bash">npm run generate:posts -- ./path/to/topics.json
+</code></pre>
+<ul>
+<li>Omit the optional <code>--date</code> flag to use today’s date in the generated folder names and front matter, or provide an explicit ISO date: <code>npm run generate:posts -- ./topics.csv --date=2024-05-20</code>.</li>
+<li>The script honours a 10-post ceiling per run (<code>--limit</code> defaults to 10 and cannot exceed it). Extra topics in the file are skipped with a warning so you can schedule them for another day.</li>
+<li>Pass <code>--dry-run</code> to preview the folders that would be created without writing files.</li>
+</ul>
+<p>Every generated post receives an <code>index.md</code> with populated front matter (<code>title</code>, <code>description</code>, <code>excerpt</code>, <code>author</code>, <code>tags</code>, and <code>date</code>), and the batch metadata is appended to <code>blog-src/posts/posts.json</code> so the shared data file tracks when automated batches were produced.</p>
