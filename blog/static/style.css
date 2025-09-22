@@ -139,3 +139,129 @@ img {
     padding: 1.5rem;
   }
 }
+
+/* Blog listing */
+.blog-index__title {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  color: #0f172a;
+}
+
+.blog-index__intro {
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  color: #475569;
+}
+
+.blog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.blog-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1.25rem 2.5rem rgba(15, 23, 42, 0.08);
+  padding: 1.75rem;
+}
+
+.blog-card__image {
+  display: block;
+  border-radius: 0.65rem;
+  overflow: hidden;
+}
+
+.blog-card__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.blog-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.blog-card__title {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: #0f172a;
+}
+
+.blog-card__title a {
+  color: inherit;
+}
+
+.blog-card__meta {
+  margin: 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blog-card__excerpt {
+  margin: 0;
+  color: #334155;
+}
+
+.blog-card__read-more {
+  align-self: flex-start;
+  font-weight: 600;
+}
+
+.blog-list__empty {
+  font-style: italic;
+  color: #475569;
+}
+
+.pagination {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination__link {
+  color: #1f7aec;
+  font-weight: 600;
+}
+
+.pagination__link--prev {
+  margin-right: auto;
+}
+
+.pagination__link--next {
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .blog-card--with-image {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.65fr);
+    align-items: center;
+  }
+
+  .blog-card--with-image .blog-card__image {
+    max-height: 14rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .blog-card {
+    padding: 1.25rem;
+  }
+}
