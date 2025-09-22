@@ -51,11 +51,31 @@ jobs:
           head -n 20 blog/index.html || echo "index.html not found"
           echo "=== END OF DEBUG OUTPUT ==="
 
+      - name: Validate canonical blog URLs
+        run: |
+          if grep -R -n "/blog/blog/" blog; then
+            echo "Error: found duplicated /blog/blog/ paths in generated output."
+            exit 1
+          fi
+
+      - name: Stage blog and root static assets
+        run: |
+          git add -A -f blog
+          for root_page in index.html manual.html shop.html flight-baggage-limits.html warranty.html; do
+            if [ -f "$root_page" ]; then
+              git add "$root_page"
+            fi
+          done
+          for canonical in sitemap.xml robots.txt; do
+            if [ -f "$canonical" ]; then
+              git add "$canonical"
+            fi
+          done
+
       - name: Commit blog output (if changed, include deletions)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -f blog
           if ! git diff --cached --quiet; then
             git commit -m "chore(blog): build Eleventy site"
             git push
