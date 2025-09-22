@@ -10,6 +10,10 @@
   "logoPath": config.site.logoPath
 } %}
 {% set seoDefaults = config.seo or {} %}
+{% set integrations = config.integrations or {} %}
+{% set analyticsConfig = integrations.analytics or {} %}
+{% set adsenseConfig = integrations.adsense or {} %}
+{% set envFlags = env or {} %}
 
 {% set computedMetaTitle = metaTitle or seoDefaults.defaultTitle or headSite.name %}
 {% set computedMetaDescription = metaDescription or seoDefaults.defaultDescription %}
@@ -81,4 +85,34 @@
   {% if modifiedDate %}
   <meta property="article:modified_time" content="{{ modifiedDate | isoDate }}">
   {% endif %}
+{% endif %}
+{% if envFlags.analytics %}
+  {% if analyticsConfig.googleAnalyticsId %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ analyticsConfig.googleAnalyticsId }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ analyticsConfig.googleAnalyticsId }}', {
+        'page_path': '{{ (page.url or '/') | replace("'", "\\'") }}',
+        'anonymize_ip': true
+      });
+    </script>
+  {% endif %}
+  {% if analyticsConfig.plausible and analyticsConfig.plausible.domain %}
+    <script
+      defer
+      data-domain="{{ analyticsConfig.plausible.domain }}"
+      src="{{ analyticsConfig.plausible.script or 'https://plausible.io/js/script.js' }}"
+      {% if analyticsConfig.plausible.apiHost %}data-api="{{ analyticsConfig.plausible.apiHost }}/api/event"{% endif %}
+    ></script>
+  {% endif %}
+{% endif %}
+{% if envFlags.adsense and adsenseConfig.clientId %}
+  <meta name="google-adsense-account" content="{{ adsenseConfig.clientId }}">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsenseConfig.clientId }}" crossorigin="anonymous"></script>
+  <!-- Google AdSense placeholder -->
+  <script>
+    window.adsbygoogle = window.adsbygoogle || [];
+  </script>
 {% endif %}
