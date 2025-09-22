@@ -22,3 +22,39 @@ The Eleventy layouts compute SEO metadata from the page front matter. Provide th
 - `authorTwitter` / `twitterCreator` – handle shown in the `twitter:creator` tag when the post has an author-specific account.
 
 All paths and URLs pass through the `absoluteUrl` filter, so relative paths under `/blog` automatically expand to fully-qualified URLs using the values in `_data/config.json`.
+
+## Batch post generation
+
+Use the Node script in `scripts/generate-posts.js` to create dated post folders in `blog-src/posts/` from a JSON or CSV topic list. The batch generator enforces the 10-post-per-day ceiling described below, so a single run produces up to ten Markdown files for the requested date.
+
+### 1. Prepare a topics file
+
+**JSON** files accept either an array or an object with a `topics` array:
+
+```jsonc
+[
+  {
+    "title": "Packing checklist for spring getaways",
+    "description": "A light-weight packing list tailored for mild weather trips.",
+    "excerpt": "Use this 10-item checklist to keep your luggage under the airline limit.",
+    "author": "Jamie Rivers",
+    "tags": ["checklist", "packing"],
+    "body": "Intro paragraph...\n\n## Section heading\nMore guidance here.",
+    "date": "2024-05-13"
+  }
+]
+```
+
+**CSV** files should provide a header row with matching columns. List multiple tags with commas (e.g., `tags="gear,packing"`).
+
+### 2. Run the generator (max 10 posts per day)
+
+```bash
+npm run generate:posts -- ./path/to/topics.json
+```
+
+- Omit the optional `--date` flag to use today’s date in the generated folder names and front matter, or provide an explicit ISO date: `npm run generate:posts -- ./topics.csv --date=2024-05-20`.
+- The script honours a 10-post ceiling per run (`--limit` defaults to 10 and cannot exceed it). Extra topics in the file are skipped with a warning so you can schedule them for another day.
+- Pass `--dry-run` to preview the folders that would be created without writing files.
+
+Every generated post receives an `index.md` with populated front matter (`title`, `description`, `excerpt`, `author`, `tags`, and `date`), and the batch metadata is appended to `blog-src/posts/posts.json` so the shared data file tracks when automated batches were produced.
