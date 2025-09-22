@@ -105,6 +105,53 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("amazonLink", amazonLinkHelper);
   eleventyConfig.addShortcode("amazonLink", amazonLinkHelper);
 
+  eleventyConfig.addFilter("normalizePostHeadings", (content, pageTitle) => {
+    if (!content) return content;
+
+    const html = String(content);
+    const firstHeadingMatch = html.match(/^[\s\uFEFF\xA0]*<h1[^>]*>([\s\S]*?)<\/h1>[\s\uFEFF\xA0]*/i);
+
+    if (!firstHeadingMatch) {
+      return html;
+    }
+
+    const [fullMatch, innerHtml] = firstHeadingMatch;
+
+    const decodeHtmlEntities = (value) =>
+      value
+        .replace(/&amp;/gi, "&")
+        .replace(/&lt;/gi, "<")
+        .replace(/&gt;/gi, ">")
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;/gi, "'");
+
+    const normalizeText = (value) =>
+      decodeHtmlEntities(String(value || ""))
+        .replace(/<[^>]*>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const normalizedHeading = normalizeText(innerHtml);
+    const normalizedTitle = normalizeText(pageTitle);
+
+    if (normalizedTitle && normalizedHeading && normalizedHeading === normalizedTitle) {
+      return html.replace(fullMatch, "");
+    }
+
+    const leadingWhitespace = fullMatch.match(/^[\s\uFEFF\xA0]*/)[0];
+    const trailingWhitespace = fullMatch.match(/[\s\uFEFF\xA0]*$/)[0];
+    const headingMarkup = fullMatch.slice(
+      leadingWhitespace.length,
+      fullMatch.length - trailingWhitespace.length
+    );
+
+    const demotedHeading = headingMarkup
+      .replace(/<h1/gi, "<h2")
+      .replace(/<\/h1>/gi, "</h2>");
+
+    return html.replace(fullMatch, `${leadingWhitespace}${demotedHeading}${trailingWhitespace}`);
+  });
+
   // Build absolute URLs safely; ensure site.base (e.g., /blog) is present
   // Expects config.site like: { "url": "https://luggage-scale.com", "base": "/blog" }
   eleventyConfig.addFilter("absoluteUrl", (path, site) => {

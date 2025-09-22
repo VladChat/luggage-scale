@@ -80,7 +80,7 @@
       </header>
 
       <div class="post__body">
-        {{ content | safe }}
+        {{ content | normalizePostHeadings(title) | safe }}
       </div>
 
       {% if affiliateDisclaimer %}
