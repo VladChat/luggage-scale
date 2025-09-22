@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">uPatch Luggage Scale</title>
+  <desc id="desc">Stylized luggage scale mark on a deep blue background</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#002F5F" />
+      <stop offset="100%" stop-color="#0B5CA5" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" rx="48" ry="48" />
+  <g fill="#FFFFFF" aria-hidden="true">
+    <path d="M360 252c0-66.274 53.726-120 120-120h240c66.274 0 120 53.726 120 120v126c0 66.274-53.726 120-120 120H480c-66.274 0-120-53.726-120-120V252zm120-72c-39.765 0-72 32.235-72 72v126c0 39.765 32.235 72 72 72h240c39.765 0 72-32.235 72-72V252c0-39.765-32.235-72-72-72H480z"/>
+    <path d="M600 210c44.183 0 80 35.817 80 80s-35.817 80-80 80-80-35.817-80-80 35.817-80 80-80zm0 48c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32z"/>
+    <rect x="556" y="186" width="88" height="36" rx="18"/>
+  </g>
+  <text x="600" y="510" fill="#FFFFFF" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="80" font-weight="600" text-anchor="middle">
+    Luggage Scale
+  </text>
+</svg>

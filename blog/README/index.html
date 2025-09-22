@@ -1,0 +1,49 @@
+<h1>Blog authoring guide</h1>
+<p>The Eleventy layouts compute SEO metadata from the page front matter. Provide the following keys whenever you create a new post or listing page so the shared <code>&lt;head&gt;</code> include can populate the Open Graph and Twitter tags correctly.</p>
+<h2>Core front matter keys</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Expected value</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>Plain text page title. Posts usually omit the brand name (it is appended automatically).</td>
+<td><code>&lt;title&gt;</code>, Open Graph title, on-page headings.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>One or two sentences (155–160 chars is ideal).</td>
+<td><code>&lt;meta name=&quot;description&quot;&gt;</code>, Open Graph/Twitter descriptions, teaser copy on listings.</td>
+</tr>
+<tr>
+<td><code>socialImage</code></td>
+<td>Absolute URL or a <code>/blog/...</code> path to a 1200×630 image.</td>
+<td>Open Graph/Twitter preview image. Falls back to <code>config.seo.defaultOgImage</code>.</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>Display name for the article or page owner.</td>
+<td>Visible post byline, <code>&lt;meta name=&quot;author&quot;&gt;</code>, <code>article:author</code>. Defaults to <code>uPatch Travel Team</code>.</td>
+</tr>
+<tr>
+<td><code>published</code></td>
+<td>ISO date string (<code>YYYY-MM-DD</code>). For posts, match the Eleventy <code>date</code>.</td>
+<td><code>article:published_time</code> and canonical date displays. Optional for listings (layout will fall back to the build date).</td>
+</tr>
+</tbody>
+</table>
+<h2>Optional helpers</h2>
+<ul>
+<li><code>metaTitle</code> / <code>metaDescription</code> – override the computed title or description for the <code>&lt;head&gt;</code> tags when you need custom copy.</li>
+<li><code>ogType</code> – defaults to <code>article</code> on posts and <code>website</code> on listings. Override for landing pages that need a different Open Graph type.</li>
+<li><code>twitterCard</code> – defaults to <code>summary_large_image</code>; set to <code>summary</code> if you deliberately ship a smaller card.</li>
+<li><code>metaRobots</code> – supply custom robots directives (e.g., <code>noindex</code>) instead of using the automatic <code>published: false</code> guard.</li>
+<li><code>socialImageAlt</code> – short alt text for the social sharing image, applied to the <code>og:image:alt</code> and <code>twitter:image:alt</code> tags.</li>
+<li><code>authorTwitter</code> / <code>twitterCreator</code> – handle shown in the <code>twitter:creator</code> tag when the post has an author-specific account.</li>
+</ul>
+<p>All paths and URLs pass through the <code>absoluteUrl</code> filter, so relative paths under <code>/blog</code> automatically expand to fully-qualified URLs using the values in <code>_data/config.json</code>.</p>

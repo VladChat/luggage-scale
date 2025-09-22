@@ -8,6 +8,11 @@
   },
   "seo": {
     "twitter": "@upatch_scale",
-    "defaultDescription": "Guides, tips, and insights about luggage scales, travel hacks, and smart packing."
+    "defaultTitle": "Luggage Scale Blog",
+    "defaultDescription": "Guides, tips, and insights about luggage scales, travel hacks, and smart packing.",
+    "defaultOgImage": "/blog/static/logo.svg",
+    "defaultOgType": "website",
+    "defaultTwitterCard": "summary_large_image",
+    "defaultAuthor": "uPatch Travel Team"
   }
 }
