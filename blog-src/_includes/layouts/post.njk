@@ -1,15 +1,53 @@
-{% set metaDescription = description or excerpt or config.seo.defaultDescription %}
 {% set headSite = {
   "name": config.site.name,
   "url": config.site.url,
   "base": config.site.base,
-  "twitter": config.seo.twitter
+  "twitter": config.seo.twitter,
+  "logoPath": config.site.logoPath
 } %}
+{% if metaTitle %}
+  {% set resolvedMetaTitle = metaTitle %}
+{% elseif title %}
+  {% if config.site.name and title.indexOf(config.site.name) > -1 %}
+    {% set resolvedMetaTitle = title %}
+  {% else %}
+    {% set resolvedMetaTitle = title + " — " + config.site.name %}
+  {% endif %}
+{% else %}
+  {% set resolvedMetaTitle = config.seo.defaultTitle or config.site.name %}
+{% endif %}
+{% set resolvedDescription = metaDescription or description or excerpt or config.seo.defaultDescription %}
+{% set resolvedOgImage = ogImage or socialImage or config.seo.defaultOgImage or headSite.logoPath %}
+{% set resolvedOgType = ogType or "article" %}
+{% set resolvedTwitterCard = twitterCard or config.seo.defaultTwitterCard or "summary_large_image" %}
+{% set resolvedMetaAuthor = metaAuthor or author or config.seo.defaultAuthor %}
+{% set resolvedPublished = articlePublished or published or date or page.date %}
+{% set resolvedModified = articleModified or updated or lastUpdated or revised %}
+{% if metaRobots is defined %}
+  {% set resolvedRobots = metaRobots %}
+{% else %}
+  {% set resolvedRobots = none %}
+  {% if published === false %}
+    {% set resolvedRobots = "noindex, nofollow" %}
+  {% endif %}
+{% endif %}
+{% set resolvedTwitterCreator = twitterCreator or authorTwitter or config.seo.twitter %}
+{% set resolvedOgImageAlt = ogImageAlt or socialImageAlt %}
 <!doctype html>
 <html lang="en">
 <head>
   {% set site = headSite %}
-  {% set description = metaDescription %}
+  {% set metaTitle = resolvedMetaTitle %}
+  {% set metaDescription = resolvedDescription %}
+  {% set ogImage = resolvedOgImage %}
+  {% set ogType = resolvedOgType %}
+  {% set twitterCard = resolvedTwitterCard %}
+  {% set metaAuthor = resolvedMetaAuthor %}
+  {% set articlePublished = resolvedPublished %}
+  {% set articleModified = resolvedModified %}
+  {% set metaRobots = resolvedRobots %}
+  {% set twitterCreator = resolvedTwitterCreator %}
+  {% set ogImageAlt = resolvedOgImageAlt %}
   {% include "head.njk" %}
   <link rel="stylesheet" href="{{ config.site.base }}/static/style.css">
 </head>

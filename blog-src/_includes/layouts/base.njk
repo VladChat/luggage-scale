@@ -1,18 +1,64 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>{{ title }} — Luggage Scale Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ description or 'Guides, tips, and insights about luggage scales, travel hacks, and smart packing.' }}">
+  {% set headSite = {
+    "name": config.site.name,
+    "url": config.site.url,
+    "base": config.site.base,
+    "twitter": config.seo.twitter,
+    "logoPath": config.site.logoPath
+  } %}
+  {% if metaTitle %}
+    {% set resolvedMetaTitle = metaTitle %}
+  {% elseif title %}
+    {% if config.site.name and title.indexOf(config.site.name) > -1 %}
+      {% set resolvedMetaTitle = title %}
+    {% else %}
+      {% set resolvedMetaTitle = title + " — " + config.site.name %}
+    {% endif %}
+  {% else %}
+    {% set resolvedMetaTitle = config.seo.defaultTitle or config.site.name %}
+  {% endif %}
+  {% set resolvedDescription = metaDescription or description or config.seo.defaultDescription %}
+  {% set resolvedOgImage = ogImage or socialImage or config.seo.defaultOgImage or headSite.logoPath %}
+  {% set resolvedOgType = ogType or config.seo.defaultOgType or "website" %}
+  {% set resolvedTwitterCard = twitterCard or config.seo.defaultTwitterCard or "summary_large_image" %}
+  {% set resolvedMetaAuthor = metaAuthor or author or config.seo.defaultAuthor %}
+  {% set resolvedOgImageAlt = ogImageAlt or socialImageAlt %}
+  {% set resolvedPublished = articlePublished or published %}
+  {% if not resolvedPublished and page and page.date %}
+    {% set resolvedPublished = page.date %}
+  {% endif %}
+  {% set resolvedModified = articleModified or updated or lastUpdated or revised %}
+  {% if metaRobots is defined %}
+    {% set resolvedRobots = metaRobots %}
+  {% else %}
+    {% set resolvedRobots = none %}
+    {% if published === false %}
+      {% set resolvedRobots = "noindex, nofollow" %}
+    {% endif %}
+  {% endif %}
+  {% set resolvedTwitterCreator = twitterCreator or authorTwitter %}
 
-  <link rel="canonical" href="{{ page.url | absoluteUrl(config.site) }}">
-  <link rel="stylesheet" href="/blog/static/style.css">
+  {% set site = headSite %}
+  {% set metaTitle = resolvedMetaTitle %}
+  {% set metaDescription = resolvedDescription %}
+  {% set ogImage = resolvedOgImage %}
+  {% set ogType = resolvedOgType %}
+  {% set twitterCard = resolvedTwitterCard %}
+  {% set metaAuthor = resolvedMetaAuthor %}
+  {% set ogImageAlt = resolvedOgImageAlt %}
+  {% set articlePublished = resolvedPublished %}
+  {% set articleModified = resolvedModified %}
+  {% set metaRobots = resolvedRobots %}
+  {% set twitterCreator = resolvedTwitterCreator %}
+  {% include "head.njk" %}
+  <link rel="stylesheet" href="{{ config.site.base }}/static/style.css">
 </head>
 <body>
   <header>
     <div class="container">
-      <a href="/blog/"><strong>Luggage Scale Blog</strong></a>
+      <a href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
     </div>
   </header>
 
@@ -23,8 +69,8 @@
   <footer>
     <div class="container">
       © {{ "now" | date("yyyy") }} —
-      <a href="/blog/">Blog Index</a> •
-      <a href="/blog/sitemap.xml">Sitemap</a>
+      <a href="{{ config.site.base }}/">Blog Index</a> •
+      <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
     </div>
   </footer>
 </body>
