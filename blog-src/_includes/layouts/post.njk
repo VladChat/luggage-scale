@@ -50,16 +50,95 @@
   {% set ogImageAlt = resolvedOgImageAlt %}
   {% include "head.njk" %}
   <link rel="stylesheet" href="{{ config.site.base }}/static/style.css">
+  {% set summary = excerpt or description or config.seo.defaultDescription %}
+  {% set canonicalHref = canonicalUrl or (page.url | absoluteUrl(site)) %}
+  {% set basePath = config.site.base or '' %}
+  {% if basePath | length %}
+    {% if basePath | last == '/' %}
+      {% set blogHomePath = basePath %}
+    {% else %}
+      {% set blogHomePath = basePath + '/' %}
+    {% endif %}
+  {% else %}
+    {% set blogHomePath = '/' %}
+  {% endif %}
+  {% set breadcrumbTrail = breadcrumbs or [
+    { "label": config.site.name, "url": blogHomePath },
+    { "label": title, "url": page.url }
+  ] %}
+  {% set prepared = content | preparePostContent(title) %}
+  {% set breadcrumbStructuredData = breadcrumbTrail | breadcrumbJsonLd(site, canonicalHref) %}
+  {% set publisherLogo = site.logoPath %}
+  {% if publisherLogo %}
+    {% set publisherLogo = publisherLogo | absoluteUrl(site) %}
+  {% endif %}
+  {% set articleImage = resolvedOgImage %}
+  {% if articleImage %}
+    {% set articleImage = articleImage | absoluteUrl(site) %}
+  {% endif %}
+  {% set publishedIso = resolvedPublished | isoDate %}
+  {% set modifiedIso = (resolvedModified or resolvedPublished) | isoDate %}
+  {% if publisherLogo %}
+    {% set publisherData = {
+      "@type": "Organization",
+      "name": site.name,
+      "logo": {
+        "@type": "ImageObject",
+        "url": publisherLogo
+      }
+    } %}
+  {% else %}
+    {% set publisherData = {
+      "@type": "Organization",
+      "name": site.name
+    } %}
+  {% endif %}
+  {% set articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": summary,
+    "datePublished": publishedIso,
+    "dateModified": modifiedIso,
+    "mainEntityOfPage": canonicalHref,
+    "author": [{
+      "@type": "Organization",
+      "name": resolvedMetaAuthor
+    }],
+    "publisher": publisherData,
+    "image": articleImage
+  } %}
+  <script type="application/ld+json">{{ articleStructuredData | jsonify | safe }}</script>
+  {% if breadcrumbStructuredData.itemListElement and breadcrumbStructuredData.itemListElement | length %}
+  <script type="application/ld+json">{{ breadcrumbStructuredData | jsonify | safe }}</script>
+  {% endif %}
 </head>
 <body class="post-page">
   <header class="site-header">
     <div class="container">
-      <a class="site-header__brand" href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
+      <nav class="site-header__nav" aria-label="Primary">
+        <a class="site-header__brand" href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
+      </nav>
+      {% if breadcrumbTrail %}
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol class="breadcrumbs__list">
+          {% for crumb in breadcrumbTrail %}
+          <li class="breadcrumbs__item">
+            {% if loop.last %}
+            <span aria-current="page">{{ crumb.label }}</span>
+            {% else %}
+            <a href="{{ crumb.url }}">{{ crumb.label }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+      </nav>
+      {% endif %}
     </div>
   </header>
 
   <main class="container">
-    <article class="post" data-canonical="{{ canonicalUrl }}">
+    <article class="post" data-canonical="{{ canonicalHref }}">
       <header class="post__header">
         {% if title %}
         <h1 class="post__title">{{ title }}</h1>
@@ -73,21 +152,43 @@
           <time class="post-meta__date" datetime="{{ date | isoDate }}">{{ date | date("MMMM d, yyyy") }}</time>
           {% endif %}
         </div>
-        {% set summary = excerpt or description or config.seo.defaultDescription %}
         {% if summary %}
         <p class="post__excerpt">{{ summary }}</p>
         {% endif %}
       </header>
 
-      <div class="post__body">
-        {{ content | normalizePostHeadings(title) | safe }}
-      </div>
+      <div class="post__content-grid">
+        <div class="post__content-column">
+          <div class="post__body">
+            {{ prepared.html | safe }}
+          </div>
 
-      {% if affiliateDisclaimer %}
-      <aside class="post__disclaimer">
-        {{ affiliateDisclaimer }}
-      </aside>
-      {% endif %}
+          {% if affiliateDisclaimer %}
+          <aside class="post__disclaimer">
+            {{ affiliateDisclaimer }}
+          </aside>
+          {% endif %}
+        </div>
+
+        {% if prepared.headings and prepared.headings | length %}
+        <aside class="post__toc" aria-labelledby="on-this-page">
+          <div class="post__toc-inner">
+            <h2 id="on-this-page" class="post__toc-title">On this page</h2>
+            <nav class="post__toc-nav" aria-label="On this page">
+              <ol class="post__toc-list">
+                {% for heading in prepared.headings %}
+                {% if heading.level <= 3 %}
+                <li class="post__toc-item post__toc-item--level-{{ heading.level }}">
+                  <a class="post__toc-link" href="#{{ heading.id }}">{{ heading.text }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ol>
+            </nav>
+          </div>
+        </aside>
+        {% endif %}
+      </div>
     </article>
   </main>
 

@@ -56,9 +56,27 @@
   <link rel="stylesheet" href="{{ config.site.base }}/static/style.css">
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <div class="container">
-      <a href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
+      <nav class="site-header__nav" aria-label="Primary">
+        <a class="site-header__brand" href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
+      </nav>
+      {% set breadcrumbTrail = breadcrumbs %}
+      {% if breadcrumbTrail %}
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol class="breadcrumbs__list">
+          {% for crumb in breadcrumbTrail %}
+          <li class="breadcrumbs__item">
+            {% if loop.last %}
+            <span aria-current="page">{{ crumb.label }}</span>
+            {% else %}
+            <a href="{{ crumb.url }}">{{ crumb.label }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+      </nav>
+      {% endif %}
     </div>
   </header>
 
