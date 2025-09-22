@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env ELEVENTY_ENV=dev npx @11ty/eleventy --serve --input=blog-src --output=blog-local",
-    "build": "cross-env ELEVENTY_ENV=prod npx @11ty/eleventy --input=blog-src --output=blog"
+    "build": "cross-env ELEVENTY_ENV=prod npx @11ty/eleventy --input=blog-src --output=blog",
+    "generate:posts": "node scripts/generate-posts.js"
   },
   "keywords": [],
   "author": "",
