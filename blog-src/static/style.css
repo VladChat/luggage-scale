@@ -214,11 +214,18 @@ pre {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--space-6);
+  gap: clamp(var(--space-5), 3vw, var(--space-6));
+  grid-template-columns: 1fr;
 }
 
 .post-grid > li {
   margin: 0;
+}
+
+@media (min-width: 40rem) {
+  .post-grid {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
 }
 
 .post-card {
