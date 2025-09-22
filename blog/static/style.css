@@ -49,6 +49,63 @@ article h3 {
   color: #0f172a;
 }
 
+.post__header {
+  margin-bottom: 2rem;
+}
+
+.post__title {
+  margin: 0 0 0.5rem;
+  font-size: 2.25rem;
+  line-height: 1.1;
+}
+
+.post__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.post__meta-separator {
+  color: #94a3b8;
+}
+
+.post__excerpt {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.25rem;
+  background-color: #f1f5f9;
+  border-left: 0.25rem solid #1f7aec;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.post__body {
+  font-size: 1.05rem;
+}
+
+.post__body > :first-child {
+  margin-top: 0;
+}
+
+.post__body p {
+  margin-bottom: 1.25rem;
+}
+
+.post__disclaimer {
+  margin-top: 2.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  background: #e0f2fe;
+  color: #0f172a;
+  font-size: 0.95rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+}
+
 code,
 pre {
   font-family: "Fira Code", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

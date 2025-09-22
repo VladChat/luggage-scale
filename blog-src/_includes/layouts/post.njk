@@ -1,0 +1,63 @@
+{% set metaDescription = description or excerpt or config.seo.defaultDescription %}
+{% set headSite = {
+  "name": config.site.name,
+  "url": config.site.url,
+  "twitter": config.seo.twitter
+} %}
+<!doctype html>
+<html lang="en">
+<head>
+  {% set site = headSite %}
+  {% set description = metaDescription %}
+  {% include "head.njk" %}
+  <link rel="stylesheet" href="{{ config.site.base }}/static/style.css">
+</head>
+<body class="post-page">
+  <header class="site-header">
+    <div class="container">
+      <a class="site-header__brand" href="{{ config.site.base }}/"><strong>{{ config.site.name }}</strong></a>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="post" data-canonical="{{ canonicalUrl }}">
+      <header class="post__header">
+        {% if title %}
+        <h1 class="post__title">{{ title }}</h1>
+        {% endif %}
+        <div class="post__meta">
+          {% if author %}
+          <span class="post__author">By {{ author }}</span>
+          {% endif %}
+          {% if date %}
+          {% if author %}<span class="post__meta-separator" aria-hidden="true">•</span>{% endif %}
+          <time class="post__date" datetime="{{ date | isoDate }}">{{ date | date("MMMM d, yyyy") }}</time>
+          {% endif %}
+        </div>
+        {% set summary = excerpt or description or config.seo.defaultDescription %}
+        {% if summary %}
+        <p class="post__excerpt">{{ summary }}</p>
+        {% endif %}
+      </header>
+
+      <div class="post__body">
+        {{ content | safe }}
+      </div>
+
+      {% if affiliateDisclaimer %}
+      <aside class="post__disclaimer">
+        {{ affiliateDisclaimer }}
+      </aside>
+      {% endif %}
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      © {{ "now" | date("yyyy") }} —
+      <a href="{{ config.site.base }}/">Blog Index</a> •
+      <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
+    </div>
+  </footer>
+</body>
+</html>
