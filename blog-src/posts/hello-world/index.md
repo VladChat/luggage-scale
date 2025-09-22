@@ -1,6 +1,9 @@
 ---
 title: Hello World — First Blog Post
 description: Testing the new blog setup.
+author: "uPatch Travel Team"
+excerpt: "A quick welcome post introducing the uPatch luggage scale blog and what we'll be sharing."
+metaDescription: "Meet the uPatch luggage scale blog—a short hello explaining the articles and travel tips coming soon."
 date: 2025-09-18
 ---
 

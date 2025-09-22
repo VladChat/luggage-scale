@@ -1,6 +1,9 @@
 ---
 title: "International vs. Domestic Trips: Planning for Weight Differences"
 description: "Key differences to consider and how a scale keeps you compliant."
+author: "uPatch Travel Team"
+excerpt: "Plan for different airline allowances by weighing and adjusting bags ahead of international or domestic departures."
+metaDescription: "Compare international and domestic baggage weight limits and use a luggage scale to prepare for each itinerary with confidence."
 date: 2025-09-17
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

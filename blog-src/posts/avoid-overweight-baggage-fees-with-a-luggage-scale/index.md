@@ -1,6 +1,9 @@
 ---
 title: "Avoid Overweight Baggage Fees with a Luggage Scale"
 description: "A practical, airline‑agnostic guide to weigh bags at home and at the airport."
+author: "uPatch Travel Team"
+excerpt: "Step-by-step plan to weigh your suitcases ahead of travel so you skip surprise overweight fees."
+metaDescription: "Learn how to use a luggage scale to avoid overweight baggage fees with practical setup tips and repacking advice."
 date: 2025-09-11
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

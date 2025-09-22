@@ -1,6 +1,9 @@
 ---
 title: "Business Travel: Weekly Packing System to Eliminate Overages"
 description: "A repeatable workflow that keeps your roller under the limit."
+author: "uPatch Travel Team"
+excerpt: "Build a repeatable weekly packing routine that keeps your carry-on within airline limits without last-minute stress."
+metaDescription: "Create a business travel packing system that pairs a luggage scale with smart prep so you never pay overweight bag fees again."
 date: 2025-09-19
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

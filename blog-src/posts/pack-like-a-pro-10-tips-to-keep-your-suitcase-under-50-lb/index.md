@@ -1,6 +1,9 @@
 ---
 title: "Pack Like a Pro: 10 Tips to Keep Your Suitcase Under 50 lb"
 description: "Simple packing strategies to avoid check‑in surprises."
+author: "uPatch Travel Team"
+excerpt: "Use smart packing moves and mid-pack weigh-ins to keep every checked suitcase comfortably under 50 pounds."
+metaDescription: "Try ten practical packing tips plus luggage scale checkpoints to avoid overweight fees at airline check-in counters."
 date: 2025-09-14
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

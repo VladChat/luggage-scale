@@ -1,6 +1,9 @@
 ---
 title: "Family Travel Checklist: Weigh Every Bag in 2 Minutes"
 description: "Fast routine to check all family luggage before leaving for the airport."
+author: "uPatch Travel Team"
+excerpt: "Run a two-minute weigh-in circuit for every suitcase so the whole family clears airline scales without drama."
+metaDescription: "Follow a family travel luggage checklist that uses a scale to verify every bag quickly before you head to the airport."
 date: 2025-09-16
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

@@ -1,6 +1,9 @@
 ---
 title: "Calibrate & Verify: Trusting Your Luggage Scale’s Readout"
 description: "Sanity checks you can do at home to validate your scale’s accuracy."
+author: "uPatch Travel Team"
+excerpt: "Quick home calibration checks help you trust every luggage scale reading before you roll to the airport."
+metaDescription: "Use simple calibration tests and verification steps so you can rely on your luggage scale before leaving for the terminal."
 date: 2025-09-18
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

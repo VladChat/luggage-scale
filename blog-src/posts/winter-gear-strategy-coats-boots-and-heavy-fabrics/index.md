@@ -1,6 +1,9 @@
 ---
 title: "Winter Gear Strategy: Coats, Boots, and Heavy Fabrics"
 description: "Keep weight under control when your wardrobe runs heavy."
+author: "uPatch Travel Team"
+excerpt: "Balance heavy coats, boots, and layers by using a luggage scale to dial in winter travel packing."
+metaDescription: "Use a luggage scale and smart packing strategy to manage winter gear weight so your cold-weather suitcase stays under the limit."
 date: 2025-09-20
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"
