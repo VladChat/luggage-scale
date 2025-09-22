@@ -14,5 +14,37 @@
     "defaultOgType": "website",
     "defaultTwitterCard": "summary_large_image",
     "defaultAuthor": "uPatch Travel Team"
+  },
+  "integrations": {
+    "analytics": {
+      "googleAnalyticsId": "G-XXXXXXX",
+      "plausible": {
+        "domain": "luggage-scale.com",
+        "script": "https://plausible.io/js/script.js",
+        "apiHost": "https://plausible.io"
+      }
+    },
+    "adsense": {
+      "clientId": "ca-pub-1234567890123456"
+    }
+  },
+  "affiliate": {
+    "amazon": {
+      "tag": "luggagescale-20",
+      "defaultDomain": "com",
+      "defaultText": "See the latest price on Amazon",
+      "products": {
+        "upatch-digital-scale": {
+          "asin": "B0AUPATCH01",
+          "title": "uPatch Digital Hanging Luggage Scale",
+          "text": "Shop the uPatch luggage scale on Amazon"
+        },
+        "travel-compression-cubes": {
+          "asin": "B0BCUBESET1",
+          "title": "Compression Packing Cubes Set",
+          "text": "Grab the compression cubes on Amazon"
+        }
+      }
+    }
   }
 }
