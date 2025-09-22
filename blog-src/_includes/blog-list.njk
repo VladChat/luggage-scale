@@ -8,7 +8,7 @@
       {% set summaryText %}{{ post.templateContent | striptags | truncate(200, true, "…") }}{% endset %}
     {% endif %}
     {% set hasHero = post.data.heroImage %}
-    <li>
+    <li class="post-grid__item">
       <article class="post-card{% if hasHero %} post-card--with-image{% endif %}">
         {% if hasHero %}
         <a class="post-card__media" href="{{ post.url }}">
@@ -35,7 +35,9 @@
           {% if summaryText %}
           <p class="post-card__excerpt">{{ summaryText }}</p>
           {% endif %}
-          <a class="post-card__cta" href="{{ post.url }}">Read the article →</a>
+          <div class="post-card__actions">
+            <a class="btn outline post-card__cta" href="{{ post.url }}">Read the article</a>
+          </div>
         </div>
       </article>
     </li>
