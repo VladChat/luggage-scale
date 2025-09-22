@@ -9,22 +9,16 @@ pagination:
 permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
 ---
 
-<h1>Blog</h1>
+<h1 class="blog-index__title">Blog</h1>
+<p class="blog-index__intro">Explore our newest guides, tutorials, and packing checklists for traveling light.</p>
 
-<ul>
-  {% for post in paged %}
-    <li>
-      <a href="{{ post.url }}">{{ post.data.title }}</a>
-      — {{ post.date | date("MMMM d, yyyy") }}
-    </li>
-  {% endfor %}
-</ul>
+{% include "blog-list.njk" %}
 
-<nav>
+<nav class="pagination" aria-label="Blog pagination">
   {% if pagination.href.previous %}
-    <a href="{{ pagination.href.previous | url }}">← Newer Posts</a>
+  <a class="pagination__link pagination__link--prev" href="{{ pagination.href.previous | url }}">← Newer Posts</a>
   {% endif %}
   {% if pagination.href.next %}
-    <a href="{{ pagination.href.next | url }}">Older Posts →</a>
+  <a class="pagination__link pagination__link--next" href="{{ pagination.href.next | url }}">Older Posts →</a>
   {% endif %}
 </nav>

@@ -1,6 +1,9 @@
 ---
 title: "Carry‑On Weight Limits: What to Know (Always Check Your Airline)"
 description: "Overview of carry‑on weight considerations and how to stay under."
+author: "uPatch Travel Team"
+excerpt: "Understand carry-on weight rules and use quick luggage scale checks so gate agents never flag your bag."
+metaDescription: "Review carry-on baggage weight limits, airline differences, and simple luggage scale habits to stay compliant at the gate."
 date: 2025-09-13
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

@@ -1,6 +1,9 @@
 ---
 title: "Weigh Odd‑Shaped Items (Strollers, Golf Bags, Instruments)"
 description: "Techniques for accurate weighing when handles or shapes make it tricky."
+author: "uPatch Travel Team"
+excerpt: "Solve tricky gear weigh-ins with strap hacks and balance tips that keep bulky items within airline limits."
+metaDescription: "Get techniques for weighing strollers, golf bags, instruments, and other awkward gear accurately with a handheld luggage scale."
 date: 2025-09-15
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"

@@ -1,6 +1,9 @@
 ---
 title: "How to Use a Battery‑Free (Shake‑to‑Charge) Luggage Scale"
 description: "Step‑by‑step instructions for reliable readings without batteries."
+author: "uPatch Travel Team"
+excerpt: "Master the shake-to-charge routine so your battery-free luggage scale delivers dependable readings on every trip."
+metaDescription: "Learn the correct way to power, zero, and read a battery-free luggage scale so you capture accurate weights anywhere."
 date: 2025-09-12
 tags: ["luggage scale", "travel tips"]
 cluster: "travel"
