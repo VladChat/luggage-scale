@@ -20,33 +20,57 @@ permalink: "index.html"
   } %}
   {% set site = headSite %}
   {% include "head.njk" %}
+  <link rel="stylesheet" href="{{ config.site.base }}/static/style.css">
 </head>
-<body>
-  <header>
-    <h1>Luggage Scale Blog</h1>
+<body class="blog-index">
+  <header class="site-header">
+    <div class="container">
+      <div class="site-header__nav">
+        <a class="site-header__brand" href="{{ config.site.base }}/">{{ config.site.name }}</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="{{ config.site.base }}/">Blog Home</a>
+          <a href="{{ config.site.base }}/page-2/">Archive</a>
+          <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <h2>Latest Posts</h2>
-    <ul>
-      {% for post in pagination.items %}
-        <li>
-          <a href="{{ post.url }}">{{ post.data.title }}</a>
-          — {{ post.date | date("MMMM D, YYYY") }}
-        </li>
-      {% endfor %}
-    </ul>
+  <main class="site-main">
+    <div class="container">
+      <section class="page-intro">
+        <h1 class="page-title">Luggage Scale Blog</h1>
+        <p class="page-lede">Latest articles, guides, and tips from the uPatch luggage scale team.</p>
+        <div class="btn-group">
+          <a class="btn solid" href="#latest-posts">Read the latest</a>
+          <a class="btn outline" href="{{ config.site.base }}/page-2/">View the archive</a>
+        </div>
+      </section>
 
-    {% if pagination.href.previous %}
-      <a href="{{ pagination.href.previous }}">Newer</a>
-    {% endif %}
-    {% if pagination.href.next %}
-      <a href="{{ pagination.href.next }}">Older →</a>
-    {% endif %}
+      <section class="post-feed" id="latest-posts">
+        <div>
+          <h2 class="section-title">Latest Posts</h2>
+        </div>
+        {% include "blog-list.njk" with { postsCollection: pagination.items } %}
+      </section>
+
+      {% if pagination.href.previous or pagination.href.next %}
+      <nav class="pagination" aria-label="Blog pagination">
+        {% if pagination.href.previous %}
+        <a class="btn outline" href="{{ pagination.href.previous }}">← Newer Posts</a>
+        {% endif %}
+        {% if pagination.href.next %}
+        <a class="btn solid" href="{{ pagination.href.next }}">Older Posts →</a>
+        {% endif %}
+      </nav>
+      {% endif %}
+    </div>
   </main>
 
-  <footer>
-    <p>© {{ now | date("YYYY") }} — <a href="/blog/">Blog Index</a> • <a href="/blog/sitemap.xml">Sitemap</a></p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {{ now | date("YYYY") }} — <a href="{{ config.site.base }}/">Blog Index</a> • <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a></p>
+    </div>
   </footer>
 </body>
 </html>
