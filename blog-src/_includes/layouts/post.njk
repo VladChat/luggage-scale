@@ -64,13 +64,13 @@
         {% if title %}
         <h1 class="post__title">{{ title }}</h1>
         {% endif %}
-        <div class="post__meta">
+        <div class="post-meta">
           {% if author %}
-          <span class="post__author">By {{ author }}</span>
+          <span class="post-meta__author">By {{ author }}</span>
           {% endif %}
           {% if date %}
-          {% if author %}<span class="post__meta-separator" aria-hidden="true">•</span>{% endif %}
-          <time class="post__date" datetime="{{ date | isoDate }}">{{ date | date("MMMM d, yyyy") }}</time>
+          {% if author %}<span class="post-meta__separator" aria-hidden="true">•</span>{% endif %}
+          <time class="post-meta__date" datetime="{{ date | isoDate }}">{{ date | date("MMMM d, yyyy") }}</time>
           {% endif %}
         </div>
         {% set summary = excerpt or description or config.seo.defaultDescription %}
