@@ -5,7 +5,7 @@
 <title>{{ title or "Luggage Scale Blog" }}</title>
 <meta name="description" content="{{ description or 'Guides, tips, and insights about luggage scales, travel hacks, and smart packing.' }}">
 
-{% set canonicalHref = canonicalUrl or (site.url ~ (page.url | url)) %}
+{% set canonicalHref = canonicalUrl or (page.url | absoluteUrl(site)) %}
 <link rel="canonical" href="{{ canonicalHref }}">
 
 <meta property="og:type" content="article">

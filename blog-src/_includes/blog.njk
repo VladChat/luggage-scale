@@ -12,6 +12,13 @@ permalink: "index.html"
 <!doctype html>
 <html lang="en">
 <head>
+  {% set headSite = {
+    "name": config.site.name,
+    "url": config.site.url,
+    "base": config.site.base,
+    "twitter": config.seo.twitter
+  } %}
+  {% set site = headSite %}
   {% include "head.njk" %}
 </head>
 <body>
