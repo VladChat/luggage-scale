@@ -15,6 +15,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const OpenAI = require("openai");
 
 // --- Constants ---
 
@@ -70,11 +71,54 @@ function countWords(str) {
   return trimmed.split(/\s+/).filter(Boolean).length;
 }
 
-// --- Fake OpenAI Call (placeholder) ---
+// --- OpenAI Integration ---
+let cachedOpenAIClient = null;
+
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error(
+      "OPENAI_API_KEY environment variable is required when using --mode=api"
+    );
+  }
+  if (!cachedOpenAIClient) {
+    cachedOpenAIClient = new OpenAI({ apiKey });
+  }
+  return cachedOpenAIClient;
+}
+
 async function callOpenAI(prompt, sectionName) {
-  // In real use, integrate with OpenAI API.
-  // Here we mock with simple text for testing.
-  return `This is placeholder text for ${sectionName}. ${prompt.slice(0, 50)}...`;
+  const client = getOpenAIClient();
+  const response = await client.chat.completions.create({
+    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+    messages: [{ role: "user", content: prompt }],
+  });
+
+  const rawContent = response?.choices?.[0]?.message?.content;
+  let text = "";
+
+  if (typeof rawContent === "string") {
+    text = rawContent.trim();
+  } else if (Array.isArray(rawContent)) {
+    text = rawContent
+      .map(part => {
+        if (typeof part === "string") return part;
+        if (part && typeof part === "object" && "text" in part) {
+          return part.text;
+        }
+        return "";
+      })
+      .join("")
+      .trim();
+  }
+
+  if (!text) {
+    throw new Error(
+      `OpenAI returned no content for section "${sectionName}". Check the prompt and API response.`
+    );
+  }
+
+  return text;
 }
 
 // --- Validation (now warnings only) ---

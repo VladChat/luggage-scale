@@ -57,4 +57,9 @@ npm run generate:posts -- ./path/to/topics.json
 - The script honours a 10-post ceiling per run (`--limit` defaults to 10 and cannot exceed it). Extra topics in the file are skipped with a warning so you can schedule them for another day.
 - Pass `--dry-run` to preview the folders that would be created without writing files.
 
+### 3. Enable API fill mode (optional)
+
+- Set the `OPENAI_API_KEY` environment variable before running with `--mode=api`. The GitHub Actions workflow reads this secret from `OPENAI_API_KEY`, so mirror that locally (for example, `export OPENAI_API_KEY=sk-...`).
+- When API mode is active, the script sends the assembled prompt for each section to OpenAI. If the API key is missing or OpenAI returns no content, the run exits with an error so the workflow fails fast.
+
 Every generated post receives an `index.md` with populated front matter (`title`, `description`, `excerpt`, `author`, `tags`, and `date`), and the batch metadata is appended to `blog-src/posts/posts.json` so the shared data file tracks when automated batches were produced.
