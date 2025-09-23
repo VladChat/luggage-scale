@@ -37,7 +37,7 @@ jobs:
 
       # ⬇️ New step to generate a post before Eleventy build
       - name: Generate new blog post
-        run: node scripts/generate-posts.js --auto --mode=manual --news-limit=3 --news-window=7
+        run: node scripts/generate-posts.js --auto --mode=api --news-limit=3 --news-window=7
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           NEWS_FEEDS_GENERAL: ${{ vars.NEWS_FEEDS_GENERAL }}
