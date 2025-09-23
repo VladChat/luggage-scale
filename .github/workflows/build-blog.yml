@@ -35,6 +35,14 @@ jobs:
       - name: Clean blog output
         run: rm -rf blog/* || true
 
+      # ⬇️ New step to generate a post before Eleventy build
+      - name: Generate new blog post
+        run: node scripts/generate-posts.js --auto --mode=manual --news-limit=3 --news-window=7
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NEWS_FEEDS_GENERAL: ${{ vars.NEWS_FEEDS_GENERAL }}
+          NEWS_FEEDS_QUERY: ${{ vars.NEWS_FEEDS_QUERY }}
+
       - name: Build blog with Eleventy
         run: |
           npx @11ty/eleventy --input=blog-src --output=blog
