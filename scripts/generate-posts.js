@@ -57,7 +57,10 @@ function slugify(str) {
 }
 
 function countWords(str) {
-  return str.trim().split(/\s+/).filter(Boolean).length;
+  if (typeof str !== "string") return 0;
+  const trimmed = str.trim();
+  if (!trimmed) return 0;
+  return trimmed.split(/\s+/).filter(Boolean).length;
 }
 
 // --- Fake OpenAI Call (placeholder) ---
@@ -69,6 +72,12 @@ async function callOpenAI(prompt, sectionName) {
 
 // --- Validation (now warnings only) ---
 function checkWordCount(sectionName, text) {
+  if (typeof text !== "string" || text.trim() === "") {
+    console.warn(
+      `⚠️ Warning: ${sectionName} has no content; skipping word count.`
+    );
+    return 0;
+  }
   const words = countWords(text);
   const [min, max] = DEFAULT_WORD_RANGES[sectionName] || [0, Infinity];
   if (words < min || words > max) {
