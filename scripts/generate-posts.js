@@ -54,6 +54,15 @@ function slugify(str) {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+function toTitleCase(str) {
+  if (typeof str !== "string" || !str.trim()) return "";
+  return str
+    .toLowerCase()
+    .split(/([\s-]+)/)
+    .map(part => (/[\s-]+/.test(part) ? part : part.charAt(0).toUpperCase() + part.slice(1)))
+    .join("");
+}
+
 function countWords(str) {
   if (typeof str !== "string") return 0;
   const trimmed = str.trim();
@@ -101,16 +110,17 @@ async function main() {
   saveState(state);
 
   const slug = slugify(keyword);
+  const displayKeyword = toTitleCase(keyword);
   const outDir = path.join(POSTS_DIR, slug);
   fs.mkdirSync(outDir, { recursive: true });
   const outFile = path.join(outDir, "index.md");
 
   let content = `---\n`;
-  content += `title: "${keyword} – Blog Post"\n`;
-  content += `subtitle: "${keyword} Subtitle Example"\n`;
-  content += `description: "${keyword} description here."\n`;
+  content += `title: "${displayKeyword} – Blog Post"\n`;
+  content += `subtitle: "${displayKeyword} Subtitle Example"\n`;
+  content += `description: "${displayKeyword} description here."\n`;
   content += `date: ${new Date().toISOString()}\n`;
-  content += `tags: ["${keyword}"]\n`;
+  content += `tags: ["${displayKeyword}"]\n`;
   content += `author: "AutoBot"\n`;
   content += `---\n\n`;
 
@@ -118,7 +128,7 @@ async function main() {
   for (const section of Object.keys(DEFAULT_WORD_RANGES)) {
     content += `## ${section}\n\n`;
     if (mode === "api") {
-      const prompt = `Write ${section} about "${keyword}"`;
+      const prompt = `Write ${section} about "${displayKeyword}"`;
       const text = await callOpenAI(prompt, section);
       checkWordCount(section, text);
       content += text + "\n\n";
