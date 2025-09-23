@@ -16,7 +16,6 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import fetch from "node-fetch";
 
 // --- Constants ---
 const __filename = fileURLToPath(import.meta.url);
