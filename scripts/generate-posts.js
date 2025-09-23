@@ -13,13 +13,10 @@
  * so the workflow won’t abort if a section is too short or too long.
  */
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+const fs = require("fs");
+const path = require("path");
 
 // --- Constants ---
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const KEYWORDS_FILE = path.join(__dirname, "keywords.txt");
 const STATE_FILE = path.join(__dirname, "../data/automation-state.json");
