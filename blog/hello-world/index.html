@@ -131,12 +131,12 @@
   
   
   
-  
     
   
   
   
     
+  
   
   
   
@@ -249,72 +249,26 @@
         
       </header>
 
-      <div class="post__content-grid">
-        <div class="post__content-column">
-          
-          <div class="post__toc-mobile">
-            <button class="post__toc-toggle" type="button" aria-expanded="false" aria-controls="post-toc-mobile">
-              <span class="post__toc-toggle-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-              <span class="post__toc-toggle-label">On this page</span>
-              <span class="post__toc-toggle-chevron" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <path d="M5 7l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  
-</span>
-            </button>
-            <div class="post__toc-panel" id="post-toc-mobile" hidden>
-              <nav class="post__toc-nav" aria-label="On this page">
-                
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#affiliate-picks">Affiliate picks</a>
+      <div class="post__content">
         
-      </div>
-      
-    </li>
-    
-  </ol>
-
-              </nav>
-            </div>
-          </div>
           
-
-          <div class="post__body">
-            
-            
-            <div class="post__intro">
-              <p>This is your <strong>first test post</strong> in the new blog system.</p>
+          <div class="post__intro">
+            <p>This is your <strong>first test post</strong> in the new blog system.</p>
 <ul>
 <li>Written in Markdown</li>
 <li>Stored in <code>/blog-src/posts/hello-world/index.md</code></li>
 <li>When built, it will publish to <code>/blog/hello-world/</code></li>
 </ul>
-            </div>
+          </div>
+          
+          <div class="post__sections" data-accordion>
             
-
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="affiliate-picks">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-affiliate-picks" data-section-toggle data-section="affiliate-picks">
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="affiliate-picks" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-affiliate-picks" type="button" aria-expanded="true" aria-controls="section-content-affiliate-picks" data-accordion-trigger data-section="affiliate-picks">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -339,11 +293,13 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-affiliate-picks" data-collapsible>
-                <p>Want to try the gear we mention? Start with our go-to travel scale:</p>
+              <div class="post-section__panel" id="section-content-affiliate-picks" role="region" aria-labelledby="section-trigger-affiliate-picks" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>Want to try the gear we mention? Start with our go-to travel scale:</p>
 <p><a href="https://www.amazon.com/dp/B0AUPATCH01?tag=luggagescale-20" rel="sponsored noopener noreferrer" target="_blank" data-affiliate="amazon" data-asin="B0AUPATCH01" title="uPatch Digital Hanging Luggage Scale">Shop the uPatch luggage scale on Amazon</a></p>
 <p>Need help staying organized? &lt;a href=&quot;https://www.amazon.com/dp/B0BCUBESET1?tag=luggagescale-20&quot; rel=&quot;sponsored noopener noreferrer&quot; target=&quot;_blank&quot; data-affiliate=&quot;amazon&quot; data-asin=&quot;B0BCUBESET1&quot; title=&quot;Compression Packing Cubes Set&quot;&gt;Compression packing cubes on Amazon&lt;/a&gt;</p>
 <p><small>As an Amazon Associate we earn from qualifying purchases.</small></p>
+                </div>
               </div>
             </section>
             
@@ -352,7 +308,7 @@
   <aside class="affiliate-card" data-affiliate-card>
     <div class="affiliate-card__media">
       
-      <img src="/blog/static/products/upatch-digital-scale.svg" alt="uPatch digital luggage scale" loading="lazy" decoding="async">
+      <img src="/blog/static/products/upatch-digital-scale.svg" alt="uPatch digital luggage scale" loading="lazy" decoding="async" width="160" height="160">
       
     </div>
     <div class="affiliate-card__body">
@@ -386,113 +342,28 @@
 
             
             
-            
           </div>
-
-          
-        </div>
-
         
-        <aside class="post__toc" aria-labelledby="on-this-page">
-          <div class="post__toc-inner">
-            <h2 id="on-this-page" class="post__toc-title">
-              <span class="post__toc-title-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-              <span>On this page</span>
-            </h2>
-            <nav class="post__toc-nav" aria-label="On this page">
-              
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#affiliate-picks">Affiliate picks</a>
-        
-      </div>
-      
-    </li>
-    
-  </ol>
 
-            </nav>
-          </div>
-        </aside>
         
       </div>
     </article>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__container">
-      <div class="site-footer__brand">
-        <a class="site-footer__logo" href="/blog/">Luggage Scale Blog</a>
-        <p class="site-footer__summary">Guides, tips, and insights about luggage scales, travel hacks, and smart packing.</p>
-        <p class="site-footer__copyright">© 2025 Luggage Scale Blog. All rights reserved.</p>
-      </div>
-      
-      <div class="site-footer__toc">
-        <h2 class="site-footer__title">
-          <span class="site-footer__title-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-          <span>On this page</span>
-        </h2>
-        <nav class="site-footer__toc-nav" aria-label="Compact page outline">
-          
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#affiliate-picks">Affiliate picks</a>
+  <footer class="legal-footer">
+    <div class="container legal-footer__container">
+      <p class="legal-footer__brand">© 2025 Luggage Scale Blog</p>
+      <nav class="legal-footer__nav" aria-label="Legal links">
         
-      </div>
-      
-    </li>
-    
-  </ol>
-
-        </nav>
-      </div>
-      
-      <div class="site-footer__legal">
-        <h2 class="site-footer__title">Legal &amp; Contact</h2>
-        <ul class="site-footer__links">
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/privacy">Privacy</a>
-          </li>
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/terms">Terms</a>
-          </li>
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/contact">Contact</a>
-          </li>
-          
-          <li class="site-footer__link-item"><a href="/blog/">Blog index</a></li>
-          <li class="site-footer__link-item"><a href="/blog/sitemap.xml">Sitemap</a></li>
-        </ul>
-      </div>
+        <a class="legal-footer__link" href="https://luggage-scale.com/privacy">Privacy Policy</a>
+        
+        <a class="legal-footer__link" href="https://luggage-scale.com/terms">Terms of Service</a>
+        
+        <a class="legal-footer__link" href="https://luggage-scale.com/affiliate-disclosure">Affiliate Disclosure</a>
+        
+        <a class="legal-footer__link" href="https://luggage-scale.com/contact">Contact</a>
+        
+      </nav>
     </div>
   </footer>
   <script src="/blog/static/post.js" defer></script>

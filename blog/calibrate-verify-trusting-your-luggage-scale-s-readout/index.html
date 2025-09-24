@@ -131,12 +131,12 @@
   
   
   
-  
     
   
   
   
     
+  
   
   
   
@@ -249,99 +249,23 @@
         
       </header>
 
-      <div class="post__content-grid">
-        <div class="post__content-column">
+      <div class="post__content">
+        
           
-          <div class="post__toc-mobile">
-            <button class="post__toc-toggle" type="button" aria-expanded="false" aria-controls="post-toc-mobile">
-              <span class="post__toc-toggle-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-              <span class="post__toc-toggle-label">On this page</span>
-              <span class="post__toc-toggle-chevron" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <path d="M5 7l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  
-</span>
-            </button>
-            <div class="post__toc-panel" id="post-toc-mobile" hidden>
-              <nav class="post__toc-nav" aria-label="On this page">
-                
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#why-it-matters">Why it matters</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#what-youll-need">What you’ll need</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#steps">Steps</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#pro-tips">Pro tips</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#after-you-weigh">After you weigh</a>
-        
-      </div>
-      
-    </li>
-    
-  </ol>
-
-              </nav>
-            </div>
+          <div class="post__intro">
+            <p><em>Note:</em> Airline rules change—always double‑check your carrier’s current baggage policy before you go.</p>
           </div>
           
-
-          <div class="post__body">
+          <div class="post__sections" data-accordion>
             
             
-            <div class="post__intro">
-              <p><em>Note:</em> Airline rules change—always double‑check your carrier’s current baggage policy before you go.</p>
-            </div>
             
-
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="why-it-matters">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-why-it-matters" data-section-toggle data-section="why-it-matters">
+              
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="why-it-matters" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-why-it-matters" type="button" aria-expanded="true" aria-controls="section-content-why-it-matters" data-accordion-trigger data-section="why-it-matters">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -368,8 +292,10 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-why-it-matters" data-collapsible>
-                <p>Using a luggage scale at home saves time, stress, and surprise fees. A quick weigh‑in the night before travel lets you repack calmly instead of scrambling at the airport.</p>
+              <div class="post-section__panel" id="section-content-why-it-matters" role="region" aria-labelledby="section-trigger-why-it-matters" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>Using a luggage scale at home saves time, stress, and surprise fees. A quick weigh‑in the night before travel lets you repack calmly instead of scrambling at the airport.</p>
+                </div>
               </div>
             </section>
             
@@ -378,7 +304,7 @@
   <aside class="affiliate-card" data-affiliate-card>
     <div class="affiliate-card__media">
       
-      <img src="/blog/static/products/upatch-digital-scale.svg" alt="uPatch digital luggage scale" loading="lazy" decoding="async">
+      <img src="/blog/static/products/upatch-digital-scale.svg" alt="uPatch digital luggage scale" loading="lazy" decoding="async" width="160" height="160">
       
     </div>
     <div class="affiliate-card__body">
@@ -412,9 +338,12 @@
 
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="what-youll-need">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-what-youll-need" data-section-toggle data-section="what-youll-need">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="what-youll-need" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-what-youll-need" type="button" aria-expanded="true" aria-controls="section-content-what-youll-need" data-accordion-trigger data-section="what-youll-need">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -439,19 +368,24 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-what-youll-need" data-collapsible>
-                <ul>
+              <div class="post-section__panel" id="section-content-what-youll-need" role="region" aria-labelledby="section-trigger-what-youll-need" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <ul>
 <li>uPatch battery‑free luggage scale</li>
 <li>Your packed bag</li>
 <li>Optional: a known‑weight item (like a 5 lb dumbbell) for quick verification</li>
 </ul>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="steps">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-steps" data-section-toggle data-section="steps">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="steps" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-steps" type="button" aria-expanded="true" aria-controls="section-content-steps" data-accordion-trigger data-section="steps">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -478,8 +412,9 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-steps" data-collapsible>
-                <ol>
+              <div class="post-section__panel" id="section-content-steps" role="region" aria-labelledby="section-trigger-steps" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <ol>
 <li><strong>Zero the scale.</strong> For uPatch, give it a few firm shakes to power the display, then make sure it reads 0.0.</li>
 <li><strong>Clip securely.</strong> Attach the strap to the bag’s primary handle; confirm it’s centered.</li>
 <li><strong>Lift to full hang.</strong> Raise until the bag is fully off the ground—no dragging or touching.</li>
@@ -487,13 +422,17 @@
 <li><strong>Adjust and re‑check.</strong> If you’re close to the limit, move heavy items to a personal item or another suitcase and measure again.</li>
 <li><strong>Final verification.</strong> Repeat once to confirm. If the numbers differ by more than ~0.2–0.3 lb, re‑position and try again.</li>
 </ol>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="pro-tips">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-pro-tips" data-section-toggle data-section="pro-tips">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="pro-tips" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-pro-tips" type="button" aria-expanded="true" aria-controls="section-content-pro-tips" data-accordion-trigger data-section="pro-tips">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -519,19 +458,24 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-pro-tips" data-collapsible>
-                <ul>
+              <div class="post-section__panel" id="section-content-pro-tips" role="region" aria-labelledby="section-trigger-pro-tips" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <ul>
 <li>Weigh with travel‑day items inside (chargers, jackets).</li>
 <li>Airports can have different scales; aim 1–2 lb under your target.</li>
 <li>For odd shapes, use a short luggage strap to create a lifting loop.</li>
 </ul>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="after-you-weigh">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-after-you-weigh" data-section-toggle data-section="after-you-weigh">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="after-you-weigh" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-after-you-weigh" type="button" aria-expanded="true" aria-controls="section-content-after-you-weigh" data-accordion-trigger data-section="after-you-weigh">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -557,185 +501,38 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-after-you-weigh" data-collapsible>
-                <p>Snap a phone photo of the display for each bag. If an agent questions your weight, you’ll have a reference to discuss calmly.</p>
+              <div class="post-section__panel" id="section-content-after-you-weigh" role="region" aria-labelledby="section-trigger-after-you-weigh" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>Snap a phone photo of the display for each bag. If an agent questions your weight, you’ll have a reference to discuss calmly.</p>
 <hr>
 <p>Want a quick refresher on using the uPatch luggage scale? See <a href="/manual.html">the Manual</a> or <a href="/shop.html">get a spare for family trips</a>.</p>
+                </div>
               </div>
             </section>
             
             
-            
           </div>
+        
 
-          
-        </div>
-
-        
-        <aside class="post__toc" aria-labelledby="on-this-page">
-          <div class="post__toc-inner">
-            <h2 id="on-this-page" class="post__toc-title">
-              <span class="post__toc-title-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-              <span>On this page</span>
-            </h2>
-            <nav class="post__toc-nav" aria-label="On this page">
-              
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#why-it-matters">Why it matters</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#what-youll-need">What you’ll need</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#steps">Steps</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#pro-tips">Pro tips</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#after-you-weigh">After you weigh</a>
-        
-      </div>
-      
-    </li>
-    
-  </ol>
-
-            </nav>
-          </div>
-        </aside>
         
       </div>
     </article>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__container">
-      <div class="site-footer__brand">
-        <a class="site-footer__logo" href="/blog/">Luggage Scale Blog</a>
-        <p class="site-footer__summary">Guides, tips, and insights about luggage scales, travel hacks, and smart packing.</p>
-        <p class="site-footer__copyright">© 2025 Luggage Scale Blog. All rights reserved.</p>
-      </div>
-      
-      <div class="site-footer__toc">
-        <h2 class="site-footer__title">
-          <span class="site-footer__title-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-          <span>On this page</span>
-        </h2>
-        <nav class="site-footer__toc-nav" aria-label="Compact page outline">
-          
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#why-it-matters">Why it matters</a>
+  <footer class="legal-footer">
+    <div class="container legal-footer__container">
+      <p class="legal-footer__brand">© 2025 Luggage Scale Blog</p>
+      <nav class="legal-footer__nav" aria-label="Legal links">
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#what-youll-need">What you’ll need</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/privacy">Privacy Policy</a>
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#steps">Steps</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/terms">Terms of Service</a>
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#pro-tips">Pro tips</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/affiliate-disclosure">Affiliate Disclosure</a>
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#after-you-weigh">After you weigh</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/contact">Contact</a>
         
-      </div>
-      
-    </li>
-    
-  </ol>
-
-        </nav>
-      </div>
-      
-      <div class="site-footer__legal">
-        <h2 class="site-footer__title">Legal &amp; Contact</h2>
-        <ul class="site-footer__links">
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/privacy">Privacy</a>
-          </li>
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/terms">Terms</a>
-          </li>
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/contact">Contact</a>
-          </li>
-          
-          <li class="site-footer__link-item"><a href="/blog/">Blog index</a></li>
-          <li class="site-footer__link-item"><a href="/blog/sitemap.xml">Sitemap</a></li>
-        </ul>
-      </div>
+      </nav>
     </div>
   </footer>
   <script src="/blog/static/post.js" defer></script>

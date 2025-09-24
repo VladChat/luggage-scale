@@ -68,14 +68,13 @@
   ] %}
   {% set prepared = content | preparePostContent(title) %}
   {% from "icons.njk" import icon %}
-  {% from "macros/post-macros.njk" import renderToc, renderAffiliate %}
+  {% from "macros/post-macros.njk" import renderAffiliate %}
   {% set hasSections = prepared.sections and (prepared.sections | length) %}
   {% if hasSections %}
-    {% set tocSections = prepared.sections %}
+    {% set accordionSections = prepared.sections %}
   {% else %}
-    {% set tocSections = [] %}
+    {% set accordionSections = [] %}
   {% endif %}
-  {% set hasToc = tocSections and (tocSections | length) %}
   {% set affiliateAmazon = config.affiliate.amazon or {} %}
   {% set affiliateProducts = affiliateAmazon.products or {} %}
   {% set affiliateProductKey = affiliateProduct %}
@@ -107,11 +106,15 @@
   {% endif %}
   {% set showFooterDisclaimer = affiliateDisclaimer and not (affiliateCard and affiliateCard.disclaimer == affiliateDisclaimer) %}
   {% set rootUrl = config.site.url or config.site.base or '/' %}
-  {% set legalLinks = [
-    { "label": "Privacy", "url": rootUrl ~ "/privacy" },
-    { "label": "Terms", "url": rootUrl ~ "/terms" },
-    { "label": "Contact", "url": rootUrl ~ "/contact" }
-  ] %}
+  {% set legalLinks = config.legal.links or [] %}
+  {% if not legalLinks or not (legalLinks | length) %}
+    {% set legalLinks = [
+      { "label": "Privacy Policy", "url": rootUrl ~ "/privacy" },
+      { "label": "Terms of Service", "url": rootUrl ~ "/terms" },
+      { "label": "Affiliate Disclosure", "url": rootUrl ~ "/affiliate-disclosure" },
+      { "label": "Contact", "url": rootUrl ~ "/contact" }
+    ] %}
+  {% endif %}
   {% set breadcrumbStructuredData = breadcrumbTrail | breadcrumbJsonLd(site, canonicalHref) %}
   {% set publisherLogo = site.logoPath %}
   {% if publisherLogo %}
@@ -202,110 +205,71 @@
         {% endif %}
       </header>
 
-      <div class="post__content-grid">
-        <div class="post__content-column">
-          {% if hasToc %}
-          <div class="post__toc-mobile">
-            <button class="post__toc-toggle" type="button" aria-expanded="false" aria-controls="post-toc-mobile">
-              <span class="post__toc-toggle-icon" aria-hidden="true">{{ icon('toc') }}</span>
-              <span class="post__toc-toggle-label">On this page</span>
-              <span class="post__toc-toggle-chevron" aria-hidden="true">{{ icon('chevron-down') }}</span>
-            </button>
-            <div class="post__toc-panel" id="post-toc-mobile" hidden>
-              <nav class="post__toc-nav" aria-label="On this page">
-                {{ renderToc(tocSections, 'mobile') | safe }}
-              </nav>
-            </div>
+      <div class="post__content">
+        {% if hasSections %}
+          {% if prepared.introHtml %}
+          <div class="post__intro">
+            {{ prepared.introHtml | safe }}
           </div>
           {% endif %}
-
-          <div class="post__body">
-            {% if hasSections %}
-            {% if prepared.introHtml %}
-            <div class="post__intro">
-              {{ prepared.introHtml | safe }}
-            </div>
+          <div class="post__sections" data-accordion>
+            {% for section in accordionSections %}
+            {% set headingKey = section.headingText | lower %}
+            {% set accent = 'brand' %}
+            {% if headingKey and headingKey.indexOf('how it works') > -1 %}
+              {% set accent = 'teal' %}
+            {% elseif headingKey and (headingKey.indexOf('key benefit') > -1 or headingKey.indexOf('benefit') > -1) %}
+              {% set accent = 'green' %}
+            {% elseif headingKey and (headingKey.indexOf('comparison') > -1 or headingKey.indexOf('compare') > -1) %}
+              {% set accent = 'orange' %}
+            {% elseif headingKey and (headingKey.indexOf('use case') > -1 or headingKey.indexOf('use-case') > -1 or headingKey.indexOf('use cases') > -1) %}
+              {% set accent = 'purple' %}
+            {% elseif headingKey and headingKey.indexOf('why it matters') > -1 %}
+              {% set accent = 'brand' %}
             {% endif %}
-
-            {% for section in tocSections %}
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="{{ section.id }}">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-{{ section.id }}" data-section-toggle data-section="{{ section.id }}">
+            <section class="post-section" data-post-section data-accent="{{ accent }}">
+              <h2 class="post-section__heading" id="{{ section.id }}" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-{{ section.id }}" type="button" aria-expanded="true" aria-controls="section-content-{{ section.id }}" data-accordion-trigger data-section="{{ section.id }}">
                   <span class="post-section__icon" aria-hidden="true">{{ icon(section.icon, 'post-section__icon-svg') }}</span>
                   <span class="post-section__label">{{ section.headingHtml | safe }}</span>
                   <span class="post-section__chevron" aria-hidden="true">{{ icon('chevron-down') }}</span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-{{ section.id }}" data-collapsible>
-                {{ section.contentHtml | safe }}
+              <div class="post-section__panel" id="section-content-{{ section.id }}" role="region" aria-labelledby="section-trigger-{{ section.id }}" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  {{ section.contentHtml | safe }}
+                </div>
               </div>
             </section>
             {% if loop.first %}
               {{ renderAffiliate(affiliateCard) | safe }}
             {% endif %}
             {% endfor %}
-            {% else %}
-            <div class="post__body-content">
-              {{ prepared.html | safe }}
-            </div>
-            {{ renderAffiliate(affiliateCard) | safe }}
-            {% endif %}
           </div>
-
-          {% if showFooterDisclaimer %}
-          <aside class="post__disclaimer">
-            {{ affiliateDisclaimer }}
-          </aside>
-          {% endif %}
-        </div>
-
-        {% if hasToc %}
-        <aside class="post__toc" aria-labelledby="on-this-page">
-          <div class="post__toc-inner">
-            <h2 id="on-this-page" class="post__toc-title">
-              <span class="post__toc-title-icon" aria-hidden="true">{{ icon('toc') }}</span>
-              <span>On this page</span>
-            </h2>
-            <nav class="post__toc-nav" aria-label="On this page">
-              {{ renderToc(tocSections, 'desktop') | safe }}
-            </nav>
+        {% else %}
+          <div class="post__body-content">
+            {{ prepared.html | safe }}
           </div>
+          {{ renderAffiliate(affiliateCard) | safe }}
+        {% endif %}
+
+        {% if showFooterDisclaimer %}
+        <aside class="post__disclaimer">
+          {{ affiliateDisclaimer }}
         </aside>
         {% endif %}
       </div>
     </article>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__container">
-      <div class="site-footer__brand">
-        <a class="site-footer__logo" href="{{ config.site.base }}/">{{ config.site.name }}</a>
-        <p class="site-footer__summary">{{ config.seo.defaultDescription }}</p>
-        <p class="site-footer__copyright">© {{ "now" | date("yyyy") }} {{ config.site.name }}. All rights reserved.</p>
-      </div>
-      {% if hasToc %}
-      <div class="site-footer__toc">
-        <h2 class="site-footer__title">
-          <span class="site-footer__title-icon" aria-hidden="true">{{ icon('toc') }}</span>
-          <span>On this page</span>
-        </h2>
-        <nav class="site-footer__toc-nav" aria-label="Compact page outline">
-          {{ renderToc(tocSections, 'footer') | safe }}
-        </nav>
-      </div>
-      {% endif %}
-      <div class="site-footer__legal">
-        <h2 class="site-footer__title">Legal &amp; Contact</h2>
-        <ul class="site-footer__links">
-          {% for link in legalLinks %}
-          <li class="site-footer__link-item">
-            <a href="{{ link.url }}">{{ link.label }}</a>
-          </li>
-          {% endfor %}
-          <li class="site-footer__link-item"><a href="{{ config.site.base }}/">Blog index</a></li>
-          <li class="site-footer__link-item"><a href="{{ config.site.base }}/sitemap.xml">Sitemap</a></li>
-        </ul>
-      </div>
+  <footer class="legal-footer">
+    <div class="container legal-footer__container">
+      <p class="legal-footer__brand">© {{ "now" | date("yyyy") }} {{ config.site.name }}</p>
+      <nav class="legal-footer__nav" aria-label="Legal links">
+        {% for link in legalLinks %}
+        <a class="legal-footer__link" href="{{ link.url }}">{{ link.label }}</a>
+        {% endfor %}
+      </nav>
     </div>
   </footer>
   <script src="{{ config.site.base }}/static/post.js" defer></script>

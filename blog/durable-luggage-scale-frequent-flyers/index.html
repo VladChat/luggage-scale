@@ -131,12 +131,12 @@
   
   
   
-  
     
   
   
   
     
+  
   
   
   
@@ -249,132 +249,11 @@
         
       </header>
 
-      <div class="post__content-grid">
-        <div class="post__content-column">
+      <div class="post__content">
+        
           
-          <div class="post__toc-mobile">
-            <button class="post__toc-toggle" type="button" aria-expanded="false" aria-controls="post-toc-mobile">
-              <span class="post__toc-toggle-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-              <span class="post__toc-toggle-label">On this page</span>
-              <span class="post__toc-toggle-chevron" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <path d="M5 7l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  
-</span>
-            </button>
-            <div class="post__toc-panel" id="post-toc-mobile" hidden>
-              <nav class="post__toc-nav" aria-label="On this page">
-                
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#introduction">Introduction</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#why-durability-matters-for-frequent-flyers">Why Durability Matters for Frequent Flyers</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#how-a-handheld-luggage-scale-works-simple-breakdown">How a Handheld Luggage Scale Works (Simple Breakdown)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#key-benefits-for-frequent-flyers">Key Benefits for Frequent Flyers</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#comparison-what-to-look-for">Comparison: What to Look For</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#use-cases-for-frequent-flyers">Use Cases for Frequent Flyers</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#pro-tips-best-practices">Pro Tips &amp; Best Practices</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#final-checklist-buy-once-fly-often">Final Checklist (Buy Once, Fly Often)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#conclusion-cta">Conclusion &amp; CTA</a>
-        
-      </div>
-      
-    </li>
-    
-  </ol>
-
-              </nav>
-            </div>
-          </div>
-          
-
-          <div class="post__body">
-            
-            
-            <div class="post__intro">
-              <!-- Hero SVG: one lightweight element -->
+          <div class="post__intro">
+            <!-- Hero SVG: one lightweight element -->
 <div aria-hidden="true" style="margin: 1rem 0 1.25rem 0;">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 240" role="img" aria-label="Handheld durable luggage scale">
   <title>Durable handheld luggage scale</title>
@@ -386,13 +265,16 @@
   <path d="M170,120 v40 m-30,0 h60 m-60,40 q30,20 60,0" stroke="#0F172A" stroke-width="2" fill="none"/>
 </svg>
 </div>
-            </div>
+          </div>
+          
+          <div class="post__sections" data-accordion>
             
-
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="introduction">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-introduction" data-section-toggle data-section="introduction">
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="introduction" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-introduction" type="button" aria-expanded="true" aria-controls="section-content-introduction" data-accordion-trigger data-section="introduction">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -419,9 +301,11 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-introduction" data-collapsible>
-                <p>If you fly often, baggage weight isn’t an occasional inconvenience—it’s a weekly risk to your wallet and schedule. The wrong scale dies mid-trip, gives flaky readings, or snaps at the hook right when you need it most. A <strong>durable luggage scale</strong> solves that problem by combining <strong>solid construction</strong>, <strong>consistent accuracy</strong>, and <strong>compact design</strong> you can trust from home to the hotel lobby and back to the gate.</p>
+              <div class="post-section__panel" id="section-content-introduction" role="region" aria-labelledby="section-trigger-introduction" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>If you fly often, baggage weight isn’t an occasional inconvenience—it’s a weekly risk to your wallet and schedule. The wrong scale dies mid-trip, gives flaky readings, or snaps at the hook right when you need it most. A <strong>durable luggage scale</strong> solves that problem by combining <strong>solid construction</strong>, <strong>consistent accuracy</strong>, and <strong>compact design</strong> you can trust from home to the hotel lobby and back to the gate.</p>
 <p>This guide explains what “durable” really means for a travel scale, how modern handheld weighers work, the benefits that matter to frequent flyers, what to compare against, and how to use one efficiently on fast turnarounds. We’ll finish with pro tips, a concise FAQ, and a final checklist so you can buy once and travel lighter—literally.</p>
+                </div>
               </div>
             </section>
             
@@ -430,7 +314,7 @@
   <aside class="affiliate-card" data-affiliate-card>
     <div class="affiliate-card__media">
       
-      <img src="/blog/static/products/upatch-digital-scale.svg" alt="uPatch digital luggage scale" loading="lazy" decoding="async">
+      <img src="/blog/static/products/upatch-digital-scale.svg" alt="uPatch digital luggage scale" loading="lazy" decoding="async" width="160" height="160">
       
     </div>
     <div class="affiliate-card__body">
@@ -464,9 +348,12 @@
 
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="why-durability-matters-for-frequent-flyers">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-why-durability-matters-for-frequent-flyers" data-section-toggle data-section="why-durability-matters-for-frequent-flyers">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="why-durability-matters-for-frequent-flyers" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-why-durability-matters-for-frequent-flyers" type="button" aria-expanded="true" aria-controls="section-content-why-durability-matters-for-frequent-flyers" data-accordion-trigger data-section="why-durability-matters-for-frequent-flyers">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -493,16 +380,21 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-why-durability-matters-for-frequent-flyers" data-collapsible>
-                <p>Frequent flyers face different conditions than occasional travelers: hurried connections, baggage re-packing on terminal floors, crowded hotel rooms, and unpredictable weather. A weak battery door or flimsy hook can fail after a few trips; a soft plastic body can crack in a carry-on pocket.</p>
+              <div class="post-section__panel" id="section-content-why-durability-matters-for-frequent-flyers" role="region" aria-labelledby="section-trigger-why-durability-matters-for-frequent-flyers" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>Frequent flyers face different conditions than occasional travelers: hurried connections, baggage re-packing on terminal floors, crowded hotel rooms, and unpredictable weather. A weak battery door or flimsy hook can fail after a few trips; a soft plastic body can crack in a carry-on pocket.</p>
 <p>A <strong>durable luggage scale</strong> prioritizes materials and design choices that resist stress: reinforced housings, metal hooks and straps, shock-absorbing geometry, and clear displays that remain readable in low-light boarding areas. Accuracy also stays stable after dozens of lifts—no “drift” after a month of heavy use.</p>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="how-a-handheld-luggage-scale-works-simple-breakdown">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-how-a-handheld-luggage-scale-works-simple-breakdown" data-section-toggle data-section="how-a-handheld-luggage-scale-works-simple-breakdown">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="how-a-handheld-luggage-scale-works-simple-breakdown" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-how-a-handheld-luggage-scale-works-simple-breakdown" type="button" aria-expanded="true" aria-controls="section-content-how-a-handheld-luggage-scale-works-simple-breakdown" data-accordion-trigger data-section="how-a-handheld-luggage-scale-works-simple-breakdown">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -528,8 +420,9 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-how-a-handheld-luggage-scale-works-simple-breakdown" data-collapsible>
-                <p>At its core, a handheld scale measures <strong>force</strong> created by your bag’s weight. That force is converted into a <strong>digital reading</strong> via an internal sensor. Here’s the basic flow:</p>
+              <div class="post-section__panel" id="section-content-how-a-handheld-luggage-scale-works-simple-breakdown" role="region" aria-labelledby="section-trigger-how-a-handheld-luggage-scale-works-simple-breakdown" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>At its core, a handheld scale measures <strong>force</strong> created by your bag’s weight. That force is converted into a <strong>digital reading</strong> via an internal sensor. Here’s the basic flow:</p>
 <ol>
 <li><strong>Attach</strong> the hook or strap to your bag’s handle.</li>
 <li><strong>Lift</strong> smoothly so the scale bears the full weight (bag not touching the floor).</li>
@@ -538,13 +431,19 @@
 <li><strong>Display</strong>: the LCD/LED shows a final weight in lb/kg; a <strong>TARE</strong> function subtracts accessories like packing cubes or straps.</li>
 </ol>
 <p><strong>Durability angle:</strong> Robust sensor mounting, metal hardware, and rigid casing help the scale maintain calibration longer and survive knocks in overhead bins and backpacks.</p>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="key-benefits-for-frequent-flyers">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-key-benefits-for-frequent-flyers" data-section-toggle data-section="key-benefits-for-frequent-flyers">
+            
+            
+            
+              
+            
+            <section class="post-section" data-post-section data-accent="green">
+              <h2 class="post-section__heading" id="key-benefits-for-frequent-flyers" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-key-benefits-for-frequent-flyers" type="button" aria-expanded="true" aria-controls="section-content-key-benefits-for-frequent-flyers" data-accordion-trigger data-section="key-benefits-for-frequent-flyers">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -571,8 +470,9 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-key-benefits-for-frequent-flyers" data-collapsible>
-                <ul>
+              <div class="post-section__panel" id="section-content-key-benefits-for-frequent-flyers" role="region" aria-labelledby="section-trigger-key-benefits-for-frequent-flyers" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <ul>
 <li><strong>Reliable construction</strong> — Metal hook/strap hardware and reinforced body resist daily wear.</li>
 <li><strong>Consistent accuracy</strong> — Stable readings reduce surprise fees at check-in.</li>
 <li><strong>Compact &amp; packable</strong> — Fits in a side pocket without adding noticeable weight.</li>
@@ -580,13 +480,19 @@
 <li><strong>Unit flexibility</strong> — Switch lb/kg instantly to match airline standards.</li>
 <li><strong>TARE function</strong> — Zero out add-ons to weigh only what matters.</li>
 </ul>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="comparison-what-to-look-for">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-comparison-what-to-look-for" data-section-toggle data-section="comparison-what-to-look-for">
+            
+            
+            
+              
+            
+            <section class="post-section" data-post-section data-accent="orange">
+              <h2 class="post-section__heading" id="comparison-what-to-look-for" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-comparison-what-to-look-for" type="button" aria-expanded="true" aria-controls="section-content-comparison-what-to-look-for" data-accordion-trigger data-section="comparison-what-to-look-for">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -611,8 +517,9 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-comparison-what-to-look-for" data-collapsible>
-                <p>Use this quick table to evaluate durability and usability at a glance.</p>
+              <div class="post-section__panel" id="section-content-comparison-what-to-look-for" role="region" aria-labelledby="section-trigger-comparison-what-to-look-for" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>Use this quick table to evaluate durability and usability at a glance.</p>
 <table>
 <thead>
 <tr>
@@ -655,13 +562,19 @@
 </tbody>
 </table>
 <p><strong>Bottom line:</strong> durability is a stack of small, smart choices—hardware, housing, and firmware working together.</p>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="use-cases-for-frequent-flyers">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-use-cases-for-frequent-flyers" data-section-toggle data-section="use-cases-for-frequent-flyers">
+            
+            
+            
+              
+            
+            <section class="post-section" data-post-section data-accent="purple">
+              <h2 class="post-section__heading" id="use-cases-for-frequent-flyers" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-use-cases-for-frequent-flyers" type="button" aria-expanded="true" aria-controls="section-content-use-cases-for-frequent-flyers" data-accordion-trigger data-section="use-cases-for-frequent-flyers">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -688,19 +601,24 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-use-cases-for-frequent-flyers" data-collapsible>
-                <p><strong>Frequent flyers</strong>: Weigh checked and carry-on bags before leaving the hotel so you breeze through the scale at check-in.<br>
+              <div class="post-section__panel" id="section-content-use-cases-for-frequent-flyers" role="region" aria-labelledby="section-trigger-use-cases-for-frequent-flyers" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p><strong>Frequent flyers</strong>: Weigh checked and carry-on bags before leaving the hotel so you breeze through the scale at check-in.<br>
 <strong>Multi-city itineraries</strong>: Reweigh after gift purchases or conference swag; shifting weight between bags can avoid fees.<br>
 <strong>International routes</strong>: Quickly flip units (lb/kg) to match airline policies without guesswork.<br>
 <strong>Family trips</strong>: Use the TARE function to subtract packing cubes or child gear straps for true net weight.</p>
 <p>Tip: Keep the scale in an easy-reach pocket; weighing takes &lt;30 seconds when you’re trained.</p>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="pro-tips-best-practices">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-pro-tips-best-practices" data-section-toggle data-section="pro-tips-best-practices">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="pro-tips-best-practices" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-pro-tips-best-practices" type="button" aria-expanded="true" aria-controls="section-content-pro-tips-best-practices" data-accordion-trigger data-section="pro-tips-best-practices">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -726,8 +644,9 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-pro-tips-best-practices" data-collapsible>
-                <ul>
+              <div class="post-section__panel" id="section-content-pro-tips-best-practices" role="region" aria-labelledby="section-trigger-pro-tips-best-practices" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <ul>
 <li><strong>Lift smoothly and steadily</strong>: rocking adds noise; a 2–3 second hold gives the best lock.</li>
 <li><strong>Use the hold feature</strong>: if the screen locks the reading, you can set the bag down and note the number without re-weighing.</li>
 <li><strong>Mind the handle</strong>: attach to a sturdy, central grip; off-center lifts can skew a couple of ounces.</li>
@@ -735,13 +654,17 @@
 <li><strong>Protect the display</strong>: store the scale screen-inward or in a soft pouch to prevent scratches.</li>
 <li><strong>Know your allowance</strong>: different fare classes and carriers vary; a quick check saves time at the counter.</li>
 </ul>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="frequently-asked-questions-faq">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-frequently-asked-questions-faq" data-section-toggle data-section="frequently-asked-questions-faq">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="frequently-asked-questions-faq" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-frequently-asked-questions-faq" type="button" aria-expanded="true" aria-controls="section-content-frequently-asked-questions-faq" data-accordion-trigger data-section="frequently-asked-questions-faq">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -767,8 +690,9 @@
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-frequently-asked-questions-faq" data-collapsible>
-                <p><strong>How accurate are handheld luggage scales?</strong><br>
+              <div class="post-section__panel" id="section-content-frequently-asked-questions-faq" role="region" aria-labelledby="section-trigger-frequently-asked-questions-faq" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p><strong>How accurate are handheld luggage scales?</strong><br>
 Quality models maintain accuracy within a small tolerance suitable for airline limits. Consistency matters more than a fractional precision race—if it reads the same across repeated lifts, you can trust your packing decisions.</p>
 <p><strong>Do I need a TARE function?</strong><br>
 It’s useful. If you use organizers, straps, or protective covers, TARE removes their weight so you see the true bag weight without mental math.</p>
@@ -780,13 +704,17 @@ Look for <strong>reinforced housing</strong>, <strong>metal hook/strap hardware<
 Yes. For soft handles, a strap often grips better than a hook. Lift until the bag is fully off the ground for a stable reading.</p>
 <p><strong>Should I weigh at the airport or hotel?</strong><br>
 Hotel first. That way you adjust before leaving. If you buy souvenirs, re-check at the airport curb or lobby and shift items to carry-on if needed.</p>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="final-checklist-buy-once-fly-often">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-final-checklist-buy-once-fly-often" data-section-toggle data-section="final-checklist-buy-once-fly-often">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="final-checklist-buy-once-fly-often" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-final-checklist-buy-once-fly-often" type="button" aria-expanded="true" aria-controls="section-content-final-checklist-buy-once-fly-often" data-accordion-trigger data-section="final-checklist-buy-once-fly-often">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -811,21 +739,26 @@ Hotel first. That way you adjust before leaving. If you buy souvenirs, re-check 
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-final-checklist-buy-once-fly-often" data-collapsible>
-                <ul>
+              <div class="post-section__panel" id="section-content-final-checklist-buy-once-fly-often" role="region" aria-labelledby="section-trigger-final-checklist-buy-once-fly-often" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <ul>
 <li><strong>Body &amp; hardware:</strong> Reinforced housing, metal hook/strap, solid buttons.</li>
 <li><strong>Display:</strong> High-contrast digits, hold/lock, easy unit toggle.</li>
 <li><strong>Accuracy:</strong> Consistent repeated readings; stays stable over time.</li>
 <li><strong>Size/weight:</strong> Compact and truly packable for weekly use.</li>
 <li><strong>Features:</strong> TARE, lb/kg switch, quick wake or battery-free readiness.</li>
 </ul>
+                </div>
               </div>
             </section>
             
             
-            <section class="post-section" data-post-section>
-              <h2 class="post-section__title" id="conclusion-cta">
-                <button class="post-section__toggle" type="button" aria-expanded="true" aria-controls="section-content-conclusion-cta" data-section-toggle data-section="conclusion-cta">
+            
+            
+            
+            <section class="post-section" data-post-section data-accent="brand">
+              <h2 class="post-section__heading" id="conclusion-cta" data-accordion-heading>
+                <button class="post-section__toggle" id="section-trigger-conclusion-cta" type="button" aria-expanded="true" aria-controls="section-content-conclusion-cta" data-accordion-trigger data-section="conclusion-cta">
                   <span class="post-section__icon" aria-hidden="true">
   
     
@@ -850,264 +783,37 @@ Hotel first. That way you adjust before leaving. If you buy souvenirs, re-check 
 </span>
                 </button>
               </h2>
-              <div class="post-section__content" id="section-content-conclusion-cta" data-collapsible>
-                <p>Frequent flyers need gear that works every single time. A <strong>durable luggage scale</strong> keeps you inside airline limits, avoids last-minute shuffles on the terminal floor, and pays for itself the first time you skip an overweight fee. Choose solid hardware, a readable display, and the right features—then make weighing your quickest pre-flight habit.</p>
+              <div class="post-section__panel" id="section-content-conclusion-cta" role="region" aria-labelledby="section-trigger-conclusion-cta" data-accordion-panel data-open="true" aria-hidden="false">
+                <div class="post-section__panel-inner">
+                  <p>Frequent flyers need gear that works every single time. A <strong>durable luggage scale</strong> keeps you inside airline limits, avoids last-minute shuffles on the terminal floor, and pays for itself the first time you skip an overweight fee. Choose solid hardware, a readable display, and the right features—then make weighing your quickest pre-flight habit.</p>
 <p><strong>Next step:</strong> Add a durable scale to your go-bag so you can fly confidently on every itinerary.</p>
+                </div>
               </div>
             </section>
             
             
-            
           </div>
+        
 
-          
-        </div>
-
-        
-        <aside class="post__toc" aria-labelledby="on-this-page">
-          <div class="post__toc-inner">
-            <h2 id="on-this-page" class="post__toc-title">
-              <span class="post__toc-title-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-              <span>On this page</span>
-            </h2>
-            <nav class="post__toc-nav" aria-label="On this page">
-              
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#introduction">Introduction</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#why-durability-matters-for-frequent-flyers">Why Durability Matters for Frequent Flyers</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#how-a-handheld-luggage-scale-works-simple-breakdown">How a Handheld Luggage Scale Works (Simple Breakdown)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#key-benefits-for-frequent-flyers">Key Benefits for Frequent Flyers</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#comparison-what-to-look-for">Comparison: What to Look For</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#use-cases-for-frequent-flyers">Use Cases for Frequent Flyers</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#pro-tips-best-practices">Pro Tips &amp; Best Practices</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#final-checklist-buy-once-fly-often">Final Checklist (Buy Once, Fly Often)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#conclusion-cta">Conclusion &amp; CTA</a>
-        
-      </div>
-      
-    </li>
-    
-  </ol>
-
-            </nav>
-          </div>
-        </aside>
         
       </div>
     </article>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__container">
-      <div class="site-footer__brand">
-        <a class="site-footer__logo" href="/blog/">Luggage Scale Blog</a>
-        <p class="site-footer__summary">Guides, tips, and insights about luggage scales, travel hacks, and smart packing.</p>
-        <p class="site-footer__copyright">© 2025 Luggage Scale Blog. All rights reserved.</p>
-      </div>
-      
-      <div class="site-footer__toc">
-        <h2 class="site-footer__title">
-          <span class="site-footer__title-icon" aria-hidden="true">
-  
-    
-  
-  
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <rect x="5" y="6" width="14" height="2" rx="1" fill="currentColor"/>
-      <rect x="5" y="11" width="9" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-      <rect x="5" y="16" width="6" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-    </svg>
-  
-</span>
-          <span>On this page</span>
-        </h2>
-        <nav class="site-footer__toc-nav" aria-label="Compact page outline">
-          
-  <ol class="post__toc-list">
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#introduction">Introduction</a>
+  <footer class="legal-footer">
+    <div class="container legal-footer__container">
+      <p class="legal-footer__brand">© 2025 Luggage Scale Blog</p>
+      <nav class="legal-footer__nav" aria-label="Legal links">
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#why-durability-matters-for-frequent-flyers">Why Durability Matters for Frequent Flyers</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/privacy">Privacy Policy</a>
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#how-a-handheld-luggage-scale-works-simple-breakdown">How a Handheld Luggage Scale Works (Simple Breakdown)</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/terms">Terms of Service</a>
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#key-benefits-for-frequent-flyers">Key Benefits for Frequent Flyers</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/affiliate-disclosure">Affiliate Disclosure</a>
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#comparison-what-to-look-for">Comparison: What to Look For</a>
+        <a class="legal-footer__link" href="https://luggage-scale.com/contact">Contact</a>
         
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#use-cases-for-frequent-flyers">Use Cases for Frequent Flyers</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#pro-tips-best-practices">Pro Tips &amp; Best Practices</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#final-checklist-buy-once-fly-often">Final Checklist (Buy Once, Fly Often)</a>
-        
-      </div>
-      
-    </li>
-    
-    <li class="toc-item">
-      <div class="toc-item__row">
-        <a class="toc-item__link" href="#conclusion-cta">Conclusion &amp; CTA</a>
-        
-      </div>
-      
-    </li>
-    
-  </ol>
-
-        </nav>
-      </div>
-      
-      <div class="site-footer__legal">
-        <h2 class="site-footer__title">Legal &amp; Contact</h2>
-        <ul class="site-footer__links">
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/privacy">Privacy</a>
-          </li>
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/terms">Terms</a>
-          </li>
-          
-          <li class="site-footer__link-item">
-            <a href="https://luggage-scale.com/contact">Contact</a>
-          </li>
-          
-          <li class="site-footer__link-item"><a href="/blog/">Blog index</a></li>
-          <li class="site-footer__link-item"><a href="/blog/sitemap.xml">Sitemap</a></li>
-        </ul>
-      </div>
+      </nav>
     </div>
   </footer>
   <script src="/blog/static/post.js" defer></script>

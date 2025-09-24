@@ -28,6 +28,14 @@
       "clientId": "ca-pub-1234567890123456"
     }
   },
+  "legal": {
+    "links": [
+      { "label": "Privacy Policy", "url": "https://luggage-scale.com/privacy" },
+      { "label": "Terms of Service", "url": "https://luggage-scale.com/terms" },
+      { "label": "Affiliate Disclosure", "url": "https://luggage-scale.com/affiliate-disclosure" },
+      { "label": "Contact", "url": "https://luggage-scale.com/contact" }
+    ]
+  },
   "affiliate": {
     "amazon": {
       "tag": "luggagescale-20",
