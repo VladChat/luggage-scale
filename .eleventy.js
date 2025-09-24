@@ -21,10 +21,12 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
-function buildAmazonLink(productId, textOverride) {
+function resolveAmazonProduct(productId, textOverride) {
   const affiliate = (siteConfig.affiliate && siteConfig.affiliate.amazon) || {};
   if (!affiliate.products) {
-    return "<!-- Amazon affiliate configuration missing -->";
+    return {
+      error: "<!-- Amazon affiliate configuration missing -->",
+    };
   }
 
   const resolvedId =
@@ -32,12 +34,16 @@ function buildAmazonLink(productId, textOverride) {
       ? productId
       : productId && (productId.id || productId.asin || productId.sku);
   if (!resolvedId) {
-    return "<!-- Amazon affiliate product id missing -->";
+    return {
+      error: "<!-- Amazon affiliate product id missing -->",
+    };
   }
 
   const product = affiliate.products[resolvedId];
   if (!product) {
-    return `<!-- Amazon affiliate product not found: ${escapeHtml(resolvedId)} -->`;
+    return {
+      error: `<!-- Amazon affiliate product not found: ${escapeHtml(resolvedId)} -->`,
+    };
   }
 
   const asin = product.asin || resolvedId;
@@ -69,6 +75,28 @@ function buildAmazonLink(productId, textOverride) {
     .filter(Boolean)
     .join(" ");
 
+  return {
+    asin,
+    url,
+    linkText,
+    linkTitle,
+    classNames,
+    product,
+    resolvedId,
+  };
+}
+
+function buildAmazonLink(productId, textOverride, options = {}) {
+  const resolved = resolveAmazonProduct(productId, textOverride);
+  if (!resolved || resolved.error) {
+    return resolved && resolved.error ? resolved.error : "";
+  }
+
+  const { asin, url, linkText, linkTitle, classNames } = resolved;
+  const mergedClassNames = [classNames, options.className]
+    .filter(Boolean)
+    .join(" ");
+
   const attributes = [
     `href="${escapeHtml(url)}"`,
     "rel=\"sponsored noopener noreferrer\"",
@@ -78,14 +106,47 @@ function buildAmazonLink(productId, textOverride) {
   if (asin) {
     attributes.push(`data-asin=\"${escapeHtml(asin)}\"`);
   }
-  if (classNames) {
-    attributes.push(`class=\"${escapeHtml(classNames)}\"`);
+  if (mergedClassNames) {
+    attributes.push(`class=\"${escapeHtml(mergedClassNames)}\"`);
   }
   if (linkTitle) {
     attributes.push(`title=\"${escapeHtml(linkTitle)}\"`);
   }
 
   return `<a ${attributes.join(" ")}>${escapeHtml(linkText)}</a>`;
+}
+
+function wrapPlaceholderParagraphs(html) {
+  if (!html) return html;
+  const placeholderPattern = /<p>([\s\S]*?placeholder text[\s\S]*?)<\/p>/gi;
+  return html.replace(placeholderPattern, (match, inner) => {
+    const content = inner.trim();
+    const escaped = content || "Draft content coming soon.";
+    return `
+<div class="placeholder-block" role="note" aria-label="Draft content placeholder">
+  <span class="placeholder-block__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" fill="currentColor"/>
+      <path d="M20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+    </svg>
+  </span>
+  <span class="placeholder-block__text"><em>${escaped}</em></span>
+</div>`;
+  });
+}
+
+function resolveSectionIcon(headingHtml) {
+  const plain = normalizePlainText(headingHtml).toLowerCase();
+  if (!plain) return "note";
+  if (/[wW]eigh|scale|luggage|bag/.test(plain)) return "scale";
+  if (/(introduction|start|getting started|overview)/.test(plain)) return "intro";
+  if (/(why|benefit|importance|value)/.test(plain)) return "target";
+  if (/(how|steps|use|setup|process)/.test(plain)) return "checklist";
+  if (/(compare|versus|vs|difference)/.test(plain)) return "compare";
+  if (/(tip|pro|best practice|strategy)/.test(plain)) return "lightbulb";
+  if (/(faq|question)/.test(plain)) return "help";
+  if (/(conclusion|cta|next|wrap)/.test(plain)) return "flag";
+  return "note";
 }
 
 function decodeHtmlEntities(value) {
@@ -103,6 +164,13 @@ function normalizePlainText(value) {
     .replace(/<[^>]*>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function trimHtmlFragment(fragment) {
+  if (!fragment) return "";
+  return String(fragment)
+    .replace(/^[\s\uFEFF\xA0]+/, "")
+    .replace(/[\s\uFEFF\xA0]+$/, "");
 }
 
 function slugifyHeading(value) {
@@ -183,7 +251,62 @@ function preparePostContent(content, pageTitle) {
     return headingMarkup;
   });
 
-  return { html, headings };
+  html = wrapPlaceholderParagraphs(html);
+
+  const h2Pattern = /<h2[^>]*>[\s\S]*?<\/h2>/gi;
+  const h2Matches = [];
+  let match;
+  while ((match = h2Pattern.exec(html)) !== null) {
+    h2Matches.push({ index: match.index, markup: match[0] });
+  }
+
+  const introHtml = h2Matches.length
+    ? trimHtmlFragment(html.slice(0, h2Matches[0].index))
+    : trimHtmlFragment(html);
+
+  const sectionFragments = h2Matches.map((entry, index) => {
+    const next = h2Matches[index + 1];
+    const headingMarkup = entry.markup;
+    const headingMatch = headingMarkup.match(/<h2([^>]*)>([\s\S]*?)<\/h2>/i);
+    const attrs = headingMatch ? headingMatch[1] : "";
+    const innerHeading = headingMatch ? headingMatch[2] : headingMarkup;
+    const idMatch = attrs && attrs.match(/\sid\s*=\s*["']([^"']+)["']/i);
+    const headingId = idMatch ? idMatch[1] : `section-${index + 1}`;
+    const contentStart = entry.index + headingMarkup.length;
+    const contentEnd = next ? next.index : html.length;
+    const body = trimHtmlFragment(html.slice(contentStart, contentEnd));
+
+    return {
+      id: headingId,
+      headingHtml: trimHtmlFragment(innerHeading),
+      headingText: normalizePlainText(innerHeading),
+      contentHtml: body,
+    };
+  });
+
+  const sectionChildren = {};
+  let currentSectionId = "";
+  headings.forEach((heading) => {
+    if (heading.level === 2) {
+      currentSectionId = heading.id;
+      if (!sectionChildren[currentSectionId]) {
+        sectionChildren[currentSectionId] = [];
+      }
+    } else if (heading.level === 3 && currentSectionId) {
+      if (!sectionChildren[currentSectionId]) {
+        sectionChildren[currentSectionId] = [];
+      }
+      sectionChildren[currentSectionId].push({ id: heading.id, text: heading.text });
+    }
+  });
+
+  const sections = sectionFragments.map((section) => ({
+    ...section,
+    subheadings: sectionChildren[section.id] || [],
+    icon: resolveSectionIcon(section.headingHtml),
+  }));
+
+  return { html, headings, sections, introHtml };
 }
 
 function buildAbsoluteUrl(path, site) {
@@ -266,6 +389,13 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("amazonLink", amazonLinkHelper);
   eleventyConfig.addShortcode("amazonLink", amazonLinkHelper);
+  eleventyConfig.addFilter("amazonLinkInfo", (productId, textOverride) => {
+    const resolved = resolveAmazonProduct(productId, textOverride);
+    if (!resolved || resolved.error) {
+      return null;
+    }
+    return resolved;
+  });
 
   eleventyConfig.addFilter("preparePostContent", (content, pageTitle) =>
     preparePostContent(content, pageTitle)
