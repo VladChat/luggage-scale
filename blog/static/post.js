@@ -7,6 +7,19 @@
   );
   if (!triggers.length) return;
 
+  const controls = document.querySelector('[data-accordion-controls]');
+  const expandAllButton = controls
+    ? controls.querySelector('[data-accordion-expand-all]')
+    : null;
+  const collapseAllButton = controls
+    ? controls.querySelector('[data-accordion-collapse-all]')
+    : null;
+
+  const faqElement = accordion.querySelector('[data-faq]');
+  const faqButtons = faqElement
+    ? Array.from(faqElement.querySelectorAll('.faq-question'))
+    : [];
+
   const reduceMotionQuery = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   );
@@ -53,15 +66,20 @@
     element.scrollIntoView({ block: 'start', behavior: scrollBehavior });
   };
 
-  const scheduleScrollToContent = (panel, options = {}) => {
-    const contentEl = getPanelContent(panel);
-    if (!contentEl) return;
+  const scheduleScrollToElement = (element, options = {}) => {
+    if (!element) return;
     const { behavior } = options;
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        scrollContentIntoView(contentEl, { behavior });
+        scrollContentIntoView(element, { behavior });
       });
     });
+  };
+
+  const scheduleScrollToContent = (panel, options = {}) => {
+    const contentEl = getPanelContent(panel);
+    if (!contentEl) return;
+    scheduleScrollToElement(contentEl, options);
   };
 
   const getPanel = (trigger) => {
@@ -145,41 +163,160 @@
     }
   };
 
-  const openFromHash = (hash, { scroll = false, immediate = false } = {}) => {
-    if (!hash) return false;
-    const targetId = hash.replace('#', '');
-    if (!targetId) return false;
-    const trigger = triggers.find((btn) => btn.dataset.section === targetId);
-    if (!trigger) return false;
+  const getFaqAnswer = (button) => {
+    const controls = button.getAttribute('aria-controls');
+    return controls ? document.getElementById(controls) : null;
+  };
 
-    const sectionElement = getSectionElement(trigger);
-    const panel = getPanel(trigger);
-    collapseAll(trigger, { immediate });
-    setExpanded(trigger, true, { immediate, force: true });
+  const setFaqExpanded = (button, expand, options = {}) => {
+    if (!button) return;
+    const answer = getFaqAnswer(button);
+    if (!answer) return;
 
-    if (scroll) {
-      const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
-      if (panel) {
-        scheduleScrollToContent(panel, { behavior });
-      } else if (sectionElement) {
-        scrollContentIntoView(sectionElement, { behavior });
-      } else {
-        const heading = document.getElementById(targetId);
-        if (heading && typeof heading.scrollIntoView === 'function') {
-          heading.scrollIntoView({ behavior, block: 'start' });
+    const { force = false, scroll = false, behavior } = options;
+    const wasExpanded = button.getAttribute('aria-expanded') === 'true';
+    if (!force && wasExpanded === expand) {
+      return;
+    }
+
+    button.setAttribute('aria-expanded', expand ? 'true' : 'false');
+    button.classList.toggle('is-open', expand);
+
+    if (expand) {
+      answer.removeAttribute('hidden');
+    } else {
+      answer.setAttribute('hidden', '');
+    }
+    answer.setAttribute('aria-hidden', expand ? 'false' : 'true');
+
+    if (expand && scroll) {
+      scheduleScrollToElement(answer, {
+        behavior: behavior || (prefersReducedMotion() ? 'auto' : 'smooth'),
+      });
+    }
+  };
+
+  const focusFaqButtonAt = (index) => {
+    if (!faqButtons.length) return;
+    const total = faqButtons.length;
+    const nextIndex = (index + total) % total;
+    const target = faqButtons[nextIndex];
+    if (target) {
+      target.focus();
+    }
+  };
+
+  const handleFaqKeyDown = (event) => {
+    const { key } = event;
+    if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
+    event.preventDefault();
+    const index = faqButtons.indexOf(event.currentTarget);
+    if (index < 0) return;
+
+    if (key === 'ArrowDown') {
+      focusFaqButtonAt(index + 1);
+    } else if (key === 'ArrowUp') {
+      focusFaqButtonAt(index - 1);
+    } else if (key === 'Home') {
+      focusFaqButtonAt(0);
+    } else if (key === 'End') {
+      focusFaqButtonAt(faqButtons.length - 1);
+    }
+  };
+
+  const openFaqFromHash = (
+    hash,
+    { scroll = false, immediate = false, focus = false } = {}
+  ) => {
+    if (!faqButtons.length || !hash) return false;
+    const raw = hash.replace('#', '');
+    if (!raw) return false;
+
+    const slug = raw.startsWith('faq-') ? raw.slice(4) : raw;
+    const targetButton = faqButtons.find(
+      (btn) => btn.dataset.faqQuestion === slug
+    );
+
+    const faqTrigger = triggers.find((btn) => btn.dataset.section === 'faq');
+    if (raw === 'faq' && faqTrigger) {
+      collapseAll(faqTrigger, { immediate });
+      setExpanded(faqTrigger, true, { immediate, force: true });
+      if (scroll) {
+        const panel = getPanel(faqTrigger);
+        const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+        if (panel) {
+          scheduleScrollToContent(panel, { behavior });
         }
       }
+      if (focus) {
+        requestAnimationFrame(() => {
+          faqTrigger.focus();
+        });
+      }
+      return true;
+    }
+
+    if (!targetButton) return false;
+
+    if (faqTrigger) {
+      collapseAll(faqTrigger, { immediate });
+      setExpanded(faqTrigger, true, { immediate, force: true });
+    }
+
+    const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+    setFaqExpanded(targetButton, true, {
+      force: true,
+      scroll,
+      behavior,
+    });
+
+    if (focus) {
+      requestAnimationFrame(() => {
+        targetButton.focus();
+      });
     }
 
     return true;
   };
 
+  const openFromHash = (hash, options = {}) => {
+    if (!hash) return false;
+    const targetId = hash.replace('#', '');
+    if (!targetId) return false;
+    const trigger = triggers.find((btn) => btn.dataset.section === targetId);
+    if (trigger) {
+      const sectionElement = getSectionElement(trigger);
+      const panel = getPanel(trigger);
+      collapseAll(trigger, { immediate: options.immediate });
+      setExpanded(trigger, true, { immediate: options.immediate, force: true });
+
+      if (options.scroll) {
+        const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+        if (panel) {
+          scheduleScrollToContent(panel, { behavior });
+        } else if (sectionElement) {
+          scrollContentIntoView(sectionElement, { behavior });
+        } else {
+          const heading = document.getElementById(targetId);
+          if (heading && typeof heading.scrollIntoView === 'function') {
+            heading.scrollIntoView({ behavior, block: 'start' });
+          }
+        }
+      }
+
+      return true;
+    }
+
+    return openFaqFromHash(hash, {
+      scroll: options.scroll,
+      immediate: options.immediate,
+      focus: true,
+    });
+  };
+
   const handleToggle = (trigger) => {
     const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
     const nextState = !isExpanded;
-    if (nextState) {
-      collapseAll(trigger);
-    }
     setExpanded(trigger, nextState, { force: true });
     if (nextState) {
       const panel = getPanel(trigger);
@@ -246,6 +383,43 @@
       }
     });
   });
+
+  const setAllSections = (expand) => {
+    triggers.forEach((trigger) => {
+      setExpanded(trigger, expand, { immediate: true, force: true });
+    });
+    if (!expand && faqButtons.length) {
+      faqButtons.forEach((button) => {
+        setFaqExpanded(button, false, { force: true });
+      });
+    }
+  };
+
+  if (expandAllButton) {
+    expandAllButton.addEventListener('click', () => {
+      setAllSections(true);
+    });
+  }
+
+  if (collapseAllButton) {
+    collapseAllButton.addEventListener('click', () => {
+      setAllSections(false);
+    });
+  }
+
+  if (faqButtons.length) {
+    faqButtons.forEach((button) => {
+      setFaqExpanded(button, false, { force: true });
+      button.addEventListener('click', () => {
+        const nextState = button.getAttribute('aria-expanded') !== 'true';
+        setFaqExpanded(button, nextState, {
+          force: true,
+          scroll: nextState,
+        });
+      });
+      button.addEventListener('keydown', handleFaqKeyDown);
+    });
+  }
 
   window.addEventListener('resize', () => {
     window.requestAnimationFrame(updateExpandedHeights);
