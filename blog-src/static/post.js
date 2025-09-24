@@ -13,6 +13,29 @@
   const prefersReducedMotion = () =>
     Boolean(reduceMotionQuery && reduceMotionQuery.matches);
 
+  const getSectionElement = (trigger) =>
+    trigger ? trigger.closest('[data-post-section]') : null;
+
+  const isElementTopInViewport = (element) => {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight || 0;
+    return rect.top >= 0 && rect.top <= viewportHeight;
+  };
+
+  const scrollSectionIntoView = (sectionEl, { behavior } = {}) => {
+    if (!sectionEl || typeof sectionEl.scrollIntoView !== 'function') {
+      return;
+    }
+    if (isElementTopInViewport(sectionEl)) {
+      return;
+    }
+    const scrollBehavior =
+      behavior || (prefersReducedMotion() ? 'auto' : 'smooth');
+    sectionEl.scrollIntoView({ block: 'start', behavior: scrollBehavior });
+  };
+
   const getPanel = (trigger) => {
     const controls = trigger.getAttribute('aria-controls');
     return controls ? document.getElementById(controls) : null;
@@ -92,14 +115,19 @@
     const trigger = triggers.find((btn) => btn.dataset.section === targetId);
     if (!trigger) return false;
 
+    const sectionElement = getSectionElement(trigger);
     collapseAll(trigger, { immediate });
     setExpanded(trigger, true, { immediate, force: true });
 
     if (scroll) {
-      const heading = document.getElementById(targetId);
-      if (heading) {
-        const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
-        heading.scrollIntoView({ behavior, block: 'start' });
+      const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+      if (sectionElement) {
+        scrollSectionIntoView(sectionElement, { behavior });
+      } else {
+        const heading = document.getElementById(targetId);
+        if (heading && typeof heading.scrollIntoView === 'function') {
+          heading.scrollIntoView({ behavior, block: 'start' });
+        }
       }
     }
 
@@ -107,12 +135,16 @@
   };
 
   const handleToggle = (trigger) => {
+    const sectionElement = getSectionElement(trigger);
     const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
     const nextState = !isExpanded;
     if (nextState) {
       collapseAll(trigger);
     }
     setExpanded(trigger, nextState, { force: true });
+    if (nextState) {
+      scrollSectionIntoView(sectionElement);
+    }
   };
 
   const handleKeyDown = (event) => {

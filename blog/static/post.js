@@ -17,6 +17,29 @@
   const prefersReducedMotion = () =>
     Boolean(reduceMotionQuery && reduceMotionQuery.matches);
 
+  const getSectionElement = (trigger) =>
+    trigger ? trigger.closest('[data-post-section]') : null;
+
+  const isElementTopInViewport = (element) => {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight || 0;
+    return rect.top >= 0 && rect.top <= viewportHeight;
+  };
+
+  const scrollSectionIntoView = (sectionEl, { behavior } = {}) => {
+    if (!sectionEl || typeof sectionEl.scrollIntoView !== 'function') {
+      return;
+    }
+    if (isElementTopInViewport(sectionEl)) {
+      return;
+    }
+    const scrollBehavior =
+      behavior || (prefersReducedMotion() ? 'auto' : 'smooth');
+    sectionEl.scrollIntoView({ block: 'start', behavior: scrollBehavior });
+  };
+
   const getPanel = (trigger) => {
     const controls = trigger.getAttribute('aria-controls');
     return controls ? document.getElementById(controls) : null;
@@ -304,21 +327,26 @@
     const trigger = triggers.find((btn) => btn.dataset.section === sectionId);
     if (!trigger) return false;
 
+    const sectionElement = getSectionElement(trigger);
     collapseAll(trigger, { immediate });
     setExpanded(trigger, true, { immediate, force: true });
 
     if (scroll) {
       const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
       const focusTargetId = focusId || null;
-      const targetElement =
-        (focusTargetId && document.getElementById(focusTargetId)) ||
-        document.getElementById(sectionId);
+      const fallbackTarget = document.getElementById(sectionId);
 
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior, block: 'start' });
-        if (focusTargetId && typeof targetElement.focus === 'function') {
+      if (sectionElement) {
+        scrollSectionIntoView(sectionElement, { behavior });
+      } else if (fallbackTarget && typeof fallbackTarget.scrollIntoView === 'function') {
+        fallbackTarget.scrollIntoView({ behavior, block: 'start' });
+      }
+
+      if (focusTargetId) {
+        const focusTarget = document.getElementById(focusTargetId);
+        if (focusTarget && typeof focusTarget.focus === 'function') {
           requestAnimationFrame(() => {
-            targetElement.focus({ preventScroll: true });
+            focusTarget.focus({ preventScroll: true });
           });
         }
       }
@@ -352,12 +380,16 @@
   };
 
   const handleToggle = (trigger) => {
+    const sectionElement = getSectionElement(trigger);
     const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
     const nextState = !isExpanded;
     if (nextState) {
       collapseAll(trigger);
     }
     setExpanded(trigger, nextState, { force: true });
+    if (nextState) {
+      scrollSectionIntoView(sectionElement);
+    }
   };
 
   const handleKeyDown = (event) => {
