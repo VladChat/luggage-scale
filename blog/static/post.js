@@ -1,133 +1,203 @@
 (function () {
-  const sectionToggles = Array.from(document.querySelectorAll('[data-section-toggle]'));
-  const tocToggles = Array.from(document.querySelectorAll('.toc-item__toggle'));
-  const mobileTocToggle = document.querySelector('.post__toc-toggle');
-  const mobileTocPanel = document.querySelector('#post-toc-mobile');
-  const tocLinks = Array.from(document.querySelectorAll('.post__toc-nav a'));
-  const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const accordion = document.querySelector('[data-accordion]');
+  if (!accordion) return;
 
-  const prefersReducedMotion = () => reduceMotionQuery.matches;
+  const triggers = Array.from(
+    accordion.querySelectorAll('[data-accordion-trigger]')
+  );
+  if (!triggers.length) return;
 
-  const setContentHeight = (content, expanded) => {
-    if (!content) return;
-    if (prefersReducedMotion()) {
-      content.style.maxHeight = expanded ? 'none' : '0px';
-      content.dataset.open = expanded ? 'true' : 'false';
+  const reduceMotionQuery = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  );
+  const prefersReducedMotion = () =>
+    Boolean(reduceMotionQuery && reduceMotionQuery.matches);
+
+  const getPanel = (trigger) => {
+    const controls = trigger.getAttribute('aria-controls');
+    return controls ? document.getElementById(controls) : null;
+  };
+
+  const setExpanded = (trigger, expand, options = {}) => {
+    const panel = getPanel(trigger);
+    if (!panel) return;
+
+    const { immediate = false, force = false } = options;
+    const wasExpanded = trigger.getAttribute('aria-expanded') === 'true';
+    if (!force && wasExpanded === expand) {
       return;
     }
-    if (expanded) {
-      content.dataset.open = 'true';
-      content.style.maxHeight = content.scrollHeight + 'px';
-    } else {
-      content.dataset.open = 'false';
-      content.style.maxHeight = content.scrollHeight + 'px';
+
+    trigger.setAttribute('aria-expanded', expand ? 'true' : 'false');
+    trigger.classList.toggle('is-open', expand);
+
+    panel.dataset.open = expand ? 'true' : 'false';
+    panel.setAttribute('aria-hidden', expand ? 'false' : 'true');
+
+    const skipAnimation = immediate || prefersReducedMotion();
+
+    if (skipAnimation) {
+      panel.style.transitionDuration = '0ms';
+      panel.style.maxHeight = expand ? 'none' : '0px';
+      panel.style.opacity = expand ? '1' : '0';
       requestAnimationFrame(() => {
-        content.style.maxHeight = '0px';
+        panel.style.transitionDuration = '';
+      });
+      return;
+    }
+
+    if (expand) {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      panel.style.opacity = '1';
+      const finalize = (event) => {
+        if (event.propertyName !== 'max-height') return;
+        if (panel.dataset.open === 'true') {
+          panel.style.maxHeight = 'none';
+        }
+        panel.removeEventListener('transitionend', finalize);
+      };
+      panel.addEventListener('transitionend', finalize);
+    } else {
+      if (panel.style.maxHeight === 'none' || !panel.style.maxHeight) {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+      panel.style.opacity = '0';
+      requestAnimationFrame(() => {
+        panel.style.maxHeight = '0px';
       });
     }
   };
 
-  const toggleSection = (toggle, force) => {
-    const contentId = toggle.getAttribute('aria-controls');
-    const content = contentId ? document.getElementById(contentId) : null;
-    if (!content) return;
-    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-    const shouldExpand = typeof force === 'boolean' ? force : !isExpanded;
-    toggle.setAttribute('aria-expanded', shouldExpand ? 'true' : 'false');
-    toggle.classList.toggle('is-open', shouldExpand);
-    setContentHeight(content, shouldExpand);
-  };
-
-  const updateAllSectionHeights = () => {
-    sectionToggles.forEach((toggle) => {
-      const contentId = toggle.getAttribute('aria-controls');
-      const content = contentId ? document.getElementById(contentId) : null;
-      if (!content) return;
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      if (prefersReducedMotion()) {
-        content.style.maxHeight = isExpanded ? 'none' : '0px';
-      } else if (isExpanded) {
-        content.style.maxHeight = content.scrollHeight + 'px';
-      }
+  const collapseAll = (exceptTrigger, options = {}) => {
+    triggers.forEach((trigger) => {
+      if (trigger === exceptTrigger) return;
+      setExpanded(trigger, false, { ...options, force: true });
     });
   };
 
-  sectionToggles.forEach((toggle) => {
-    const contentId = toggle.getAttribute('aria-controls');
-    const content = contentId ? document.getElementById(contentId) : null;
-    if (!content) return;
-    toggle.classList.add('is-open');
-    toggle.setAttribute('aria-expanded', 'true');
-    content.dataset.open = 'true';
-    if (!prefersReducedMotion()) {
-      content.style.maxHeight = content.scrollHeight + 'px';
+  const focusTriggerAt = (index) => {
+    if (!triggers.length) return;
+    const total = triggers.length;
+    const nextIndex = (index + total) % total;
+    const target = triggers[nextIndex];
+    if (target) {
+      target.focus();
     }
-    toggle.addEventListener('click', () => toggleSection(toggle));
-  });
-
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(updateAllSectionHeights, 150);
-  });
-
-  tocToggles.forEach((button) => {
-    const targetId = button.getAttribute('aria-controls');
-    const target = targetId ? document.getElementById(targetId) : null;
-    if (!target) return;
-    button.addEventListener('click', () => {
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      const nextState = !expanded;
-      button.setAttribute('aria-expanded', nextState ? 'true' : 'false');
-      button.classList.toggle('is-open', nextState);
-      if (nextState) {
-        target.removeAttribute('hidden');
-      } else {
-        target.setAttribute('hidden', '');
-      }
-    });
-  });
-
-  const closeMobileToc = () => {
-    if (!mobileTocToggle || !mobileTocPanel) return;
-    mobileTocToggle.setAttribute('aria-expanded', 'false');
-    mobileTocToggle.classList.remove('is-open');
-    mobileTocPanel.setAttribute('hidden', '');
   };
 
-  if (mobileTocToggle && mobileTocPanel) {
-    mobileTocToggle.addEventListener('click', () => {
-      const expanded = mobileTocToggle.getAttribute('aria-expanded') === 'true';
-      const nextState = !expanded;
-      mobileTocToggle.setAttribute('aria-expanded', nextState ? 'true' : 'false');
-      mobileTocToggle.classList.toggle('is-open', nextState);
-      if (nextState) {
-        mobileTocPanel.removeAttribute('hidden');
-      } else {
-        mobileTocPanel.setAttribute('hidden', '');
-      }
-    });
+  const openFromHash = (hash, { scroll = false, immediate = false } = {}) => {
+    if (!hash) return false;
+    const targetId = hash.replace('#', '');
+    if (!targetId) return false;
+    const trigger = triggers.find((btn) => btn.dataset.section === targetId);
+    if (!trigger) return false;
 
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 900) {
-        closeMobileToc();
-      }
-    });
-  }
+    collapseAll(trigger, { immediate });
+    setExpanded(trigger, true, { immediate, force: true });
 
-  tocLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      const targetId = link.hash ? link.hash.slice(1) : '';
-      if (targetId) {
-        const matchingToggle = sectionToggles.find((btn) => btn.dataset.section === targetId);
-        if (matchingToggle) {
-          const isExpanded = matchingToggle.getAttribute('aria-expanded') === 'true';
-          if (!isExpanded) {
-            toggleSection(matchingToggle, true);
-          }
+    if (scroll) {
+      const heading = document.getElementById(targetId);
+      if (heading) {
+        const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+        heading.scrollIntoView({ behavior, block: 'start' });
+      }
+    }
+
+    return true;
+  };
+
+  const handleToggle = (trigger) => {
+    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+    const nextState = !isExpanded;
+    if (nextState) {
+      collapseAll(trigger);
+    }
+    setExpanded(trigger, nextState, { force: true });
+  };
+
+  const handleKeyDown = (event) => {
+    const { key } = event;
+    if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
+
+    event.preventDefault();
+    const index = triggers.indexOf(event.currentTarget);
+    if (index < 0) return;
+
+    if (key === 'ArrowDown') {
+      focusTriggerAt(index + 1);
+    } else if (key === 'ArrowUp') {
+      focusTriggerAt(index - 1);
+    } else if (key === 'Home') {
+      focusTriggerAt(0);
+    } else if (key === 'End') {
+      focusTriggerAt(triggers.length - 1);
+    }
+  };
+
+  const updateExpandedHeights = () => {
+    triggers.forEach((trigger) => {
+      const panel = getPanel(trigger);
+      if (!panel) return;
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        if (prefersReducedMotion()) {
+          panel.style.maxHeight = 'none';
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          requestAnimationFrame(() => {
+            if (panel.dataset.open === 'true') {
+              panel.style.maxHeight = 'none';
+            }
+          });
         }
       }
-      closeMobileToc();
     });
+  };
+
+  triggers.forEach((trigger) => {
+    const panel = getPanel(trigger);
+    if (!panel) return;
+    panel.dataset.open = 'true';
+    panel.setAttribute('aria-hidden', 'false');
+
+    trigger.addEventListener('click', () => handleToggle(trigger));
+    trigger.addEventListener('keydown', handleKeyDown);
+
+    panel.addEventListener('transitionend', (event) => {
+      if (event.propertyName !== 'max-height') return;
+      if (panel.dataset.open === 'true' && !prefersReducedMotion()) {
+        panel.style.maxHeight = 'none';
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    window.requestAnimationFrame(updateExpandedHeights);
+  });
+
+  const handleMotionChange = () => {
+    triggers.forEach((trigger) => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      setExpanded(trigger, expanded, { immediate: true, force: true });
+    });
+  };
+
+  if (reduceMotionQuery) {
+    if (typeof reduceMotionQuery.addEventListener === 'function') {
+      reduceMotionQuery.addEventListener('change', handleMotionChange);
+    } else if (typeof reduceMotionQuery.addListener === 'function') {
+      reduceMotionQuery.addListener(handleMotionChange);
+    }
+  }
+
+  requestAnimationFrame(() => {
+    triggers.forEach((trigger) => {
+      setExpanded(trigger, false, { immediate: true, force: true });
+    });
+    openFromHash(window.location.hash, { immediate: true, scroll: true });
+  });
+
+  window.addEventListener('hashchange', () => {
+    openFromHash(window.location.hash, { scroll: true });
   });
 })();

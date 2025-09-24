@@ -33,7 +33,7 @@
   <aside class="affiliate-card" data-affiliate-card>
     <div class="affiliate-card__media">
       {% if card.image %}
-      <img src="{{ card.image }}" alt="{{ card.imageAlt }}" loading="lazy" decoding="async">
+      <img src="{{ card.image }}" alt="{{ card.imageAlt }}" loading="lazy" decoding="async" width="160" height="160">
       {% else %}
       <div class="affiliate-card__icon">{{ icon('scale') }}</div>
       {% endif %}
