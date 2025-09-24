@@ -594,7 +594,19 @@ main.container {
 
 .post__sections {
   display: grid;
-  gap: 1.25rem;
+  gap: 0.875rem;
+}
+
+.post__sections > .post-section {
+  margin: 0;
+}
+
+.post__sections > .post-section:first-of-type {
+  margin-top: 0.875rem;
+}
+
+.post__sections > .post-section:last-of-type {
+  margin-bottom: 0.875rem;
 }
 
 .post__body-content {
@@ -616,6 +628,7 @@ main.container {
   color: var(--text);
   overflow: hidden;
   transition: background var(--transition-fast), box-shadow var(--transition-fast);
+  scroll-margin-top: calc(var(--sticky-header-height, 72px) + 12px);
 }
 
 .post-section:hover,
@@ -680,30 +693,32 @@ main.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   padding: 1.1rem 1.5rem;
   min-height: 44px;
   border: none;
   background: transparent;
   color: inherit;
-  font-size: 1.1rem;
+  font-size: 1.1875rem;
   font-weight: 600;
+  line-height: 1.3;
   text-align: left;
   cursor: pointer;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition: color var(--transition-fast);
 }
 
 .post-section__toggle:focus-visible {
-  outline: 3px solid rgba(0, 86, 179, 0.35);
+  outline: 2px solid var(--focus, #0056B3);
   outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.25);
 }
 
 .post-section__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 0.9rem;
   background: var(--section-icon-bg);
   color: var(--section-icon-color);
@@ -712,22 +727,32 @@ main.container {
 }
 
 .post-section__icon-svg {
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 2rem;
+  height: 2rem;
   fill: currentColor;
 }
 
 .post-section__label {
   flex: 1;
-  display: inline-flex;
+  min-width: 0;
+  display: block;
+  white-space: normal;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.post-section__chevron {
+  flex-shrink: 0;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  width: 1.75rem;
 }
 
 .post-section__chevron svg {
   width: 1rem;
   height: 1rem;
-  transition: transform var(--transition-fast), color var(--transition-fast);
+  transition: transform 200ms ease, color var(--transition-fast);
   color: var(--section-icon-color);
 }
 
@@ -742,6 +767,11 @@ main.container {
 .post-section__toggle:focus-visible .post-section__chevron svg,
 .post-section__toggle[aria-expanded="true"] .post-section__chevron svg {
   color: var(--section-icon-active);
+}
+
+.post-section__toggle[aria-expanded="true"] {
+  font-weight: 700;
+  letter-spacing: 0.1px;
 }
 
 .post-section__toggle[aria-expanded="true"] .post-section__chevron svg {
@@ -762,6 +792,7 @@ main.container {
 
 .post-section__panel-inner {
   padding: 1.5rem 1.5rem 1.75rem;
+  line-height: 1.6;
 }
 
 .post-section__panel-inner > *:first-child {
@@ -839,8 +870,9 @@ main.container {
 }
 
 .faq-accordion__toggle:focus-visible {
-  outline: 3px solid rgba(63, 81, 181, 0.35);
+  outline: 2px solid var(--focus, #3F51B5);
   outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.25);
 }
 
 .faq-accordion__toggle[aria-expanded="true"] {
@@ -849,13 +881,25 @@ main.container {
 
 .faq-accordion__question {
   flex: 1;
+  min-width: 0;
+  white-space: normal;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.faq-accordion__chevron {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
 }
 
 .faq-accordion__chevron svg {
-  width: 0.95rem;
-  height: 0.95rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--faq-accent);
-  transition: transform var(--transition-fast), color var(--transition-fast);
+  transition: transform 200ms ease, color var(--transition-fast);
 }
 
 .faq-accordion__toggle:hover .faq-accordion__chevron svg,
@@ -892,6 +936,18 @@ main.container {
 
 .faq-accordion__panel-inner > *:last-child {
   margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-section__chevron svg,
+  .faq-accordion__chevron svg {
+    transition-duration: 0ms;
+  }
+
+  .post-section__panel,
+  .faq-accordion__panel {
+    transition: none;
+  }
 }
 
 
