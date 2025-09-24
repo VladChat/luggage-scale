@@ -7,6 +7,10 @@
   );
   if (!triggers.length) return;
 
+  const sectionAliasMap = new Map([
+    ['how-it-works-portable-luggage-scale', 'how-it-works'],
+  ]);
+
   const reduceMotionQuery = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   );
@@ -85,25 +89,266 @@
     }
   };
 
-  const openFromHash = (hash, { scroll = false, immediate = false } = {}) => {
-    if (!hash) return false;
-    const targetId = hash.replace('#', '');
-    if (!targetId) return false;
-    const trigger = triggers.find((btn) => btn.dataset.section === targetId);
+  const createFaqAccordion = (container) => {
+    const items = Array.from(container.querySelectorAll('[data-faq-item]'));
+    if (!items.length) return null;
+
+    const faqTriggers = items
+      .map((item) => item.querySelector('[data-faq-trigger]'))
+      .filter(Boolean);
+
+    const aliasMap = new Map();
+    items.forEach((item) => {
+      const canonicalId = item.dataset.faqId;
+      if (!canonicalId) return;
+      aliasMap.set(canonicalId, canonicalId);
+      const aliases = (item.dataset.faqAliases || '')
+        .split(',')
+        .map((alias) => alias.trim())
+        .filter(Boolean);
+      aliases.forEach((alias) => aliasMap.set(alias, canonicalId));
+    });
+
+    const getPanel = (trigger) => {
+      const controls = trigger.getAttribute('aria-controls');
+      return controls ? document.getElementById(controls) : null;
+    };
+
+    const setFaqExpanded = (trigger, expand, options = {}) => {
+      const panel = getPanel(trigger);
+      if (!panel) return;
+
+      const { immediate = false, force = false } = options;
+      const wasExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      if (!force && wasExpanded === expand) {
+        return;
+      }
+
+      trigger.setAttribute('aria-expanded', expand ? 'true' : 'false');
+
+      panel.dataset.open = expand ? 'true' : 'false';
+      panel.setAttribute('aria-hidden', expand ? 'false' : 'true');
+
+      const skipAnimation = immediate || prefersReducedMotion();
+
+      if (skipAnimation) {
+        panel.style.transitionDuration = '0ms';
+        panel.style.maxHeight = expand ? 'none' : '0px';
+        panel.style.opacity = expand ? '1' : '0';
+        requestAnimationFrame(() => {
+          panel.style.transitionDuration = '';
+        });
+        return;
+      }
+
+      if (expand) {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.style.opacity = '1';
+        const finalize = (event) => {
+          if (event.propertyName !== 'max-height') return;
+          if (panel.dataset.open === 'true') {
+            panel.style.maxHeight = 'none';
+          }
+          panel.removeEventListener('transitionend', finalize);
+        };
+        panel.addEventListener('transitionend', finalize);
+      } else {
+        if (panel.style.maxHeight === 'none' || !panel.style.maxHeight) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+        panel.style.opacity = '0';
+        requestAnimationFrame(() => {
+          panel.style.maxHeight = '0px';
+        });
+      }
+    };
+
+    const focusFaqTriggerAt = (index) => {
+      if (!faqTriggers.length) return;
+      const total = faqTriggers.length;
+      const nextIndex = (index + total) % total;
+      const target = faqTriggers[nextIndex];
+      if (target) {
+        target.focus();
+      }
+    };
+
+    const handleFaqKeyDown = (event) => {
+      const { key } = event;
+      if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
+
+      event.preventDefault();
+      const index = faqTriggers.indexOf(event.currentTarget);
+      if (index < 0) return;
+
+      if (key === 'ArrowDown') {
+        focusFaqTriggerAt(index + 1);
+      } else if (key === 'ArrowUp') {
+        focusFaqTriggerAt(index - 1);
+      } else if (key === 'Home') {
+        focusFaqTriggerAt(0);
+      } else if (key === 'End') {
+        focusFaqTriggerAt(faqTriggers.length - 1);
+      }
+    };
+
+    faqTriggers.forEach((trigger) => {
+      const panel = getPanel(trigger);
+      if (!panel) return;
+
+      panel.dataset.open = 'true';
+      panel.setAttribute('aria-hidden', 'false');
+
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        setFaqExpanded(trigger, !isExpanded, { force: true });
+      });
+
+      trigger.addEventListener('keydown', handleFaqKeyDown);
+
+      panel.addEventListener('transitionend', (event) => {
+        if (event.propertyName !== 'max-height') return;
+        if (panel.dataset.open === 'true' && !prefersReducedMotion()) {
+          panel.style.maxHeight = 'none';
+        }
+      });
+    });
+
+    const updateExpandedHeights = () => {
+      faqTriggers.forEach((trigger) => {
+        const panel = getPanel(trigger);
+        if (!panel) return;
+        if (trigger.getAttribute('aria-expanded') === 'true') {
+          if (prefersReducedMotion()) {
+            panel.style.maxHeight = 'none';
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+              if (panel.dataset.open === 'true') {
+                panel.style.maxHeight = 'none';
+              }
+            });
+          }
+        }
+      });
+    };
+
+    const handleMotionChange = () => {
+      faqTriggers.forEach((trigger) => {
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        setFaqExpanded(trigger, expanded, { immediate: true, force: true });
+      });
+    };
+
+    requestAnimationFrame(() => {
+      faqTriggers.forEach((trigger) => {
+        setFaqExpanded(trigger, false, { immediate: true, force: true });
+      });
+    });
+
+    const scrollToAnchor = (id) => {
+      const anchor = document.getElementById(id);
+      if (!anchor) return false;
+      const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+      anchor.scrollIntoView({ behavior, block: 'start' });
+      if (typeof anchor.focus === 'function') {
+        requestAnimationFrame(() => {
+          anchor.focus({ preventScroll: true });
+        });
+      }
+      return true;
+    };
+
+    const openFromHash = (
+      hashId,
+      { scroll = false, immediate = false, ensureSection } = {}
+    ) => {
+      const canonical = aliasMap.get(hashId);
+      if (!canonical) return false;
+      const trigger = faqTriggers.find((btn) => {
+        const item = btn.closest('[data-faq-item]');
+        return item && item.dataset.faqId === canonical;
+      });
+      if (!trigger) return false;
+
+      if (typeof ensureSection === 'function') {
+        ensureSection();
+      }
+
+      setFaqExpanded(trigger, true, { immediate, force: true });
+
+      if (scroll) {
+        if (!scrollToAnchor(hashId)) {
+          scrollToAnchor(canonical);
+        }
+      }
+
+      return true;
+    };
+
+    return {
+      isFaqHash: (id) => aliasMap.has(id),
+      openFromHash,
+      updateExpandedHeights,
+      handleMotionChange,
+    };
+  };
+
+  const faqContainer = accordion.querySelector('[data-faq-accordion]');
+  const faqController = faqContainer ? createFaqAccordion(faqContainer) : null;
+
+  const openSectionById = (
+    sectionId,
+    { scroll = false, immediate = false, focusId } = {}
+  ) => {
+    const trigger = triggers.find((btn) => btn.dataset.section === sectionId);
     if (!trigger) return false;
 
     collapseAll(trigger, { immediate });
     setExpanded(trigger, true, { immediate, force: true });
 
     if (scroll) {
-      const heading = document.getElementById(targetId);
-      if (heading) {
-        const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
-        heading.scrollIntoView({ behavior, block: 'start' });
+      const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+      const focusTargetId = focusId || null;
+      const targetElement =
+        (focusTargetId && document.getElementById(focusTargetId)) ||
+        document.getElementById(sectionId);
+
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior, block: 'start' });
+        if (focusTargetId && typeof targetElement.focus === 'function') {
+          requestAnimationFrame(() => {
+            targetElement.focus({ preventScroll: true });
+          });
+        }
       }
     }
 
     return true;
+  };
+
+  const openFromHash = (hash, { scroll = false, immediate = false } = {}) => {
+    if (!hash) return false;
+    const targetId = hash.replace('#', '');
+    if (!targetId) return false;
+
+    if (faqController && faqController.isFaqHash(targetId)) {
+      return faqController.openFromHash(targetId, {
+        scroll,
+        immediate,
+        ensureSection: () =>
+          openSectionById('faq', { immediate, scroll: false }),
+      });
+    }
+
+    const canonicalId = sectionAliasMap.get(targetId) || targetId;
+    const focusId = canonicalId !== targetId ? targetId : undefined;
+
+    return openSectionById(canonicalId, {
+      scroll,
+      immediate,
+      focusId,
+    });
   };
 
   const handleToggle = (trigger) => {
@@ -152,6 +397,9 @@
         }
       }
     });
+    if (faqController) {
+      faqController.updateExpandedHeights();
+    }
   };
 
   triggers.forEach((trigger) => {
@@ -180,6 +428,9 @@
       const expanded = trigger.getAttribute('aria-expanded') === 'true';
       setExpanded(trigger, expanded, { immediate: true, force: true });
     });
+    if (faqController) {
+      faqController.handleMotionChange();
+    }
   };
 
   if (reduceMotionQuery) {
