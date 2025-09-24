@@ -16,24 +16,52 @@
   const getSectionElement = (trigger) =>
     trigger ? trigger.closest('[data-post-section]') : null;
 
-  const isElementTopInViewport = (element) => {
-    if (!element) return false;
-    const rect = element.getBoundingClientRect();
-    const viewportHeight =
-      window.innerHeight || document.documentElement.clientHeight || 0;
-    return rect.top >= 0 && rect.top <= viewportHeight;
+  const getPanelContent = (panel) =>
+    panel ? panel.querySelector('.post-section__panel-inner') || panel : null;
+
+  const getStickyHeaderOffset = () => {
+    const defaultHeight = 72;
+    const gap = 12;
+    const root = document.documentElement;
+    if (!root || typeof window.getComputedStyle !== 'function') {
+      return defaultHeight + gap;
+    }
+    const style = window.getComputedStyle(root);
+    if (!style) {
+      return defaultHeight + gap;
+    }
+    const parsed = parseFloat(style.getPropertyValue('--sticky-header-height'));
+    const headerHeight = Number.isNaN(parsed) ? defaultHeight : parsed;
+    return headerHeight + gap;
   };
 
-  const scrollSectionIntoView = (sectionEl, { behavior } = {}) => {
-    if (!sectionEl || typeof sectionEl.scrollIntoView !== 'function') {
+  const isContentTopFullyVisible = (element) => {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    return rect.top >= getStickyHeaderOffset();
+  };
+
+  const scrollContentIntoView = (element, { behavior } = {}) => {
+    if (!element || typeof element.scrollIntoView !== 'function') {
       return;
     }
-    if (isElementTopInViewport(sectionEl)) {
+    if (isContentTopFullyVisible(element)) {
       return;
     }
     const scrollBehavior =
       behavior || (prefersReducedMotion() ? 'auto' : 'smooth');
-    sectionEl.scrollIntoView({ block: 'start', behavior: scrollBehavior });
+    element.scrollIntoView({ block: 'start', behavior: scrollBehavior });
+  };
+
+  const scheduleScrollToContent = (panel, options = {}) => {
+    const contentEl = getPanelContent(panel);
+    if (!contentEl) return;
+    const { behavior } = options;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollContentIntoView(contentEl, { behavior });
+      });
+    });
   };
 
   const getPanel = (trigger) => {
@@ -43,7 +71,13 @@
 
   const setExpanded = (trigger, expand, options = {}) => {
     const panel = getPanel(trigger);
-    if (!panel) return;
+    const sectionElement = getSectionElement(trigger);
+    if (!panel) {
+      if (sectionElement) {
+        sectionElement.dataset.open = expand ? 'true' : 'false';
+      }
+      return;
+    }
 
     const { immediate = false, force = false } = options;
     const wasExpanded = trigger.getAttribute('aria-expanded') === 'true';
@@ -56,6 +90,9 @@
 
     panel.dataset.open = expand ? 'true' : 'false';
     panel.setAttribute('aria-hidden', expand ? 'false' : 'true');
+    if (sectionElement) {
+      sectionElement.dataset.open = expand ? 'true' : 'false';
+    }
 
     const skipAnimation = immediate || prefersReducedMotion();
 
@@ -116,13 +153,16 @@
     if (!trigger) return false;
 
     const sectionElement = getSectionElement(trigger);
+    const panel = getPanel(trigger);
     collapseAll(trigger, { immediate });
     setExpanded(trigger, true, { immediate, force: true });
 
     if (scroll) {
       const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
-      if (sectionElement) {
-        scrollSectionIntoView(sectionElement, { behavior });
+      if (panel) {
+        scheduleScrollToContent(panel, { behavior });
+      } else if (sectionElement) {
+        scrollContentIntoView(sectionElement, { behavior });
       } else {
         const heading = document.getElementById(targetId);
         if (heading && typeof heading.scrollIntoView === 'function') {
@@ -135,7 +175,6 @@
   };
 
   const handleToggle = (trigger) => {
-    const sectionElement = getSectionElement(trigger);
     const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
     const nextState = !isExpanded;
     if (nextState) {
@@ -143,7 +182,8 @@
     }
     setExpanded(trigger, nextState, { force: true });
     if (nextState) {
-      scrollSectionIntoView(sectionElement);
+      const panel = getPanel(trigger);
+      scheduleScrollToContent(panel);
     }
   };
 
@@ -191,6 +231,10 @@
     if (!panel) return;
     panel.dataset.open = 'true';
     panel.setAttribute('aria-hidden', 'false');
+    const sectionElement = getSectionElement(trigger);
+    if (sectionElement) {
+      sectionElement.dataset.open = 'true';
+    }
 
     trigger.addEventListener('click', () => handleToggle(trigger));
     trigger.addEventListener('keydown', handleKeyDown);
