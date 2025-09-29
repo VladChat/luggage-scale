@@ -48,6 +48,15 @@ module.exports = function(eleventyConfig) {
     };
   });
 
+  // Реализация jsonify
+  eleventyConfig.addFilter("jsonify", (value) => {
+    try {
+      return JSON.stringify(value, null, 2);
+    } catch (e) {
+      return "{}";
+    }
+  });
+
   eleventyConfig.addPlugin(pluginRss);
 
   return {
