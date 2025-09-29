@@ -1,0 +1,76 @@
+name: Auto Blog Full Cycle
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # каждые 6 часов
+  workflow_dispatch:         # можно запустить вручную
+
+jobs:
+  generate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install openai feedparser beautifulsoup4
+
+      - name: Generate blog post(s)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python generate.py --auto
+          python rebuild_index.py
+
+      - name: Debug — list generated posts
+        run: |
+          echo "=== POSTS CREATED IN blog-src/posts/ ==="
+          ls -R blog-src/posts || echo "No posts found in blog-src/posts"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Clean blog output
+        run: rm -rf blog/* || true
+
+      - name: Build blog with Eleventy
+        run: |
+          npx @11ty/eleventy --input=blog-src --output=blog
+          echo "" > blog/.nojekyll
+
+      - name: Debug — list built files
+        run: |
+          echo "=== FILES IN /blog AFTER BUILD ==="
+          ls -R blog || echo "No files found in /blog"
+
+      - name: Debug — show start of index.html
+        run: |
+          echo "=== START OF /blog/index.html ==="
+          head -n 30 blog/index.html || echo "index.html not found"
+          echo "=== END OF DEBUG OUTPUT ==="
+
+      - name: Commit blog output (if changed, include deletions)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(blog): auto-generate new post(s) and build site"
+            git push
+          else
+            echo "No changes to commit"
+          fi
