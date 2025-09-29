@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "3.1.2",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
     "cross-env": "^7.0.3"
   },
   "dependencies": {
