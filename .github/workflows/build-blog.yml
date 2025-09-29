@@ -31,7 +31,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: blog   # 👈 без ./ чтобы GitHub Pages видел корень правильно
+          path: .   # 👈 без ./ чтобы GitHub Pages видел корень правильно
 
   deploy:
     needs: build
