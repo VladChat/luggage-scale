@@ -22,6 +22,11 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
   });
 
+  eleventyConfig.addFilter("year", (dateObj) => {
+    if (!dateObj) dateObj = new Date(); // default = now
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy");
+  });
+
   // Plugins
   eleventyConfig.addPlugin(pluginRss);
 
