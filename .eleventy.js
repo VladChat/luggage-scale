@@ -39,6 +39,15 @@ module.exports = function(eleventyConfig) {
     };
   });
 
+  // Заглушка для breadcrumbJsonLd
+  eleventyConfig.addFilter("breadcrumbJsonLd", (data) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": []
+    };
+  });
+
   eleventyConfig.addPlugin(pluginRss);
 
   return {
