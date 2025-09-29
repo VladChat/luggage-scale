@@ -1,68 +1,40 @@
-﻿const pluginRss = require("@11ty/eleventy-plugin-rss");
-const { DateTime } = require("luxon");
+﻿const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy({ "blog-src/static": "static" });
-
-  eleventyConfig.addCollection("posts", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("blog-src/posts/**/index.md")
-      .sort((a, b) => a.date - b.date);
-  });
-
-  eleventyConfig.addFilter("isoDate", (dateObj) => {
-    if (!dateObj) return "";
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toISODate();
-  });
-
-  eleventyConfig.addFilter("date", (dateObj, format = "yyyy-LL-dd") => {
-    if (!dateObj) return "";
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
-  });
-
-  eleventyConfig.addFilter("year", (dateObj) => {
-    if (!dateObj) dateObj = new Date();
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy");
-  });
-
-  // Заглушки
-  eleventyConfig.addFilter("preparePostContent", (content, title) => {
-    return { sections: [] };
-  });
-
-  eleventyConfig.addFilter("amazonLinkInfo", (productKey) => {
-    return {
-      url: "#",
-      title: productKey || "Amazon Product",
-      price: "",
-      image: ""
-    };
-  });
-
-  eleventyConfig.addFilter("breadcrumbJsonLd", (data) => {
-    return {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": []
-    };
-  });
-
-  eleventyConfig.addFilter("jsonify", (value) => {
+  // Фильтр для форматирования дат
+  eleventyConfig.addFilter("date", (dateObj, format = "DDD") => {
     try {
-      return JSON.stringify(value, null, 2);
-    } catch (e) {
-      return "{}";
+      return DateTime.fromJSDate(dateObj).toFormat(format);
+    } catch {
+      return "";
     }
   });
 
-  eleventyConfig.addPlugin(pluginRss);
+  // Фильтр для года (футер)
+  eleventyConfig.addFilter("year", () => new Date().getFullYear());
+
+  // Фильтр для ISO-даты (sitemap, schema.org)
+  eleventyConfig.addFilter("isoDate", (dateObj) => {
+    try {
+      return DateTime.fromJSDate(dateObj).toISODate();
+    } catch {
+      return "";
+    }
+  });
+
+  // Заглушки для кастомных фильтров
+  eleventyConfig.addFilter("preparePostContent", content => content || "");
+  eleventyConfig.addFilter("amazonLinkInfo", link => link || "");
+  eleventyConfig.addFilter("breadcrumbJsonLd", json => json || "{}");
+  eleventyConfig.addFilter("jsonify", obj => JSON.stringify(obj));
+
+  // Копирование статических файлов (CSS, JS, картинки)
+  eleventyConfig.addPassthroughCopy("blog-src/assets");
 
   return {
     dir: {
       input: "blog-src",
-      output: "blog",
-      includes: "_includes",
-      data: "_data"
-    },
-    pathPrefix: "/blog/"
+      output: "."
+    }
   };
 };
