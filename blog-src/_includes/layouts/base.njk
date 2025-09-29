@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   {% set headSite = {
@@ -14,7 +14,7 @@
     {% if config.site.name and title.indexOf(config.site.name) > -1 %}
       {% set resolvedMetaTitle = title %}
     {% else %}
-      {% set resolvedMetaTitle = title + " — " + config.site.name %}
+      {% set resolvedMetaTitle = title + " â€” " + config.site.name %}
     {% endif %}
   {% else %}
     {% set resolvedMetaTitle = config.seo.defaultTitle or config.site.name %}
@@ -86,8 +86,8 @@
 
   <footer>
     <div class="container">
-      © {{ "now" | date("yyyy") }} —
-      <a href="{{ config.site.base }}/">Blog Index</a> •
+      Â© {{ "now" | date("yyyy") }} â€”
+      <a href="{{ config.site.base }}/">Blog Index</a> â€¢
       <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
     </div>
   </footer>
