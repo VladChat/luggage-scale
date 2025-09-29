@@ -2,16 +2,13 @@
 const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
-  // Copy static assets from blog-src/static to blog/static
   eleventyConfig.addPassthroughCopy({ "blog-src/static": "static" });
 
-  // Collections: all posts under blog-src/posts/**/index.md
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi.getFilteredByGlob("blog-src/posts/**/index.md")
-      .sort((a, b) => a.date - b.date); // oldest → newest
+      .sort((a, b) => a.date - b.date);
   });
 
-  // Filters
   eleventyConfig.addFilter("isoDate", (dateObj) => {
     if (!dateObj) return "";
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toISODate();
@@ -29,14 +26,21 @@ module.exports = function(eleventyConfig) {
 
   // Заглушка для preparePostContent
   eleventyConfig.addFilter("preparePostContent", (content, title) => {
-    // Возвращаем объект с пустыми секциями, чтобы не падал билд
     return { sections: [] };
   });
 
-  // Plugins
+  // Заглушка для amazonLinkInfo
+  eleventyConfig.addFilter("amazonLinkInfo", (productKey) => {
+    return {
+      url: "#",
+      title: productKey || "Amazon Product",
+      price: "",
+      image: ""
+    };
+  });
+
   eleventyConfig.addPlugin(pluginRss);
 
-  // Directory structure
   return {
     dir: {
       input: "blog-src",
