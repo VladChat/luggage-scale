@@ -22,6 +22,17 @@ module.exports = function(eleventyConfig) {
     }
   });
 
+  // Фильтр absoluteUrl (заглушка для robots/sitemap)
+  eleventyConfig.addFilter("absoluteUrl", (url, base = "/") => {
+    try {
+      if(!url) return base;
+      if(url.startsWith("http")) return url;
+      return base.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
+    } catch {
+      return url || base;
+    }
+  });
+
   // Заглушки для кастомных фильтров
   eleventyConfig.addFilter("preparePostContent", content => content || "");
   eleventyConfig.addFilter("amazonLinkInfo", link => link || "");
