@@ -24,12 +24,11 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy");
   });
 
-  // Заглушка для preparePostContent
+  // Заглушки
   eleventyConfig.addFilter("preparePostContent", (content, title) => {
     return { sections: [] };
   });
 
-  // Заглушка для amazonLinkInfo
   eleventyConfig.addFilter("amazonLinkInfo", (productKey) => {
     return {
       url: "#",
@@ -39,7 +38,6 @@ module.exports = function(eleventyConfig) {
     };
   });
 
-  // Заглушка для breadcrumbJsonLd
   eleventyConfig.addFilter("breadcrumbJsonLd", (data) => {
     return {
       "@context": "https://schema.org",
@@ -48,7 +46,6 @@ module.exports = function(eleventyConfig) {
     };
   });
 
-  // Реализация jsonify
   eleventyConfig.addFilter("jsonify", (value) => {
     try {
       return JSON.stringify(value, null, 2);
@@ -65,6 +62,7 @@ module.exports = function(eleventyConfig) {
       output: "blog",
       includes: "_includes",
       data: "_data"
-    }
+    },
+    pathPrefix: "/blog/"
   };
 };
