@@ -1,11 +1,11 @@
 ---
-layout: ../layouts/layout.njk
+layout: layouts/base.njk
 title: "uPatch Blog"
 ---
 
 <h2>Latest Posts</h2>
 <ul>
 {% for post in collections.posts | reverse %}
-  <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+  <li><a href="{{ config.site.base }}{{ post.url }}">{{ post.data.title }}</a></li>
 {% endfor %}
 </ul>

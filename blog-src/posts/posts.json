@@ -1,22 +1,6 @@
-[
-  {
-    "title": "Travel Luggage Scale — Travel Tips & Gear Insights",
-    "slug": "travel-luggage-scale-20250928-191828",
-    "date": "2025-09-29T00:19:30.248Z",
-    "tags": [
-      "Travel Luggage Scale"
-    ],
-    "heroImage": "/blog/static/products/compression-cubes.svg",
-    "link": "/blog/travel-luggage-scale-20250928-191828/"
-  },
-  {
-    "title": "Portable Luggage Scale — Travel Tips & Gear Insights",
-    "slug": "portable-luggage-scale-20250928-190843",
-    "date": "2025-09-29T00:08:43.659Z",
-    "tags": [
-      "Portable Luggage Scale"
-    ],
-    "heroImage": "/blog/static/products/upatch-digital-scale.svg",
-    "link": "/blog/portable-luggage-scale-20250928-190843/"
-  }
-]
+{
+  "layout": "layouts/post.njk",
+  "tags": [
+    "posts"
+  ]
+}
