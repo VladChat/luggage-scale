@@ -49,7 +49,7 @@ jobs:
 
       - name: Build blog with Eleventy
         run: |
-          npx @11ty/eleventy --input=blog-src --output=blog
+          ELEVENTY_ENV=prod node ./node_modules/@11ty/eleventy/cmd.js --input=blog-src --output=blog
           echo "" > blog/.nojekyll
 
       - name: Debug — list built files

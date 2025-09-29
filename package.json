@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ELEVENTY_ENV=dev npx @11ty/eleventy --serve --input=blog-src --output=blog-local",
-    "build": "ELEVENTY_ENV=prod npx @11ty/eleventy --input=blog-src --output=blog",
-    "dev:win": "set ELEVENTY_ENV=dev && npx @11ty/eleventy --serve --input=blog-src --output=blog-local",
-    "build:win": "set ELEVENTY_ENV=prod && npx @11ty/eleventy --input=blog-src --output=blog",
+    "dev": "ELEVENTY_ENV=dev node ./node_modules/@11ty/eleventy/cmd.js --serve --input=blog-src --output=blog-local",
+    "build": "ELEVENTY_ENV=prod node ./node_modules/@11ty/eleventy/cmd.js --input=blog-src --output=blog",
+    "dev:win": "set ELEVENTY_ENV=dev && node ./node_modules/@11ty/eleventy/cmd.js --serve --input=blog-src --output=blog-local",
+    "build:win": "set ELEVENTY_ENV=prod && node ./node_modules/@11ty/eleventy/cmd.js --input=blog-src --output=blog",
     "generate:posts": "node scripts/generate-posts.js"
   },
   "keywords": [],
