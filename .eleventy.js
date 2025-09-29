@@ -1,4 +1,5 @@
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
   // Copy static assets from blog-src/static to blog/static
@@ -7,7 +8,13 @@ module.exports = function(eleventyConfig) {
   // Collections: all posts under blog-src/posts/**/index.md
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi.getFilteredByGlob("blog-src/posts/**/index.md")
-      .sort((a, b) => (a.date > b.date ? 1 : -1)); // oldest -> newest
+      .sort((a, b) => a.date - b.date); // oldest → newest
+  });
+
+  // Filters
+  eleventyConfig.addFilter("isoDate", (dateObj) => {
+    if (!dateObj) return "";
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toISODate();
   });
 
   // Plugins
@@ -21,6 +28,5 @@ module.exports = function(eleventyConfig) {
       includes: "_includes",
       data: "_data"
     }
-    // Do NOT set pathPrefix here; we handle base paths via config.site.base ("/blog")
   };
 };
