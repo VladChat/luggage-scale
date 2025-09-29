@@ -1,9 +1,9 @@
----
-title: Hello World — First Blog Post
+﻿---
+title: Hello World â€” First Blog Post
 description: Testing the new blog setup.
 author: "uPatch Travel Team"
 excerpt: "A quick welcome post introducing the uPatch luggage scale blog and what we'll be sharing."
-metaDescription: "Meet the uPatch luggage scale blog—a short hello explaining the articles and travel tips coming soon."
+metaDescription: "Meet the uPatch luggage scale blogâ€”a short hello explaining the articles and travel tips coming soon."
 date: 2025-09-18
 ---
 
@@ -22,3 +22,4 @@ Want to try the gear we mention? Start with our go-to travel scale:
 Need help staying organized? {{ "travel-compression-cubes" | amazonLink("Compression packing cubes on Amazon") }}
 
 <small>As an Amazon Associate we earn from qualifying purchases.</small>
+

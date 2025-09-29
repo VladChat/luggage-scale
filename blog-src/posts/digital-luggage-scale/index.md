@@ -1,5 +1,5 @@
----
-title: "Digital Luggage Scale – Blog Post"
+﻿---
+title: "Digital Luggage Scale â€“ Blog Post"
 subtitle: "Digital Luggage Scale Subtitle Example"
 description: "Digital Luggage Scale description here."
 date: 2025-09-23T02:24:16.464Z
@@ -42,5 +42,6 @@ This is placeholder text for FAQ. Write FAQ about "Digital Luggage Scale"...
 ## Conclusion + CTA
 
 This is placeholder text for Conclusion + CTA. Write Conclusion + CTA about "Digital Luggage Scal...
+
 
 

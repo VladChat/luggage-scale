@@ -1,4 +1,4 @@
-{% set headSite = {
+﻿{% set headSite = {
   "name": config.site.name,
   "url": config.site.url,
   "base": config.site.base,
@@ -11,7 +11,7 @@
   {% if config.site.name and title.indexOf(config.site.name) > -1 %}
     {% set resolvedMetaTitle = title %}
   {% else %}
-    {% set resolvedMetaTitle = title + " — " + config.site.name %}
+    {% set resolvedMetaTitle = title + " â€” " + config.site.name %}
   {% endif %}
 {% else %}
   {% set resolvedMetaTitle = config.seo.defaultTitle or config.site.name %}
@@ -148,7 +148,7 @@
           <span class="post-meta__author">By {{ author }}</span>
           {% endif %}
           {% if date %}
-          {% if author %}<span class="post-meta__separator" aria-hidden="true">•</span>{% endif %}
+          {% if author %}<span class="post-meta__separator" aria-hidden="true">â€¢</span>{% endif %}
           <time class="post-meta__date" datetime="{{ date | isoDate }}">{{ date | date("MMMM d, yyyy") }}</time>
           {% endif %}
         </div>
@@ -194,10 +194,14 @@
 
   <footer>
     <div class="container">
-      © {{ "now" | date("yyyy") }} —
-      <a href="{{ config.site.base }}/">Blog Index</a> •
+      Â© {{ "now" | date("yyyy") }} â€”
+      <a href="{{ config.site.base }}/">Blog Index</a> â€¢
       <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a>
     </div>
   </footer>
 </body>
 </html>
+
+
+
+

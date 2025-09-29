@@ -1,11 +1,11 @@
-{% set postsCollection = posts or paged or pagination.items or collections.posts %}
+﻿{% set postsCollection = posts or paged or pagination.items or collections.posts %}
 {% if postsCollection and postsCollection | length %}
 <ul class="post-grid">
   {% for post in postsCollection %}
     {% set authorName = post.data.author or config.seo.defaultAuthor or "uPatch Travel Team" %}
     {% set summaryText = post.data.excerpt or post.data.metaDescription or post.data.description %}
     {% if not summaryText %}
-      {% set summaryText %}{{ post.templateContent | striptags | truncate(200, true, "…") }}{% endset %}
+      {% set summaryText %}{{ post.templateContent | striptags | truncate(200, true, "â€¦") }}{% endset %}
     {% endif %}
     {% set hasHero = post.data.heroImage %}
     <li class="post-grid__item">
@@ -25,7 +25,7 @@
             <span class="post-meta__author">{{ authorName }}</span>
             {% endif %}
             {% if authorName and post.date %}
-            <span class="post-meta__separator" aria-hidden="true">•</span>
+            <span class="post-meta__separator" aria-hidden="true">â€¢</span>
             {% endif %}
             {% if post.date %}
             <time class="post-meta__date" datetime="{{ post.date | isoDate }}">{{ post.date | date("MMMM d, yyyy") }}</time>
@@ -46,3 +46,7 @@
 {% else %}
 <p class="blog-list__empty">No posts available yet. Check back soon!</p>
 {% endif %}
+
+
+
+

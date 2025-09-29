@@ -1,10 +1,10 @@
----
+﻿---
 layout: layouts/base.njk
 title: "Blog"
 description: "Latest articles, guides, and tips from the uPatch luggage scale team."
 breadcrumbs:
   - label: "Blog"
-    url: "/blog/"
+    url: "/"
 pagination:
   data: collections.posts
   size: 10
@@ -19,9 +19,11 @@ permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagin
 
 <nav class="pagination" aria-label="Blog pagination">
   {% if pagination.href.previous %}
-  <a class="pagination__link pagination__link--prev" href="{{ pagination.href.previous | url }}">← Newer Posts</a>
+  <a class="pagination__link pagination__link--prev" href="{{ pagination.href.previous | url }}">â† Newer Posts</a>
   {% endif %}
   {% if pagination.href.next %}
-  <a class="pagination__link pagination__link--next" href="{{ pagination.href.next | url }}">Older Posts →</a>
+  <a class="pagination__link pagination__link--next" href="{{ pagination.href.next | url }}">Older Posts â†’</a>
   {% endif %}
 </nav>
+
+
