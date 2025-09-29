@@ -17,6 +17,8 @@ This is your **first test post** in the new blog system.
 
 Want to try the gear we mention? Start with our go-to travel scale:
 
+{% amazonLink "upatch-digital-scale" %}
 
+Need help staying organized? {{ "travel-compression-cubes" | amazonLink("Compression packing cubes on Amazon") }}
 
 <small>As an Amazon Associate we earn from qualifying purchases.</small>

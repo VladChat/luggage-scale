@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "luggage-scale",
   "version": "1.0.0",
   "description": "",
@@ -13,12 +13,10 @@
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "3.1.2",
-    "@11ty/eleventy-plugin-rss": "^2.0.4",
     "cross-env": "^7.0.3"
   },
   "dependencies": {
     "luxon": "^3.7.2",
-    "openai": "file:vendor/openai",
-    "rss-parser": "^3.13.0"
+    "openai": "file:vendor/openai"
   }
 }

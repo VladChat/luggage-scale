@@ -1,6 +1,10 @@
 {
   "layout": "layouts/post.njk",
-  "tags": [
-    "posts"
-  ]
+  "permalink": "/{{ page.fileSlug }}/",
+  "tags": ["post"],
+  "author": "uPatch Travel Team",
+  "affiliateDisclaimer": "This article may contain affiliate links. If you make a purchase through these links, we may earn a small commission at no extra cost to you.",
+  "eleventyComputed": {
+    "canonicalUrl": "{{ page.url | absoluteUrl(config.site) }}"
+  }
 }
