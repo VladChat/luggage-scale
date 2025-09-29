@@ -1,10 +1,25 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+---
+permalink: "/sitemap.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% for post in collections.post %}
+  {% for post in collections.posts %}
   <url>
-    <loc>{{ site.url }}{{ post.url }}</loc>
-    <lastmod>{{ post.date | date('yyyy-MM-dd') }}</lastmod>
+    <loc>{{ post.url | absoluteUrl(config.site) }}</loc>
+    <lastmod>{{ post.date | isoDate }}</lastmod>
   </url>
   {% endfor %}
-</urlset>
 
+  {% set latest = collections.posts[0] %}
+  <url>
+    <loc>{{ "/" | absoluteUrl(config.site) }}</loc>
+    <lastmod>
+      {% if latest and latest.date %}
+        {{ latest.date | isoDate }}
+      {% else %}
+        {{ "now" | isoDate }}
+      {% endif %}
+    </lastmod>
+  </url>
+</urlset>

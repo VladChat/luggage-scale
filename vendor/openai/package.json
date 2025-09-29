@@ -1,7 +1,0 @@
-{
-  "name": "openai",
-  "version": "4.52.3",
-  "description": "Minimal subset of the OpenAI API client for offline automation",
-  "main": "index.js",
-  "license": "MIT"
-}

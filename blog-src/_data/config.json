@@ -28,36 +28,21 @@
       "clientId": "ca-pub-1234567890123456"
     }
   },
-  "legal": {
-    "links": [
-      { "label": "Privacy Policy", "url": "https://luggage-scale.com/privacy" },
-      { "label": "Terms of Service", "url": "https://luggage-scale.com/terms" },
-      { "label": "Affiliate Disclosure", "url": "https://luggage-scale.com/affiliate-disclosure" },
-      { "label": "Contact", "url": "https://luggage-scale.com/contact" }
-    ]
-  },
   "affiliate": {
     "amazon": {
       "tag": "luggagescale-20",
       "defaultDomain": "com",
       "defaultText": "See the latest price on Amazon",
-      "featuredProduct": "upatch-digital-scale",
       "products": {
         "upatch-digital-scale": {
           "asin": "B0AUPATCH01",
           "title": "uPatch Digital Hanging Luggage Scale",
-          "text": "Shop the uPatch luggage scale on Amazon",
-          "description": "110 lb capacity, shake-to-charge power, and a grippy comfort handle for quick weigh-ins.",
-          "image": "/blog/static/products/upatch-digital-scale.svg",
-          "imageAlt": "uPatch digital luggage scale"
+          "text": "Shop the uPatch luggage scale on Amazon"
         },
         "travel-compression-cubes": {
           "asin": "B0BCUBESET1",
           "title": "Compression Packing Cubes Set",
-          "text": "Grab the compression cubes on Amazon",
-          "description": "Space-saving compression cubes that keep outfits sorted and suitcases balanced.",
-          "image": "/blog/static/products/compression-cubes.svg",
-          "imageAlt": "Set of travel compression packing cubes"
+          "text": "Grab the compression cubes on Amazon"
         }
       }
     }

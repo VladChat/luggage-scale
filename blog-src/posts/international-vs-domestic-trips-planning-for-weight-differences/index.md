@@ -40,4 +40,3 @@ Snap a phone photo of the display for each bag. If an agent questions your weigh
 ---
 
 <p>Want a quick refresher on using the uPatch luggage scale? See <a href="/manual.html">the Manual</a> or <a href="/shop.html">get a spare for family trips</a>.</p>
-
