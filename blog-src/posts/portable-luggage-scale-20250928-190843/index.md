@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Portable Luggage Scale â€” Travel Tips & Gear Insights"
 subtitle: "Portable Luggage Scale"
 description: "Practical guide on portable luggage scale for travelers â€” avoid overweight fees and pack smarter."

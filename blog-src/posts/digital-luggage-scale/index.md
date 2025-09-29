@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Digital Luggage Scale â€“ Blog Post"
 subtitle: "Digital Luggage Scale Subtitle Example"
 description: "Digital Luggage Scale description here."

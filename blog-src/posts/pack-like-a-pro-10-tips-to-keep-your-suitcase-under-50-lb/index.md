@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Pack Like a Pro: 10 Tips to Keep Your Suitcase Under 50 lb"
 description: "Simple packing strategies to avoid checkâ€‘in surprises."
 author: "uPatch Travel Team"

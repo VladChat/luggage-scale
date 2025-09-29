@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Family Travel Checklist: Weigh Every Bag in 2 Minutes"
 description: "Fast routine to check all family luggage before leaving for the airport."
 author: "uPatch Travel Team"

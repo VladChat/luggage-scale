@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Avoid Overweight Baggage Fees with a Luggage Scale"
 description: "A practical, airlineâ€‘agnostic guide to weigh bags at home and at the airport."
 author: "uPatch Travel Team"

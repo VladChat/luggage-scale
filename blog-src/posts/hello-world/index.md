@@ -1,4 +1,4 @@
-﻿---
+---
 title: Hello World â€” First Blog Post
 description: Testing the new blog setup.
 author: "uPatch Travel Team"

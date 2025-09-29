@@ -1,4 +1,4 @@
-﻿---
+---
 title: "International vs. Domestic Trips: Planning for Weight Differences"
 description: "Key differences to consider and how a scale keeps you compliant."
 author: "uPatch Travel Team"

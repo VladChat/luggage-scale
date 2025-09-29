@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Battery-Free Luggage Scale (Shake-to-Charge): The Complete Guide"
 description: "Everything you need to know about battery-free luggage scales, how shake-to-charge works, and how to get accurate readings at home or on the go."
 author: "uPatch Travel Team"

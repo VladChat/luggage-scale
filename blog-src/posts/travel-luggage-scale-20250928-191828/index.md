@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Travel Luggage Scale â€” Travel Tips & Gear Insights"
 subtitle: "Travel Luggage Scale"
 description: "Practical guide on travel luggage scale for travelers â€” avoid overweight fees and pack smarter."

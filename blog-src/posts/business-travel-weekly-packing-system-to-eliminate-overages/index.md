@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Business Travel: Weekly Packing System to Eliminate Overages"
 description: "A repeatable workflow that keeps your roller under the limit."
 author: "uPatch Travel Team"

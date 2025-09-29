@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Durable Luggage Scale â€“ Built for Frequent Flyers"
 subtitle: "Accurate, compact, and tough enough for weekly trips â€” a travel weigher that survives layovers, gate checks, and tight connections."
 description: "A complete guide to choosing a durable luggage scale for frequent flyers: what durability really means, how it works, key benefits, comparisons, use cases, pro tips, FAQs, and a clear checklist."

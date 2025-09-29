@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Weigh Oddâ€‘Shaped Items (Strollers, Golf Bags, Instruments)"
 description: "Techniques for accurate weighing when handles or shapes make it tricky."
 author: "uPatch Travel Team"

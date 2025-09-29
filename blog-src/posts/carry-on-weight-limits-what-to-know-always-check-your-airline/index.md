@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Carryâ€‘On Weight Limits: What to Know (Always Check Your Airline)"
 description: "Overview of carryâ€‘on weight considerations and how to stay under."
 author: "uPatch Travel Team"

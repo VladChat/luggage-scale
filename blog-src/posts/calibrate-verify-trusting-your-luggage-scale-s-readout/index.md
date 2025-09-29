@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Calibrate & Verify: Trusting Your Luggage Scaleâ€™s Readout"
 description: "Sanity checks you can do at home to validate your scaleâ€™s accuracy."
 author: "uPatch Travel Team"

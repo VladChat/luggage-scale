@@ -1,4 +1,4 @@
-﻿---
+---
 title: "How to Use a Batteryâ€‘Free (Shakeâ€‘toâ€‘Charge) Luggage Scale"
 description: "Stepâ€‘byâ€‘step instructions for reliable readings without batteries."
 author: "uPatch Travel Team"

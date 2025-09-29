@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Winter Gear Strategy: Coats, Boots, and Heavy Fabrics"
 description: "Keep weight under control when your wardrobe runs heavy."
 author: "uPatch Travel Team"
