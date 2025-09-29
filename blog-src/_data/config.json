@@ -2,7 +2,7 @@
   "site": {
     "name": "Luggage Scale Blog",
     "url": "https://luggage-scale.com",
-    "base": "",
+    "base": "blog",
     "brandColor": "#002F5F",
     "logoPath": "/blog/static/logo.svg"
   },
