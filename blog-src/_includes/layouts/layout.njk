@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include "head.njk" %}
+</head>
+<body>
+  <header>
+    <h1><a href="/blog/">uPatch Blog</a></h1>
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer>
+    <p>&copy; {{ "now" | date("yyyy") }} uPatch Blog</p>
+  </footer>
+</body>
+</html>
