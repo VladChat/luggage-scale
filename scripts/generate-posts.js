@@ -414,7 +414,7 @@ async function main() {
     date: new Date().toISOString(),
     tags: [toTitleCase(keyword)],
     heroImage,
-    link: `/blog/${slug}/`, // Eleventy pathPrefix = /blog
+    link: `/${slug}/`, // Eleventy pathPrefix = /blog
   });
 }
 
