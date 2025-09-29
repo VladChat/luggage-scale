@@ -11,12 +11,12 @@ function pickHeroImage() {
     const files = fs.existsSync(PRODUCTS_DIR)
       ? fs.readdirSync(PRODUCTS_DIR).filter(n => /\.(svg|png|jpg|jpeg|webp)$/i.test(n))
       : [];
-    const fallback = "./static/products/upatch-digital-scale.svg";
+    const fallback = "static/products/upatch-digital-scale.svg";
     if (!files.length) return fallback;
     const pick = files[Math.floor(Math.random() * files.length)];
-    return `./static/products/${pick}`;
+    return `static/products/${pick}`;
   } catch {
-    return "./static/products/upatch-digital-scale.svg";
+    return "static/products/upatch-digital-scale.svg";
   }
 }
 
