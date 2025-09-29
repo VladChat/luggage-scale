@@ -17,6 +17,11 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toISODate();
   });
 
+  eleventyConfig.addFilter("date", (dateObj, format = "yyyy-LL-dd") => {
+    if (!dateObj) return "";
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
+  });
+
   // Plugins
   eleventyConfig.addPlugin(pluginRss);
 
