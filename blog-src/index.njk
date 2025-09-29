@@ -1,27 +1,11 @@
+﻿---
+layout: layout.njk
+title: Home
 ---
-layout: layouts/base.njk
-title: "Blog"
-description: "Latest articles, guides, and tips from the uPatch luggage scale team."
-breadcrumbs:
-  - label: "Blog"
-    url: "/blog/"
-pagination:
-  data: collections.posts
-  size: 10
-  alias: paged
-permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page-{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
----
+<h1>Welcome to the Blog</h1>
+<ul>
+  {% for post in collections.post %}
+    <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+  {% endfor %}
+</ul>
 
-<h1 class="blog-index__title">Blog</h1>
-<p class="blog-index__intro">Explore our newest guides, tutorials, and packing checklists for traveling light.</p>
-
-{% include "blog-list.njk" %}
-
-<nav class="pagination" aria-label="Blog pagination">
-  {% if pagination.href.previous %}
-  <a class="pagination__link pagination__link--prev" href="{{ pagination.href.previous | url }}">← Newer Posts</a>
-  {% endif %}
-  {% if pagination.href.next %}
-  <a class="pagination__link pagination__link--next" href="{{ pagination.href.next | url }}">Older Posts →</a>
-  {% endif %}
-</nav>

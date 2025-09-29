@@ -109,3 +109,4 @@ Hotel first. That way you adjust before leaving. If you buy souvenirs, re-check 
 Frequent flyers need gear that works every single time. A **durable luggage scale** keeps you inside airline limits, avoids last-minute shuffles on the terminal floor, and pays for itself the first time you skip an overweight fee. Choose solid hardware, a readable display, and the right features—then make weighing your quickest pre-flight habit.
 
 **Next step:** Add a durable scale to your go-bag so you can fly confidently on every itinerary.
+

@@ -1,10 +1,10 @@
----
+﻿---
 layout: false
 pagination:
   data: collections.post
   size: 10
   reverse: true
-title: "Blog — Luggage Scale Blog"
+title: "Blog â€” Luggage Scale Blog"
 description: "Latest articles, guides, and tips from the uPatch luggage scale team."
 permalink: "index.html"
 ---
@@ -57,10 +57,10 @@ permalink: "index.html"
       {% if pagination.href.previous or pagination.href.next %}
       <nav class="pagination" aria-label="Blog pagination">
         {% if pagination.href.previous %}
-        <a class="btn outline" href="{{ pagination.href.previous }}">← Newer Posts</a>
+        <a class="btn outline" href="{{ pagination.href.previous }}">â† Newer Posts</a>
         {% endif %}
         {% if pagination.href.next %}
-        <a class="btn solid" href="{{ pagination.href.next }}">Older Posts →</a>
+        <a class="btn solid" href="{{ pagination.href.next }}">Older Posts â†’</a>
         {% endif %}
       </nav>
       {% endif %}
@@ -69,8 +69,9 @@ permalink: "index.html"
 
   <footer class="site-footer">
     <div class="container">
-      <p>© {{ now | date("YYYY") }} — <a href="{{ config.site.base }}/">Blog Index</a> • <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a></p>
+      <p>Â© {{ now | date("YYYY") }} â€” <a href="{{ config.site.base }}/">Blog Index</a> â€¢ <a href="{{ config.site.base }}/sitemap.xml">Sitemap</a></p>
     </div>
   </footer>
 </body>
 </html>
+

@@ -162,3 +162,4 @@ Use the scale twice—**before you leave**, and **before you come home**.
 A **battery-free, shake-to-charge luggage scale** removes the most common failure point—dead batteries—while staying compact, accurate, and easy to use. With a 30-second routine and a bit of consistency, you’ll travel lighter, skip the last-minute repack at the airport, and avoid those painful overweight fees for good.
 
 **Try it once** before your next trip—you’ll never go back to guessing.
+

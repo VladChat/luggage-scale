@@ -17,12 +17,12 @@
 </tr>
 <tr>
 <td><code>description</code></td>
-<td>One or two sentences (155–160 chars is ideal).</td>
+<td>One or two sentences (155â€“160 chars is ideal).</td>
 <td><code>&lt;meta name=&quot;description&quot;&gt;</code>, Open Graph/Twitter descriptions, teaser copy on listings.</td>
 </tr>
 <tr>
 <td><code>socialImage</code></td>
-<td>Absolute URL or a <code>/blog/...</code> path to a 1200×630 image.</td>
+<td>Absolute URL or a <code>/blog/...</code> path to a 1200Ã—630 image.</td>
 <td>Open Graph/Twitter preview image. Falls back to <code>config.seo.defaultOgImage</code>.</td>
 </tr>
 <tr>
@@ -39,12 +39,12 @@
 </table>
 <h2>Optional helpers</h2>
 <ul>
-<li><code>metaTitle</code> / <code>metaDescription</code> – override the computed title or description for the <code>&lt;head&gt;</code> tags when you need custom copy.</li>
-<li><code>ogType</code> – defaults to <code>article</code> on posts and <code>website</code> on listings. Override for landing pages that need a different Open Graph type.</li>
-<li><code>twitterCard</code> – defaults to <code>summary_large_image</code>; set to <code>summary</code> if you deliberately ship a smaller card.</li>
-<li><code>metaRobots</code> – supply custom robots directives (e.g., <code>noindex</code>) instead of using the automatic <code>published: false</code> guard.</li>
-<li><code>socialImageAlt</code> – short alt text for the social sharing image, applied to the <code>og:image:alt</code> and <code>twitter:image:alt</code> tags.</li>
-<li><code>authorTwitter</code> / <code>twitterCreator</code> – handle shown in the <code>twitter:creator</code> tag when the post has an author-specific account.</li>
+<li><code>metaTitle</code> / <code>metaDescription</code> â€“ override the computed title or description for the <code>&lt;head&gt;</code> tags when you need custom copy.</li>
+<li><code>ogType</code> â€“ defaults to <code>article</code> on posts and <code>website</code> on listings. Override for landing pages that need a different Open Graph type.</li>
+<li><code>twitterCard</code> â€“ defaults to <code>summary_large_image</code>; set to <code>summary</code> if you deliberately ship a smaller card.</li>
+<li><code>metaRobots</code> â€“ supply custom robots directives (e.g., <code>noindex</code>) instead of using the automatic <code>published: false</code> guard.</li>
+<li><code>socialImageAlt</code> â€“ short alt text for the social sharing image, applied to the <code>og:image:alt</code> and <code>twitter:image:alt</code> tags.</li>
+<li><code>authorTwitter</code> / <code>twitterCreator</code> â€“ handle shown in the <code>twitter:creator</code> tag when the post has an author-specific account.</li>
 </ul>
 <p>All paths and URLs pass through the <code>absoluteUrl</code> filter, so relative paths under <code>/blog</code> automatically expand to fully-qualified URLs using the values in <code>_data/config.json</code>.</p>
 <h2>Batch post generation</h2>
@@ -68,7 +68,7 @@
 <pre><code class="language-bash">npm run generate:posts -- ./path/to/topics.json
 </code></pre>
 <ul>
-<li>Omit the optional <code>--date</code> flag to use today’s date in the generated folder names and front matter, or provide an explicit ISO date: <code>npm run generate:posts -- ./topics.csv --date=2024-05-20</code>.</li>
+<li>Omit the optional <code>--date</code> flag to use todayâ€™s date in the generated folder names and front matter, or provide an explicit ISO date: <code>npm run generate:posts -- ./topics.csv --date=2024-05-20</code>.</li>
 <li>The script honours a 10-post ceiling per run (<code>--limit</code> defaults to 10 and cannot exceed it). Extra topics in the file are skipped with a warning so you can schedule them for another day.</li>
 <li>Pass <code>--dry-run</code> to preview the folders that would be created without writing files.</li>
 </ul>
