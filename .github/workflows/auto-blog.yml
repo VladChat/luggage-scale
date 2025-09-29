@@ -21,42 +21,34 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
-          python-version: "3.11"
+          node-version: "20"
 
-      - name: Install Python dependencies
-        run: |
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-          pip install openai feedparser beautifulsoup4
+      - name: Install Node dependencies
+        run: npm ci
 
       - name: Generate blog post(s)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          if [ -f generate.py ]; then
-            python generate.py --auto || python generate.py
-          fi
-          if [ -f rebuild_index.py ]; then
-            python rebuild_index.py || true
-          fi
+        run: npm run generate:posts
 
       - name: Debug — list generated sources
         run: |
           echo "=== blog-src/posts/ ==="
           ls -R blog-src/posts || echo "No posts created"
+          echo "=== data/state.json ==="
+          cat data/state.json || echo "No state.json file"
 
       - name: Commit new sources
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A blog-src/posts data/state.json 2>/dev/null || true
+          git add -A blog-src/posts data/state.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore(auto-blog): add new generated post(s)"
+            git commit -m "chore(auto-blog): add/update generated post(s) and state.json"
             git push
           else
-            echo "No new posts to commit"
+            echo "No changes to commit"
           fi
