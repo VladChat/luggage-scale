@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Digital luggage scale illustration</title>
+  <desc id="desc">Stylized handheld luggage scale with strap and digital readout.</desc>
+  <defs>
+    <linearGradient id="scale-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dbe9ff" />
+      <stop offset="100%" stop-color="#bcd1ff" />
+    </linearGradient>
+    <linearGradient id="scale-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect x="20" y="32" width="120" height="60" rx="18" fill="url(#scale-body)" stroke="#1d4ed8" stroke-width="4" />
+  <rect x="42" y="46" width="76" height="28" rx="8" fill="#0f172a" opacity="0.9" />
+  <rect x="48" y="52" width="36" height="16" rx="6" fill="#f1f5f9" />
+  <circle cx="106" cy="60" r="6" fill="#38bdf8" />
+  <path d="M80 92v20c0 6.6 5.4 12 12 12h4c6.6 0 12 5.4 12 12v6" fill="none" stroke="url(#scale-accent)" stroke-width="6" stroke-linecap="round" />
+  <path d="M108 142c0 6.6-5.4 12-12 12s-12-5.4-12-12" fill="none" stroke="#1d4ed8" stroke-width="6" stroke-linecap="round" />
+  <path d="M52 92h28" stroke="#2563eb" stroke-width="6" stroke-linecap="round" />
+  <circle cx="62" cy="118" r="10" fill="#2563eb" opacity="0.18" />
+</svg>

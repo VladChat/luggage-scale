@@ -1,0 +1,80 @@
+<h1>Blog authoring guide</h1>
+<p>The Eleventy layouts compute SEO metadata from the page front matter. Provide the following keys whenever you create a new post or listing page so the shared <code>&lt;head&gt;</code> include can populate the Open Graph and Twitter tags correctly.</p>
+<h2>Core front matter keys</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Expected value</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>Plain text page title. Posts usually omit the brand name (it is appended automatically).</td>
+<td><code>&lt;title&gt;</code>, Open Graph title, on-page headings.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>One or two sentences (155–160 chars is ideal).</td>
+<td><code>&lt;meta name=&quot;description&quot;&gt;</code>, Open Graph/Twitter descriptions, teaser copy on listings.</td>
+</tr>
+<tr>
+<td><code>socialImage</code></td>
+<td>Absolute URL or a <code>/blog/...</code> path to a 1200×630 image.</td>
+<td>Open Graph/Twitter preview image. Falls back to <code>config.seo.defaultOgImage</code>.</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>Display name for the article or page owner.</td>
+<td>Visible post byline, <code>&lt;meta name=&quot;author&quot;&gt;</code>, <code>article:author</code>. Defaults to <code>uPatch Travel Team</code>.</td>
+</tr>
+<tr>
+<td><code>published</code></td>
+<td>ISO date string (<code>YYYY-MM-DD</code>). For posts, match the Eleventy <code>date</code>.</td>
+<td><code>article:published_time</code> and canonical date displays. Optional for listings (layout will fall back to the build date).</td>
+</tr>
+</tbody>
+</table>
+<h2>Optional helpers</h2>
+<ul>
+<li><code>metaTitle</code> / <code>metaDescription</code> – override the computed title or description for the <code>&lt;head&gt;</code> tags when you need custom copy.</li>
+<li><code>ogType</code> – defaults to <code>article</code> on posts and <code>website</code> on listings. Override for landing pages that need a different Open Graph type.</li>
+<li><code>twitterCard</code> – defaults to <code>summary_large_image</code>; set to <code>summary</code> if you deliberately ship a smaller card.</li>
+<li><code>metaRobots</code> – supply custom robots directives (e.g., <code>noindex</code>) instead of using the automatic <code>published: false</code> guard.</li>
+<li><code>socialImageAlt</code> – short alt text for the social sharing image, applied to the <code>og:image:alt</code> and <code>twitter:image:alt</code> tags.</li>
+<li><code>authorTwitter</code> / <code>twitterCreator</code> – handle shown in the <code>twitter:creator</code> tag when the post has an author-specific account.</li>
+</ul>
+<p>All paths and URLs pass through the <code>absoluteUrl</code> filter, so relative paths under <code>/blog</code> automatically expand to fully-qualified URLs using the values in <code>_data/config.json</code>.</p>
+<h2>Batch post generation</h2>
+<p>Use the Node script in <code>scripts/generate-posts.js</code> to create dated post folders in <code>blog-src/posts/</code> from a JSON or CSV topic list. The batch generator enforces the 10-post-per-day ceiling described below, so a single run produces up to ten Markdown files for the requested date.</p>
+<h3>1. Prepare a topics file</h3>
+<p><strong>JSON</strong> files accept either an array or an object with a <code>topics</code> array:</p>
+<pre><code class="language-jsonc">[
+  {
+    &quot;title&quot;: &quot;Packing checklist for spring getaways&quot;,
+    &quot;description&quot;: &quot;A light-weight packing list tailored for mild weather trips.&quot;,
+    &quot;excerpt&quot;: &quot;Use this 10-item checklist to keep your luggage under the airline limit.&quot;,
+    &quot;author&quot;: &quot;Jamie Rivers&quot;,
+    &quot;tags&quot;: [&quot;checklist&quot;, &quot;packing&quot;],
+    &quot;body&quot;: &quot;Intro paragraph...\n\n## Section heading\nMore guidance here.&quot;,
+    &quot;date&quot;: &quot;2024-05-13&quot;
+  }
+]
+</code></pre>
+<p><strong>CSV</strong> files should provide a header row with matching columns. List multiple tags with commas (e.g., <code>tags=&quot;gear,packing&quot;</code>).</p>
+<h3>2. Run the generator (max 10 posts per day)</h3>
+<pre><code class="language-bash">npm run generate:posts -- ./path/to/topics.json
+</code></pre>
+<ul>
+<li>Omit the optional <code>--date</code> flag to use today’s date in the generated folder names and front matter, or provide an explicit ISO date: <code>npm run generate:posts -- ./topics.csv --date=2024-05-20</code>.</li>
+<li>The script honours a 10-post ceiling per run (<code>--limit</code> defaults to 10 and cannot exceed it). Extra topics in the file are skipped with a warning so you can schedule them for another day.</li>
+<li>Pass <code>--dry-run</code> to preview the folders that would be created without writing files.</li>
+</ul>
+<h3>3. Enable API fill mode (optional)</h3>
+<ul>
+<li>Set the <code>OPENAI_API_KEY</code> environment variable before running with <code>--mode=api</code>. The GitHub Actions workflow reads this secret from <code>OPENAI_API_KEY</code>, so mirror that locally (for example, <code>export OPENAI_API_KEY=sk-...</code>).</li>
+<li>When API mode is active, the script sends the assembled prompt for each section to OpenAI. If the API key is missing or OpenAI returns no content, the run exits with an error so the workflow fails fast.</li>
+</ul>
+<p>Every generated post receives an <code>index.md</code> with populated front matter (<code>title</code>, <code>description</code>, <code>excerpt</code>, <code>author</code>, <code>tags</code>, and <code>date</code>), and the batch metadata is appended to <code>blog-src/posts/posts.json</code> so the shared data file tracks when automated batches were produced.</p>
