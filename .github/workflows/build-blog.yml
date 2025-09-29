@@ -1,19 +1,14 @@
-name: Build Blog
+name: Build and Deploy Blog
 
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'blog-src/**'
-      - '.eleventy.js'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'scripts/**'
-      - '.nojekyll'
-      - '.github/workflows/build-blog.yml'
-  schedule:
-    - cron: '0 6 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -21,72 +16,30 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Clean blog output
-        run: rm -rf blog/* || true
+      - name: Build Eleventy
+        run: npx @11ty/eleventy --input=blog-src --output=blog
 
-      # ⬇️ New step to generate a post before Eleventy build
-      - name: Generate new blog post
-        run: node scripts/generate-posts.js --auto --mode=api --news-limit=3 --news-window=7
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          NEWS_FEEDS_GENERAL: ${{ vars.NEWS_FEEDS_GENERAL }}
-          NEWS_FEEDS_QUERY: ${{ vars.NEWS_FEEDS_QUERY }}
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./blog
 
-      - name: Build blog with Eleventy
-        run: |
-          npx @11ty/eleventy --input=blog-src --output=blog
-          echo "" > blog/.nojekyll
-
-      - name: Debug 1 — list built files
-        run: |
-          echo "=== FILES IN /blog AFTER BUILD ==="
-          ls -R blog || echo "No files found in /blog"
-
-      - name: Debug 2 — show index.html content
-        run: |
-          echo "=== START OF /blog/index.html ==="
-          head -n 20 blog/index.html || echo "index.html not found"
-          echo "=== END OF DEBUG OUTPUT ==="
-
-      - name: Validate canonical blog URLs
-        run: |
-          if grep -R -n "/blog/blog/" blog; then
-            echo "Error: found duplicated /blog/blog/ paths in generated output."
-            exit 1
-          fi
-
-      - name: Stage blog and root static assets
-        run: |
-          git add -A -f blog
-          for root_page in index.html manual.html shop.html flight-baggage-limits.html warranty.html; do
-            if [ -f "$root_page" ]; then
-              git add "$root_page"
-            fi
-          done
-          for canonical in sitemap.xml robots.txt; do
-            if [ -f "$canonical" ]; then
-              git add "$canonical"
-            fi
-          done
-
-      - name: Commit blog output (if changed, include deletions)
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(blog): build Eleventy site"
-            git push
-          else
-            echo "No changes to commit"
-          fi
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
