@@ -2,33 +2,17 @@
 
 /**
  * Unified Blog Post Generator (with RSS support & fixes)
- *
- * Implements 7 improvements:
- * 1) RSS support via env NEWS_FEEDS_GENERAL/NEWS_FEEDS_QUERY + --news-limit --news-window
- * 2) Collision-safe slug: keyword + YYYYMMDD-HHmmss
- * 3) Strong SEO/system prompt + single-call generation path (still supports section-by-section)
- * 4) heroImage in frontmatter (auto-pick from blog-src/static/products/*)
- * 5) Update blog-src/posts/posts.json index
- * 6) Dynamic meta (subtitle, description, author brand)
- * 7) Fail-safe OpenAI: never crash build on empty/failed response
- *
- * Notes:
- * - Requires: openai client (vendor) and `npm i rss-parser`
- * - Keeps previous CLI modes: --mode=api | --mode=manual (default: api)
- * - Eleventy input: blog-src; output: blog
+ * Includes heroImage fix (no duplicate /blog/ prefix)
  */
 
 const fs = require("fs");
 const path = require("path");
 const OpenAI = require("openai");
 
-// Optional (install): npm i rss-parser
 let Parser = null;
 try {
   Parser = require("rss-parser");
-} catch (_) {
-  /* rss-parser not installed – RSS will be skipped gracefully */
-}
+} catch (_) {}
 
 // -------------------- Constants --------------------
 
@@ -230,13 +214,12 @@ function pickHeroImage() {
     const files = fs.existsSync(PRODUCTS_DIR)
       ? fs.readdirSync(PRODUCTS_DIR).filter(n => /\.(svg|png|jpg|jpeg|webp)$/i.test(n))
       : [];
-    const fallback = "/blog/static/products/upatch-digital-scale.svg";
+    const fallback = "/static/products/upatch-digital-scale.svg";
     if (!files.length) return fallback;
     const pick = files[Math.floor(Math.random() * files.length)];
-    // Important: absolute path within site (GitHub Pages served under /blog)
-    return `/blog/static/products/${pick}`;
+    return `/static/products/${pick}`;
   } catch {
-    return "/blog/static/products/upatch-digital-scale.svg";
+    return "/static/products/upatch-digital-scale.svg";
   }
 }
 
@@ -262,7 +245,6 @@ Return ONLY compact JSON.`;
     if (!description) description = `Tips and guidance on ${keyword.toLowerCase()} to help travelers avoid baggage overages and pack smarter.`;
     return { subtitle, description };
   } catch {
-    // Fallback if model returned text
     return {
       subtitle: toTitleCase(keyword),
       description: `Practical guide on ${keyword.toLowerCase()} for travelers — avoid overweight fees and pack smarter.`,
@@ -343,7 +325,6 @@ function updatePostsIndex(entry) {
     }
   }
   list.push(entry);
-  // Sort desc by date
   list.sort((a, b) => new Date(b.date) - new Date(a.date));
   writeJsonPretty(POSTS_JSON, list);
 }
@@ -359,36 +340,29 @@ async function main() {
   ensureDir(POSTS_DIR);
   ensureDir(STATE_DIR);
 
-  // 1) Read keywords + state
   const keywords = readKeywords();
-  if (!keywords.length) {
-    throw new Error(`No keywords found in ${KEYWORDS_FILE}`);
-  }
+  if (!keywords.length) throw new Error(`No keywords found in ${KEYWORDS_FILE}`);
   const state = loadState();
   const nextIndex = (Number.isInteger(state.lastIndex) ? state.lastIndex + 1 : 0) % keywords.length;
   const keyword = keywords[nextIndex];
   state.lastIndex = nextIndex;
   saveState(state);
 
-  // 2) Build unique slug (avoid overwrite)
   const baseSlug = slugify(keyword);
-  const uniqueSuffix = stamp(); // YYYYMMDD-HHmmss
+  const uniqueSuffix = stamp();
   const slug = `${baseSlug}-${uniqueSuffix}`;
   const outDir = path.join(POSTS_DIR, slug);
   const outFile = path.join(outDir, "index.md");
   ensureDir(outDir);
 
-  // 3) Fetch news context
   const newsItems = await fetchNewsFromEnv(newsLimit, newsWindow);
   const newsContext = formatNewsContext(newsItems);
 
-  // 4) Meta & hero
   const { subtitle, description } = mode === "api"
     ? await generateMeta(keyword, newsContext)
     : { subtitle: toTitleCase(keyword), description: `Overview and tips on ${keyword.toLowerCase()}.` };
   const heroImage = pickHeroImage();
 
-  // 5) Compose content
   const title = `${toTitleCase(keyword)} — Travel Tips & Gear Insights`;
   const frontmatter = buildFrontmatter({
     title,
@@ -403,23 +377,20 @@ async function main() {
   const body = await generateSectionsMarkdown(keyword, newsContext, mode);
   const content = frontmatter + body;
 
-  // 6) Write file
   fs.writeFileSync(outFile, content, "utf-8");
   console.log(`✅ Blog post generated: ${path.relative(REPO_ROOT, outFile)}`);
 
-  // 7) Update posts index
   updatePostsIndex({
     title,
     slug,
     date: new Date().toISOString(),
     tags: [toTitleCase(keyword)],
     heroImage,
-    link: `/${slug}/`, // Eleventy pathPrefix = /blog
+    link: `/${slug}/`,
   });
 }
 
 main().catch(err => {
   console.error("❌ Error:", err?.stack || err?.message || String(err));
-  // Do not exit with non-zero to avoid CI hard-fail on content issues:
   process.exit(1);
 });
