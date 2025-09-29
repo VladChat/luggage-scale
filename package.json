@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "luxon": "^3.7.2",
-    "openai": "file:vendor/openai"
+    "openai": "file:vendor/openai",
+    "rss-parser": "^3.13.0"
   }
 }
