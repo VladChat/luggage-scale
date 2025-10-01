@@ -11,7 +11,6 @@ def load_prompt_template():
 
 def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
-    # Добавляем блок Context с summary
     return template.format(topic=f"{topic}\n\nContext: {summary}")
 
 def main():
@@ -21,17 +20,26 @@ def main():
     max_attempts = 3
     for attempt in range(max_attempts):
         md_raw = llm.call_llm(prompt)
-
-        # Проверка качества (через posts.qa_check)
         qa_result = posts.qa_check(md_raw)
+
         if qa_result["ok"]:
-            # Сохраняем пост
             slug = posts.make_slug(topic)
             now = datetime.utcnow()
             out_path = Path(f"blog_src/content/posts/{now.year}/{now.month:02d}/{slug}.md")
             out_path.parent.mkdir(parents=True, exist_ok=True)
+
+            # Добавляем YAML frontmatter
+            frontmatter = (
+                f"---\n"
+                f'title: "{topic}"\n'
+                f"date: {now.isoformat()}Z\n"
+                f"draft: false\n"
+                f"---\n\n"
+            )
+
             with open(out_path, "w", encoding="utf-8") as f:
-                f.write(md_raw)
+                f.write(frontmatter + md_raw)
+
             print(f"✓ New post: {out_path}")
             return
         else:

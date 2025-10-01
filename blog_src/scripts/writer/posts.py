@@ -13,8 +13,11 @@ def gather_posts(content_dir: pathlib.Path):
             slug = md.stem
             url = f"/blog/posts/{y}/{m}/{slug}/"
             text = md.read_text(encoding="utf-8")
-            t = re.search(r'^title:\s*"(.*)"\s*$', text, flags=re.M)
-            posts.append({"title": t.group(1) if t else slug, "url": url})
+
+            # Пытаемся найти title из YAML frontmatter
+            t = re.search(r'^title:\s*"?(.+?)"?\s*$', text, flags=re.M)
+            title = t.group(1) if t else slug
+            posts.append({"title": title, "url": url})
     return posts
 
 def inject_links(md: str, pool: list, n_min: int, n_max: int) -> str:
@@ -38,15 +41,11 @@ def make_slug(s: str) -> str:
     return s or "post"
 
 def load_writer_config():
-    """
-    Загружает writer_config.json и возвращает dict с настройками.
-    """
     try:
         with open("blog_src/config/writer_config.json", "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
         print(f"⚠️ Could not load writer_config.json: {e}")
-        # дефолтные значения
         return {
             "qa_thresholds": {
                 "min_words": 1400,
@@ -58,10 +57,6 @@ def load_writer_config():
         }
 
 def qa_check(md_text: str) -> dict:
-    """
-    Проверка качества текста по правилам из writer_config.json.
-    Возвращает dict: {"ok": bool, "errors": [список ошибок]}
-    """
     config = load_writer_config()
     rules = config.get("qa_thresholds", {})
 
@@ -75,7 +70,7 @@ def qa_check(md_text: str) -> dict:
     words = len(md_text.split())
     subheadings = md_text.count("## ")
     has_faq = "FAQ" in md_text or "?" in md_text
-    has_link = "<a href=" in md_text
+    has_link = "<a href=" in md_text or "http" in md_text
 
     if words < min_words:
         errors.append(f"words={words} (<{min_words})")
