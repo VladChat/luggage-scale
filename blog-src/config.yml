@@ -32,6 +32,7 @@ params:
   ShowWordCount: true
   assets:
     favicon: "favicon.svg"
+  disableGA: true   # отключаем google_analytics.html, чтобы не было ошибки
 
 menu:
   main:
