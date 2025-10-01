@@ -12,7 +12,7 @@
   "min_link_pool_posts": 5,
   "title_max_chars": 60,
   "description_max_chars": 160,
-  "max_posts_per_day": 100,
+  "max_posts_per_day": 0,
   "draft_if_fail": true,
   "categories_mode": "auto",
   "categories_allowed": [],
