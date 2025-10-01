@@ -1,11 +1,10 @@
-
-name: Build Blog
+﻿name: Build Blog
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'blog-src/**'
+      - 'blog_src/**'
       - '.github/workflows/blog-build.yml'
   schedule:
     - cron: '0 9 * * *'
@@ -19,32 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - run: |
-          pip install openai==0.28 feedparser python-slugify
-
-      - name: Run Writer
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python -m blog_src.scripts.writer.main
-
-      - uses: peaceiris/actions-hugo@v2
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.146.0'
           extended: true
 
-      - run: hugo --minify -s blog-src -d ../blog
+      - name: Build Hugo site
+        run: hugo --minify -s blog_src -d ../blog
 
       - name: Commit & Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add blog-src/content/posts blog-src/data/state.json blog
+          git add blog_src/content/posts blog_src/data/state.json blog
           git commit -m "Update blog" || echo "No changes"
           git push
