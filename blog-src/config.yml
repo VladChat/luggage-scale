@@ -1,0 +1,51 @@
+﻿baseURL: "https://luggage-scale.com/blog/"
+title: "Luggage Scale Blog"
+theme: "PaperMod"
+publishDir: "../blog"
+canonifyURLs: true
+relativeURLs: false
+paginate: 10   # актуальный способ задать 10 постов на страницу
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+permalinks:
+  posts: "/posts/:year/:month/:slug/"
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  env: production
+  title: "Luggage Scale Blog"
+  description: "Travel tips, airline baggage limits, and smart packing with a digital luggage scale."
+  keywords: ["luggage scale", "airline baggage limits", "travel tips", "digital travel scale"]
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowWordCount: true
+  assets:
+    favicon: "favicon.svg"
+
+menu:
+  main:
+    - identifier: home
+      name: Home
+      url: "/"
+      weight: 1
+    - identifier: blog
+      name: Blog
+      url: "/blog/"
+      weight: 2
+    - identifier: shop
+      name: Shop
+      url: "/shop.html"
+      weight: 3
+    - identifier: manual
+      name: Manual
+      url: "/manual.html"
+      weight: 4
