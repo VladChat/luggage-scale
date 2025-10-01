@@ -1,12 +1,14 @@
 baseURL: "https://luggage-scale.com/blog/"
 title: "Luggage Scale Blog"
-paginate: 10
 theme: "PaperMod"
 
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
+
+pagination:
+  pagerSize: 10
 
 minify:
   disableXML: true
