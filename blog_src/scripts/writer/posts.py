@@ -1,7 +1,7 @@
-
 import re
 import pathlib
 import random
+import json
 from slugify import slugify
 
 def gather_posts(content_dir: pathlib.Path):
@@ -37,21 +37,55 @@ def make_slug(s: str) -> str:
     s = slugify(s)[:80]
     return s or "post"
 
+def load_writer_config():
+    """
+    Загружает writer_config.json и возвращает dict с настройками.
+    """
+    try:
+        with open("blog_src/config/writer_config.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"⚠️ Could not load writer_config.json: {e}")
+        # дефолтные значения
+        return {
+            "qa_thresholds": {
+                "min_words": 1400,
+                "max_words": 2900,
+                "min_subheadings": 6,
+                "require_faq": True,
+                "require_internal_links": True
+            }
+        }
+
 def qa_check(md_text: str) -> dict:
     """
-    Простая проверка качества текста.
+    Проверка качества текста по правилам из writer_config.json.
     Возвращает dict: {"ok": bool, "errors": [список ошибок]}
     """
+    config = load_writer_config()
+    rules = config.get("qa_thresholds", {})
+
+    min_words = rules.get("min_words", 0)
+    max_words = rules.get("max_words", 99999)
+    min_subheadings = rules.get("min_subheadings", 0)
+    require_faq = rules.get("require_faq", False)
+    require_internal_links = rules.get("require_internal_links", False)
+
     errors = []
     words = len(md_text.split())
     subheadings = md_text.count("## ")
-    faq = "FAQ" in md_text or "?" in md_text
+    has_faq = "FAQ" in md_text or "?" in md_text
+    has_link = "<a href=" in md_text
 
-    if words < 1400:
-        errors.append(f"words={words} (<1400)")
-    if subheadings < 6:
-        errors.append(f"subheadings={subheadings} (<6)")
-    if not faq:
+    if words < min_words:
+        errors.append(f"words={words} (<{min_words})")
+    if words > max_words:
+        errors.append(f"words={words} (>{max_words})")
+    if subheadings < min_subheadings:
+        errors.append(f"subheadings={subheadings} (<{min_subheadings})")
+    if require_faq and not has_faq:
         errors.append("FAQ missing")
+    if require_internal_links and not has_link:
+        errors.append("internal links missing")
 
     return {"ok": len(errors) == 0, "errors": errors}
