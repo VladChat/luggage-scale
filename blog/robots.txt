@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://luggage-scale.com/blog/sitemap.xml
