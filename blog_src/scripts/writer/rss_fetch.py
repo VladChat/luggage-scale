@@ -1,82 +1,50 @@
 import json
+import pathlib
 import feedparser
-import time
-from pathlib import Path
 
-STATE_FILE = Path("blog_src/data/state.json")
-RSS_FILE = Path("blog_src/data/rss.json")
-KEYWORDS_FILE = Path("blog_src/data/keywords.json")
+STATE_PATH = pathlib.Path("blog_src/data/state.json")
+RSS_PATH = pathlib.Path("blog_src/data/rss.json")
+KEYWORDS_PATH = pathlib.Path("blog_src/data/keywords.json")
 
-def load_json(path):
+def load_json(path, default):
     try:
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return []
-    except Exception as e:
-        print(f"⚠️ Could not load {path}: {e}")
-        return []
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
 
-def save_state(state):
-    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(STATE_FILE, "w", encoding="utf-8") as f:
-        json.dump(state, f)
-
-def load_state():
-    try:
-        with open(STATE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {"keyword_index": 0}
-    except Exception as e:
-        print(f"⚠️ Could not load state.json: {e}")
-        return {"keyword_index": 0}
+def save_json(path, data):
+    path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 def get_latest_topic():
-    feeds = load_json(RSS_FILE)
-    keywords = load_json(KEYWORDS_FILE)
-    state = load_state()
+    rss_list = load_json(RSS_PATH, [])
+    keywords = load_json(KEYWORDS_PATH, [])
+    state = load_json(STATE_PATH, {"last_keyword": -1, "last_rss": -1})
 
-    if not feeds or not keywords:
-        raise RuntimeError("RSS feeds or keywords are missing")
+    if not rss_list:
+        raise RuntimeError("⚠️ rss.json is empty")
+    if not keywords:
+        raise RuntimeError("⚠️ keywords.json is empty")
 
-    latest_entry = None
-    latest_time = 0
+    # RSS feed rotation
+    rss_index = (state.get("last_rss", -1) + 1) % len(rss_list)
+    rss_url = rss_list[rss_index]
+    feed = feedparser.parse(rss_url)
+    if not feed.entries:
+        raise RuntimeError(f"⚠️ No entries found in RSS: {rss_url}")
+    latest_entry = feed.entries[0]
+    topic = latest_entry.get("title", "Untitled")
+    summary = latest_entry.get("summary", "")
 
-    # Проверяем все ленты и ищем самую свежую запись
-    for url in feeds:
-        try:
-            feed = feedparser.parse(url)
-            if not feed.entries:
-                continue
-            entry = feed.entries[0]  # первая запись (самая свежая)
-            # Определяем время публикации
-            published = getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed", None)
-            if published:
-                ts = time.mktime(published)
-            else:
-                ts = time.time()
-            if ts > latest_time:
-                latest_time = ts
-                latest_entry = entry
-        except Exception as e:
-            print(f"⚠️ Could not parse feed {url}: {e}")
+    # Keyword rotation
+    keyword_index = (state.get("last_keyword", -1) + 1) % len(keywords)
+    keyword = keywords[keyword_index]
 
-    if not latest_entry:
-        raise RuntimeError("No entries found in any RSS feed")
+    # Save new state
+    state["last_rss"] = rss_index
+    state["last_keyword"] = keyword_index
+    save_json(STATE_PATH, state)
 
-    # Берем keyword по порядку
-    kw_index = state.get("keyword_index", 0)
-    keyword = keywords[kw_index % len(keywords)]
-    state["keyword_index"] = (kw_index + 1) % len(keywords)
-    save_state(state)
+    print(f"ℹ️ Using keyword: {keyword} (index {keyword_index})")
+    print(f"ℹ️ From RSS feed: {rss_url}")
 
-    title = latest_entry.title.strip()
-    summary = getattr(latest_entry, "summary", "").strip()
-    # Ограничиваем summary до 200 слов
-    summary_words = summary.split()
-    if len(summary_words) > 200:
-        summary = " ".join(summary_words[:200])
-
-    topic = f"{title} — {keyword}"
-    return topic, summary
+    return f"{topic} — {keyword}", summary
