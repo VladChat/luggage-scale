@@ -3,19 +3,20 @@ from datetime import datetime
 from pathlib import Path
 from . import llm
 from . import posts
+from .rss_fetch import get_latest_topic
 
 def load_prompt_template():
     with open("blog_src/config/prompt_template.txt", "r", encoding="utf-8") as f:
         return f.read()
 
-def build_prompt(topic: str) -> str:
+def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
-    return template.format(topic=topic)
+    # Добавляем блок Context с summary
+    return template.format(topic=f"{topic}\n\nContext: {summary}")
 
 def main():
-    # Получаем тему поста (заглушка: берем из RSS или фиксированный заголовок)
-    topic = "New Nonrefundable Travel Options Save Money Until They Backfire"
-    prompt = build_prompt(topic)
+    topic, summary = get_latest_topic()
+    prompt = build_prompt(topic, summary)
 
     max_attempts = 3
     for attempt in range(max_attempts):
