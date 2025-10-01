@@ -1,0 +1,11 @@
+Write a detailed blog post in English for luggage-scale.com.
+
+Requirements:
+- Word count: 1800–2000 words.
+- Use at least 6 subheadings (## H2).
+- End with a FAQ section (3–5 questions and answers).
+- Include 2–3 internal links in HTML format (<a href="...">text</a>).
+- Tone: professional, informative, travel-focused.
+- Output only valid Markdown.
+
+Topic: {topic}
