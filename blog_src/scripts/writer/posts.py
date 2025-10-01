@@ -36,3 +36,22 @@ def make_slug(s: str) -> str:
         return "post"
     s = slugify(s)[:80]
     return s or "post"
+
+def qa_check(md_text: str) -> dict:
+    """
+    Простая проверка качества текста.
+    Возвращает dict: {"ok": bool, "errors": [список ошибок]}
+    """
+    errors = []
+    words = len(md_text.split())
+    subheadings = md_text.count("## ")
+    faq = "FAQ" in md_text or "?" in md_text
+
+    if words < 1400:
+        errors.append(f"words={words} (<1400)")
+    if subheadings < 6:
+        errors.append(f"subheadings={subheadings} (<6)")
+    if not faq:
+        errors.append("FAQ missing")
+
+    return {"ok": len(errors) == 0, "errors": errors}
