@@ -12,14 +12,14 @@
   "min_link_pool_posts": 5,
   "title_max_chars": 60,
   "description_max_chars": 160,
-  "max_posts_per_day": 1,
+  "max_posts_per_day": 100,
   "draft_if_fail": true,
   "categories_mode": "auto",
   "categories_allowed": [],
   "categories_per_post": 1,
   "qa_thresholds": {
-    "min_words": 1700,
-    "max_words": 2100,
+    "min_words": 1400,
+    "max_words": 2900,
     "min_subheadings": 6,
     "require_faq": true,
     "require_internal_links": true

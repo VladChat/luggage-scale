@@ -1,3 +1,4 @@
+
 name: Build Blog
 
 on:
@@ -31,7 +32,7 @@ jobs:
       - name: Run Writer
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python blog-src/scripts/writer.py
+        run: python -m blog_src.scripts.writer.main
 
       - uses: peaceiris/actions-hugo@v2
         with:
