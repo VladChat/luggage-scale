@@ -18,22 +18,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v4
-        with: { python-version: '3.11' }
+        with:
+          python-version: '3.11'
 
       - run: |
           pip install openai==0.28 feedparser python-slugify
 
       - name: Run Writer
-        env: { OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} }
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python blog-src/scripts/writer.py
 
       - uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.146.0'
           extended: true
+
       - run: hugo --minify -s blog-src -d ../blog
 
       - name: Commit & Push
