@@ -1,7 +1,7 @@
 {
   "language": "en",
-  "post_length_min": 1800,
-  "post_length_max": 2000,
+  "post_length_min": 1500,
+  "post_length_max": 2200,
   "subheading_interval": 250,
   "h2_max_chars": 60,
   "h3_max_chars": 60,
@@ -18,9 +18,9 @@
   "categories_allowed": [],
   "categories_per_post": 1,
   "qa_thresholds": {
-    "min_words": 1400,
-    "max_words": 2900,
-    "min_subheadings": 6,
+    "min_words": 1000,
+    "max_words": 3000,
+    "min_subheadings": 5,
     "require_faq": true,
     "require_internal_links": true
   }
