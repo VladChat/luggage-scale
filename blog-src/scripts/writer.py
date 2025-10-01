@@ -19,7 +19,8 @@ def now_iso():
 
 def choose_keyword(keywords, state):
     i = state.get("keyword_index", 0)
-    if not keywords: return "", state
+    if not keywords: 
+        return "", state
     kw = keywords[i % len(keywords)]
     state["keyword_index"] = (i + 1) % len(keywords)
     return kw, state
@@ -37,7 +38,8 @@ def gather_posts():
     return posts
 
 def inject_links(md, pool, n_min, n_max):
-    if not pool: return md
+    if not pool: 
+        return md
     n = random.randint(n_min, n_max)
     picks = random.sample(pool, min(n, len(pool)))
     paras = md.split("\n\n")
@@ -58,6 +60,17 @@ def call_llm(prompt):
     )
     return resp["choices"][0]["message"]["content"]
 
+# ---------- Front matter fix ----------
+def ensure_front_matter(md):
+    # Если модель не вернула блок --- --- в начале, обернём первый кусок
+    if not md.strip().startswith("---"):
+        parts = md.split("\n\n", 1)
+        if len(parts) == 2:
+            fm, body = parts
+            return f"---\n{fm.strip()}\n---\n\n{body.strip()}"
+    return md
+
+# ---------- QA ----------
 def word_count(text):
     body = re.sub(r"^---.*?---", "", text, flags=re.S)
     return len(re.findall(r"\w+", body, flags=re.U))
@@ -97,6 +110,7 @@ def qa_check(md_text, cfg):
         print("QA OK")
     return md_text
 
+# ---------- main ----------
 def main():
     cfg = load_json(CONFIG, {})
     rss = load_json(DATA/"rss.json", [])
@@ -127,7 +141,7 @@ Requirements:
 - subheadings every ~{cfg['subheading_interval']} words (H2/H3)
 - FAQ {cfg['faq_count_min']}–{cfg['faq_count_max']} questions
 - headings ≤ {cfg['h2_max_chars']} characters
-- return YAML front matter + body
+- return valid Markdown with YAML front matter wrapped in --- delimiters + body
 
 Front matter must include:
 title, date, description, draft=false, tags=[keyword], categories=["News"],
@@ -139,12 +153,19 @@ Keyword: "{kw}"
 """
 
     md = call_llm(prompt)
+
+    # fix front matter if model returned it as plain text
+    md = ensure_front_matter(md)
+
+    # inject internal links
     pool = gather_posts()
     if len(pool) >= cfg["min_link_pool_posts"]:
         md = inject_links(md, pool, cfg["internal_links_min"], cfg["internal_links_max"])
 
+    # QA check
     md = qa_check(md, cfg)
 
+    # save
     today = datetime.datetime.utcnow()
     y, m = today.strftime("%Y"), today.strftime("%m")
     slug = slugify(news_title)[:80] or hashlib.sha1(news_title.encode()).hexdigest()[:12]
