@@ -2,11 +2,11 @@
 import os
 
 def call_llm(prompt: str) -> str:
-    \"""
+    """
     Calls OpenAI ChatCompletion API with GPT-5 models.
     Uses gpt-5-mini primarily, falls back to gpt-5 if unavailable.
     Returns the assistant's response text.
-    \"""
+    """
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set")
