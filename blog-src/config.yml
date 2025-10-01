@@ -4,7 +4,9 @@ theme: "PaperMod"
 publishDir: "../blog"
 canonifyURLs: true
 relativeURLs: false
-paginate: 10   # актуальный способ задать 10 постов на страницу
+
+pagination:
+  pagerSize: 10
 
 enableRobotsTXT: true
 buildDrafts: false
