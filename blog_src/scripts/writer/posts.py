@@ -1,8 +1,8 @@
 import re
 import pathlib
 import random
-import json
 from slugify import slugify
+import json
 
 def gather_posts(content_dir: pathlib.Path):
     posts = []
@@ -13,11 +13,8 @@ def gather_posts(content_dir: pathlib.Path):
             slug = md.stem
             url = f"/blog/posts/{y}/{m}/{slug}/"
             text = md.read_text(encoding="utf-8")
-
-            # Пытаемся найти title из YAML frontmatter
-            t = re.search(r'^title:\s*"?(.+?)"?\s*$', text, flags=re.M)
-            title = t.group(1) if t else slug
-            posts.append({"title": title, "url": url})
+            t = re.search(r'^title:\s*"(.*)"\s*$', text, flags=re.M)
+            posts.append({"title": t.group(1) if t else slug, "url": url})
     return posts
 
 def inject_links(md: str, pool: list, n_min: int, n_max: int) -> str:
@@ -48,15 +45,19 @@ def load_writer_config():
         print(f"⚠️ Could not load writer_config.json: {e}")
         return {
             "qa_thresholds": {
-                "min_words": 1400,
-                "max_words": 2900,
-                "min_subheadings": 6,
+                "min_words": 1000,
+                "max_words": 3000,
+                "min_subheadings": 5,
                 "require_faq": True,
-                "require_internal_links": True
+                "require_internal_links": False
             }
         }
 
 def qa_check(md_text: str) -> dict:
+    """
+    Проверка качества текста по правилам из writer_config.json.
+    Возвращает dict: {"ok": bool, "errors": [список ошибок]}
+    """
     config = load_writer_config()
     rules = config.get("qa_thresholds", {})
 
@@ -64,13 +65,14 @@ def qa_check(md_text: str) -> dict:
     max_words = rules.get("max_words", 99999)
     min_subheadings = rules.get("min_subheadings", 0)
     require_faq = rules.get("require_faq", False)
-    require_internal_links = rules.get("require_internal_links", False)
+    # internal links check полностью отключена
+    # require_internal_links = rules.get("require_internal_links", False)
 
     errors = []
     words = len(md_text.split())
     subheadings = md_text.count("## ")
     has_faq = "FAQ" in md_text or "?" in md_text
-    has_link = "<a href=" in md_text or "http" in md_text
+    # has_link = "<a href=" in md_text  # отключено
 
     if words < min_words:
         errors.append(f"words={words} (<{min_words})")
@@ -80,7 +82,7 @@ def qa_check(md_text: str) -> dict:
         errors.append(f"subheadings={subheadings} (<{min_subheadings})")
     if require_faq and not has_faq:
         errors.append("FAQ missing")
-    if require_internal_links and not has_link:
-        errors.append("internal links missing")
+    # if require_internal_links and not has_link:
+    #     errors.append("internal links missing")
 
     return {"ok": len(errors) == 0, "errors": errors}

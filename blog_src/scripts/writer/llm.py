@@ -36,7 +36,7 @@ def call_llm(prompt: str, *, effort: str = "medium", verbosity: str = "medium") 
                 ],
                 reasoning={"effort": effort},   # GPT-5 control
                 text={"verbosity": verbosity},  # GPT-5 control
-                max_output_tokens=2500,         # вместо max_completion_tokens
+                max_output_tokens=7500,         # вместо max_completion_tokens
             )
 
             # Унифицированное извлечение текста (Responses API)
