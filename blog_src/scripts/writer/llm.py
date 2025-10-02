@@ -68,10 +68,11 @@ def call_llm(prompt: str, *, effort: str = "medium", verbosity: str = "medium") 
     raise RuntimeError(f"All fallback models failed. Last error: {last_error}")
 
 
-def rephrase_title(title: str) -> str:
+def rephrase_title(title: str, *args, **kwargs) -> str:
     """
     Rewrites a blog post title to be SEO-friendly, concise (<70 chars),
     and natural in English. Falls back to returning the original title.
+    Extra args are ignored for compatibility.
     """
     try:
         prompt = (
