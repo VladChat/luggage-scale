@@ -40,15 +40,11 @@ menu:
       name: Home
       url: "/"
       weight: 1
-    - identifier: blog
-      name: Blog
-      url: "/blog/"
-      weight: 2
     - identifier: shop
       name: Shop
-      url: "/shop.html"
-      weight: 3
+      url: "../shop.html"
+      weight: 2
     - identifier: manual
       name: Manual
-      url: "/manual.html"
-      weight: 4
+      url: "../manual.html"
+      weight: 3
