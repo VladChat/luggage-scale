@@ -2,7 +2,7 @@
 title: "Luggage Scale Blog"
 theme: "PaperMod"
 publishDir: "../blog"
-canonifyURLs: true
+canonifyURLs: false
 relativeURLs: false
 
 pagination:
