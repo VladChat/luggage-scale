@@ -24,8 +24,8 @@ outputs:
 
 params:
   env: production
-  title: "Luggage Scale Blog"
-  description: "Travel tips, airline baggage limits, and smart packing with a digital luggage scale."
+  title: "Luggage Scale"
+  description: "Travel news and tips, airline baggage limits."
   keywords: ["luggage scale", "airline baggage limits", "travel tips", "digital travel scale"]
   defaultTheme: auto
   ShowReadingTime: true
