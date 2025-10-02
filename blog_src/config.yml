@@ -1,5 +1,5 @@
 ﻿baseURL: "https://luggage-scale.com/blog/"
-title: "Luggage Scale Blog"
+title: "Luggage Scale"
 theme: "PaperMod"
 publishDir: "../blog"
 canonifyURLs: false
@@ -21,6 +21,7 @@ outputs:
     - HTML
     - RSS
     - JSON
+    - Sitemap
 
 params:
   env: production
