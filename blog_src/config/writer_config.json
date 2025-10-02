@@ -1,12 +1,12 @@
 {
   "language": "en",
   "post_length_min": 1500,
-  "post_length_max": 2200,
+  "post_length_max": 2800,
   "subheading_interval": 250,
   "h2_max_chars": 60,
   "h3_max_chars": 60,
   "faq_count_min": 3,
-  "faq_count_max": 5,
+  "faq_count_max": 6,
   "internal_links_min": 1,
   "internal_links_max": 3,
   "min_link_pool_posts": 5,
@@ -22,6 +22,6 @@
     "max_words": 3000,
     "min_subheadings": 5,
     "require_faq": true,
-    "require_internal_links": true
+    "require_internal_links": false
   }
 }
