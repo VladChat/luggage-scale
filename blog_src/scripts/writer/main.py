@@ -1,10 +1,10 @@
 import os
+import json
 from datetime import datetime
 from pathlib import Path
 from . import llm
 from . import posts
 from .rss_fetch import get_latest_topic
-import json
 
 def load_prompt_template():
     with open("blog_src/config/prompt_template.txt", "r", encoding="utf-8") as f:
@@ -17,6 +17,21 @@ def load_writer_config():
     except Exception as e:
         print(f"⚠️ Could not load writer_config.json: {e}")
         return {"title_max_chars": 60}
+
+def load_keyword_from_state():
+    """Берёт текущее ключевое слово по индексу из state.json."""
+    try:
+        with open("blog_src/data/keywords.json", "r", encoding="utf-8") as f:
+            keywords = json.load(f)
+        with open("blog_src/data/state.json", "r", encoding="utf-8") as f:
+            state = json.load(f)
+        idx = state.get("keyword_index", 0)
+        if idx < 0 or idx >= len(keywords):
+            idx = 0
+        return keywords[idx].strip()
+    except Exception as e:
+        print(f"⚠️ Could not load keyword from state: {e}")
+        return ""
 
 def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
@@ -45,6 +60,8 @@ def safe_title_text(raw_title: str) -> str:
 
 def main():
     topic, summary = get_latest_topic()
+    keyword = load_keyword_from_state()  # ← вытаскиваем keyword из state.json
+
     prompt = build_prompt(topic, summary)
 
     max_attempts = 3
@@ -53,7 +70,10 @@ def main():
         qa_result = posts.qa_check(md_raw)
 
         if qa_result["ok"]:
-            slug = posts.make_slug(topic)
+            # slug = title + keyword → уникальный и SEO-дружелюбный
+            slug_source = f"{topic} {keyword}" if keyword else topic
+            slug = posts.make_slug(slug_source)
+
             now = datetime.utcnow()
             out_path = Path(f"blog_src/content/posts/{now.year}/{now.month:02d}/{slug}.md")
             out_path.parent.mkdir(parents=True, exist_ok=True)
