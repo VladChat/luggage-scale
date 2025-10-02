@@ -7,17 +7,19 @@ on:
       - 'blog_src/**'
       - '.github/workflows/blog-build.yml'
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 9 * * *'   # ← сохраняем твой CRON
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write          # нужно, чтобы коммитить /blog обратно в репозиторий
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,12 +27,15 @@ jobs:
           python-version: '3.11'
 
       - name: Install Python deps
-        run: pip install -r blog_src/scripts/requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r blog_src/scripts/requirements.txt
 
-      - name: Run generator
+      - name: Run generator (create Markdown posts)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python -m blog_src.scripts.writer.main
+        run: |
+          python -m blog_src.scripts.writer.main
 
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
@@ -38,13 +43,14 @@ jobs:
           hugo-version: '0.146.0'
           extended: true
 
-      - name: Build Hugo site
-        run: hugo --minify -s blog_src -d ../blog
+      - name: Build Hugo → /blog
+        run: |
+          hugo --minify -s blog_src -d ../blog
 
-      - name: Commit & Push
+      - name: Commit & Push built blog
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add blog blog_src/content/posts
-          git commit -m "Update blog" || echo "No changes"
+          git add blog blog_src/content/posts blog_src/data/state.json
+          git commit -m "Update blog build [skip ci]" || echo "No changes"
           git push
