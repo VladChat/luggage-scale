@@ -33,7 +33,7 @@ params:
   description: "Travel news, helpful resources, and useful guides."
   keywords: ["luggage", "baggage limits", "travel tips", "packing guides", "smart travel"]
   author: "Luggage Scale Blog"
-  footer: "© 2025 Luggage Scale Blog. All rights reserved."
+  customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
   defaultTheme: auto
   ShowReadingTime: true
   ShowWordCount: true
