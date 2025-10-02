@@ -6,6 +6,10 @@ from . import llm
 from . import posts
 from .rss_fetch import get_latest_topic
 
+DATA_DIR = Path("blog_src/data")
+KEYWORDS_FILE = DATA_DIR / "keywords.json"
+STATE_FILE = DATA_DIR / "state.json"
+
 def load_prompt_template():
     with open("blog_src/config/prompt_template.txt", "r", encoding="utf-8") as f:
         return f.read()
@@ -18,20 +22,21 @@ def load_writer_config():
         print(f"⚠️ Could not load writer_config.json: {e}")
         return {"title_max_chars": 60}
 
-def load_keyword_from_state():
-    """Берёт текущее ключевое слово по индексу из state.json."""
+def load_keywords():
+    with open(KEYWORDS_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def load_state():
     try:
-        with open("blog_src/data/keywords.json", "r", encoding="utf-8") as f:
-            keywords = json.load(f)
-        with open("blog_src/data/state.json", "r", encoding="utf-8") as f:
-            state = json.load(f)
-        idx = state.get("keyword_index", 0)
-        if idx < 0 or idx >= len(keywords):
-            idx = 0
-        return keywords[idx].strip()
-    except Exception as e:
-        print(f"⚠️ Could not load keyword from state: {e}")
-        return ""
+        with open(STATE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"keyword_index": 0, "seen": []}
+
+def save_state(state):
+    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(state, f, indent=2)
 
 def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
@@ -60,7 +65,14 @@ def safe_title_text(raw_title: str) -> str:
 
 def main():
     topic, summary = get_latest_topic()
-    keyword = load_keyword_from_state()  # ← вытаскиваем keyword из state.json
+    keywords = load_keywords()
+    state = load_state()
+
+    # Получаем keyword по индексу
+    idx = state.get("keyword_index", 0)
+    if idx < 0 or idx >= len(keywords):
+        idx = 0
+    keyword = keywords[idx].strip()
 
     prompt = build_prompt(topic, summary)
 
@@ -94,6 +106,12 @@ def main():
                 f.write(frontmatter + md_raw)
 
             print(f"✓ New post: {out_path}")
+
+            # увеличиваем keyword_index
+            next_idx = (idx + 1) % len(keywords)
+            state["keyword_index"] = next_idx
+            save_state(state)
+
             return
         else:
             print(f"⚠️ Attempt {attempt+1} failed QA: {qa_result['errors']}")
