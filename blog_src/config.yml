@@ -14,7 +14,7 @@ buildFuture: false
 buildExpired: false
 
 permalinks:
-  posts: "/posts/:year/:month/:slug/"
+  posts: "/posts/:year/:month/:day/:slug/"
 
 outputs:
   home:
