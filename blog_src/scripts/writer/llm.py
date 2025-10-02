@@ -27,35 +27,30 @@ def call_llm(prompt: str, *, effort: str = "medium", verbosity: str = "medium") 
 
     for model_name in model_candidates:
         try:
-            # Responses API поддерживает передачу ролей в input как списка сообщений
             resp = client.responses.create(
                 model=model_name,
                 input=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": prompt},
                 ],
-                reasoning={"effort": effort},   # GPT-5 control
-                text={"verbosity": verbosity},  # GPT-5 control
-                max_output_tokens=7500,         # вместо max_completion_tokens
+                reasoning={"effort": effort},
+                text={"verbosity": verbosity},
+                max_output_tokens=7500,
             )
 
             # Унифицированное извлечение текста (Responses API)
             content = (getattr(resp, "output_text", "") or "").strip()
 
-            # Запасной путь: если SDK вернул разметку кусками
             if not content and hasattr(resp, "output") and resp.output:
                 chunks = []
                 for item in resp.output:
-                    # item.type может быть "message"; item.content — список блоков
                     if getattr(item, "type", None) == "message":
                         for block in (getattr(item, "content", None) or []):
-                            # block.type может быть "output_text" или "text"
                             text_val = getattr(block, "text", None)
                             if isinstance(text_val, str) and text_val.strip():
                                 chunks.append(text_val.strip())
                 content = "\n".join(chunks).strip()
 
-            # Логирование токенов (если доступны)
             usage = getattr(resp, "usage", None)
             in_tok = getattr(usage, "input_tokens", None)
             out_tok = getattr(usage, "output_tokens", None)
@@ -65,11 +60,26 @@ def call_llm(prompt: str, *, effort: str = "medium", verbosity: str = "medium") 
                 return content
             else:
                 print(f"⚠️ {model_name} returned empty content.")
-                # переходим к следующей модели
 
         except Exception as e:
             print(f"⚠️ {model_name} failed: {e}")
             last_error = e
-            # переходим к следующей модели
 
     raise RuntimeError(f"All fallback models failed. Last error: {last_error}")
+
+
+def rephrase_title(title: str) -> str:
+    """
+    Rewrites a blog post title to be SEO-friendly, concise (<70 chars),
+    and natural in English. Falls back to returning the original title.
+    """
+    try:
+        prompt = (
+            f"Rewrite the following blog post title so it is concise, natural, "
+            f"SEO-friendly, and under 70 characters:\n\n"
+            f"Title: {title}"
+        )
+        return call_llm(prompt, effort="low", verbosity="low").strip()
+    except Exception as e:
+        print(f"⚠️ rephrase_title failed: {e}")
+        return title
