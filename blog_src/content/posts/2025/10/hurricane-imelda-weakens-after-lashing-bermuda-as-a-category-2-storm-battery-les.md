@@ -1,4 +1,4 @@
----
+﻿---
 title: "Imelda Weakens After Lashing Bermuda — Battery-Free Luggage Scale"
 date: 2025-10-02T09:19:03.987147Z
 draft: false
@@ -37,7 +37,7 @@ Key steps to keep you compliant and mobile:
 
 A battery-less luggage scale ensures you’re not dependent on hotel power or fresh batteries to weigh your bag. That reliability is a quiet superpower when timelines are tight and stores are closed.
 
-For quick reference on typical airline limits and tips to stay under them, see our <a href="https://luggage-scale.com/blog/airline-baggage-allowances">airline baggage allowances guide</a>.
+For quick reference on typical airline limits and tips to stay under them, see our airline baggage allowances guide.
 
 ## Why a Battery-Less Luggage Scale Is Essential in Hurricane Season
 
@@ -107,7 +107,7 @@ Bermuda’s beauty comes with unique logistics during and after a tropical syste
 - Moisture matters. Humidity and salt air can affect gear. Choose corrosion-resistant hardware (stainless steel hooks on your scale) and quick-dry fabrics.
 - Flight variability. Island airports can face ground delays even in marginal weather if upstream routes are congested. Being packed and weighed in advance helps you capitalize on any open seats.
 
-For a comprehensive packing plan designed around storm season conditions, review our <a href="https://luggage-scale.com/blog/hurricane-travel-checklist">hurricane travel checklist</a> before you depart.
+For a comprehensive packing plan designed around storm season conditions, review our hurricane travel checklist before you depart.
 
 ## Weighing Bags When the Power’s Out: Field-Tested Techniques
 
@@ -178,4 +178,4 @@ Q: How do I maintain a scale in humid, coastal environments like Bermuda?
 A: Rinse and dry metal components exposed to salt air, store the scale in a protective pouch, avoid drops, and periodically zero or test against a known weight. These simple steps preserve accuracy and lifespan.
 
 Q: Where can I learn more about choosing and using a battery-less luggage scale?
-A: Explore our detailed guide to the <a href="https://luggage-scale.com/battery-less-luggage-scale">battery-less luggage scale</a> and review our <a href="https://luggage-scale.com/blog/hurricane-travel-checklist">hurricane travel checklist</a> for packing strategies tailored to storm-season travel.
+A: Explore our detailed guide to the <a href="https://luggage-scale.com/battery-less-luggage-scale">battery-less luggage scale</a> and review our hurricane travel checklist for packing strategies tailored to storm-season travel.

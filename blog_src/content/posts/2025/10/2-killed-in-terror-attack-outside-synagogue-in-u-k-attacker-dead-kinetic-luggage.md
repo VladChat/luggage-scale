@@ -1,4 +1,4 @@
----
+﻿---
 title: "UK synagogue attack: 2 killed, attacker dead"
 date: 2025-10-03T00:31:41.999166Z
 draft: false
@@ -73,7 +73,7 @@ Key benefits in uncertain conditions:
 
 Packed within a small gear pouch, a kinetic luggage scale pairs well with a minimalist toolkit that includes a compact multitool (check security rules before carrying), spare zipper pouches, and a small luggage strap. Together, these help you adjust on the move without creating bottlenecks at check‑in counters.
 
-If you’re new to luggage scales, our primer explains weight rules, device types, and accuracy considerations: <a href="https://www.luggage-scale.com/blog/what-is-a-luggage-scale">What Is a Luggage Scale?</a>
+If you’re new to luggage scales, our primer explains weight rules, device types, and accuracy considerations: What Is a Luggage Scale?
 
 ## How to Use a Kinetic Luggage Scale Safely and Discreetly
 

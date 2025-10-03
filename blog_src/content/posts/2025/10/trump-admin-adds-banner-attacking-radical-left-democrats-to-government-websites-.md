@@ -1,4 +1,4 @@
----
+﻿---
 title: "Trump Admin Adds Anti-'Radical Left' Banners to Government Sites"
 date: 2025-10-02T03:40:43.843026Z
 draft: false
@@ -58,7 +58,7 @@ Digital convenience is great—until a coin cell dies at the worst possible mome
 
 If your travel strategy includes a margin for the unexpected, a battery-free scale fits right in—much like a paper boarding pass backup or an extra photocopy of your passport.
 
-For a deeper dive into models and mechanisms, see our guide: <a href="https://luggage-scale.com/blog/luggage-scale-no-battery">Luggage Scale No Battery: How Analog Travel Scales Work and When to Choose One</a>.
+For a deeper dive into models and mechanisms, see our guide: Luggage Scale No Battery: How Analog Travel Scales Work and When to Choose One.
 
 ## The Mechanics That Make Analog Scales Reliable
 

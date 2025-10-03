@@ -1,4 +1,4 @@
----
+﻿---
 title: "Amelia Earhart’s Plane Likely Found, Research Team Says"
 date: 2025-10-02T14:29:58.881112Z
 draft: false
@@ -122,7 +122,7 @@ Sustainable travel is more than carbon offsets; it’s about purposeful, long-li
 
 For travelers who frequent regions where e-waste management is limited, battery-free tools reduce the risk of leaving behind hazardous materials. They also simplify your packing list: one less cell type to track and replace.
 
-If you’re new to luggage scales or want to revisit best practices, our primer details techniques to get fast, accurate readings with any scale: <a href="https://luggage-scale.com/blog/how-to-weigh-luggage">How to Weigh Your Luggage the Right Way</a>.
+If you’re new to luggage scales or want to revisit best practices, our primer details techniques to get fast, accurate readings with any scale: How to Weigh Your Luggage the Right Way.
 
 ## Practical Packing Checklist for Island Hops and Small Planes
 

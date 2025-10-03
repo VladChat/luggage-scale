@@ -1,4 +1,4 @@
----
+﻿---
 title: "Inside the New Report on Extremist Violence — No-Battery Luggage Scale"
 date: 2025-10-02T23:52:11.949002Z
 draft: false
@@ -136,7 +136,7 @@ It’s easy for the mind to jump from “political violence exists” to “dang
 
 That’s why our core advice mirrors the ethos of mechanical travel tools: keep it simple, keep it steady. Pack smart so you’re nimble. Use official information to avoid surprises. Maintain distance from any congregation that looks heated. And focus on your purpose—time away, time with people you care about, and the enrichment that comes from seeing a new place.
 
-If you’re assembling a compact travel kit that supports that kind of calm, you may appreciate our quick read on doing more with less: <a href="https://www.luggage-scale.com/blog/travel-safety-checklist">Travel Safety and Packing Checklist for Smooth Domestic Trips</a>.
+If you’re assembling a compact travel kit that supports that kind of calm, you may appreciate our quick read on doing more with less: Travel Safety and Packing Checklist for Smooth Domestic Trips.
 
 ## Bottom Line
 

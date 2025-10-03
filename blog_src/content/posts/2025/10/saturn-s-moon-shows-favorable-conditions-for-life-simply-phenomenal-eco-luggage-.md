@@ -1,4 +1,4 @@
----
+﻿---
 title: "Saturn Moon May Host Life: Remarkable | Eco Luggage Scale No Battery"
 date: 2025-10-02T15:27:05.825468Z
 draft: false
@@ -55,7 +55,7 @@ A battery-free luggage scale might seem like a small upgrade, but it can fundame
 - Cost savings: Baggage fees can be steep. A precise reading at home lets you redistribute weight or remove items before you get to the counter.
 - Simplicity: Mechanical or energy-harvesting designs tend to be robust and travel-hardy, with fewer failure points than fully electronic gadgets.
 
-If you’re exploring options, our overview of battery-free scales and packing tactics is a helpful starting point: <a href="https://luggage-scale.com/blog/packing-weight-tips">packing weight tips</a>.
+If you’re exploring options, our overview of battery-free scales and packing tactics is a helpful starting point: packing weight tips.
 
 ## How a No-Battery Luggage Scale Works
 

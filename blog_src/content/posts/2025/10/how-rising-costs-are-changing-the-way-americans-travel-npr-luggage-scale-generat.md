@@ -1,4 +1,4 @@
----
+﻿---
 title: "Rising Travel Costs Shift American Trips: Self-Powered Luggage Scale"
 date: 2025-10-02T17:08:24.504296Z
 draft: false
@@ -127,7 +127,7 @@ Even with higher prices, you can travel well—if you lean into planning and sma
 - Use points tactically: Redeem for high-cash-price flights or hotels. Transferable credit card points give flexibility across airlines and hotel chains.
 - Buy insurance appropriately: Trip interruption insurance can be valuable for long or expensive journeys. Compare credit card protections before buying extras.
 
-For a deeper dive on packing light while keeping your kit functional, see our guide: <a href="https://luggage-scale.com/blog/pack-light-save-fees">Pack Light to Save on Fees</a>.
+For a deeper dive on packing light while keeping your kit functional, see our guide: Pack Light to Save on Fees.
 
 ## Sustainable Choices That Also Save Money
 

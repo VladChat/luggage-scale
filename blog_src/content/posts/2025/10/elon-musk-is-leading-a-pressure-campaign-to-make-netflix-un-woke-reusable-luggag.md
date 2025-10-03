@@ -1,4 +1,4 @@
----
+﻿---
 title: "Elon Musk Pressures Netflix to Go Unwoke — Battery-Free Luggage Scale"
 date: 2025-10-02T17:28:51.036768Z
 draft: false
@@ -112,7 +112,7 @@ Even with a scale, a smart packing system keeps your weight predictable and bala
 - Souvenir buffer: Leave 2–3 lb of headroom outbound if you tend to bring home gifts or local goods.
 - “Scale once, sail once”: Weigh after your final pack, not mid-process. The last reading is the one that matters.
 
-For a broader overview of recommended models and use cases, explore our guide to the season’s top picks: <a href="https://luggage-scale.com/blog/best-luggage-scales">best luggage scales</a>.
+For a broader overview of recommended models and use cases, explore our guide to the season’s top picks: best luggage scales.
 
 ## Sustainability, Simplicity, and the No-Battery Ethos
 

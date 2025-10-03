@@ -1,4 +1,4 @@
----
+﻿---
 title: "Mariah the Scientist on 'Burning Blue,' album and eco luggage scales"
 date: 2025-10-02T16:04:30.914586Z
 draft: false
@@ -64,7 +64,7 @@ Touring teams use weight manifests; you can steal the technique in a simpler for
 - Leave room: Aim for 2–3 pounds under limit to accommodate merch or spontaneous purchases.
 - Practice weigh-ins: Check bag weight before leaving home and again before your return flight.
 
-If you want a pre-built list to adapt, we’ve compiled a versatile, weight-aware template: <a href="https://luggage-scale.com/blog/packing-checklist">Ultimate Packing Checklist</a>.
+If you want a pre-built list to adapt, we’ve compiled a versatile, weight-aware template: Ultimate Packing Checklist.
 
 ## How to Choose the Right Sustainable Luggage Scale
 

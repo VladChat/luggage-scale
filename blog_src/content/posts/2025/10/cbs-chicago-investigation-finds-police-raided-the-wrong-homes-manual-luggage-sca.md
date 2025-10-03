@@ -1,4 +1,4 @@
----
+﻿---
 title: "Top Manual Luggage Scales: No Batteries Required"
 date: 2025-10-02T16:19:58.119777Z
 draft: false
@@ -52,7 +52,7 @@ Key advantages of a manual luggage scale:
 
 If you’re new to luggage scales, our guide on technique can help you get consistent results. See <a href="https://www.luggage-scale.com/guides/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a> for clear, step-by-step advice.
 
-Travel well is travel light—mentally and literally. That’s why we recommend starting with a proven, battery-free design. Explore top picks in our roundup of reliable, road-tested options: <a href="https://www.luggage-scale.com/blog/best-manual-luggage-scales">Best Manual Luggage Scales</a>. When you’re ready to choose one for your kit, you can browse our curated selection here: <a href="https://www.luggage-scale.com/shop/manual-luggage-scale">Manual Luggage Scale</a>.
+Travel well is travel light—mentally and literally. That’s why we recommend starting with a proven, battery-free design. Explore top picks in our roundup of reliable, road-tested options: Best Manual Luggage Scales. When you’re ready to choose one for your kit, you can browse our curated selection here: <a href="https://www.luggage-scale.com/shop/manual-luggage-scale">Manual Luggage Scale</a>.
 
 ## Packing Smart in an Age of Uncertainty
 
@@ -108,7 +108,7 @@ As travelers and household planners, we can’t control everything, but we can c
 
 When you’re ready to upgrade your kit, revisit these three essentials:
 - Practical know-how for consistent readings: <a href="https://www.luggage-scale.com/guides/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a>
-- Field-tested, battery-free picks: <a href="https://www.luggage-scale.com/blog/best-manual-luggage-scales">Best Manual Luggage Scales</a>
+- Field-tested, battery-free picks: Best Manual Luggage Scales
 - Ready-to-travel tools that last: <a href="https://www.luggage-scale.com/shop/manual-luggage-scale">Manual Luggage Scale</a>
 
 Safe travels—and may your bags be just right, your documents in order, and your peace of mind intact.

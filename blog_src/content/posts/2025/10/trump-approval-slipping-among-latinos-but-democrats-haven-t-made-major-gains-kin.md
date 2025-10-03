@@ -1,4 +1,4 @@
----
+﻿---
 title: "Trump Support Slips Among Latinos; Democrats Gain Little"
 date: 2025-10-02T14:17:07.908815Z
 draft: false
@@ -47,7 +47,7 @@ These characteristics put baggage strategy at center stage. A single overweight 
 
 A kinetic luggage scale addresses precisely that risk. It helps travelers surface the true weight before leaving home or hotel, in a form factor that’s durable, consistent, and independent of charging cables.
 
-For a broader look at why weighing matters before you arrive at the airport, see <a href="https://luggage-scale.com/blog/why-luggage-scales-matter">Why luggage scales matter</a>.
+For a broader look at why weighing matters before you arrive at the airport, see Why luggage scales matter.
 
 ## Why a Kinetic Luggage Scale Matters When Budgets Are Tight
 
@@ -164,7 +164,7 @@ Political cycles introduce noise; travel thrives on signal. The reliable signal 
 
 That’s why thousands of travelers fold a kinetic luggage scale into their standard kit. It’s light, it’s ready, and it does one job exceptionally well: keeping you under the limit so you can focus on your journey.
 
-If you’re building your travel toolkit or refreshing it for the season, revisit the fundamentals in <a href="https://luggage-scale.com/blog/why-luggage-scales-matter">Why luggage scales matter</a>, learn the best practices in <a href="https://luggage-scale.com/guides/how-to-use-a-luggage-scale">How to use a luggage scale</a>, and consider the reliability of our <a href="https://luggage-scale.com/products/kinetic-luggage-scale">kinetic luggage scale</a> as a battery-free anchor for smarter packing.
+If you’re building your travel toolkit or refreshing it for the season, revisit the fundamentals in Why luggage scales matter, learn the best practices in <a href="https://luggage-scale.com/guides/how-to-use-a-luggage-scale">How to use a luggage scale</a>, and consider the reliability of our <a href="https://luggage-scale.com/products/kinetic-luggage-scale">kinetic luggage scale</a> as a battery-free anchor for smarter packing.
 
 ## FAQ
 

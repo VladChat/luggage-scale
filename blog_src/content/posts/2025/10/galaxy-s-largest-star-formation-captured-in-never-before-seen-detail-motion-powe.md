@@ -1,4 +1,4 @@
----
+﻿---
 title: "Motion-Powered Luggage Scale: Galaxy’s Biggest Star Nursery Revealed"
 date: 2025-10-02T16:16:06.799167Z
 draft: false
@@ -53,7 +53,7 @@ Common scenarios where a motion-powered scale shines:
 - Expedition travel—trekking, photography tours, or diving—where weight planning is meticulous.
 - Family trips where multiple bags rotate through a single, rugged tool without anyone worrying about batteries.
 
-If you want a quick refresher on different airline weight allowances and the fees they impose, bookmark our <a href="https://www.luggage-scale.com/blog/airline-baggage-fees-guide">airline baggage fees guide</a> before you pack.
+If you want a quick refresher on different airline weight allowances and the fees they impose, bookmark our airline baggage fees guide before you pack.
 
 ## The engineering: harvesting kinetic energy in a palm-sized scale
 
@@ -139,7 +139,7 @@ Pro tip for connecting flights: Different airlines and aircraft types vary in ov
 
 What do a planetary traveler and a galactic nursery share? A reliance on motion to get things done. Sagittarius B2 is a reminder that energy is everywhere, waiting to be organized. In that spirit, a motion-powered luggage scale is simple, effective, and surprisingly liberating. It takes a universal resource—your movement—and turns it into certainty at the check-in counter.
 
-If you’re ready to travel lighter, smarter, and more independently, explore our detailed look at the <a href="https://www.luggage-scale.com/products/motion-powered-luggage-scale">Motion-Powered Luggage Scale</a>, and keep our <a href="https://www.luggage-scale.com/blog/airline-baggage-fees-guide">airline baggage fees guide</a> handy as you plan your luggage strategy. Let the stars inspire you, but let your gear deliver—every day, in every terminal.
+If you’re ready to travel lighter, smarter, and more independently, explore our detailed look at the <a href="https://www.luggage-scale.com/products/motion-powered-luggage-scale">Motion-Powered Luggage Scale</a>, and keep our airline baggage fees guide handy as you plan your luggage strategy. Let the stars inspire you, but let your gear deliver—every day, in every terminal.
 
 ## FAQ
 

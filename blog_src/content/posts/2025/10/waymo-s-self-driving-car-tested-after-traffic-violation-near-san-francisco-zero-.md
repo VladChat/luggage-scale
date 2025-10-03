@@ -1,4 +1,4 @@
----
+﻿---
 title: "Waymo Self-Driving Car Investigated After Traffic Violation Near SF"
 date: 2025-10-02T15:52:22.827768Z
 draft: false
@@ -94,7 +94,7 @@ A good luggage scale keeps your trip moving. A great one disappears into your ba
 - Unit switching: Quick toggles between kg and lb help when airlines publish limits in different units.
 - Weight locking: A hold function that locks the weight for a few seconds reduces juggling while you lower the bag.
 
-For a deeper dive into comparing mechanical versus digital, evaluating accuracy claims, and maintenance tips, check our guide: <a href="https://luggage-scale.com/blog/how-to-choose-a-luggage-scale">How to Choose a Luggage Scale</a>. It breaks down the tradeoffs with travelers’ real-world scenarios in mind.
+For a deeper dive into comparing mechanical versus digital, evaluating accuracy claims, and maintenance tips, check our guide: How to Choose a Luggage Scale. It breaks down the tradeoffs with travelers’ real-world scenarios in mind.
 
 ## Pack Smart, Avoid Fees: Sync With Your Airline’s Rules
 
@@ -107,7 +107,7 @@ Practical steps:
 - Respect equipment limits: Hard cases can hide overages. Use your scale before you zip.
 - Beware return legs: The generous allowance on the outbound carrier might shrink on your return partner airline.
 
-To make this easier, we maintain a traveler-friendly overview: <a href="https://luggage-scale.com/blog/airline-baggage-allowance-guide">Airline Baggage Allowance Guide</a>. Bookmark it before multi-leg trips; it’s a fast way to check rules by carrier, cabin, and route.
+To make this easier, we maintain a traveler-friendly overview: Airline Baggage Allowance Guide. Bookmark it before multi-leg trips; it’s a fast way to check rules by carrier, cabin, and route.
 
 ## What Incidents Teach Us: Policy, Safety, and the Road Ahead
 

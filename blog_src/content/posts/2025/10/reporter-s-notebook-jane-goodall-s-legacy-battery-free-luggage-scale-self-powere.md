@@ -1,4 +1,4 @@
----
+﻿---
 title: "Jane Goodall’s Legacy and the Battery-Free Luggage Scale"
 date: 2025-10-02T23:46:15.713106Z
 draft: false
@@ -35,7 +35,7 @@ At first glance, the difference between battery-powered and battery-free luggage
 
 When you keep a scale clipped to your bag, you’re not just preventing overweight surprises. You’re also enrolling yourself in a preflight ritual: weigh, adjust, breathe. A battery-free scale makes that ritual evergreen. There’s no “if” about it. It works.
 
-If you’re new to this category, start with a primer like <a href="https://luggage-scale.com/blog/what-is-a-battery-free-luggage-scale">What is a battery-free luggage scale?</a> to understand the different forms and use cases.
+If you’re new to this category, start with a primer like What is a battery-free luggage scale? to understand the different forms and use cases.
 
 ## How battery-free luggage scales work
 
@@ -110,7 +110,7 @@ Maintenance and care
 
 Packing strategy: Use your scale as a tool to pack smarter, not just lighter. Create a preflight checklist—document weight targets for each bag, along with your plan for redistributing items if needed. A consistent routine makes the airport feel less like a gatekeeper and more like a waypoint.
 
-For step-by-step weighing techniques, see <a href="https://luggage-scale.com/blog/how-to-weigh-luggage">how to weigh luggage</a>.
+For step-by-step weighing techniques, see how to weigh luggage.
 
 ## A field-ready packing mindset inspired by Goodall
 
