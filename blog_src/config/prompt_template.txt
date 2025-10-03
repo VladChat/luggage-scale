@@ -8,7 +8,7 @@ Requirements:
 - Provide actionable insights, practical travel tips, and real-world examples to make the content useful.
 - Maintain a professional, informative, and travel-focused tone.
 - Use bullet points and numbered lists where they improve readability and flow.
-- End with a dedicated "Frequently Asked Questions (FAQ)" section.
+- End with 3 - 5 dedicated "Frequently Asked Questions (FAQ)" section.
 - Format FAQ so that each question starts with '### Q:' on its own line, followed by the answer text starting with 'A:' on the next line. This structure will make it easy to later apply an accordion-style design.
 - Ensure all output is valid Markdown (headings, lists, links).
 - Avoid repetition, filler, or generic statements.
