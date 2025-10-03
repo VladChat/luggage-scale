@@ -13,6 +13,17 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
+# включаем GitInfo, чтобы lastmod брался из даты последнего коммита
+enableGitInfo: true
+
+# настраиваем приоритет для lastmod
+frontmatter:
+  lastmod:
+    - lastmod      # если указан lastmod в front-matter
+    - :git         # иначе Hugo возьмет дату последнего коммита
+    - :fileModTime # если git недоступен — дату изменения файла
+    - :default     # fallback: date
+
 permalinks:
   posts: "/posts/:year/:month/:day/:slug/"
 
