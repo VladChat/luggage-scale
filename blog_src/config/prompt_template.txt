@@ -1,11 +1,17 @@
-Write a detailed blog post in English for luggage-scale.com.
+﻿Write a comprehensive and detailed blog post in English.
 
 Requirements:
 - Word count: 1800–2000 words.
-- Use at least 6 subheadings (## H2).
-- End with a FAQ section (3–5 questions and answers).
-- Include 2–3 internal links in HTML format (<a href="...">text</a>).
-- Tone: professional, informative, travel-focused.
-- Output only valid Markdown.
+- Begin with a clear introduction that engages the reader.
+- Use 7–9 main subheadings (## H2). Add optional subsections (### H3) if they improve clarity and structure.
+- Naturally incorporate the given topic and context throughout the article for SEO.
+- Provide actionable insights, practical travel tips, and real-world examples to make the content useful.
+- Maintain a professional, informative, and travel-focused tone.
+- Use bullet points and numbered lists where they improve readability and flow.
+- End with a dedicated "Frequently Asked Questions (FAQ)" section.
+- Format FAQ so that each question starts with '### Q:' on its own line, followed by the answer text starting with 'A:' on the next line. This structure will make it easy to later apply an accordion-style design.
+- Ensure all output is valid Markdown (headings, lists, links).
+- Avoid repetition, filler, or generic statements.
 
-Topic: {topic}
+Topic and context for the article:
+{topic}
