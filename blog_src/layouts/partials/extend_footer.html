@@ -1,12 +1,9 @@
-﻿<div class="custom-legal-footer" style="text-align:center; font-size:.9rem; margin-top:1rem; opacity:0.8;">
-  {{ with .Site.Params.customFooterText }}
-    <div>{{ . }}</div>
-  {{ end }}
+﻿<div class="custom-legal-footer" style="text-align:center; font-size:.9rem; margin-top:.5rem; opacity:0.8;">
   {{ if .Site.Menus.footer }}
-    <nav style="margin-top:0.3rem;">
+    <nav>
       {{- $first := true -}}
       {{- range .Site.Menus.footer -}}
-        {{- if not $first -}} · {{- end -}}
+        {{- if not $first -}}&nbsp;·&nbsp;{{- end -}}
         <a href="{{ .URL }}">{{ .Name }}</a>
         {{- $first = false -}}
       {{- end -}}
