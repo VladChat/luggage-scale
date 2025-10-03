@@ -22,6 +22,21 @@ outputs:
     - RSS
     - JSON
     - Sitemap
+  section:
+    - HTML
+    - RSS
+    - Sitemap
+  taxonomy:
+    - HTML
+    - RSS
+    - Sitemap
+  term:
+    - HTML
+    - RSS
+    - Sitemap
+  page:
+    - HTML
+    - Sitemap
 
 taxonomies:
   category: categories
