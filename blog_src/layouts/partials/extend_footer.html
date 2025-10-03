@@ -1,0 +1,16 @@
+﻿<div class="custom-legal-footer" style="text-align:center; font-size:.9rem; margin-top:1rem;">
+  {{ with .Site.Params.customFooterText }}
+    <div>{{ . }}</div>
+  {{ end }}
+
+  {{ if .Site.Menus.footer }}
+    <nav class="footer-nav" style="margin-top:0.5rem;">
+      {{- $first := true -}}
+      {{- range .Site.Menus.footer -}}
+        {{- if not $first -}}<span aria-hidden="true"> · </span>{{- end -}}
+        <a href="{{ .URL }}">{{ .Name }}</a>
+        {{- $first = false -}}
+      {{- end -}}
+    </nav>
+  {{ end }}
+</div>
