@@ -19,6 +19,15 @@
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
         <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
+
+    {{- $items := site.Menus.footer -}}
+    {{- if $items }}
+    <nav class="legal-links" aria-label="Legal" style="margin-top:0.5rem;">
+        {{- range $index, $entry := $items -}}
+            <a href="{{ $entry.URL | absLangURL }}">{{ $entry.Name }}</a>{{- if lt $index (sub (len $items) 1) -}}&nbsp;·&nbsp;{{- end -}}
+        {{- end -}}
+    </nav>
+    {{- end }}
 </footer>
 {{- end }}
 
@@ -59,7 +68,6 @@
             }
         });
     });
-
 </script>
 
 {{- if (not site.Params.disableScrollToTop) }}
@@ -74,7 +82,6 @@
             mybutton.style.opacity = "0";
         }
     };
-
 </script>
 {{- end }}
 
@@ -89,7 +96,6 @@
             localStorage.setItem("pref-theme", 'dark');
         }
     })
-
 </script>
 {{- end }}
 
