@@ -25,10 +25,16 @@ outputs:
   section:
     - HTML
     - RSS
+    - Sitemap
   taxonomy:
     - HTML
     - RSS
+    - Sitemap
   term:
+    - HTML
+    - RSS
+    - Sitemap
+  page:
     - HTML
 
 taxonomies:
