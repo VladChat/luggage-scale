@@ -5,7 +5,7 @@ git checkout main
 git pull origin main
 
 # Создаём тег с именем (например, snapshot-2025-10-01)
-git tag -a snapshot-Last -m "Last"
+git tag -a snapshot-Last3 -m "Last3"
 
 # Отправляем тег на GitHub
-git push origin snapshot-Last
+git push origin snapshot-Last3

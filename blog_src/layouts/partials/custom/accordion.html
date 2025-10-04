@@ -1,0 +1,126 @@
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const postContent = document.querySelector(".post-content");
+  if (!postContent) return;
+
+  // ==== разметка секций H2 -> контент до следующего H2 ====
+  const nodes = Array.from(postContent.children);
+  const sections = [];
+  let cur = null;
+
+  nodes.forEach(node => {
+    if (node.tagName === "H2") {
+      if (cur) sections.push(cur);
+      cur = { h: node, body: [] };
+    } else if (cur) {
+      cur.body.push(node);
+    }
+  });
+  if (cur) sections.push(cur);
+
+  if (sections.length < 2) return; // ничего не перестраиваем
+
+  // очищаем и строим заново
+  postContent.innerHTML = "";
+
+  // вспомогалки
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const SCROLL_OFFSET = getScrollOffset(); // px
+  function getScrollOffset() {
+    // можно переопределить var(--accordion-offset) в своих стилях
+    const css = parseInt(getComputedStyle(document.documentElement)
+      .getPropertyValue("--accordion-offset"));
+    return Number.isFinite(css) ? css : 96; // дефолт 96px
+  }
+  function recalcOpenHeights() {
+    postContent.querySelectorAll(".accordion-section.open .accordion-content")
+      .forEach(c => c.style.maxHeight = c.scrollHeight + "px");
+  }
+
+  sections.forEach((sec, idx) => {
+    const wrapper = document.createElement("section");
+    wrapper.className = "accordion-section" + (idx === 0 ? " open" : "");
+    // оставляем место сверху при scrollIntoView
+    wrapper.style.scrollMarginTop = SCROLL_OFFSET + "px";
+
+    const header = document.createElement("button");
+    header.type = "button";
+    header.className = "accordion-header";
+    header.setAttribute("aria-expanded", idx === 0 ? "true" : "false");
+    header.textContent = sec.h.textContent;
+
+    const content = document.createElement("div");
+    content.className = "accordion-content";
+    // гарантируем плавность без внешних CSS (не ломая твои стили)
+    content.style.overflow = "hidden";
+    content.style.transition = "max-height 320ms cubic-bezier(.2,.7,.3,1)";
+    content.style.maxHeight = idx === 0 ? "0px" : "0px"; // выставим чуть позже
+    sec.body.forEach(el => content.appendChild(el));
+
+    // открыть первую секцию после вставки в DOM, чтобы корректно взять scrollHeight
+    requestAnimationFrame(() => {
+      if (idx === 0) {
+        wrapper.classList.add("open");
+        header.setAttribute("aria-expanded", "true");
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+
+    // пересчёт высоты при догрузке картинок внутри секции
+    content.querySelectorAll("img").forEach(img => {
+      img.addEventListener("load", () => {
+        if (wrapper.classList.contains("open")) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    });
+
+    header.addEventListener("click", () => {
+      const willOpen = !wrapper.classList.contains("open");
+
+      // закрываем остальные
+      postContent.querySelectorAll(".accordion-section.open").forEach(secEl => {
+        if (secEl === wrapper) return;
+        secEl.classList.remove("open");
+        const c = secEl.querySelector(".accordion-content");
+        const h = secEl.querySelector(".accordion-header");
+        if (c) c.style.maxHeight = "0px";
+        if (h) h.setAttribute("aria-expanded", "false");
+      });
+
+      if (willOpen) {
+        wrapper.classList.add("open");
+        header.setAttribute("aria-expanded", "true");
+
+        // форсим рефлоу, чтобы transition точно отработал
+        content.style.maxHeight = "0px";
+        // eslint-disable-next-line no-unused-expressions
+        content.offsetHeight;
+        content.style.maxHeight = content.scrollHeight + "px";
+
+        const scrollAfter = () => {
+          wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+        // скроллим ПОСЛЕ завершения анимации
+        if (prefersReduced) {
+          scrollAfter();
+        } else {
+          content.addEventListener("transitionend", scrollAfter, { once: true });
+        }
+      } else {
+        // сворачиваем текущую
+        wrapper.classList.remove("open");
+        header.setAttribute("aria-expanded", "false");
+        content.style.maxHeight = "0px";
+      }
+    });
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(content);
+    postContent.appendChild(wrapper);
+  });
+
+  // пересчитать высоту открытой секции при ресайзе
+  window.addEventListener("resize", recalcOpenHeights, { passive: true });
+});
+</script>

@@ -1,0 +1,29 @@
+<style>
+  #reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #0066cc, #00c6ff);
+    box-shadow: 0 0 8px rgba(0, 102, 204, 0.6);
+    z-index: 9999;
+    transition: width 0.3s ease-in-out;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const progress = document.createElement("div");
+    progress.id = "reading-progress";
+    document.body.appendChild(progress);
+    function updateProgress() {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const value = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progress.style.width = value + "%";
+    }
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
+  });
+</script>

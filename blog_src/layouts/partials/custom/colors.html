@@ -1,0 +1,114 @@
+<style>
+  /* ========= PALLETTE ========= */
+  :root {
+    --brand-blue: #1f6feb;     /* основной акцент */
+    --brand-cyan: #00c6ff;     /* второй акцент */
+    --brand-bg:   #0f1218;     /* тёмный фон */
+    --brand-card: #171b22;     /* тёмная карточка */
+    --radius: 12px;
+    --shadow: 0 6px 16px rgba(2, 6, 23, .25);
+  }
+
+  /* Сопоставляем PaperMod-переменные (LIGHT) */
+  :root {
+    --theme: #f7f9fc;
+    --entry: #ffffff;
+    --primary: #0f172a;
+    --secondary: #334155;
+    --tertiary: #64748b;
+    --content: #111827;
+    --border: #e6e8ec;
+
+    --link-color: var(--brand-blue);
+    --link-hover: var(--brand-cyan);
+  }
+
+  /* Сопоставляем PaperMod-переменные (DARK) */
+  body.dark {
+    --theme: var(--brand-bg);
+    --entry: var(--brand-card);
+    --primary: #e6edf3;
+    --secondary: #9aa4b2;
+    --tertiary: #738294;
+    --content: #d8e0ea;
+    --border: #2b323b;
+
+    --link-color: var(--brand-cyan);
+    --link-hover: #7bd7ff;
+  }
+
+  /* ========= БАЗОВЫЕ ПРИМЕНЕНИЯ ========= */
+  .post-content a,
+  .page-content a { color: var(--link-color); transition: color .2s ease; }
+  .post-content a:hover { color: var(--link-hover); }
+
+  .post-content h2, .post-content h3,
+  .post-single .post-title { color: var(--primary); }
+
+  /* Карточки на списке постов — чуть «воздуха» и скругления как в мини-сайте */
+  .post-entry, .first-entry {
+    border-radius: var(--radius);
+    box-shadow: 0 1px 0 rgba(0,0,0,.04);
+  }
+  body.dark .post-entry, body.dark .first-entry {
+    box-shadow: 0 1px 0 rgba(255,255,255,.03);
+  }
+
+  /* ========= АККОРДЕОН: ЦВЕТА И СТИЛИ ========= */
+  .accordion-section {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    /* фирменный градиент «шапки» секции */
+    background: linear-gradient(180deg, var(--brand-blue), var(--brand-cyan));
+  }
+
+  /* плюс/минус справа */
+  .accordion-header::after{
+    content: "+";
+    margin-left: auto;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .accordion-section.open .accordion-header::after{
+    content: "–";
+  }
+
+  .accordion-content {
+    background: var(--entry);
+    color: var(--content);
+    overflow: hidden;
+    max-height: 0;
+    padding: 0 1.25rem;
+    transition: max-height .35s ease, padding .3s ease;
+  }
+
+  .accordion-section.open .accordion-content {
+    /* высоту выставляет JS, padding включаем тут для плавности */
+    padding: 1rem 1.25rem;
+  }
+
+  /* блок-цитаты/лист внутри — слегка выделяем */
+  .accordion-content blockquote {
+    border-left: 3px solid var(--brand-blue);
+    padding-left: .85rem;
+    margin-left: .25rem;
+    opacity: .95;
+  }
+</style>

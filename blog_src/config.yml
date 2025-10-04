@@ -1,4 +1,4 @@
-﻿baseURL: "https://luggage-scale.com/blog/"
+baseURL: "https://luggage-scale.com/blog/"
 title: "Luggage Scale"
 theme: "PaperMod"
 publishDir: "../blog"
@@ -62,6 +62,11 @@ params:
   defaultTheme: auto
   ShowReadingTime: true
   ShowWordCount: true
+  centerTheme: true   # центрирует весь контент
+  label:
+    text: "Luggage Scale"
+    icon: "favicon.svg"
+    iconHeight: 32
   assets:
     favicon: "favicon.svg"
   disableGA: true   # отключаем google_analytics.html, чтобы не было ошибки
