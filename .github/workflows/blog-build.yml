@@ -7,19 +7,28 @@ on:
       - 'blog_src/**'
       - '.github/workflows/blog-build.yml'
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Blog Writer"]   # запускаться после завершения Writer
+    types: [completed]           # но реально выполним джобу только при успехе (см. if ниже)
 
 permissions:
   contents: write
 
 jobs:
   build:
+    # если пришли по workflow_run — бежим только при успешном завершении Writer
+    # если пришли по push / workflow_dispatch — условие истинно (event_name != workflow_run)
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repo at correct ref
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # важно для enableGitInfo
+          fetch-depth: 0
+          # При запуске через workflow_run — берём точный коммит, который сделал Writer.
+          # При обычном push/dispatch — fallback на текущий SHA.
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
