@@ -9,31 +9,30 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: ["Blog Writer"]   # запускаться после завершения Writer
-    types: [completed]           # но реально выполним джобу только при успехе (см. if ниже)
+    types: [completed]           # джоб бежит только при success (см. if ниже)
 
 permissions:
   contents: write
 
 jobs:
   build:
-    # если пришли по workflow_run — бежим только при успешном завершении Writer
-    # если пришли по push / workflow_dispatch — условие истинно (event_name != workflow_run)
+    # если пришли по workflow_run — бежим только при success
+    # если push/dispatch — условие истинно
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo at correct ref
+      - name: Checkout repository (branch, not SHA)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # При запуске через workflow_run — берём точный коммит, который сделал Writer.
-          # При обычном push/dispatch — fallback на текущий SHA.
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          # ВАЖНО: всегда ветка, чтобы не было detached HEAD
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.146.0'
+          hugo-version: '0.150.1'   # можно вернуть '0.146.0' при желании
           extended: true
 
       - name: Build Hugo → /blog
@@ -46,4 +45,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add blog
           git commit -m "Update blog build [skip ci]" || echo "No changes"
+          # HEAD теперь на ветке (не detached), обычный push работает
           git push
