@@ -1,0 +1,145 @@
+<!-- NEW FILE: blog_src/layouts/partials/custom/home-cards.html -->
+<style>
+  /* ===== Стили карточек списка в духе дизайна поста ===== */
+
+  /* базовая карточка списка */
+  .post-list .post-entry,
+  .home .post-entry,
+  .terms .post-entry,
+  .list .post-entry,
+  .home .first-entry,
+  .list .first-entry {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .post-entry:hover,
+  .first-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(2,6,23,.30);
+  }
+
+  /* градиентная шапка карточки — как шапка секции в посте */
+  .post-entry .entry-header,
+  .first-entry .entry-header {
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-cyan));
+    color: #fff;
+    padding: .9rem 1.05rem;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+  }
+  .post-entry .entry-header a,
+  .first-entry .entry-header a {
+    color: #fff !important;
+    text-decoration: none;
+  }
+  .post-entry .entry-header h2,
+  .first-entry .entry-header h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  /* компактный бейдж статуса чтения слева от заголовка */
+  .read-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 .6rem;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(255,255,255,.22);
+    border: 1px solid rgba(255,255,255,.35);
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+    flex-shrink: 0;
+  }
+  .read-pill.active {
+    background: rgba(0,0,0,.15);
+    border-color: rgba(255,255,255,.5);
+  }
+
+  /* контент и мета в карточке */
+  .post-entry .entry-content,
+  .first-entry .entry-content {
+    padding: 1rem 1.05rem;
+  }
+  .post-entry .entry-footer,
+  .first-entry .entry-footer {
+    padding: .7rem 1.05rem;
+    border-top: 1px solid var(--border);
+    color: var(--secondary);
+  }
+
+  /* адаптивные отступы */
+  @media (max-width: 480px) {
+    .post-entry .entry-header,
+    .first-entry .entry-header { padding: .8rem .85rem; }
+    .post-entry .entry-content,
+    .first-entry .entry-content { padding: .85rem .85rem; }
+    .post-entry .entry-footer,
+    .first-entry .entry-footer { padding: .6rem .85rem; }
+  }
+
+  /* плавное появление карточек (добавляется классом .fade-in) */
+  .post-entry, .first-entry {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .post-entry.fade-in, .first-entry.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: opacity .45s ease, transform .45s ease;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    /* 1) Помечаем посты как прочитанные, когда открыта single-страница */
+    const isSingle = document.querySelector('.post-single');
+    if (isSingle) {
+      try {
+        localStorage.setItem('postRead:' + location.pathname, '1');
+      } catch (_) {}
+    }
+
+    /* 2) На главной/списках добавляем бейджи READ / TO READ слева от заголовка */
+    const cards = document.querySelectorAll('article.post-entry, article.first-entry');
+    cards.forEach(card => {
+      const titleLink = card.querySelector('.entry-header a, .entry-header h2 a');
+      const header = card.querySelector('.entry-header');
+      if (!titleLink || !header) return;
+
+      let url;
+      try { url = new URL(titleLink.getAttribute('href'), location.href).pathname; }
+      catch { url = titleLink.getAttribute('href'); }
+      const isRead = (localStorage.getItem('postRead:' + url) === '1');
+
+      const pill = document.createElement('span');
+      pill.className = 'read-pill' + (isRead ? ' active' : '');
+      pill.textContent = isRead ? 'READ' : 'TO READ';
+      header.prepend(pill);
+    });
+
+    /* 3) Плавное появление карточек при скролле */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('fade-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    cards.forEach(c => io.observe(c));
+  });
+</script>
