@@ -13,14 +13,16 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
+# включаем GitInfo, чтобы lastmod брался из даты последнего коммита
 enableGitInfo: true
 
+# настраиваем приоритет для lastmod
 frontmatter:
   lastmod:
-    - lastmod
-    - :git
-    - :fileModTime
-    - :default
+    - lastmod      # если указан lastmod в front-matter
+    - :git         # иначе Hugo возьмет дату последнего коммита
+    - :fileModTime # если git недоступен — дату изменения файла
+    - :default     # fallback: date
 
 permalinks:
   posts: "/posts/:year/:month/:day/:slug/"
@@ -54,32 +56,22 @@ params:
   disableAnchoredHeadings: true
   env: production
   title: "Luggage Scale"
-  description: "Find airline baggage limits, packing tips, and travel guides to avoid overweight fees. Use the uPatch Luggage Scale — the smart, battery-free way to travel light."
-  keywords:
-    - "airline baggage limits"
-    - "carry-on size guide"
-    - "checked bag allowance"
-    - "travel packing tips"
-    - "uPatch luggage scale"
-    - "battery-free luggage scale"
-    - "lightweight travel gear"
-    - "overweight luggage fees"
-    - "smart travel accessories"
-    - "flight baggage rules"
-    - "travel weight checker"
+  description: "Travel news, helpful resources, and useful guides."
+  keywords: ["luggage", "baggage limits", "travel tips", "packing guides", "smart travel"]
   author: "Luggage Scale Blog"
   customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
   defaultTheme: auto
   ShowReadingTime: true
   ShowWordCount: true
-  centerTheme: true
+  centerTheme: true   # центрирует весь контент
   label:
     text: "Luggage Scale"
     icon: "favicon.svg"
     iconHeight: 32
   assets:
     favicon: "favicon.svg"
-  disableGA: true
+  disableGA: true   # отключаем google_analytics.html, чтобы не было ошибки
+
 
 privacy:
   googleAnalytics:
@@ -99,15 +91,15 @@ menu:
   main:
     - identifier: home
       name: Home
-      url: "/"  # это даст https://luggage-scale.com/blog/
+      url: "/"
       weight: 1
     - identifier: shop
       name: Shop
-      url: "https://luggage-scale.com/shop.html"
+      url: "../shop.html"
       weight: 2
     - identifier: manual
       name: Manual
-      url: "https://luggage-scale.com/manual.html"
+      url: "../manual.html"
       weight: 3
 
   footer:
