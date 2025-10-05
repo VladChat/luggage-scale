@@ -95,7 +95,7 @@ A well-built self-powered luggage scale can deliver:
 
 With a few seconds of priming (e.g., pulling a generator cord), you can get multiple measurements. High-quality models use strain gauge sensors with calibration routines to maintain accuracy over time.
 
-For more on the concept and buying considerations, see our in-depth guide: <a href="https://luggage-scale.com/guides/self-powered-luggage-scale">The Self-Powered Luggage Scale: How It Works and What to Look For</a>.
+For more on the concept and buying considerations, see our in-depth guide: The Self-Powered Luggage Scale: How It Works and What to Look For.
 
 ## Designing for Reliability in Remote Places
 
@@ -159,7 +159,7 @@ Earhart’s story resonates because it exemplifies the human appetite for discov
 
 Whether you’re joining a liveaboard dive trip, flying to a windy atoll with a short runway, or hopping between regional hubs, the combination of careful planning, weight discipline, and dependable gear forms a safety net for your itinerary.
 
-If you’re building your kit from scratch, start with the essentials and choose gear that thrives off-grid. Our homepage curates top picks and practical advice for seasoned and aspiring explorers alike: <a href="https://luggage-scale.com/">luggage-scale.com</a>.
+If you’re building your kit from scratch, start with the essentials and choose gear that thrives off-grid. Our homepage curates top picks and practical advice for seasoned and aspiring explorers alike: luggage-scale.com.
 
 ## Conclusion: Curiosity, Respect, and the Right Tools
 

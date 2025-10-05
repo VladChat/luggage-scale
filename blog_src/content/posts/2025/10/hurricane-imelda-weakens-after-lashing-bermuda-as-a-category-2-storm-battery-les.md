@@ -49,7 +49,7 @@ Electricity is among the first services to fail during a storm—and one of the 
 - Sustainable choice. No disposable batteries means less waste, fewer supply runs, and a smaller travel footprint—vital on islands where disposal logistics are more complex.
 - Fits emergency repacking scenarios. Amid a storm, you may need to redistribute supplies (water filters, power banks, rain gear) across multiple bags. A battery-less scale lets you rebalance fast.
 
-On top of all that, knowing your bag’s weight allows you to move with confidence: you can rebook to the earliest available flight without second-guessing whether your luggage will pass muster. To explore options, start with our overview of the <a href="https://luggage-scale.com/battery-less-luggage-scale">battery-less luggage scale</a> and how to choose the right model for your travel style.
+On top of all that, knowing your bag’s weight allows you to move with confidence: you can rebook to the earliest available flight without second-guessing whether your luggage will pass muster. To explore options, start with our overview of the battery-less luggage scale and how to choose the right model for your travel style.
 
 ## How Battery-Less Luggage Scales Work
 
@@ -178,4 +178,4 @@ Q: How do I maintain a scale in humid, coastal environments like Bermuda?
 A: Rinse and dry metal components exposed to salt air, store the scale in a protective pouch, avoid drops, and periodically zero or test against a known weight. These simple steps preserve accuracy and lifespan.
 
 Q: Where can I learn more about choosing and using a battery-less luggage scale?
-A: Explore our detailed guide to the <a href="https://luggage-scale.com/battery-less-luggage-scale">battery-less luggage scale</a> and review our hurricane travel checklist for packing strategies tailored to storm-season travel.
+A: Explore our detailed guide to the battery-less luggage scale and review our hurricane travel checklist for packing strategies tailored to storm-season travel.

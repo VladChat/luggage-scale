@@ -58,7 +58,7 @@ Not all scales are built to the same standard. Whether you’re packing for a qu
 - Build materials: Stainless steel hooks and reinforced plastic or aluminum bodies hold up better during frequent use.
 - Size and portability: Slim profiles slip into outer pockets without adding meaningful weight. If you travel with a carry-on only, prioritize compactness.
 
-If you’re comparing models, see our overview of travel-ready picks: <a href="https://www.luggage-scale.com/best-luggage-scales">Best Luggage Scales</a>.
+If you’re comparing models, see our overview of travel-ready picks: Best Luggage Scales.
 
 ## Real-World Scenarios Where Hand Powered Scales Shine
 
@@ -93,7 +93,7 @@ Frequent travelers develop a steady routine. Here’s a simple, repeatable metho
 - Repeat for consistency: Two consistent readings reduce error. If readings differ, try a slower lift with less sway.
 - Use tare if needed: Weigh your protective bag or a tote first, note the reading, then weigh again with the suitcase inside and subtract. Some mechanical units allow zeroing with the tote attached.
 
-For a step-by-step walkthrough and troubleshooting tips, see <a href="https://www.luggage-scale.com/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a>.
+For a step-by-step walkthrough and troubleshooting tips, see How to Use a Luggage Scale.
 
 ## Mechanical vs. Digital-Without-Batteries: Which Should You Choose?
 
@@ -105,7 +105,7 @@ If you can find one, a dynamo-assisted digital scale offers bright numeric reado
 
 However, availability is limited, and cranking mechanisms add complexity. Mechanical models win on simplicity and durability, and they’re easy to hand to a relative or friend without explanation.
 
-For a broader look at trade-offs, visit <a href="https://www.luggage-scale.com/digital-vs-analog-luggage-scale">Digital vs. Analog Luggage Scale</a>.
+For a broader look at trade-offs, visit Digital vs. Analog Luggage Scale.
 
 ## Price, Value, and How to Avoid Overpaying
 

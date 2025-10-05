@@ -46,7 +46,7 @@ Culture-war debates generate plenty of heat. But for travelers, a calmer, more l
 
 Why the emphasis on “no-battery”? Because when you’re standing at a check-in counter, the worst time to find out a coin cell is dead is right now. A mechanical or spring-based scale avoids that failure mode entirely. It’s one less thing to charge, one less spare to carry, and one less source of electronic waste.
 
-If you’re considering the switch, or simply upgrading your kit, take a look at our product insights here: <a href="https://luggage-scale.com/products/reusable-luggage-scale">reusable luggage scale</a>. It’s the rare travel tool that is both simple and quietly sophisticated.
+If you’re considering the switch, or simply upgrading your kit, take a look at our product insights here: reusable luggage scale. It’s the rare travel tool that is both simple and quietly sophisticated.
 
 ## Why a Reusable No-Battery Luggage Scale Belongs in Every Bag
 
@@ -99,7 +99,7 @@ How to weigh your bag accurately:
 5. Set the bag down, adjust contents if necessary, then retest.
 6. Write the number on your itinerary or phone notes so you remember it at the counter.
 
-If you want a step-by-step walkthrough with pro tips, bookmark our how-to guide: <a href="https://luggage-scale.com/guides/how-to-use-a-luggage-scale">how to use a luggage scale</a>.
+If you want a step-by-step walkthrough with pro tips, bookmark our how-to guide: how to use a luggage scale.
 
 ## Avoiding Overweight Fees Without Stress: Packing Strategies That Work
 

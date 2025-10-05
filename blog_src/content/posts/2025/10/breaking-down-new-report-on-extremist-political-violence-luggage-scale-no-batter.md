@@ -106,7 +106,7 @@ You don’t need a security background to make smart choices. This checklist mir
 - Essentials on you: Keep medications, IDs, and a phone battery pack handy. Even if you detour or wait out a delay, you’ll be fine.
 - Respectful awareness: People have the right to assemble peacefully. Your goal is simply to reach your dinner reservation or museum—and to do so smoothly.
 
-For more on smart packing that minimizes stress, see our in-house guide to staying under airline limits with practical tools like mechanical scales: <a href="https://www.luggage-scale.com/guides/no-battery-luggage-scale">No-Battery Luggage Scale: Why It Belongs in Every Carry-On</a>.
+For more on smart packing that minimizes stress, see our in-house guide to staying under airline limits with practical tools like mechanical scales: No-Battery Luggage Scale: Why It Belongs in Every Carry-On.
 
 ## Why a Luggage Scale With No Battery Required Still Matters
 
@@ -117,7 +117,7 @@ On a site dedicated to hassle-free travel, we’d be remiss not to touch on a si
 - Packability: Many models fold or tuck into a side pocket. They’re lighter than carrying spare batteries or a charger for a digital scale.
 - Sustainability: Fewer disposable cells and less e-waste. Small wins add up.
 
-If you’re looking for a straightforward, everyday tool, explore our portable options: <a href="https://www.luggage-scale.com/products/handheld-luggage-scale">Handheld Luggage Scales for Any Trip</a>. A reliable, no-battery design is one less thing to think about, especially when the rest of your itinerary is busy.
+If you’re looking for a straightforward, everyday tool, explore our portable options: Handheld Luggage Scales for Any Trip. A reliable, no-battery design is one less thing to think about, especially when the rest of your itinerary is busy.
 
 ## What to Watch in the Months Ahead
 

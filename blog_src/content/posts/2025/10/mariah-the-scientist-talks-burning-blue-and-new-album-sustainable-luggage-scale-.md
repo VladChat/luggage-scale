@@ -39,7 +39,7 @@ If you care about the footprint of your trips, start with the gear. A sustainabl
 
 At luggage-scale.com, we measure “sustainable” not just by a marketing claim but by how many years a scale can stave off replacement. If a scale survives dozens of trips, does not require frequent battery swaps, and ships in minimal packaging, it earns its place.
 
-For an example of what we look for, see our lightweight, USB-C rechargeable option here: <a href="https://luggage-scale.com/products/eco-smart-scale">Eco-Smart Scale</a>.
+For an example of what we look for, see our lightweight, USB-C rechargeable option here: Eco-Smart Scale.
 
 ## “Burning Blue” and the Art of Weightless Packing
 
@@ -120,7 +120,7 @@ Between “Burning Blue” love and a No. 1 album, the merch lines will be serio
 - Reserve capacity: Start your trip a couple pounds under the airline limit.
 - Protect flat items: Slip a rigid mailer into your suitcase wall for posters or programs.
 - Weigh mid-trip: If you hit multiple shows, weigh after each merch stop to stay on track.
-- Ship home if needed: If you overdo it, compare shipping rates versus airline fees. We offer guidance on weight-safe packing and returns here: <a href="https://luggage-scale.com/pages/shipping-returns">Shipping & Returns</a>.
+- Ship home if needed: If you overdo it, compare shipping rates versus airline fees. We offer guidance on weight-safe packing and returns here: Shipping & Returns.
 
 Your scale removes guesswork and protects the memories you’re bringing home.
 

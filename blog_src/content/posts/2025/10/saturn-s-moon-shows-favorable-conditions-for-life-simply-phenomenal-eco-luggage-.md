@@ -65,7 +65,7 @@ Battery-free luggage scales generally fall into two categories, each with its ow
 
 - Energy-harvesting digital: Some designs harvest a small amount of energy from your motion—think a short squeeze, crank, or lift—to power a low-draw display for a brief interval. This provides the readability of a digital screen without a disposable battery. The key is high-efficiency electronics and simple user input to “wake” the display.
 
-Both types can meet airline weight thresholds with tight tolerances when manufactured and calibrated well. The best choice depends on preference: analog simplicity or digital readability without a battery. For an example of what to look for in features and build, see our product overview: <a href="https://luggage-scale.com/eco-luggage-scale">Eco Luggage Scale</a>.
+Both types can meet airline weight thresholds with tight tolerances when manufactured and calibrated well. The best choice depends on preference: analog simplicity or digital readability without a battery. For an example of what to look for in features and build, see our product overview: Eco Luggage Scale.
 
 ## Packing Light, Traveling Far: Practical Tips Inspired by Space Science
 
@@ -99,7 +99,7 @@ Weight is a proxy for three things travelers care about: cost, comfort, and carb
 - Comfort: Carrying a lighter bag means fewer transfers to check-in, shorter lines, and easier navigation through transit.
 - Carbon: Lighter loads reduce aircraft fuel consumption at scale. While an individual’s contribution is small, a culture of right-sizing baggage across millions of passengers is non-trivial—especially when paired with other low-impact choices.
 
-Want to understand how we think about weight, measurement, and traveler experience? Read our story: <a href="https://luggage-scale.com/about">About</a>.
+Want to understand how we think about weight, measurement, and traveler experience? Read our story: About.
 
 ## Enceladus, Exploration, and a Culture of Measurement
 

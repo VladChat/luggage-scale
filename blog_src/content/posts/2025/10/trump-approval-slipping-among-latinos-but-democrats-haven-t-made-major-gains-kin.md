@@ -62,7 +62,7 @@ For price-conscious travelers—or anyone trying to avoid last-minute repacking 
 
 By removing batteries from the equation, a kinetic scale makes weighing a routine habit. You pull the scale out, give it the motion it needs, clip the strap, lift the bag, and read the display. That habit powerfully reduces the odds of a fee you didn’t plan for.
 
-To explore an example model and its specifications, visit the product page for our <a href="https://luggage-scale.com/products/kinetic-luggage-scale">kinetic luggage scale</a>.
+To explore an example model and its specifications, visit the product page for our kinetic luggage scale.
 
 ## How Kinetic Scales Work: Motion-Powered Reliability
 
@@ -82,7 +82,7 @@ What matters for travelers is the experience, not the engineering. The workflow 
 
 With that simple routine, you can measure and adjust your packing even in a small hotel room. No need to find a bathroom scale, and no approximating weight by “feel.” You get a reliable number that aligns with airline limits.
 
-For step-by-step best practices, you can consult our guide: <a href="https://luggage-scale.com/guides/how-to-use-a-luggage-scale">How to use a luggage scale</a>.
+For step-by-step best practices, you can consult our guide: How to use a luggage scale.
 
 ## Packing and Weighing Strategies for Families and Multicity Itineraries
 
@@ -164,7 +164,7 @@ Political cycles introduce noise; travel thrives on signal. The reliable signal 
 
 That’s why thousands of travelers fold a kinetic luggage scale into their standard kit. It’s light, it’s ready, and it does one job exceptionally well: keeping you under the limit so you can focus on your journey.
 
-If you’re building your travel toolkit or refreshing it for the season, revisit the fundamentals in Why luggage scales matter, learn the best practices in <a href="https://luggage-scale.com/guides/how-to-use-a-luggage-scale">How to use a luggage scale</a>, and consider the reliability of our <a href="https://luggage-scale.com/products/kinetic-luggage-scale">kinetic luggage scale</a> as a battery-free anchor for smarter packing.
+If you’re building your travel toolkit or refreshing it for the season, revisit the fundamentals in Why luggage scales matter, learn the best practices in How to use a luggage scale, and consider the reliability of our kinetic luggage scale as a battery-free anchor for smarter packing.
 
 ## FAQ
 

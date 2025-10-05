@@ -50,9 +50,9 @@ Key advantages of a manual luggage scale:
 - Rugged longevity: Fewer electronic parts mean fewer failure points.
 - Sustainable mindset: No disposable batteries means less e-waste and fewer restrictions when packing.
 
-If you’re new to luggage scales, our guide on technique can help you get consistent results. See <a href="https://www.luggage-scale.com/guides/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a> for clear, step-by-step advice.
+If you’re new to luggage scales, our guide on technique can help you get consistent results. See How to Use a Luggage Scale for clear, step-by-step advice.
 
-Travel well is travel light—mentally and literally. That’s why we recommend starting with a proven, battery-free design. Explore top picks in our roundup of reliable, road-tested options: Best Manual Luggage Scales. When you’re ready to choose one for your kit, you can browse our curated selection here: <a href="https://www.luggage-scale.com/shop/manual-luggage-scale">Manual Luggage Scale</a>.
+Travel well is travel light—mentally and literally. That’s why we recommend starting with a proven, battery-free design. Explore top picks in our roundup of reliable, road-tested options: Best Manual Luggage Scales. When you’re ready to choose one for your kit, you can browse our curated selection here: Manual Luggage Scale.
 
 ## Packing Smart in an Age of Uncertainty
 
@@ -107,9 +107,9 @@ The CBS Chicago investigation into wrong-home raids is a reminder that accuracy 
 As travelers and household planners, we can’t control everything, but we can control our readiness, our calm, and our gear. The manual luggage scale seems simple—and it is—but it embodies a larger philosophy: measure early, reduce surprises, and keep your system steady. If more of our travel decisions follow that principle, we’ll spend less time reacting and more time experiencing the journey.
 
 When you’re ready to upgrade your kit, revisit these three essentials:
-- Practical know-how for consistent readings: <a href="https://www.luggage-scale.com/guides/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a>
+- Practical know-how for consistent readings: How to Use a Luggage Scale
 - Field-tested, battery-free picks: Best Manual Luggage Scales
-- Ready-to-travel tools that last: <a href="https://www.luggage-scale.com/shop/manual-luggage-scale">Manual Luggage Scale</a>
+- Ready-to-travel tools that last: Manual Luggage Scale
 
 Safe travels—and may your bags be just right, your documents in order, and your peace of mind intact.
 

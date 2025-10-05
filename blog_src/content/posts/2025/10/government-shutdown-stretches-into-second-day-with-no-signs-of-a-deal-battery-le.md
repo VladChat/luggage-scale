@@ -56,7 +56,7 @@ Battery-less luggage scales come in two primary forms: mechanical spring scales 
 
 Both types can deliver excellent real-world accuracy. If you prefer absolute simplicity and ruggedness, go mechanical. If you want a bright digital readout with a hold function but still wish to avoid batteries, energy-harvesting models are a strong fit.
 
-For a deeper look at features to compare, see our roundup: <a href="https://luggage-scale.com/best-luggage-scales">Best Luggage Scales</a>.
+For a deeper look at features to compare, see our roundup: Best Luggage Scales.
 
 ## Choosing the Right Battery‑Less Luggage Scale: Features That Matter
 
@@ -86,7 +86,7 @@ If you’re buying during a busy travel period—or mid-shutdown—focus on reli
 - Warranty and support
   - In uncertain times, support matters. Favor brands that publish clear calibration guidance, offer spare parts or straps, and provide straightforward warranty terms.
 
-For brand-agnostic buying tips and operating best practices, explore our step-by-step guide: <a href="https://luggage-scale.com/guide/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a>.
+For brand-agnostic buying tips and operating best practices, explore our step-by-step guide: How to Use a Luggage Scale.
 
 ## Step‑by‑Step: Weighing Your Bag Without Power
 
@@ -117,7 +117,7 @@ Whether you’re using a mechanical or energy-harvesting digital scale, a consis
 8. Note it down
    - Write the final weight on your packing list. If you’re juggling multiple bags, label them by weight for quick reference at check-in.
 
-Need a dependable, travel-ready option? See our featured pick: <a href="https://luggage-scale.com/battery-less-luggage-scale">Battery‑Less Luggage Scale</a>.
+Need a dependable, travel-ready option? See our featured pick: Battery‑Less Luggage Scale.
 
 ## Minimizing Airport Friction During a Shutdown: A Practical Checklist
 
@@ -217,7 +217,7 @@ Shutdowns are, by definition, uncertain. You can’t force a deal in Washington,
 
 The small investments you make before leaving home will pay back in minutes and peace of mind at the airport—especially when the system is under extra pressure.
 
-If you’re ready to upgrade your kit, our recommended pick highlights the core features that matter under real-world conditions: <a href="https://luggage-scale.com/battery-less-luggage-scale">Battery‑Less Luggage Scale</a>.
+If you’re ready to upgrade your kit, our recommended pick highlights the core features that matter under real-world conditions: Battery‑Less Luggage Scale.
 
 ## FAQ
 
@@ -234,4 +234,4 @@ Q: Do energy-harvesting digital scales hold a reading long enough to set the bag
 A: Look for a “hold” or “peak hold” feature. Most quality models display the captured weight for several seconds after you lower the bag, allowing you to read the number without juggling a heavy lift.
 
 Q: How can I avoid overweight fees during periods of airport congestion?
-A: Weigh bags at home, aim 1–2 lb (0.5–1.0 kg) under the limit, and allocate dense items strategically between bags and your personal item. Arrive early enough to make small adjustments calmly if needed. For technique tips, see <a href="https://luggage-scale.com/guide/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a>.
+A: Weigh bags at home, aim 1–2 lb (0.5–1.0 kg) under the limit, and allocate dense items strategically between bags and your personal item. Arrive early enough to make small adjustments calmly if needed. For technique tips, see How to Use a Luggage Scale.

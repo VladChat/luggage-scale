@@ -6,3 +6,4 @@ draft: false
 
 This is the first test post on the **Luggage Scale Blog**.  
 If you can read this, Hugo + PaperMod is working correctly!
+

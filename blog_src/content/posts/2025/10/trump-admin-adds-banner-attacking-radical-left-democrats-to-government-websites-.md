@@ -105,7 +105,7 @@ Not all analog scales are identical. Consider these criteria:
 - Tare/zero function: An adjustable zero helps you factor in straps, packing cubes, or a laundry bag you might use as a liner.
 - Protective case: A small pouch prevents scratches and keeps the hook from snagging gear inside your bag.
 
-Want curated picks based on real-world testing? Visit <a href="https://luggage-scale.com/guides/best-luggage-scales">Best Luggage Scales for International Travel</a> for analog and hybrid options that balance durability, precision, and price.
+Want curated picks based on real-world testing? Visit Best Luggage Scales for International Travel for analog and hybrid options that balance durability, precision, and price.
 
 ## Battery-Free vs. Digital: When Each Makes Sense
 
@@ -152,7 +152,7 @@ Preparedness looks like:
 
 When systems strain, the travelers who stay nimble glide past the snags.
 
-For shoppers ready to outfit their kit, browse our analog lineup here: <a href="https://luggage-scale.com/shop/analog-luggage-scale">Shop Analog Luggage Scales</a>.
+For shoppers ready to outfit their kit, browse our analog lineup here: Shop Analog Luggage Scales.
 
 ## Quick Checklist: Preflight Steps During a Shutdown
 

@@ -57,7 +57,7 @@ Air travel continues during shutdowns, but it doesn’t operate unaffected. The 
 
 For travelers, the main takeaway is to expect friction at the margins: longer queues, less predictable connection cushions, and fewer recovery options when flights misconnect. Small planning moves—prepacking to avoid repacking, knowing your airline’s weight limits, and carrying tools that simplify rebooking—help keep delays from turning into trip-enders.
 
-If you need a refresher on staying under airline weight limits, see our quick guide: <a href="https://luggage-scale.com/guides/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a>.
+If you need a refresher on staying under airline weight limits, see our quick guide: How to Use a Luggage Scale.
 
 ## National Parks, Museums, and Conferences: The Silent Drag on Local Economies
 
@@ -117,7 +117,7 @@ For travel businesses:
 - Communicate proactively: Email customers with clear updates about potential closures, refund policies, and alternative options.
 - Manage working capital: Build cash cushions where possible; engage lenders early if SBA channels pause; negotiate flexible terms with suppliers tied to fluctuating occupancy.
 
-If you’re revisiting baggage policies for your next trip, our guide to airline weight rules can help: <a href="https://luggage-scale.com/guides/airline-baggage-allowances">Airline Baggage Allowances</a>.
+If you’re revisiting baggage policies for your next trip, our guide to airline weight rules can help: Airline Baggage Allowances.
 
 ## Why a No-Battery Travel Scale Still Matters in Turbulent Times
 
@@ -134,7 +134,7 @@ Choosing the right one:
 - Aim for capacity that matches your airline’s limits (typically 50 lbs/23 kg for economy checked bags, though it varies).
 - A built-in tape measure helps verify carry-on dimensions if aircraft swaps change overhead bin capacity.
 
-Curious which models are worth it? See our curated picks here: <a href="https://luggage-scale.com/buyers-guide/no-battery-travel-scales">Best No-Battery Travel Scales</a>.
+Curious which models are worth it? See our curated picks here: Best No-Battery Travel Scales.
 
 ## Methodology Notes: How Analysts Add Up the Numbers
 
@@ -172,4 +172,4 @@ Q: Why do shutdowns cost taxpayers money if agencies are closed?
 A: Most furloughed employees receive back pay once funding is restored. Agencies also incur overtime and other catch-up costs. Meanwhile, fee-funded revenue (like park fees) can be lost during closure periods. Add inefficiencies in procurement and some permanently lost economic activity, and total costs typically rise.
 
 Q: How can I avoid overweight baggage fees if airport lines are longer?
-A: Weigh bags before you leave and again before your return flight. A compact, no battery travel scale is ideal—no charging, no batteries, and accurate enough to keep you under airline limits. For quick tips, see <a href="https://luggage-scale.com/guides/how-to-use-a-luggage-scale">How to Use a Luggage Scale</a>.
+A: Weigh bags before you leave and again before your return flight. A compact, no battery travel scale is ideal—no charging, no batteries, and accurate enough to keep you under airline limits. For quick tips, see How to Use a Luggage Scale.

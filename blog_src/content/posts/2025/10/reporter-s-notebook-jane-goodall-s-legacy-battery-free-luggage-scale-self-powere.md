@@ -71,7 +71,7 @@ Jane Goodall’s advocacy has always emphasized the small choices that add up to
 
 Sustainability is also psychological. When you commit to one tool that simply works, you’re less tempted to upgrade impulsively. That mindset—buy well and use often—aligns with Goodall’s ethic of respect for materials, for the forests and mines that yield them, and for the communities that live with the consequences of our consumption.
 
-For a closer look at the features that matter, browse our overview of options here: <a href="https://luggage-scale.com/products/battery-free-luggage-scale">battery-free luggage scale</a>.
+For a closer look at the features that matter, browse our overview of options here: battery-free luggage scale.
 
 ## Reliability in the wild—and at the check-in counter
 

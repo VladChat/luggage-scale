@@ -127,7 +127,7 @@ Not all mechanical scales are created equal. Consider the following features as 
 - Compact form factor: A flat profile and minimal protrusions pack better in small bags.
 - Comfort grip: A padded or contoured handle reduces strain when lifting heavier suitcases.
 
-Explore reliable, battery-free options here: <a href="https://luggage-scale.com/shop/mechanical-luggage-scale">Shop Mechanical Luggage Scales</a>.
+Explore reliable, battery-free options here: Shop Mechanical Luggage Scales.
 
 ## Why “Battery Free” Matters More During High-Stakes Travel
 

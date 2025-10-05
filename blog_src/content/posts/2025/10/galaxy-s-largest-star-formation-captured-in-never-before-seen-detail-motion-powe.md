@@ -34,7 +34,7 @@ A motion-powered luggage scale does what it says on the tin—it generates its o
 
 Why does this matter? Because a luggage scale is most useful precisely when power is scarce: at a rural bus station, on a redeye after your phone battery dies, or when you’re repacking in a dim hostel dorm to meet a weight limit. Motion is the one thing you always have while traveling. Converting it to the few milliwatt-hours a scale needs is the perfect trade: effortless, predictable, and independent of wall plugs or power banks.
 
-If you’re curious how this translates into an actual product, see our overview of the <a href="https://www.luggage-scale.com/products/motion-powered-luggage-scale">Motion-Powered Luggage Scale</a>, designed for accuracy and durability without disposable batteries.
+If you’re curious how this translates into an actual product, see our overview of the Motion-Powered Luggage Scale, designed for accuracy and durability without disposable batteries.
 
 ## Why motion-powered makes sense for modern travelers
 
@@ -82,7 +82,7 @@ To get consistent results:
 - Measure twice: Two consistent readings within a few seconds confirm stability.
 - Mind the strap: Use the provided strap or hook as designed; twisting can torque readings.
 
-Calibrating a modern scale is straightforward and rarely needed, but it’s good practice to verify occasionally with a known weight. If you’re unsure, follow our step-by-step walkthrough to <a href="https://www.luggage-scale.com/guides/how-to-calibrate-a-luggage-scale">calibrate a luggage scale</a> at home.
+Calibrating a modern scale is straightforward and rarely needed, but it’s good practice to verify occasionally with a known weight. If you’re unsure, follow our step-by-step walkthrough to calibrate a luggage scale at home.
 
 What about magnetic interference? The generator inside uses a magnet, but it’s small, shielded, and isolated from the measurement path. Airports and airplanes are full of electronics and magnetic fields, yet properly engineered scales pose no interference risk and aren’t affected by routine environmental magnetism. Sensible precautions apply:
 
@@ -139,7 +139,7 @@ Pro tip for connecting flights: Different airlines and aircraft types vary in ov
 
 What do a planetary traveler and a galactic nursery share? A reliance on motion to get things done. Sagittarius B2 is a reminder that energy is everywhere, waiting to be organized. In that spirit, a motion-powered luggage scale is simple, effective, and surprisingly liberating. It takes a universal resource—your movement—and turns it into certainty at the check-in counter.
 
-If you’re ready to travel lighter, smarter, and more independently, explore our detailed look at the <a href="https://www.luggage-scale.com/products/motion-powered-luggage-scale">Motion-Powered Luggage Scale</a>, and keep our airline baggage fees guide handy as you plan your luggage strategy. Let the stars inspire you, but let your gear deliver—every day, in every terminal.
+If you’re ready to travel lighter, smarter, and more independently, explore our detailed look at the Motion-Powered Luggage Scale, and keep our airline baggage fees guide handy as you plan your luggage strategy. Let the stars inspire you, but let your gear deliver—every day, in every terminal.
 
 ## FAQ
 
@@ -156,4 +156,4 @@ Q: How long do I need to shake the scale before use, and how many weigh-ins does
 A: About 10–15 seconds of moderate shaking or a short walk with the scale in your hand typically primes the supercapacitor for several consecutive weigh-ins. If the display dims, a brief top-up shake restores full brightness and stability.
 
 Q: Can I calibrate a motion-powered luggage scale at home?
-A: Yes. Most models include a simple calibration mode. Use a known reference weight—like a set of dumbbells or gym plates verified on a floor scale—and follow the prompts. For a detailed walkthrough, see how to <a href="https://www.luggage-scale.com/guides/how-to-calibrate-a-luggage-scale">calibrate a luggage scale</a> step-by-step.
+A: Yes. Most models include a simple calibration mode. Use a known reference weight—like a set of dumbbells or gym plates verified on a floor scale—and follow the prompts. For a detailed walkthrough, see how to calibrate a luggage scale step-by-step.

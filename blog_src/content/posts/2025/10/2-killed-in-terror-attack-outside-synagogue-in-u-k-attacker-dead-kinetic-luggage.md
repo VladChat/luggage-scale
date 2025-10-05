@@ -86,7 +86,7 @@ If you’re new to luggage scales, our primer explains weight rules, device type
 
 Security tip: Always keep your passport and high‑value items on your person while repacking. Close zippers and re‑lock compartments immediately after weighing.
 
-For more on navigating checkpoints with travel tools, see our guide: <a href="https://www.luggage-scale.com/guides/airport-security-luggage-scales">Airport Security and Luggage Scales: Rules, Tips, and Best Practices</a>
+For more on navigating checkpoints with travel tools, see our guide: Airport Security and Luggage Scales: Rules, Tips, and Best Practices
 
 ## Packing Light and Smart When Alerts Are Elevated
 
@@ -146,7 +146,7 @@ Making a kinetic luggage scale part of your standard travel loadout is straightf
 - Calibration check: Periodically verify accuracy by weighing a known item at home. Mechanical and kinetic devices maintain accuracy well, but it’s good practice.
 - Shareability: If traveling as a group, one scale serves everyone. Build five extra minutes into your departure plan for collective weighing.
 
-For those ready to add one to their kit, browse options and specs here: <a href="https://www.luggage-scale.com/shop/kinetic-luggage-scale">Kinetic Luggage Scale – Models and Buying Guide</a>
+For those ready to add one to their kit, browse options and specs here: Kinetic Luggage Scale – Models and Buying Guide
 
 ## Final Thoughts: Prepared, Calm, and Compassionate
 

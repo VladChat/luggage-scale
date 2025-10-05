@@ -100,4 +100,4 @@ Enhanced protocols include improved surveillance, personal security details, and
 ### How can travelers enhance their safety during trips?
 Travelers can enhance safety by packing smartly, staying informed about their destinations, using secure luggage, and keeping emergency contacts handy. 
 
-For more information on travel solutions, consider checking out our guides on <a href="https://www.luggage-scale.com/luggage-accessories/">luggage accessories</a> and <a href="https://www.luggage-scale.com/best-luggage-scales/">travel scales</a> to ensure a seamless travel experience.
+For more information on travel solutions, consider checking out our guides on luggage accessories and travel scales to ensure a seamless travel experience.

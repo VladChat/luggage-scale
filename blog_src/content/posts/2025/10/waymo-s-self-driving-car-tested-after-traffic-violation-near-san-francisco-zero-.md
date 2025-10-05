@@ -81,7 +81,7 @@ Why this matters:
 - Reliability under pressure: If an AV drop-off leaves you a short walk from the terminal or a level below your airline’s counter, you want to be confident you’re not over the limit.
 - Sustainable by design: Fewer disposable batteries mean less waste and one fewer item to manage on the road.
 
-If you’re curious what that looks like in practice, consider our streamlined option designed for frequent flyers: <a href="https://luggage-scale.com/products/zero-battery-luggage-scale">Zero Battery Luggage Scale</a>. It’s built to be compact, intuitive, and dependable wherever your itinerary takes you—no power outlet required.
+If you’re curious what that looks like in practice, consider our streamlined option designed for frequent flyers: Zero Battery Luggage Scale. It’s built to be compact, intuitive, and dependable wherever your itinerary takes you—no power outlet required.
 
 ## Choosing the Right Scale for Modern Travel: Key Features to Consider
 

@@ -109,10 +109,10 @@ A little preparation reduces stress and saves money when systems are strained. U
 - Confirm attractions: Re-check park and museum status the day prior; have Plan B activities.
 - Pack a self-reliance kit: Snacks, a refillable water bottle, meds, portable charger, and a compact luggage scale.
 - Weigh your bags at home: Overweight bags mean counter-time you may not have. A battery-free luggage scale removes “dead battery” surprises on the morning of departure.
-- Know the rules: Brush up on prohibited items and power bank limits with our <a href="https://luggage-scale.com/tsa-guide">TSA rules for luggage scales and batteries</a>.
+- Know the rules: Brush up on prohibited items and power bank limits with our TSA rules for luggage scales and batteries.
 - Document everything: Save delay messages, boarding passes, and receipts for potential claims.
 
-New to ultra-light packing? Our <a href="https://luggage-scale.com/packing-checklist">carry-on packing checklist</a> helps you trim weight and skip check-in counters when lines are long.
+New to ultra-light packing? Our carry-on packing checklist helps you trim weight and skip check-in counters when lines are long.
 
 ## Why a Battery-Free Luggage Scale Belongs in Your Travel Kit
 
@@ -124,7 +124,7 @@ A battery-free luggage scale offers specific advantages:
 - Eco- and travel-friendly: No spare batteries to pack, no disposal worries, and no compliance issues with button cells in checked bags.
 - Useful at destination: Souvenirs add weight. Recheck your bag in the hotel room and redistribute items before heading to the airport.
 
-Curious which style fits your travel style? See our in-depth overview: <a href="https://luggage-scale.com/battery-free-luggage-scale">battery-free luggage scale guide</a>.
+Curious which style fits your travel style? See our in-depth overview: battery-free luggage scale guide.
 
 ## Additional Strategies for Business and Time-Critical Trips
 
@@ -161,4 +161,4 @@ Q: Are Global Entry interviews and renewals affected?
 A: Enrollment center interviews may be curtailed, and processing can slow, depending on staffing. You can submit renewals online; conditional approvals and interview scheduling might take longer than usual.
 
 Q: How can a battery-free luggage scale help during a shutdown?
-A: It removes a common failure point—dead batteries—on a day when airport lines and counters may already be stretched. Weighing your bags at home helps you avoid overweight fees and desk time, letting you head straight to security if you’re traveling carry-on only. For guidance on models and use, see our <a href="https://luggage-scale.com/battery-free-luggage-scale">battery-free luggage scale guide</a>.
+A: It removes a common failure point—dead batteries—on a day when airport lines and counters may already be stretched. Weighing your bags at home helps you avoid overweight fees and desk time, letting you head straight to security if you’re traveling carry-on only. For guidance on models and use, see our battery-free luggage scale guide.

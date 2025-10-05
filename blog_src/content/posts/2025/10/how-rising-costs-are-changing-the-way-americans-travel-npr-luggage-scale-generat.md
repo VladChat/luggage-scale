@@ -51,7 +51,7 @@ Strategies to mitigate these costs:
 - Plan around a personal item: Some travelers use a cleverly sized under-seat backpack to avoid both checked and carry-on fees on budget airlines.
 - Weigh your bag at home: Bring a luggage scale into the booking equation. If you’re close to the limit, you may prefer a fare with free checked baggage over a cheaper ticket plus potential fees.
 
-If you’re not sure about limits on specific airlines or regions, bookmark guides you’ll actually use, like our carry-on and checked bag recommendations in the <a href="https://luggage-scale.com/guides/carry-on-weight-limits">Carry-On Weight Limits Guide</a>. Knowing the rules saves you money and stress.
+If you’re not sure about limits on specific airlines or regions, bookmark guides you’ll actually use, like our carry-on and checked bag recommendations in the Carry-On Weight Limits Guide. Knowing the rules saves you money and stress.
 
 ## Hotels and Accommodations: Not Just the Nightly Rate
 
@@ -110,7 +110,7 @@ How to use it effectively:
 4. Check your airline’s limits and adjust if needed by shifting heavier items to another bag or your personal item.  
 5. Reweigh after any changes to confirm you’re safely under the threshold.
 
-Ready to see what a self-powered scale can do? Compare features and specs in our product detail page: <a href="https://luggage-scale.com/products/self-powered-luggage-scale">Self-Powered Luggage Scale</a>.
+Ready to see what a self-powered scale can do? Compare features and specs in our product detail page: Self-Powered Luggage Scale.
 
 ## Strategies to Stretch Your Travel Budget Without Cutting the Joy
 
@@ -159,7 +159,7 @@ You can’t control macroeconomics, but you can control preparation. That’s th
 
 A luggage scale that generates its own power is a small investment that pays for itself the first time you avoid an overweight fee or a last-minute bag reshuffle at the check-in counter. Keep it in the front pocket of your suitcase, and you’ll always travel with confidence.
 
-If you’re ready to build a kit that cuts stress and fees, start here: <a href="https://luggage-scale.com/products/self-powered-luggage-scale">Self-Powered Luggage Scale</a> and the <a href="https://luggage-scale.com/guides/carry-on-weight-limits">Carry-On Weight Limits Guide</a>.
+If you’re ready to build a kit that cuts stress and fees, start here: Self-Powered Luggage Scale and the Carry-On Weight Limits Guide.
 
 ## FAQ
 
