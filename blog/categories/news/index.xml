@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>News on Luggage Scale</title>
+    <link>http://localhost:1313/blog/categories/news/</link>
+    <description>Recent content in News on Luggage Scale</description>
+    <generator>Hugo -- 0.150.1</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Oct 2025 19:28:44 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/categories/news/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>New nonrefundable travel options save money — until they</title>
+      <link>http://localhost:1313/blog/posts/2025/10/01/new-nonrefundable-travel-options-save-money-until-they/</link>
+      <pubDate>Wed, 01 Oct 2025 19:28:44 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/2025/10/01/new-nonrefundable-travel-options-save-money-until-they/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Canada updates travel advisory for the U.S. - FOX 8 News</title>
+      <link>http://localhost:1313/blog/posts/2025/10/01/canada-updates-travel-advisory-for-the-u.s.-fox-8-news/</link>
+      <pubDate>Wed, 01 Oct 2025 19:24:57 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/2025/10/01/canada-updates-travel-advisory-for-the-u.s.-fox-8-news/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

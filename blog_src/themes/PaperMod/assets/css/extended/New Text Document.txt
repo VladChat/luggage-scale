@@ -1,0 +1,3 @@
+/* Скрываем визуальный символ '#' у якорей PaperMod, но оставляем ссылку */
+a.anchor { font-size: 0; color: inherit; text-decoration: none; }
+a.anchor::before { content: ""; }

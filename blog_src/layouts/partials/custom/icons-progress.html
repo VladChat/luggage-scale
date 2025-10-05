@@ -1,0 +1,167 @@
+{{/* === Interactive Read Status Icons — Final Fix (Left-Aligned Titles) === */}}
+
+<style>
+/* Выровнять заголовки секций по левому краю */
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Всё содержимое слева */
+  text-align: left;
+}
+
+.accordion-header .read-badge {
+  width: 120px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  border-radius: 10px;
+  margin-right: 14px;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.25);
+  transition: all .35s ease;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+}
+.read-badge.active {
+  background: linear-gradient(135deg, #00c6ff, #82d6ff);
+  box-shadow: 0 0 12px rgba(130,214,255,.5);
+  transform: scale(1.05);
+}
+.read-badge.read {
+  background: linear-gradient(135deg, #6c757d, #9aa3ad);
+  opacity: .75;
+  box-shadow: none;
+}
+.read-badge svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  fill: none;
+}
+
+/* Однострочный заголовок с троеточием */
+.accordion-header .acc-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left; /* Название всегда слева */
+}
+
+/* Полное скрытие всех PaperMod anchors */
+.accordion-header .anchor,
+.accordion-content .anchor,
+a.anchor[href^="#"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  content: none !important;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .read-badge { box-shadow: 0 3px 10px rgba(0,0,0,.6); }
+  .read-badge.read { opacity: .6; }
+}
+</style>
+
+{{- $raw := `
+document.addEventListener("DOMContentLoaded", function () {
+  const root = document.querySelector(".post-content");
+  if (!root) return;
+
+  const icons = {
+    unread: "<svg viewBox='0 0 24 24'><rect x='4' y='4' width='16' height='16' rx='2'/></svg>",
+    active: "<svg viewBox='0 0 24 24'><circle cx='12' cy='12' r='8'/></svg>",
+    read:   "<svg viewBox='0 0 24 24'><path d='M4 12l5 5 11-11'/></svg>"
+  };
+
+  function buildTitleSpan(header) {
+    let titleSpan = header.querySelector('.acc-title');
+    if (titleSpan) {
+      header.setAttribute('title', titleSpan.textContent || '');
+      return;
+    }
+
+    const badge = header.querySelector('.read-badge');
+    const parts = [];
+    header.childNodes.forEach(n => {
+      if (badge && n === badge) return;
+      if (n.nodeType === Node.TEXT_NODE) parts.push(n.nodeValue);
+      else if (n.nodeType === Node.ELEMENT_NODE && !n.classList.contains('anchor'))
+        parts.push(n.textContent || '');
+    });
+
+    let title = parts.join(' ').replace(/\\s+/g, ' ').trim();
+    title = title.replace(/\\s*#\\s*$/, '');
+
+    const hadBadge = !!badge;
+    header.textContent = '';
+    if (hadBadge) header.appendChild(badge);
+
+    titleSpan = document.createElement('span');
+    titleSpan.className = 'acc-title';
+    titleSpan.textContent = title;
+    header.appendChild(document.createTextNode(' '));
+    header.appendChild(titleSpan);
+    header.setAttribute('title', title);
+  }
+
+  const sections = root.querySelectorAll('.accordion-section');
+  sections.forEach(sec => {
+    const header = sec.querySelector('.accordion-header');
+    if (!header) return;
+
+    if (!header.querySelector('.read-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'read-badge';
+      badge.innerHTML = icons.unread + 'TO READ';
+      header.insertBefore(badge, header.firstChild);
+    }
+
+    buildTitleSpan(header);
+  });
+
+  root.addEventListener('click', e => {
+    const header = e.target.closest('.accordion-header');
+    if (!header) return;
+    const badge = header.querySelector('.read-badge');
+    if (!badge) return;
+
+    root.querySelectorAll('.read-badge.active').forEach(b => {
+      b.classList.remove('active');
+      b.classList.add('read');
+      b.innerHTML = icons.read + 'READ';
+    });
+
+    badge.classList.remove('read');
+    badge.classList.add('active');
+    badge.innerHTML = icons.active + 'READING...';
+    buildTitleSpan(header);
+  });
+
+  sections.forEach(sec => {
+    if (sec.classList.contains('open')) {
+      const header = sec.querySelector('.accordion-header');
+      const badge = sec.querySelector('.read-badge');
+      if (badge) {
+        badge.classList.add('active');
+        badge.innerHTML = icons.active + 'READING...';
+      }
+      if (header) buildTitleSpan(header);
+    }
+  });
+});
+` -}}
+
+<script>{{ $raw | safeJS }}</script>

@@ -1,0 +1,50 @@
+{{/* === Section Design — Minimal Visible Test (safe and guaranteed) === */}}
+
+<style>
+/* Применяем эффект ко всем элементам второго уровня внутри .post-content */
+.post-content > *:not(.accordion-section):not(.faq-accordion):not(.read-badge) {
+  background: rgba(0, 170, 255, 0.05);
+  border-left: 4px solid #00aaff;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  margin: 1.2rem 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Эффект наведения */
+.post-content > *:not(.accordion-section):not(.faq-accordion):hover {
+  background: rgba(0, 170, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Анимация появления */
+.post-content > *:not(.accordion-section):not(.faq-accordion) {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.post-content > *:not(.accordion-section):not(.faq-accordion).fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const items = document.querySelectorAll(
+    ".post-content > *:not(.accordion-section):not(.faq-accordion)"
+  );
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  items.forEach(el => observer.observe(el));
+});
+</script>

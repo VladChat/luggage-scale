@@ -1,0 +1,25 @@
+/* === uPatch Blog | Section Icons Progress Style === */
+.icon {
+  color: var(--icon-active, #4db8ff);
+  transition: color 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+  opacity: 1;
+  filter: none;
+}
+.icon.active {
+  color: var(--icon-highlight, #82d6ff);
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(77,184,255,0.4));
+  animation: fadeInUp 0.4s ease-out;
+}
+.icon.read {
+  color: var(--icon-read, #7a8ca5);
+  opacity: 0.6;
+  filter: grayscale(100%);
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon, .icon.active { transition: none; animation: none; }
+}

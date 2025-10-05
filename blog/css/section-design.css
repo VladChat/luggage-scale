@@ -1,0 +1,19 @@
+/* === TEST MODE: CSS injection check === */
+
+body::before {
+  content: "✅ section-design.css is ACTIVE";
+  display: block;
+  background: #00ff9d;
+  color: #000;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 4px solid #008060;
+  z-index: 9999;
+}
+
+body {
+  outline: 8px dashed magenta !important;
+  background: rgba(255, 0, 255, 0.05) !important;
+}

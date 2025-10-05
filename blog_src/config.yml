@@ -53,6 +53,7 @@ taxonomies:
   tag: tags
 
 params:
+  disableAnchoredHeadings: true
   env: production
   title: "Luggage Scale"
   description: "Travel news, helpful resources, and useful guides."
@@ -70,6 +71,10 @@ params:
   assets:
     favicon: "favicon.svg"
   disableGA: true   # отключаем google_analytics.html, чтобы не было ошибки
+
+  # ✅ ДОБАВЛЕННО:
+  customCSS: ["/css/section-design.css"]
+  customJS: ["/js/section-fadein.js"]
 
 privacy:
   googleAnalytics:
