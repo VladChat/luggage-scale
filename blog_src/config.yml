@@ -2,7 +2,7 @@ baseURL: "https://luggage-scale.com/blog/"
 title: "Luggage Scale"
 theme: "PaperMod"
 publishDir: "../blog"
-canonifyURLs: false
+canonifyURLs: true
 relativeURLs: false
 
 pagination:
@@ -13,16 +13,14 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
-# включаем GitInfo, чтобы lastmod брался из даты последнего коммита
 enableGitInfo: true
 
-# настраиваем приоритет для lastmod
 frontmatter:
   lastmod:
-    - lastmod      # если указан lastmod в front-matter
-    - :git         # иначе Hugo возьмет дату последнего коммита
-    - :fileModTime # если git недоступен — дату изменения файла
-    - :default     # fallback: date
+    - lastmod
+    - :git
+    - :fileModTime
+    - :default
 
 permalinks:
   posts: "/posts/:year/:month/:day/:slug/"
@@ -56,25 +54,32 @@ params:
   disableAnchoredHeadings: true
   env: production
   title: "Luggage Scale"
-  description: "Travel news, helpful resources, and useful guides."
-  keywords: ["luggage", "baggage limits", "travel tips", "packing guides", "smart travel"]
+  description: "Find airline baggage limits, packing tips, and travel guides to avoid overweight fees. Use the uPatch Luggage Scale — the smart, battery-free way to travel light."
+  keywords:
+    - "airline baggage limits"
+    - "carry-on size guide"
+    - "checked bag allowance"
+    - "travel packing tips"
+    - "uPatch luggage scale"
+    - "battery-free luggage scale"
+    - "lightweight travel gear"
+    - "overweight luggage fees"
+    - "smart travel accessories"
+    - "flight baggage rules"
+    - "travel weight checker"
   author: "Luggage Scale Blog"
   customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
   defaultTheme: auto
   ShowReadingTime: true
   ShowWordCount: true
-  centerTheme: true   # центрирует весь контент
+  centerTheme: true
   label:
     text: "Luggage Scale"
     icon: "favicon.svg"
     iconHeight: 32
   assets:
     favicon: "favicon.svg"
-  disableGA: true   # отключаем google_analytics.html, чтобы не было ошибки
-
-  # ✅ ДОБАВЛЕННО:
-  customCSS: ["/css/section-design.css"]
-  customJS: ["/js/section-fadein.js"]
+  disableGA: true
 
 privacy:
   googleAnalytics:
@@ -94,15 +99,15 @@ menu:
   main:
     - identifier: home
       name: Home
-      url: "/"
+      url: "/"  # это даст https://luggage-scale.com/blog/
       weight: 1
     - identifier: shop
       name: Shop
-      url: "../shop.html"
+      url: "https://luggage-scale.com/shop.html"
       weight: 2
     - identifier: manual
       name: Manual
-      url: "../manual.html"
+      url: "https://luggage-scale.com/manual.html"
       weight: 3
 
   footer:
