@@ -1,7 +1,0 @@
-cd documents/luggage-scale
-hugo server -s blog_src --disableFastRender --buildDrafts
-
-
-http://localhost:1313/blog/
-
-

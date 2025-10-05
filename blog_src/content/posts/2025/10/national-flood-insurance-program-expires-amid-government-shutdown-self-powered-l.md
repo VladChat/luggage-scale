@@ -65,7 +65,7 @@ When selecting a self-powered luggage scale, consider the following factors:
 - **Build Quality**: Look for durable materials that can withstand frequent travel use.
 - **User Reviews**: Research consumer feedback to gauge performance and reliability.
 
-For more information on the best luggage scales, visit our guide on [top self-powered luggage scales](https://luggage-scale.com/top-self-powered-luggage-scales).
+For more information on the best luggage scales, visit our guide on top self-powered luggage scales.
 
 ## Conclusion
 
