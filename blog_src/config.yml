@@ -63,10 +63,10 @@ taxonomies:
 params:
   disableAnchoredHeadings: true
   env: production
-  title: "Luggage Scale"
+  title: "uPatch Luggage Scale"
   description: "Travel news, helpful resources, and useful guides."
   keywords: ["luggage", "baggage limits", "travel tips", "packing guides", "smart travel"]
-  author: "Luggage Scale Blog"
+  author: "uPatch Editorial"
   customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
   defaultTheme: auto
   ShowReadingTime: true
@@ -105,10 +105,6 @@ menu:
       name: Shop
       url: "../shop.html"
       weight: 2
-    - identifier: manual
-      name: Manual
-      url: "../manual.html"
-      weight: 3
 
   footer:
     - identifier: privacy

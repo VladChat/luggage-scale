@@ -21,24 +21,31 @@ body.single .main {
   max-width: 800px;
 }
 
-
-
-
-<!-- PAGINATION FIX v3: build links from .Site.BaseURL path + "page/N/" -->
-
-<style>
-/* ======== Blog List — uPatch Design (2-column Layout) ======== */
-
-/* Расширяем только список (list) — без влияния на single */
-body.list .main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+/* ==== Header block (Hero Strip) ==== */
+.list-page-header {
+  background: linear-gradient(180deg, rgba(0,198,255,0.10), transparent 90%);
+  border-radius: var(--radius);
+  padding: 2rem 1.25rem 2.25rem 1.25rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+body.dark .list-page-header {
+  background: linear-gradient(180deg, rgba(0,198,255,0.12), rgba(0,0,0,0.1));
 }
 
-/* Узкая ширина для страниц-постов (на будущее) */
-body.single .main {
-  max-width: 800px;
+.list-page-header .page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  margin-bottom: 0.5rem;
+}
+
+.list-page-header .page-intro {
+  color: var(--secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 /* Сетка карточек: 1 колонка мобайл, 2 — десктоп */
@@ -61,8 +68,26 @@ body.single .main {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   transition: all 0.25s ease;
+  height: auto;              /* мобильная версия — гибкая */
+  min-height: unset;
 }
+
+/* === Fix: ensure no leftover min-height or fixed height from theme === */
+.post-card {
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+}
+
+/* На десктопах фиксируем высоту для ровной сетки */
+@media (min-width: 860px) {
+  .post-card {
+    min-height: 360px;
+  }
+}
+
 .post-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 0 14px rgba(0, 198, 255, 0.25);
@@ -81,6 +106,7 @@ body.single .main {
   white-space: normal;
   -webkit-line-clamp: 1;
   line-clamp: 1;
+  text-align: left;
 }
 @media (max-width: 640px) {
   .post-card-title {
@@ -89,13 +115,21 @@ body.single .main {
   }
 }
 
-/* Краткое описание */
+/* Краткое описание (аннотация) */
 .post-card-summary {
   color: var(--tertiary);
   font-size: 0.95rem;
   line-height: 1.45;
   margin-bottom: 1rem;
   flex: 1 1 auto;
+
+  /* === Truncate + Justify === */
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Метаданные */
@@ -104,6 +138,7 @@ body.single .main {
   color: var(--secondary);
   margin-top: auto;
   opacity: 0.85;
+  text-align: left;
 }
 
 /* Ссылки внутри карточки */
@@ -152,15 +187,20 @@ nav.pagination a.disabled {
 </style>
 
 <section class="list-page">
-  {{ if .Title }}
-    <h1 class="page-title">{{ .Title }}</h1>
-  {{ end }}
 
-  {{ if .Content }}
-    <div class="page-intro">
-      {{ .Content }}
-    </div>
-  {{ end }}
+  <!-- === HERO STRIP (Blog Header) === -->
+  <div class="list-page-header">
+    {{ if .Title }}
+      <h1 class="page-title">{{ .Title }}</h1>
+    {{ end }}
+
+    {{ if .Content }}
+      <div class="page-intro">
+        {{ .Content }}
+      </div>
+    {{ end }}
+  </div>
+  <!-- === END HERO STRIP === -->
 
   {{/* Берём только реальные статьи, исключая служебные страницы */}}
   {{ $allPages := where .Site.RegularPages "Type" "!=" "page" }}
@@ -187,9 +227,8 @@ nav.pagination a.disabled {
     {{ end }}
   </div>
 
-  {{/* ===== Custom Pagination: build from baseURL path (no .URL) ===== */}}
+  {{/* ===== PAGINATION FIX v3 ===== */}}
   {{- if gt $paginator.TotalPages 1 }}
-    {{/* Вытащим только путь из .Site.BaseURL: из "https://host/blog/" -> "/blog/" */}}
     {{- $baseURL := .Site.BaseURL -}}
     {{- $basePath := replaceRE `^https?://[^/]+` "" $baseURL -}}
     {{- if not (strings.HasSuffix $basePath "/") -}}
@@ -197,7 +236,6 @@ nav.pagination a.disabled {
     {{- end -}}
 
     <nav class="pagination">
-      {{- /* Prev */ -}}
       {{- if $paginator.HasPrev -}}
         {{- $prevNum := sub $paginator.PageNumber 1 -}}
         {{- $prevHref := cond (eq $prevNum 1) $basePath (printf "%spage/%d/" $basePath $prevNum) -}}
@@ -206,14 +244,12 @@ nav.pagination a.disabled {
         <a class="prev disabled">« Prev</a>
       {{- end -}}
 
-      {{- /* Numbers */ -}}
       {{- range $paginator.Pagers -}}
         {{- $n := .PageNumber -}}
         {{- $href := cond (eq $n 1) $basePath (printf "%spage/%d/" $basePath $n) -}}
         <a class="{{ if eq $n $paginator.PageNumber }}active{{ end }}" href="{{ $href }}">{{ $n }}</a>
       {{- end -}}
 
-      {{- /* Next */ -}}
       {{- if $paginator.HasNext -}}
         {{- $nextNum := add $paginator.PageNumber 1 -}}
         {{- $nextHref := cond (eq $nextNum 1) $basePath (printf "%spage/%d/" $basePath $nextNum) -}}
