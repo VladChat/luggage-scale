@@ -1,12 +1,12 @@
 <style>
   /* ========= PALLETTE ========= */
   :root {
-    --brand-blue: #1f6feb;     /* основной акцент */
-    --brand-cyan: #00c6ff;     /* второй акцент */
-    --brand-bg:   #0f1218;     /* тёмный фон */
-    --brand-card: #171b22;     /* тёмная карточка */
+    --brand-blue: #1855c3;     /* основной акцент — чуть темнее и глубже */
+    --brand-cyan: #00b8f0;     /* второй акцент — холодный голубой */
+    --brand-bg:   #090d13;     /* фон — тёмно-синий графит */
+    --brand-card: #131924;     /* карточки — глубокий, но читаемый оттенок */
     --radius: 12px;
-    --shadow: 0 6px 16px rgba(2, 6, 23, .25);
+    --shadow: 0 6px 16px rgba(2, 6, 23, .28);
   }
 
   /* Сопоставляем PaperMod-переменные (LIGHT) */
@@ -27,11 +27,11 @@
   body.dark {
     --theme: var(--brand-bg);
     --entry: var(--brand-card);
-    --primary: #e6edf3;
-    --secondary: #9aa4b2;
-    --tertiary: #738294;
+    --primary: #e7edf4;
+    --secondary: #aab4c2;
+    --tertiary: #7c8aa1;
     --content: #d8e0ea;
-    --border: #2b323b;
+    --border: #2c3442;
 
     --link-color: var(--brand-cyan);
     --link-hover: #7bd7ff;
@@ -45,16 +45,17 @@
   .post-content h2, .post-content h3,
   .post-single .post-title { color: var(--primary); }
 
-  /* Карточки на списке постов — чуть «воздуха» и скругления как в мини-сайте */
+  /* Карточки на списке постов */
   .post-entry, .first-entry {
     border-radius: var(--radius);
     box-shadow: 0 1px 0 rgba(0,0,0,.04);
   }
   body.dark .post-entry, body.dark .first-entry {
-    box-shadow: 0 1px 0 rgba(255,255,255,.03);
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    background-color: var(--brand-card);
   }
 
-  /* ========= АККОРДЕОН: ЦВЕТА И СТИЛИ ========= */
+  /* ========= АККОРДЕОН ========= */
   .accordion-section {
     background: var(--entry);
     border: 1px solid var(--border);
@@ -62,6 +63,10 @@
     box-shadow: var(--shadow);
     margin: 1rem 0;
     overflow: hidden;
+    transition: background .3s ease, box-shadow .3s ease;
+  }
+  body.dark .accordion-section:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
   }
 
   .accordion-header {
@@ -75,7 +80,6 @@
     color: #fff;
     border: 0;
     cursor: pointer;
-    /* фирменный градиент «шапки» секции */
     background: linear-gradient(180deg, var(--brand-blue), var(--brand-cyan));
   }
 
@@ -100,15 +104,39 @@
   }
 
   .accordion-section.open .accordion-content {
-    /* высоту выставляет JS, padding включаем тут для плавности */
     padding: 1rem 1.25rem;
   }
 
-  /* блок-цитаты/лист внутри — слегка выделяем */
   .accordion-content blockquote {
     border-left: 3px solid var(--brand-blue);
     padding-left: .85rem;
     margin-left: .25rem;
     opacity: .95;
+  }
+
+  /* ==== STATUS GRADIENTS ==== */
+  :root {
+    --grad-toread:   linear-gradient(135deg, #17b65f, #28d97a);
+    --grad-reading:  linear-gradient(135deg, #faae24, #ff8a0d);
+    --grad-read:     linear-gradient(135deg, #56607c, #75809b);
+  }
+
+  .accordion-section[data-status="toread"]   > .accordion-header { background: var(--grad-toread); }
+  .accordion-section[data-status="reading"]  > .accordion-header { background: var(--grad-reading); }
+
+  .accordion-section[data-status] > .accordion-header {
+    background: linear-gradient(180deg, var(--brand-blue), var(--brand-cyan));
+  }
+
+  .accordion-section[data-status="toread"]  .read-badge { background: var(--grad-toread); }
+  .accordion-section[data-status="reading"] .read-badge { background: var(--grad-reading); }
+  .accordion-section[data-status="read"]    .read-badge { background: var(--grad-read); }
+
+  /* Бейджи */
+  .read-badge {
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.25);
+    outline: 1px solid rgba(255,255,255,.16);
+    box-shadow: 0 2px 6px rgba(0,0,0,.18);
   }
 </style>

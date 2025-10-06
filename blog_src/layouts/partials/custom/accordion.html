@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
   sections.forEach((sec, idx) => {
     const wrapper = document.createElement("section");
     wrapper.className = "accordion-section" + (idx === 0 ? " open" : "");
+    // статус для раскраски (совместимо с colors.html)
+    wrapper.dataset.status = (idx === 0) ? "reading" : "toread";
     // оставляем место сверху при scrollIntoView
     wrapper.style.scrollMarginTop = SCROLL_OFFSET + "px";
 
@@ -86,6 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const h = secEl.querySelector(".accordion-header");
         if (c) c.style.maxHeight = "0px";
         if (h) h.setAttribute("aria-expanded", "false");
+        // помечаем как прочитанное
+        secEl.dataset.status = "read";
       });
 
       if (willOpen) {
@@ -107,11 +111,16 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           content.addEventListener("transitionend", scrollAfter, { once: true });
         }
+
+        // текущая — читается
+        wrapper.dataset.status = "reading";
       } else {
         // сворачиваем текущую
         wrapper.classList.remove("open");
         header.setAttribute("aria-expanded", "false");
         content.style.maxHeight = "0px";
+        // текущая становится прочитанной
+        wrapper.dataset.status = "read";
       }
     });
 

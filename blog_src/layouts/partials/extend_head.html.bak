@@ -1,7 +1,0 @@
-{{/* Подключаем всё по частям, чтобы не ломать то, что уже сделано */}}
-{{/* partial "custom/progress.html" . */}}        {{/* полоска прогресса */}}
-{{ partial "custom/header-fix.html" . }}      {{/* фикс ширины шапки */}}
-{{ partial "custom/colors.html" . }}          {{/* палитра и базовые цвета */}}
-{{ partial "custom/accordion.html" . }}       {{/* внешний вид + логика аккордеона */}}
-{{ partial "custom/accordion-faq.html" . }}   {{/* for FAQ + логика аккордеона */}}
-{{ partial "custom/icons-progress.html" . }}

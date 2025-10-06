@@ -17,23 +17,23 @@
   justify-content: center;
   font-size: 0.9rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--col-hex-ffffff);
   border-radius: 10px;
   margin-right: 14px;
   text-transform: uppercase;
   letter-spacing: .6px;
-  box-shadow: 0 3px 10px rgba(0,0,0,.25);
+  box-shadow: 0 3px 10px var(--col-23624780);
   transition: all .35s ease;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #007bff, #00c6ff);
+  background: linear-gradient(135deg, var(--col-hex-007bff), var(--col-hex-00c6ff));
 }
 .read-badge.active {
-  background: linear-gradient(135deg, #00c6ff, #82d6ff);
-  box-shadow: 0 0 12px rgba(130,214,255,.5);
+  background: linear-gradient(135deg, var(--col-hex-faae24), var(--col-hex-ff8a0d));
+  box-shadow: 0 0 12px var(--col-39672051);
   transform: scale(1.05);
 }
 .read-badge.read {
-  background: linear-gradient(135deg, #6c757d, #9aa3ad);
+  background: linear-gradient(135deg, var(--col-hex-6c757d), var(--col-hex-9aa3ad));
   opacity: .75;
   box-shadow: none;
 }
@@ -46,14 +46,25 @@
   fill: none;
 }
 
-/* Однострочный заголовок с троеточием */
+/* Мультистрочный заголовок с line-clamp (1 строка десктоп, 2 — мобильные) */
 .accordion-header .acc-title {
   flex: 1 1 auto;
   min-width: 0;
-  white-space: nowrap;
+  margin: 0 8px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 1; /* десктоп: 1 строка */
+  line-clamp: 1;
   text-align: left; /* Название всегда слева */
+}
+@media (max-width: 640px) {
+  .accordion-header .acc-title {
+    -webkit-line-clamp: 2;    /* мобилка: 2 строки */
+    line-clamp: 2;
+  }
 }
 
 /* Полное скрытие всех PaperMod anchors */
@@ -65,12 +76,12 @@ a.anchor[href^="#"] {
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
-  content: none !important;
+  pointer-events: none !important;
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
-  .read-badge { box-shadow: 0 3px 10px rgba(0,0,0,.6); }
+  .read-badge { box-shadow: 0 3px 10px var(--col-54290361); }
   .read-badge.read { opacity: .6; }
 }
 </style>
