@@ -1,3 +1,5 @@
+cd documents/luggage-scale
+
 # Проверяем, что на нужной ветке
 git checkout main
 
@@ -5,7 +7,7 @@ git checkout main
 git pull origin main
 
 # Создаём тег с именем (например, snapshot-2025-10-01)
-git tag -a snapshot-Last3 -m "Last3"
+git tag -a snapshot-Last5 -m "Last5"
 
 # Отправляем тег на GitHub
-git push origin snapshot-Last3
+git push origin snapshot-Last5

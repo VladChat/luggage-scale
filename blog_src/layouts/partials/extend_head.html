@@ -1,12 +1,13 @@
-{{/* Подключаем всё по частям, чтобы не ломать то, что уже сделано */}}
-{{/* partial "custom/progress.html" . */}}        {{/* полоска прогресса */}}
-{{ partial "custom/header-fix.html" . }}      {{/* фикс ширины шапки */}}
-{{ partial "custom/colors.html" . }}          {{/* палитра и базовые цвета */}}
-{{ partial "custom/accordion.html" . }}       {{/* внешний вид + логика аккордеона */}}
-{{ partial "custom/accordion-faq.html" . }}   {{/* for FAQ + логика аккордеона */}}
+{{/* === Custom Head Extensions — final safe version === */}}
+
+{{/* Подключаем всё по частям */}}
+{{ partial "custom/header-fix.html" . }}
+{{ partial "custom/colors.html" . }}
+{{ partial "custom/accordion.html" . }}
+{{ partial "custom/accordion-faq.html" . }}
 {{ partial "custom/icons-progress.html" . }}
 
 <!-- section-design inject -->
-<link rel="stylesheet" href="/css/section-design.css">
+<link rel="stylesheet" href="{{ "css/section-design.css" | absURL }}">
+<script src="{{ "js/section-fadein.js" | absURL }}" defer></script>
 
-<script src="/js/section-fadein.js" defer></script>

@@ -1,15 +1,17 @@
-{{- if gt .TotalPages 1 }}
+<!-- PAGINATION OVERRIDE ACTIVE -->
+{{- $p := . -}}
+{{- if gt $p.TotalPages 1 }}
 <nav class="pagination">
-  {{- if .HasPrev }}
-  <a class="prev" href="{{ .Prev.URL | absURL }}">« Prev</a>
+  {{- if $p.HasPrev }}
+    <a class="prev" href="{{ $p.Prev.URL | absURL }}">« Prev</a>
   {{- end }}
 
-  {{- range .Pagers }}
-  <a class="{{ if eq .PageNumber $.PageNumber }}active{{ end }}" href="{{ .URL | absURL }}">{{ .PageNumber }}</a>
+  {{- range $p.Pagers }}
+    <a class="{{ if eq .PageNumber $p.PageNumber }}active{{ end }}" href="{{ .URL | absURL }}">{{ .PageNumber }}</a>
   {{- end }}
 
-  {{- if .HasNext }}
-  <a class="next" href="{{ .Next.URL | absURL }}">Next »</a>
+  {{- if $p.HasNext }}
+    <a class="next" href="{{ $p.Next.URL | absURL }}">Next »</a>
   {{- end }}
 </nav>
 {{- end }}

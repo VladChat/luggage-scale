@@ -2,8 +2,16 @@ baseURL: "https://luggage-scale.com/blog/"
 title: "Luggage Scale"
 theme: "PaperMod"
 publishDir: "../blog"
-canonifyURLs: true
+
+canonifyURLs: false
 relativeURLs: false
+uglyURLs: false
+layoutDir: "layouts"
+
+
+server:
+  baseURLRedirects: false
+
 
 pagination:
   pagerSize: 10
