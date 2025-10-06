@@ -32,9 +32,18 @@ def inject_links(md: str, pool: list, n_min: int, n_max: int) -> str:
     return "\n\n".join(paras)
 
 def make_slug(s: str) -> str:
+    """
+    Безопасный slug без слэшей. Это предотвращает появление вложенных директорий
+    (например /sec/) в финальном пути Hugo.
+    """
     if not s:
         return "post"
+    # Базовая нормализация
     s = slugify(s)[:80]
+    # Жёстко убираем любые слэши, чтобы Hugo не создал подпапки
+    s = s.replace("/", "-").replace("\\", "-")
+    # Схлопываем повторные дефисы и подчищаем края
+    s = re.sub(r"-{2,}", "-", s).strip("-")
     return s or "post"
 
 def load_writer_config():
