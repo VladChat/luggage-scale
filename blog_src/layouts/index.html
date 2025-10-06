@@ -1,0 +1,228 @@
+{{/* 
+  Main blog layout (replaces _default/list.html)
+  Hugo uses this for /blog/ homepage instead of list.html
+*/}}
+
+{{ define "main" }}
+
+{{ partial "extend_head.html" . }}
+
+<style>
+/* ======== Blog List — uPatch Design (2-column Layout) ======== */
+/* Расширяем только список (list) — без влияния на single */
+body.list .main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Узкая ширина для страниц-постов (на будущее) */
+body.single .main {
+  max-width: 800px;
+}
+
+
+
+
+<!-- PAGINATION FIX v3: build links from .Site.BaseURL path + "page/N/" -->
+
+<style>
+/* ======== Blog List — uPatch Design (2-column Layout) ======== */
+
+/* Расширяем только список (list) — без влияния на single */
+body.list .main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Узкая ширина для страниц-постов (на будущее) */
+body.single .main {
+  max-width: 800px;
+}
+
+/* Сетка карточек: 1 колонка мобайл, 2 — десктоп */
+.post-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 860px) {
+  .post-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Карточка поста */
+.post-card {
+  background: var(--brand-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 14px rgba(0, 198, 255, 0.25);
+}
+
+/* Заголовок */
+.post-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--brand-blue);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+@media (max-width: 640px) {
+  .post-card-title {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+}
+
+/* Краткое описание */
+.post-card-summary {
+  color: var(--tertiary);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin-bottom: 1rem;
+  flex: 1 1 auto;
+}
+
+/* Метаданные */
+.post-card-meta {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  margin-top: auto;
+  opacity: 0.85;
+}
+
+/* Ссылки внутри карточки */
+.post-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.post-card a:hover .post-card-title {
+  color: var(--brand-cyan);
+}
+
+/* ======== Pagination Styles ======== */
+nav.pagination {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+nav.pagination a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  background: var(--brand-card);
+  color: var(--brand-blue);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+nav.pagination a:hover {
+  background: var(--brand-blue);
+  color: #fff;
+}
+nav.pagination a.active {
+  background: var(--brand-blue);
+  color: #fff;
+  pointer-events: none;
+}
+nav.pagination a.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+</style>
+
+<section class="list-page">
+  {{ if .Title }}
+    <h1 class="page-title">{{ .Title }}</h1>
+  {{ end }}
+
+  {{ if .Content }}
+    <div class="page-intro">
+      {{ .Content }}
+    </div>
+  {{ end }}
+
+  {{/* Берём только реальные статьи, исключая служебные страницы */}}
+  {{ $allPages := where .Site.RegularPages "Type" "!=" "page" }}
+  {{ $pages := where $allPages "File.BaseFileName" "not in" (slice "privacy-policy" "terms" "_index") }}
+  {{ $paginator := .Paginate $pages }}
+
+  <div class="post-list">
+    {{ range $paginator.Pages }}
+      <article class="post-card">
+        <a href="{{ .RelPermalink }}">
+          <h2 class="post-card-title">{{ .Title }}</h2>
+          {{ with .Summary }}
+            <p class="post-card-summary">{{ . | plainify }}</p>
+          {{ end }}
+          <p class="post-card-meta">
+            {{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min · {{ .WordCount }} words
+          </p>
+        </a>
+      </article>
+    {{ else }}
+      <p style="color: var(--secondary); text-align: center; margin-top: 3rem;">
+        No posts found.
+      </p>
+    {{ end }}
+  </div>
+
+  {{/* ===== Custom Pagination: build from baseURL path (no .URL) ===== */}}
+  {{- if gt $paginator.TotalPages 1 }}
+    {{/* Вытащим только путь из .Site.BaseURL: из "https://host/blog/" -> "/blog/" */}}
+    {{- $baseURL := .Site.BaseURL -}}
+    {{- $basePath := replaceRE `^https?://[^/]+` "" $baseURL -}}
+    {{- if not (strings.HasSuffix $basePath "/") -}}
+      {{- $basePath = printf "%s/" $basePath -}}
+    {{- end -}}
+
+    <nav class="pagination">
+      {{- /* Prev */ -}}
+      {{- if $paginator.HasPrev -}}
+        {{- $prevNum := sub $paginator.PageNumber 1 -}}
+        {{- $prevHref := cond (eq $prevNum 1) $basePath (printf "%spage/%d/" $basePath $prevNum) -}}
+        <a class="prev" href="{{ $prevHref }}">« Prev</a>
+      {{- else -}}
+        <a class="prev disabled">« Prev</a>
+      {{- end -}}
+
+      {{- /* Numbers */ -}}
+      {{- range $paginator.Pagers -}}
+        {{- $n := .PageNumber -}}
+        {{- $href := cond (eq $n 1) $basePath (printf "%spage/%d/" $basePath $n) -}}
+        <a class="{{ if eq $n $paginator.PageNumber }}active{{ end }}" href="{{ $href }}">{{ $n }}</a>
+      {{- end -}}
+
+      {{- /* Next */ -}}
+      {{- if $paginator.HasNext -}}
+        {{- $nextNum := add $paginator.PageNumber 1 -}}
+        {{- $nextHref := cond (eq $nextNum 1) $basePath (printf "%spage/%d/" $basePath $nextNum) -}}
+        <a class="next" href="{{ $nextHref }}">Next »</a>
+      {{- else -}}
+        <a class="next disabled">Next »</a>
+      {{- end -}}
+    </nav>
+  {{- end }}
+</section>
+
+{{ end }}
