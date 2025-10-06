@@ -8,18 +8,7 @@
 {{ partial "extend_head.html" . }}
 
 <style>
-/* ======== Blog List — uPatch Design (2-column Layout) ======== */
-/* Расширяем только список (list) — без влияния на single */
-body.list .main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-/* Узкая ширина для страниц-постов (на будущее) */
-body.single .main {
-  max-width: 800px;
-}
+/* ======== Blog List — 2-column Layout (uses global .main width) ======== */
 
 /* ==== Header block (Hero Strip) ==== */
 .list-page-header {
@@ -38,14 +27,6 @@ body.dark .list-page-header {
   font-weight: 800;
   color: var(--brand-blue);
   margin-bottom: 0.5rem;
-}
-
-.list-page-header .page-intro {
-  color: var(--secondary);
-  font-size: 1.05rem;
-  line-height: 1.6;
-  max-width: 760px;
-  margin: 0 auto;
 }
 
 /* Сетка карточек: 1 колонка мобайл, 2 — десктоп */
@@ -70,22 +51,14 @@ body.dark .list-page-header {
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.25s ease;
-  height: auto;              /* мобильная версия — гибкая */
-  min-height: unset;
-}
-
-/* === Fix: ensure no leftover min-height or fixed height from theme === */
-.post-card {
   height: auto !important;
   min-height: auto !important;
   max-height: none !important;
 }
 
-/* На десктопах фиксируем высоту для ровной сетки */
+/* На десктопах слегка выравниваем высоту для ровной сетки (необязательно) */
 @media (min-width: 860px) {
-  .post-card {
-    min-height: 360px;
-  }
+  .post-card { min-height: 360px; }
 }
 
 .post-card:hover {
@@ -109,10 +82,7 @@ body.dark .list-page-header {
   text-align: left;
 }
 @media (max-width: 640px) {
-  .post-card-title {
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-  }
+  .post-card-title { -webkit-line-clamp: 2; line-clamp: 2; }
 }
 
 /* Краткое описание (аннотация) */
@@ -122,8 +92,6 @@ body.dark .list-page-header {
   line-height: 1.45;
   margin-bottom: 1rem;
   flex: 1 1 auto;
-
-  /* === Truncate + Justify === */
   text-align: justify;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -147,9 +115,7 @@ body.dark .list-page-header {
   color: inherit;
   display: block;
 }
-.post-card a:hover .post-card-title {
-  color: var(--brand-cyan);
-}
+.post-card a:hover .post-card-title { color: var(--brand-cyan); }
 
 /* ======== Pagination Styles ======== */
 nav.pagination {
@@ -159,7 +125,6 @@ nav.pagination {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-
 nav.pagination a {
   display: inline-block;
   padding: 0.45rem 0.9rem;
@@ -171,36 +136,18 @@ nav.pagination a {
   border: 1px solid var(--border);
   transition: all 0.2s ease;
 }
-nav.pagination a:hover {
-  background: var(--brand-blue);
-  color: #fff;
-}
-nav.pagination a.active {
-  background: var(--brand-blue);
-  color: #fff;
-  pointer-events: none;
-}
-nav.pagination a.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
+nav.pagination a:hover { background: var(--brand-blue); color: #fff; }
+nav.pagination a.active { background: var(--brand-blue); color: #fff; pointer-events: none; }
+nav.pagination a.disabled { opacity: 0.5; pointer-events: none; }
 </style>
 
 <section class="list-page">
 
   <!-- === HERO STRIP (Blog Header) === -->
   <div class="list-page-header">
-    {{ if .Title }}
-      <h1 class="page-title">{{ .Title }}</h1>
-    {{ end }}
-
-    {{ if .Content }}
-      <div class="page-intro">
-        {{ .Content }}
-      </div>
-    {{ end }}
+    {{ if .Title }}<h1 class="page-title">{{ .Title }}</h1>{{ end }}
+    {{ if .Content }}<div class="page-intro">{{ .Content }}</div>{{ end }}
   </div>
-  <!-- === END HERO STRIP === -->
 
   {{/* Берём только реальные статьи, исключая служебные страницы */}}
   {{ $allPages := where .Site.RegularPages "Type" "!=" "page" }}
@@ -212,22 +159,18 @@ nav.pagination a.disabled {
       <article class="post-card">
         <a href="{{ .RelPermalink }}">
           <h2 class="post-card-title">{{ .Title }}</h2>
-          {{ with .Summary }}
-            <p class="post-card-summary">{{ . | plainify }}</p>
-          {{ end }}
+          {{ with .Summary }}<p class="post-card-summary">{{ . | plainify }}</p>{{ end }}
           <p class="post-card-meta">
             {{ .Date.Format "January 2, 2006" }} · {{ .ReadingTime }} min · {{ .WordCount }} words
           </p>
         </a>
       </article>
     {{ else }}
-      <p style="color: var(--secondary); text-align: center; margin-top: 3rem;">
-        No posts found.
-      </p>
+      <p style="color: var(--secondary); text-align: center; margin-top: 3rem;">No posts found.</p>
     {{ end }}
   </div>
 
-  {{/* ===== PAGINATION FIX v3 ===== */}}
+  <!-- === Pagination === -->
   {{- if gt $paginator.TotalPages 1 }}
     {{- $baseURL := .Site.BaseURL -}}
     {{- $basePath := replaceRE `^https?://[^/]+` "" $baseURL -}}

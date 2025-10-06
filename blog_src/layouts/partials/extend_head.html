@@ -11,3 +11,19 @@
 <link rel="stylesheet" href="{{ "css/section-design.css" | absURL }}">
 <script src="{{ "js/section-fadein.js" | absURL }}" defer></script>
 
+<!-- Global width override for PaperMod -->
+<style>
+  /* 
+    ВАЖНО:
+    .main использует max-width: calc(var(--main-width) + var(--gap) * 2).
+    Если хочешь «итоговую» ширину ровно 1200px вместе с отступами (gap=24px),
+    поставь 1152px (= 1200 - 24*2). Если хочешь содержимое ~1200px + поля, ставь 1200px.
+  */
+  :root {
+    /* Вариант А: содержимое ~1200px + поля (итого ~1248px на десктопе) */
+    --main-width: 1152px;
+
+    /* Чтобы шапка совпадала по ширине с контентом */
+    --nav-width: var(--main-width);
+  }
+</style>
