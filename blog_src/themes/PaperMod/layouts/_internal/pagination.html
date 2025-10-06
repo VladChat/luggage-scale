@@ -1,0 +1,17 @@
+<!-- OVERRIDE: Correct Pagination for /blog/page/2/ -->
+{{- $p := . -}}
+{{- if gt $p.TotalPages 1 }}
+<nav class="pagination">
+  {{- if $p.HasPrev }}
+    <a class="prev" href="{{ $p.Prev.URL | absURL }}">« Prev</a>
+  {{- end }}
+
+  {{- range $p.Pagers }}
+    <a class="{{ if eq .PageNumber $p.PageNumber }}active{{ end }}" href="{{ .URL | absURL }}">{{ .PageNumber }}</a>
+  {{- end }}
+
+  {{- if $p.HasNext }}
+    <a class="next" href="{{ $p.Next.URL | absURL }}">Next »</a>
+  {{- end }}
+</nav>
+{{- end }}
