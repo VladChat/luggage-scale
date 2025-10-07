@@ -95,12 +95,24 @@ def main():
 
             # YAML frontmatter
             frontmatter = (
-                f"---\n"
-                f'title: "{title}"\n'
-                f"date: {now.isoformat()}Z\n"
-                f"draft: false\n"
-                f"---\n\n"
-            )
+    f"---
+"
+    f'title: "{title}"
+'
+    f"date: {now.isoformat()}Z
+"
+    f"draft: false
+"
+    # Category kept simple for now; adjust if you split News/Guides later
+    f"categories: ['news']
+"
+    # Tags: primary = current keyword (lowercased, quotes escaped), fallback = travel
+    f"tags: ['{(keyword or \"travel\").replace('\\'', '\\'\\'').lower()}']
+"
+    f"---
+
+"
+)
 
             with open(out_path, "w", encoding="utf-8") as f:
                 f.write(frontmatter + md_raw)
