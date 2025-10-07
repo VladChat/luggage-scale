@@ -1,9 +1,21 @@
----
+﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Apple Pulls App That Tracks ICE Agents From App Store"
 date: 2025-10-04T03:28:12.697850Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # Apple removes an app that tracked ICE agents: What travelers can learn (and why low-tech gear still matters)
 
 Big platforms change the rules. Apps you counted on yesterday can disappear today. When the developer of ICEBlock announced that Apple removed the app from the App Store for “objectionable content,” it wasn’t just a niche headline about a contentious tool that tracked ICE agents—it was a wake-up call for anyone who travels with a phone full of mission-critical apps. From check-in and eSIMs to secure messaging and border guidance, modern travel relies on software. But software lives inside ecosystems, and ecosystems enforce policies that can shift without warning.

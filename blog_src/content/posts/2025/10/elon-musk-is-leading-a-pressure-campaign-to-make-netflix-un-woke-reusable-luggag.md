@@ -1,9 +1,21 @@
 ﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Elon Musk Pressures Netflix to Go Unwoke — Battery-Free Luggage Scale"
 date: 2025-10-02T17:28:51.036768Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # Elon Musk, Netflix, and the Traveler’s Choice: Media Values, Streaming on the Road, and the Case for a Reusable No-Battery Luggage Scale
 
 News cycles move fast, but sometimes a debate about culture, technology, and personal values spills over into practical decisions—like which subscriptions to keep and which travel tools earn a spot in your carry-on. Elon Musk’s latest salvo at Netflix over “woke” content, including criticism of shows with transgender characters that premiered years ago, has sparked a new wave of calls to cancel subscriptions. Whether one agrees with Musk or not, his high-profile decision raises a familiar question for travelers: How should we align the services we pay for with our values and our actual usage when we’re on the road?
@@ -170,3 +182,4 @@ Yes. Mechanical luggage scales do not contain batteries or restricted electronic
 
 ### How can I avoid overweight fees besides using a scale?
 Adopt a modular packing system, distribute weight between checked and carry-on, wear heavier items on travel day, and leave a small buffer for souvenirs. Weigh your bag after final packing so you have a trusted number before you head to the airport.
+

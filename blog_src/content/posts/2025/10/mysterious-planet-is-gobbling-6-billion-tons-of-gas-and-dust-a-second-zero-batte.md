@@ -1,9 +1,21 @@
----
+﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Zero-Battery Luggage Scale — Planet Devours 6 Billion Tons/Sec"
 date: 2025-10-06T13:24:04.040445Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # From Rogue Planets to Carry-Ons: Why a Zero-Battery Luggage Scale Belongs in Every Bag
 
 When astronomers at ESO’s Very Large Telescope announced a rogue planet gulping down 6 billion tons of gas and dust every second, the headline dominated science feeds for days. It’s hard to wrap your head around a number that large—and that’s precisely the point. Whether you’re sizing up the cosmos or your suitcase, understanding weight is about managing the scale of things. For travelers, the scale that matters is the one at the check-in counter. A reliable, zero-battery luggage scale can make the difference between breezing past the desk and paying an eye-watering overweight fee.

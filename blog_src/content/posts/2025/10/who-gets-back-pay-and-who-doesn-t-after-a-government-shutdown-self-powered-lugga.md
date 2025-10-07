@@ -1,9 +1,21 @@
----
+﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Government Shutdown: Who Gets Back Pay and Who Doesn't?"
 date: 2025-10-03T19:56:08.226888Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # Who Gets Back Pay (and Who Doesn’t) After a Government Shutdown? A Traveler’s Guide With Smart Packing Tips and a Self Powered Luggage Scale
 
 Government shutdowns can feel abstract—until you’re queuing at security behind stressed travelers, trying to reschedule a passport appointment, or budgeting a trip while your paycheck is delayed. Whether you’re a federal employee, a contractor, a frequent flyer, or just planning a long-awaited getaway, understanding who gets back pay after a shutdown and who doesn’t can help you plan wisely. This guide breaks down the essentials in clear, travel-focused terms and adds practical strategies—down to how a self powered luggage scale can save you real money when every dollar counts.

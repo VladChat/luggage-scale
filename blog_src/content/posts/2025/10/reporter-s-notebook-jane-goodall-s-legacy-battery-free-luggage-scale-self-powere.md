@@ -1,9 +1,21 @@
 ﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Jane Goodall’s Legacy and the Battery-Free Luggage Scale"
 date: 2025-10-02T23:46:15.713106Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # Reporter’s Notebook: Jane Goodall’s Legacy — And the Case for a Battery‑Free Luggage Scale
 
 Jane Goodall walked into the forest with a notebook and an open mind, and she walked back out having redrawn the boundary between humans and the rest of nature. That’s the core of her legacy: an ethic of attention, patience, and respect that collapses the walls we imagine stand between our lives and the living world. As John Dickerson reflected in a recent Reporter's Notebook, her work didn’t just change science; it changed how we travel through the world—how we look, listen, and tread.
@@ -165,3 +177,4 @@ A: Use a known weight, like a 1-liter water bottle (about 1 kg), or dumbbells wi
 
 Q: Is a battery-free luggage scale worth it if I only travel once or twice a year?
 A: For infrequent travelers, the value lies in reliability and cost avoidance. Even one avoided overweight fee can offset the purchase. Plus, you won’t discover a dead battery the night before a flight. Over time, the reduced waste and simplicity pay dividends in peace of mind and lighter, smarter packing.
+

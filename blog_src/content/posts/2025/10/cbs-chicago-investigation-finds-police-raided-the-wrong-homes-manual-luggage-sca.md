@@ -1,9 +1,21 @@
 ﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Top Manual Luggage Scales: No Batteries Required"
 date: 2025-10-02T16:19:58.119777Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 ## When the Wrong Door Gets Kicked In: What a CBS Chicago Investigation Means for Travelers — and Why a Manual Luggage Scale (No Battery) Still Matters
 
 A year-long CBS Chicago investigation led by Dave Savini brought a sobering problem into the public eye: police raiding the wrong homes, often with children inside, leaving families traumatized by mistakes that should never have happened. Families shared their stories—doorways splintered, living rooms turned upside down, and innocent people grappling with lasting fear—because they want change. While this is first and foremost a community and public safety issue, it also raises an important question for travelers and household planners: how do we prepare for the unexpected, protect our loved ones, and keep stress to a minimum at home and on the road?
@@ -129,3 +141,4 @@ A: Look for a sturdy hook or strap, a clear, easy-to-read dial, a comfortable gr
 
 Q: What’s a simple way to stay prepared in a short-term rental?
 A: On arrival, confirm and post the exact address near the entry, keep printed or offline copies of your reservation, and store IDs and essentials in a dedicated pouch. Maintain a small readiness kit—manual luggage scale, flashlight, first aid, and a written emergency contact list—so you can handle minor disruptions calmly.
+

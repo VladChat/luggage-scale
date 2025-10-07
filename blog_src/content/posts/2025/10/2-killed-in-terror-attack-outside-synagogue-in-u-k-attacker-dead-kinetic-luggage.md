@@ -1,9 +1,21 @@
 ﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "UK synagogue attack: 2 killed, attacker dead"
 date: 2025-10-03T00:31:41.999166Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # 2 Killed in Terror Attack Outside Synagogue in U.K.; Attacker Dead — What Travelers Need to Know and How a Kinetic Luggage Scale Fits Into Risk‑Ready Packing
 
 When a security incident unfolds in a city many of us visit for business, studies, or leisure, the travel community feels it deeply. Authorities in the English city of Manchester reported that two people were killed in an attack outside a synagogue while worshippers were inside. The attacker is dead. As investigations proceed, our thoughts are with the victims, their families, and the community impacted.
@@ -170,3 +182,4 @@ A: Weigh your bags before leaving your hotel, and again curbside if you added it
 
 Q: Will travel insurance cover changes I make due to a security incident?
 A: Coverage depends on your policy. Many plans include trip interruption or delay benefits for security‑related disruptions, but definitions and exclusions vary. Document what changed, keep receipts, and contact your insurer’s 24/7 line before making large alternative bookings when possible.
+

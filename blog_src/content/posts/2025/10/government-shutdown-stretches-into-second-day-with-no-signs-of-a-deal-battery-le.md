@@ -1,9 +1,21 @@
----
+﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Battery-Free Luggage Scale: Weigh Baggage Without Batteries"
 date: 2025-10-03T00:17:32.297450Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # Government Shutdown Stretches Into Second Day With No Signs of a Deal — What Travelers Should Know About Battery‑Less Luggage Scales
 
 The 2025 government shutdown entered its second day on Thursday with no public signs of a breakthrough. For travelers, any prolonged budget stalemate in Washington often brings uncertainty: airport staffing can fluctuate, routine processing may slow, and lines may grow as essential federal workers keep core services running under added strain. While every shutdown has its own operational reality, the one constant for travelers is the need to control what they can.

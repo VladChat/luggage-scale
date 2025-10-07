@@ -1,9 +1,21 @@
----
+﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Battery-Free Mechanical Luggage Scale"
 date: 2025-10-03T20:39:56.965951Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # A Rogue Planet Is Devouring 6 Billion Tons a Second—Here’s What That Has to Do With Your Luggage Weight
 
 Every once in a while, a headline from deep space grabs us by the shoulders. Astronomers using ESO’s Very Large Telescope recently watched a rogue planet gulping down gas and dust at a breathtaking rate—6 billion tons per second. It’s a cosmic feast, and a stark reminder of a simple truth: mass matters. Out there, gravity shapes planets. Down here, it shapes travel plans—and your wallet—every time your bag hits an airline scale.

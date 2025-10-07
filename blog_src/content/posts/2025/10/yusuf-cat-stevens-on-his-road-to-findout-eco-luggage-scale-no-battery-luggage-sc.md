@@ -1,9 +1,21 @@
----
+﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Eco No-Battery Luggage Scale: The Road to Find Out"
 date: 2025-10-05T20:13:30.990801Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 ## Introduction: On the Road to Findout, With Luggage in Hand
 
 Yusuf/Cat Stevens has long sung about journeys—the outer miles and the inner miles. In his new memoir, “Cat on the Road to Findout,” the artist who later renamed himself Yusuf Islam reflects on decades of travel, a lifelong spiritual quest, and the art of discovering who you are along the way. That theme resonates deeply with travelers: every trip is a test of what to carry, what to leave, and what truly matters.

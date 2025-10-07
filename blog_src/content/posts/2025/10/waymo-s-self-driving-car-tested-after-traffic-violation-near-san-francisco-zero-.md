@@ -1,9 +1,21 @@
 ﻿---
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 title: "Waymo Self-Driving Car Investigated After Traffic Violation Near SF"
 date: 2025-10-02T15:52:22.827768Z
 draft: false
 ---
 
+tags:
+  - "luggage scale"
+  - "travel tips"
+  - "airline baggage limits"
+categories:
+  - "Guides"
 # Waymo’s Self-Driving Car Faces Scrutiny After Traffic Violation Near San Francisco — What Travelers Should Know, Plus the Case for a Zero Battery Luggage Scale
 
 Autonomous vehicles have promised safer roads, smoother trips, and stress-free rides to the airport. Yet a recent incident near San Francisco shows that the journey to fully reliable self-driving technology is still under way. Local police said a Waymo driverless vehicle executed an illegal U-turn, prompting new questions: When a driverless car breaks the law, who’s accountable? How do these edge cases affect trust among travelers who rely on AVs for critical trips—especially those tight, early morning runs to catch a flight?
@@ -143,3 +155,4 @@ A: First, check the app for updated ETA or pickup point. If time’s tight, trig
 
 Q: Who is held responsible when a driverless car commits a traffic violation?
 A: Responsibility typically shifts to the operator company when no human driver is present. Data logs guide investigations and improvements. Policies vary by jurisdiction, but the aim is clear accountability and continuous safety upgrades.
+
