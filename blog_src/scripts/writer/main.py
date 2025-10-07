@@ -1,4 +1,4 @@
-import os
+# blog_src/scripts/writer/main.py
 import json
 from datetime import datetime
 from pathlib import Path
@@ -10,9 +10,11 @@ DATA_DIR = Path("blog_src/data")
 KEYWORDS_FILE = DATA_DIR / "keywords.json"
 STATE_FILE = DATA_DIR / "state.json"
 
+
 def load_prompt_template():
     with open("blog_src/config/prompt_template.txt", "r", encoding="utf-8") as f:
         return f.read()
+
 
 def load_writer_config():
     try:
@@ -22,9 +24,11 @@ def load_writer_config():
         print(f"⚠️ Could not load writer_config.json: {e}")
         return {"title_max_chars": 60}
 
+
 def load_keywords():
     with open(KEYWORDS_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def load_state():
     try:
@@ -33,14 +37,17 @@ def load_state():
     except FileNotFoundError:
         return {"keyword_index": 0, "seen": []}
 
+
 def save_state(state):
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2)
 
+
 def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
     return template.format(topic=f"{topic}\n\nContext: {summary}")
+
 
 def safe_title_text(raw_title: str) -> str:
     """
@@ -50,29 +57,43 @@ def safe_title_text(raw_title: str) -> str:
     config = load_writer_config()
     max_len = config.get("title_max_chars", 60)
 
-    if len(raw_title) <= max_len:
-        return raw_title.strip()
+    txt = (raw_title or "").strip()
+    if len(txt) <= max_len:
+        return txt
 
     try:
-        rewritten = llm.rephrase_title(raw_title, max_len)
+        rewritten = llm.rephrase_title(txt, max_len)
         if rewritten:
             return rewritten.strip()
     except Exception as e:
         print(f"⚠️ Title rewrite failed: {e}")
 
     # Fallback — обрезка
-    return raw_title[:max_len].rstrip()
+    return txt[:max_len].rstrip()
+
 
 def main():
     topic, summary = get_latest_topic()
-    keywords = load_keywords()
+    topic = topic or "Travel update"
+    summary = summary or ""
+
+    keywords = []
+    try:
+        keywords = load_keywords()
+    except Exception as e:
+        print(f"⚠️ Could not load keywords.json: {e}")
+        keywords = []
+
     state = load_state()
 
-    # Получаем keyword по индексу
-    idx = state.get("keyword_index", 0)
-    if idx < 0 or idx >= len(keywords):
-        idx = 0
-    keyword = keywords[idx].strip()
+    # Получаем keyword по индексу, с защитой от пустого списка
+    idx = max(0, int(state.get("keyword_index", 0)))
+    if keywords:
+        if idx >= len(keywords):
+            idx = 0
+        keyword = (keywords[idx] or "").strip()
+    else:
+        keyword = ""
 
     prompt = build_prompt(topic, summary)
 
@@ -83,52 +104,48 @@ def main():
 
         if qa_result["ok"]:
             # slug = title + keyword → уникальный и SEO-дружелюбный
-            slug_source = f"{topic} {keyword}" if keyword else topic
+            slug_source = f"{topic} {keyword}".strip() if keyword else topic
             slug = posts.make_slug(slug_source)
 
             now = datetime.utcnow()
             out_path = Path(f"blog_src/content/posts/{now.year}/{now.month:02d}/{slug}.md")
             out_path.parent.mkdir(parents=True, exist_ok=True)
 
-            # Подготовим title
+            # Подготовим title и экранируем кавычки для YAML
             title = safe_title_text(topic)
+            title_escaped = title.replace('"', '\\"')
 
-            # YAML frontmatter
-            frontmatter = (
-    f"---
-"
-    f'title: "{title}"
-'
-    f"date: {now.isoformat()}Z
-"
-    f"draft: false
-"
-    # Category kept simple for now; adjust if you split News/Guides later
-    f"categories: ['news']
-"
-    # Tags: primary = current keyword (lowercased, quotes escaped), fallback = travel
-    f"tags: ['{(keyword or \"travel\").replace('\\'', '\\'\\'').lower()}']
-"
-    f"---
+            # Приводим тег к нижнему регистру и экранируем одинарные кавычки для YAML (single-quoted)
+            tag_value = (keyword or "travel").lower().replace("'", "''")
 
-"
-)
+            # YAML front matter (одним f-"""...""" без разрывов строк в кавычках)
+            frontmatter = f"""---
+title: "{title_escaped}"
+date: {now.isoformat()}Z
+draft: false
+categories: ['news']
+tags: ['{tag_value}']
+---
+
+"""
 
             with open(out_path, "w", encoding="utf-8") as f:
                 f.write(frontmatter + md_raw)
 
             print(f"✓ New post: {out_path}")
 
-            # увеличиваем keyword_index
-            next_idx = (idx + 1) % len(keywords)
-            state["keyword_index"] = next_idx
-            save_state(state)
+            # увеличиваем keyword_index только если keywords не пустые
+            if keywords:
+                next_idx = (idx + 1) % len(keywords)
+                state["keyword_index"] = next_idx
+                save_state(state)
 
             return
         else:
             print(f"⚠️ Attempt {attempt+1} failed QA: {qa_result['errors']}")
 
     print("❌ Failed to generate a valid post after retries.")
+
 
 if __name__ == "__main__":
     main()
