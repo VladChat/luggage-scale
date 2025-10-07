@@ -8,10 +8,8 @@ relativeURLs: false
 uglyURLs: false
 layoutDir: "layouts"
 
-
 server:
   baseURLRedirects: false
-
 
 pagination:
   pagerSize: 10
@@ -21,40 +19,24 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
-# включаем GitInfo, чтобы lastmod брался из даты последнего коммита
 enableGitInfo: true
 
-# настраиваем приоритет для lastmod
 frontmatter:
   lastmod:
-    - lastmod      # если указан lastmod в front-matter
-    - :git         # иначе Hugo возьмет дату последнего коммита
-    - :fileModTime # если git недоступен — дату изменения файла
-    - :default     # fallback: date
+    - lastmod
+    - :git
+    - :fileModTime
+    - :default
 
 permalinks:
   posts: "/posts/:year/:month/:day/:slug/"
 
 outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON
-    - Sitemap
-  section:
-    - HTML
-    - RSS
-    - Sitemap
-  taxonomy:
-    - HTML
-    - RSS
-    - Sitemap
-  term:
-    - HTML
-    - RSS
-    - Sitemap
-  page:
-    - HTML
+  home: [HTML, RSS, JSON, Sitemap]
+  section: [HTML, RSS, Sitemap]
+  taxonomy: [HTML, RSS, Sitemap]
+  term: [HTML, RSS, Sitemap]
+  page: [HTML]
 
 taxonomies:
   category: categories
@@ -64,22 +46,29 @@ params:
   disableAnchoredHeadings: true
   env: production
   title: "uPatch Luggage Scale"
-  description: "Travel news, helpful resources, and useful guides."
-  keywords: ["luggage", "baggage limits", "travel tips", "packing guides", "smart travel"]
+  description: "Discover airline baggage limits, smart packing tips, and flight travel resources. Learn how to avoid overweight fees with the uPatch Luggage Scale — your reliable, battery-free travel companion."
+  keywords: ["airline baggage limits", "carry-on size guide", "checked luggage rules", "travel weight scale", "uPatch luggage scale", "smart packing tips", "flight baggage allowance", "overweight luggage fees", "travel essentials", "battery-free luggage scale"]
   author: "uPatch Editorial"
   customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
   defaultTheme: auto
   ShowReadingTime: true
   ShowWordCount: true
-  centerTheme: true   # центрирует весь контент
+  centerTheme: true
   label:
     text: "Luggage Scale"
     icon: "favicon.svg"
     iconHeight: 32
   assets:
     favicon: "favicon.svg"
-  disableGA: true   # отключаем google_analytics.html, чтобы не было ошибки
+  disableGA: true
 
+  # 👇 вот эти две строки теперь точно работают
+  ShowRelatedPosts: true
+  relatedPosts:
+    count: 4
+    threshold: 0
+    includeNewer: true
+    sortByDate: false
 
 privacy:
   googleAnalytics:
