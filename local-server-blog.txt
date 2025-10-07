@@ -1,4 +1,5 @@
 cd documents/luggage-scale
+
 hugo server -s blog_src --disableFastRender --buildDrafts
 
 

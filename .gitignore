@@ -1,0 +1,68 @@
+# =====================================================
+# Luggage-scale.com / Blog project .gitignore
+# =====================================================
+
+# ==== Hugo / Eleventy build output ====
+/blog/                    # финальная собранная папка (GitHub Pages)
+/public/                  # стандартный Hugo output
+/resources/               # кэш ресурсов Hugo
+/blog_src/public/
+/blog_src/resources/
+/blog_src/.hugo_build.lock
+
+# ==== Generated blog content ====
+/blog_src/content/posts/  # все посты генерируются автоматически
+/blog_src/content/drafts/
+/blog_src/content/temp/
+/blog_src/content/_temp/
+
+# ==== Build artifacts ====
+/node_modules/
+/package-lock.json
+/.parcel-cache/
+/dist/
+/cache/
+/tmp/
+/temp/
+/__pycache__/
+/*.pyc
+
+# ==== System / Editor / Misc ====
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+*.orig
+*.lock
+*.env
+*.zip
+
+# ==== VSCode / IDE ====
+.vscode/
+.idea/
+.history/
+*.code-workspace
+
+# ==== OS metadata ====
+ehthumbs.db
+Desktop.ini
+
+# ==== Local testing / drafts / misc ====
+/drafts/
+/test/
+/tests/
+/sandbox/
+/playground/
+/debug/
+/temp_build/
+
+# ==== Keep core source folders ====
+!blog_src/layouts/**
+!blog_src/assets/**
+!blog_src/static/**
+!blog_src/config.*
+!blog_src/package.json
+!blog_src/package-lock.json
