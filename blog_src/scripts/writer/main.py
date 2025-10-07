@@ -103,6 +103,7 @@ def main():
         qa_result = posts.qa_check(md_raw)
 
         if qa_result["ok"]:
+
             # slug = title + keyword → уникальный и SEO-дружелюбный
             slug_source = f"{topic} {keyword}".strip() if keyword else topic
             slug = posts.make_slug(slug_source)
@@ -115,16 +116,42 @@ def main():
             title = safe_title_text(topic)
             title_escaped = title.replace('"', '\\"')
 
-            # Приводим тег к нижнему регистру и экранируем одинарные кавычки для YAML (single-quoted)
-            tag_value = (keyword or "travel").lower().replace("'", "''")
+            # === Формирование тегов ===
+            # 4 общих тега — это первые четыре непустых keywords из файла
+            common_tags = []
+            try:
+                common_tags = [
+                    (kw or "").strip().lower()
+                    for kw in (keywords or [])[:4]
+                    if (kw or "").strip()
+                ]
+            except Exception as e:
+                print(f"⚠️ Could not prepare common tags: {e}")
+                common_tags = []
 
-            # YAML front matter (одним f-"""...""" без разрывов строк в кавычках)
+            # Динамический (5-й) тег — текущий keyword или fallback
+            keyword_tag = (keyword or "travel").strip().lower()
+
+            # Итоговый список: 4 общих + 1 динамический (если не дублируется)
+            tags_list = list(common_tags)
+            if keyword_tag and (keyword_tag not in tags_list):
+                tags_list.append(keyword_tag)
+
+            # Если вообще ничего не вышло — поставим безопасный fallback
+            if not tags_list:
+                tags_list = ["travel"]
+
+            # Преобразуем список тегов в YAML-friendly строку:
+            # каждый тег в одинарных кавычках, одинарные кавычки внутри — задваиваем
+            tags_yaml = ", ".join("'" + t.replace("'", "''") + "'" for t in tags_list)
+
+            # YAML front matter
             frontmatter = f"""---
 title: "{title_escaped}"
 date: {now.isoformat()}Z
 draft: false
 categories: ['news']
-tags: ['{tag_value}']
+tags: [{tags_yaml}]
 ---
 
 """
