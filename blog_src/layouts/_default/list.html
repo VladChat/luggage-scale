@@ -1,0 +1,146 @@
+{{ define "main" }}
+<main class="main list-page">
+  {{- if not .IsHome }}
+  <header class="page-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Description }}
+      <p class="page-description">{{ . }}</p>
+    {{ end }}
+  </header>
+  {{- end }}
+
+  {{/* Create paginator safely */}}
+  {{ $p := .Paginate (.Pages) }}
+  {{ if $p.Pages }}
+  <section class="list-cards">
+    {{ range $p.Pages }}
+    <article class="card-item">
+      <a href="{{ .RelPermalink }}" class="card-link">
+        <h2 class="card-title">{{ .Title }}</h2>
+        <div class="card-meta">
+          {{ with .Params.tags }}
+            <div class="tags">
+              {{ range . }}
+                <span class="tag">#{{ . }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
+          {{ with .Params.categories }}
+            <div class="categories">
+              {{ range . }}
+                <span class="cat">{{ . }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+        {{ with .Summary }}
+        <p class="card-summary">{{ . | plainify | truncate 240 }}</p>
+        {{ end }}
+        <div class="card-footer">
+          <span>{{ .Date.Format "January 2, 2006" }}</span>
+          <span>• {{ .ReadingTime }} min • {{ .WordCount }} words</span>
+        </div>
+      </a>
+    </article>
+    {{ end }}
+  </section>
+
+  {{/* Pagination only if multiple pages exist */}}
+  {{ if gt $p.TotalPages 1 }}
+    {{ partial "pagination.html" $p }}
+  {{ end }}
+
+  {{ else }}
+    <p>No posts found.</p>
+  {{ end }}
+</main>
+
+<style>
+.list-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.card-item {
+  background: var(--brand-card, #0e1420);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.4);
+}
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: var(--content, #e5e9f0);
+  padding: 1.25rem 1.5rem;
+}
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--link-color, #1f6feb);
+  margin: 0 0 .6rem 0;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  font-size: .8rem;
+  color: var(--secondary, #9ca3af);
+  margin-bottom: .75rem;
+}
+.tags, .categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.tag, .cat {
+  background: rgba(255,255,255,.08);
+  border-radius: 6px;
+  padding: .15rem .5rem;
+  font-weight: 500;
+  color: #d6e4ff;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.cat {
+  background: rgba(255,255,255,.12);
+  color: #b5f3ff;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.card-summary {
+  font-size: .9rem;
+  color: var(--tertiary, #aab1bd);
+  line-height: 1.5;
+  margin: .5rem 0 1rem 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.card-footer {
+  font-size: .8rem;
+  color: var(--secondary, #9ca3af);
+  margin-top: auto;
+  opacity: .9;
+}
+@media (max-width: 480px) {
+  .card-summary { -webkit-line-clamp: 5; }
+}
+</style>
+{{ end }}
