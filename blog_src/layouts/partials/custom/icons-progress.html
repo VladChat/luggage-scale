@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!header.querySelector('.read-badge')) {
       const badge = document.createElement('span');
       badge.className = 'read-badge';
-      badge.innerHTML = icons.unread + 'TO READ';
+      badge.innerHTML = icons.unread + 'NEXT';
       header.insertBefore(badge, header.firstChild);
     }
 
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     badge.classList.remove('read');
     badge.classList.add('active');
-    badge.innerHTML = icons.active + 'READING...';
+    badge.innerHTML = icons.active + 'READING';
     buildTitleSpan(header);
   });
 
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const badge = sec.querySelector('.read-badge');
       if (badge) {
         badge.classList.add('active');
-        badge.innerHTML = icons.active + 'READING...';
+        badge.innerHTML = icons.active + 'READING';
       }
       if (header) buildTitleSpan(header);
     }

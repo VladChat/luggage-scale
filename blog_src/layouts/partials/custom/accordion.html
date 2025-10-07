@@ -18,7 +18,7 @@
 
   /* Вертикальная плашка */
   .accordion-header::before {
-    content: attr(data-status);
+    content: attr(data-status); /* базово — из data-status; ниже переопределим по каждому статусу */
     position: absolute;
     top: 0;
     left: 0;
@@ -40,17 +40,21 @@
     z-index: 1;
   }
 
+  /* Маппинг статусов для мобилки: текст + цвет */
   .accordion-section[data-status="toread"] .accordion-header::before {
+    content: "NEXT";
     background: linear-gradient(135deg, #17b65f, #28d97a);
   }
   .accordion-section[data-status="reading"] .accordion-header::before {
+    content: "NOW";
     background: linear-gradient(135deg, #faae24, #ff8a0d);
   }
   .accordion-section[data-status="read"] .accordion-header::before {
+    content: "READ";
     background: linear-gradient(135deg, #6c757d, #9aa3ad);
   }
 
-  /* Убираем старые плашки */
+  /* Убираем старые плашки только на мобилке */
   .accordion-header .read-badge { display: none !important; }
 
   .accordion-header .accordion-title {
