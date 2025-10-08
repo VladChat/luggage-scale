@@ -2,60 +2,48 @@
 import json
 from datetime import datetime
 from pathlib import Path
+
 from . import llm
 from . import posts
 from .rss_fetch import get_latest_topic
+from .config_loader import load_writer_config
 
 DATA_DIR = Path("blog_src/data")
 KEYWORDS_FILE = DATA_DIR / "keywords.json"
 STATE_FILE = DATA_DIR / "state.json"
+CONTENT_DIR = Path("blog_src/content/posts")
 
-
-def load_prompt_template():
+def load_prompt_template() -> str:
     with open("blog_src/config/prompt_template.txt", "r", encoding="utf-8") as f:
         return f.read()
 
-
-def load_writer_config():
-    try:
-        with open("blog_src/config/writer_config.json", "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"⚠️ Could not load writer_config.json: {e}")
-        return {"title_max_chars": 60}
-
-
-def load_keywords():
+def load_keywords() -> list:
     with open(KEYWORDS_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
-
-def load_state():
+def load_state() -> dict:
     try:
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
         return {"keyword_index": 0, "seen": []}
 
-
-def save_state(state):
+def save_state(state: dict) -> None:
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2)
-
 
 def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
     return template.format(topic=f"{topic}\n\nContext: {summary}")
 
-
 def safe_title_text(raw_title: str) -> str:
     """
-    Возвращает безопасный title не длиннее title_max_chars.
-    Использует llm.rephrase_title, если строка слишком длинная.
+    Возвращает безопасный title не длиннее title_max_chars:
+    пытается переписать через LLM, если слишком длинный; иначе — обрезает.
     """
-    config = load_writer_config()
-    max_len = config.get("title_max_chars", 60)
+    cfg = load_writer_config()
+    max_len = int(cfg.get("generation", {}).get("title_max_chars", 60))
 
     txt = (raw_title or "").strip()
     if len(txt) <= max_len:
@@ -68,16 +56,17 @@ def safe_title_text(raw_title: str) -> str:
     except Exception as e:
         print(f"⚠️ Title rewrite failed: {e}")
 
-    # Fallback — обрезка
     return txt[:max_len].rstrip()
 
-
 def main():
+    cfg = load_writer_config()
+
+    # 1) Тема и краткий контекст
     topic, summary = get_latest_topic()
     topic = topic or "Travel update"
     summary = summary or ""
 
-    keywords = []
+    # 2) Ключевые слова и состояние
     try:
         keywords = load_keywords()
     except Exception as e:
@@ -85,8 +74,6 @@ def main():
         keywords = []
 
     state = load_state()
-
-    # Получаем keyword по индексу, с защитой от пустого списка
     idx = max(0, int(state.get("keyword_index", 0)))
     if keywords:
         if idx >= len(keywords):
@@ -95,29 +82,34 @@ def main():
     else:
         keyword = ""
 
+    # 3) Промпт
     prompt = build_prompt(topic, summary)
 
+    # 4) Генерация с QA-повтором
     max_attempts = 3
     for attempt in range(max_attempts):
         md_raw = llm.call_llm(prompt)
-        qa_result = posts.qa_check(md_raw)
 
+        # posts.qa_check_proxy → единый QA из qa.py
+        qa_result = posts.qa_check_proxy(md_raw)
         if qa_result["ok"]:
-
-            # slug = title + keyword → уникальный и SEO-дружелюбный
+            # 5) Формируем slug и путь
             slug_source = f"{topic} {keyword}".strip() if keyword else topic
             slug = posts.make_slug(slug_source)
 
             now = datetime.utcnow()
-            out_path = Path(f"blog_src/content/posts/{now.year}/{now.month:02d}/{slug}.md")
+            out_path = CONTENT_DIR / f"{now.year}/{now.month:02d}/{slug}.md"
             out_path.parent.mkdir(parents=True, exist_ok=True)
 
-            # Подготовим title и экранируем кавычки для YAML
+            # 6) Заголовок (с учётом лимита из конфига)
             title = safe_title_text(topic)
             title_escaped = title.replace('"', '\\"')
 
-            # === Формирование тегов ===
-            # 4 общих тега — это первые четыре непустых keywords из файла
+            # 7) Категория по умолчанию из конфига (единичная)
+            default_category = cfg.get("default_category", "news")
+            categories_json = f"['{default_category}']"
+
+            # 8) Теги — 4 общих ключевых + 1 динамический (если он уникален)
             common_tags = []
             try:
                 common_tags = [
@@ -128,40 +120,31 @@ def main():
             except Exception as e:
                 print(f"⚠️ Could not prepare common tags: {e}")
                 common_tags = []
-
-            # Динамический (5-й) тег — текущий keyword или fallback
             keyword_tag = (keyword or "travel").strip().lower()
-
-            # Итоговый список: 4 общих + 1 динамический (если не дублируется)
             tags_list = list(common_tags)
             if keyword_tag and (keyword_tag not in tags_list):
                 tags_list.append(keyword_tag)
-
-            # Если вообще ничего не вышло — поставим безопасный fallback
             if not tags_list:
                 tags_list = ["travel"]
-
-            # Преобразуем список тегов в YAML-friendly строку:
-            # каждый тег в одинарных кавычках, одинарные кавычки внутри — задваиваем
             tags_yaml = ", ".join("'" + t.replace("'", "''") + "'" for t in tags_list)
 
-            # YAML front matter
-            frontmatter = f"""---
-title: "{title_escaped}"
-date: {now.isoformat()}Z
-draft: false
-categories: ['news']
-tags: [{tags_yaml}]
----
-
-"""
+            # 9) YAML front matter
+            fm = (
+                f"---\n"
+                f'title: "{title_escaped}"\n'
+                f"date: {now.isoformat()}Z\n"
+                f"draft: false\n"
+                f"categories: {categories_json}\n"
+                f"tags: [{tags_yaml}]\n"
+                f"---\n\n"
+            )
 
             with open(out_path, "w", encoding="utf-8") as f:
-                f.write(frontmatter + md_raw)
+                f.write(fm + md_raw)
 
             print(f"✓ New post: {out_path}")
 
-            # увеличиваем keyword_index только если keywords не пустые
+            # 10) Обновляем индекс keyword
             if keywords:
                 next_idx = (idx + 1) % len(keywords)
                 state["keyword_index"] = next_idx
@@ -169,10 +152,38 @@ tags: [{tags_yaml}]
 
             return
         else:
-            print(f"⚠️ Attempt {attempt+1} failed QA: {qa_result['errors']}")
+            print(f"⚠️ Attempt {attempt + 1} failed QA: {qa_result['errors']}")
 
-    print("❌ Failed to generate a valid post after retries.")
+    # Если мы здесь — три попытки не прошли.
+    # Если включён draft_if_fail — можно сохранить драфт (опционально).
+    if cfg.get("draft_if_fail", True):
+        now = datetime.utcnow()
+        fallback_slug = posts.make_slug(f"{topic}-draft")
+        out_path = CONTENT_DIR / f"{now.year}/{now.month:02d}/{fallback_slug}.md"
+        out_path.parent.mkdir(parents=True, exist_ok=True)
 
+        title = safe_title_text(topic)
+        title_escaped = title.replace('"', '\\"')
+        default_category = cfg.get("default_category", "news")
+        categories_json = f"['{default_category}']"
+
+        fm = (
+            f"---\n"
+            f'title: "{title_escaped}"\n'
+            f"date: {now.isoformat()}Z\n"
+            f"draft: true\n"
+            f"categories: {categories_json}\n"
+            f"tags: ['draft']\n"
+            f"---\n\n"
+            f"(Auto-saved draft after QA failures)\n\n"
+        )
+
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(fm)
+
+        print(f"📝 Saved draft: {out_path}")
+    else:
+        print("❌ Failed to generate a valid post after retries.")
 
 if __name__ == "__main__":
     main()
