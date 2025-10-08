@@ -22,10 +22,10 @@ def has_faq_header(text: str) -> bool:
     return bool(re.search(r"^##\s*(faq|questions)\b", body, flags=re.I | re.M))
 
 # Accept both '### Q:' / 'A:' pairs (preferred) and plain 'Q:'/'A:' pairs.
-FAQ_QA_PAIR_RE = re.compile(r"""(?mi)
-    ^\s*(?:###\s*)?Q:\s+.+\n    # Q: line (optionally preceded by ###)
-    \s*A:\s+.+                   # A: line
-""", re.X)
+FAQ_QA_PAIR_RE = re.compile(
+    r"(?mi)^\s*(?:###\s*)?Q:\s+.+\n\s*A:\s+.+",
+    re.MULTILINE | re.IGNORECASE
+)
 
 def faq_pair_count(text: str) -> int:
     body = _strip_front_matter(text)
