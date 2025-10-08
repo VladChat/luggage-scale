@@ -1,5 +1,8 @@
+<!-- layouts/partials/custom/accordion-faq.html -->
 <style>
-  .faq-accordion { margin-top: .5rem; }
+  .faq-accordion {
+    margin-top: .5rem;
+  }
   .faq-item {
     border: 1px solid var(--border, var(--col-hex-e5e5e5));
     background: var(--entry, var(--col-hex-fff));
@@ -9,155 +12,155 @@
     overflow: hidden;
     margin: .5rem 0;
   }
-
   .faq-q {
     width: 100%;
     text-align: left;
     padding: .85rem 1rem;
     font-weight: 600;
     cursor: pointer;
-    display: flex; align-items: center; justify-content: space-between;
-    border: 0; background: transparent; color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    background: transparent;
+    color: inherit;
     transition: background .2s ease, color .2s ease;
   }
   .faq-q:hover { background: var(--col-15188202); }
   body.dark .faq-q:hover { background: var(--col-74974589); }
-
   .faq-q .label { display: flex; align-items: center; gap: .5rem; }
-  .faq-q .mark  { font-size: 1.1rem; line-height: 1; transition: transform .22s ease; opacity: .9; }
+  .faq-q .mark { font-size: 1.1rem; line-height: 1; transition: transform .22s ease; opacity: .9; }
   .faq-item.open .faq-q .mark { transform: rotate(45deg); }
-
-  /* Контейнер, в котором анимируем только высоту */
-  .faq-a {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 320ms cubic-bezier(.2,.7,.3,1);
-  }
-
-  /* Внутренняя обёртка — здесь паддинги контента */
-  .faq-a-inner {
-    padding: 0 1rem;          /* в закрытом состоянии — только горизонтальные */
-  }
-  .faq-item.open .faq-a-inner {
-    padding: 1rem;            /* при открытии добавляем вертикальные отступы */
-  }
-
-  .faq-a-inner p {
-    margin: 0;
-    display: flex;
-    align-items: flex-start;
-    gap: .5rem;
-  }
-  .faq-a-inner p::before {
-    content: "💡";            /* иконка для ответа */
-    flex-shrink: 0;
-  }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 320ms cubic-bezier(.2,.7,.3,1); }
+  .faq-a-inner { padding: 0 1rem; }
+  .faq-item.open .faq-a-inner { padding: 1rem; }
+  .faq-a-inner p { margin: 0; display: flex; align-items: flex-start; gap: .5rem; }
+  .faq-a-inner p::before { content: "💡"; flex-shrink: 0; }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const isFaqTitle = (txt) => /(^|\b)(faq|frequently asked questions|вопросы|вопрос-ответ)/i.test(txt.trim());
+(function () {
+  const i18nFAQ = /(faq|frequently\s+asked\s+questions|вопросы|вопрос-ответ)/i;
 
-  function buildFaqAccordion(root) {
-    if (!root) return;
-
-    const text = root.innerText;
-    const parts = text.split(/(?=Q:)/i).map(s => s.trim()).filter(Boolean);
-
-    const items = [];
-    parts.forEach(p => {
-      const match = p.match(/^Q:\s*(.+?)(?:\s*A:\s*(.+))?$/is);
-      if (match) {
-        items.push({
-          q: match[1].trim(),
-          a: (match[2] || "").trim()
-        });
+  function findFAQContainer() {
+    const root = document.querySelector('.post-content');
+    if (!root) return null;
+    const secs = root.querySelectorAll('.accordion-section');
+    for (const sec of secs) {
+      const header = sec.querySelector('.accordion-header');
+      if (header && i18nFAQ.test((header.textContent || '').trim())) {
+        return sec.querySelector('.accordion-content') || sec;
       }
-    });
+    }
+    return null;
+  }
 
-    if (!items.length) return;
+  // Улучшенный парсер: извлекает Q/A даже из HTML (<p>, <br> и т.п.)
+  function extractQAFromHTML(html) {
+    const text = html
+      .replace(/<\/p>|<br\s*\/?>/gi, '\n')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\r/g, '')
+      .trim();
+    const parts = text.split(/(?=\bQ\s*:)/i);
+    const qa = [];
+    for (const part of parts) {
+      const match = part.match(/Q\s*:\s*(.+?)(?:\s*A\s*:\s*([\s\S]+))?$/i);
+      if (match) {
+        const q = match[1].trim();
+        const a = (match[2] || '').trim();
+        if (q && a) qa.push({ q, a });
+      }
+    }
+    return qa;
+  }
 
-    const cont = document.createElement('div');
-    cont.className = 'faq-accordion';
-
-    items.forEach((it, idx) => {
-      const item = document.createElement('div');
-      item.className = 'faq-item' + (idx === 0 ? ' open' : '');
-
+  function buildAccordion(qa) {
+    const acc = document.createElement('div');
+    acc.className = 'faq-accordion';
+    qa.forEach((item, idx) => {
+      const it = document.createElement('div');
+      it.className = 'faq-item' + (idx === 0 ? ' open' : '');
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'faq-q';
       btn.setAttribute('aria-expanded', idx === 0 ? 'true' : 'false');
-      btn.innerHTML = `<span class="label">❓ ${it.q}</span><span class="mark">+</span>`;
-
-      const ans = document.createElement('div');
-      ans.className = 'faq-a';
-      ans.innerHTML = `<div class="faq-a-inner"><p>${it.a}</p></div>`;
-
-      const inner = ans.firstElementChild;
-
-      // Открываем первый пункт корректно (с учётом паддингов inner)
-      if (idx === 0) {
-        requestAnimationFrame(() => {
-          ans.style.maxHeight = (inner.scrollHeight + 2) + 'px';
-        });
-      }
-
+      btn.innerHTML = `<span class="label"><strong>Q:</strong> ${escapeHTML(item.q)}</span><span class="mark">+</span>`;
+      const aWrap = document.createElement('div');
+      aWrap.className = 'faq-a';
+      const inner = document.createElement('div');
+      inner.className = 'faq-a-inner';
+      inner.innerHTML = `<p>${escapeHTML(item.a)}</p>`;
+      aWrap.appendChild(inner);
+      requestAnimationFrame(() => {
+        aWrap.style.maxHeight = idx === 0 ? (inner.scrollHeight + 2) + 'px' : '0px';
+      });
       btn.addEventListener('click', () => {
-        const willOpen = !item.classList.contains('open');
-
-        // закрываем остальные
-        cont.querySelectorAll('.faq-item').forEach(el => {
-          if (el !== item) {
-            el.classList.remove('open');
-            el.querySelector('.faq-a').style.maxHeight = '0px';
-            el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        const isOpen = it.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        aWrap.style.maxHeight = isOpen ? (inner.scrollHeight + 2) + 'px' : '0px';
+        acc.querySelectorAll('.faq-item').forEach(other => {
+          if (other !== it) {
+            other.classList.remove('open');
+            const oPanel = other.querySelector('.faq-a');
+            const oBtn = other.querySelector('.faq-q');
+            if (oPanel) oPanel.style.maxHeight = '0px';
+            if (oBtn) oBtn.setAttribute('aria-expanded', 'false');
           }
         });
-
-        item.classList.toggle('open', willOpen);
-        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-
-        if (willOpen) {
-          // ждём применения класса .open (появятся вертикальные паддинги у inner)
-          requestAnimationFrame(() => {
-            ans.style.maxHeight = (inner.scrollHeight + 2) + 'px'; // +2px запас против округления
-          });
-        } else {
-          ans.style.maxHeight = '0px';
-        }
       });
-
-      item.appendChild(btn);
-      item.appendChild(ans);
-      cont.appendChild(item);
+      it.appendChild(btn);
+      it.appendChild(aWrap);
+      acc.appendChild(it);
     });
-
-    root.innerHTML = "";
-    root.appendChild(cont);
-
-    // Пересчёт высоты открытого ответа при ресайзе/догрузке картинок/шрифтов
-    const recalcOpenHeights = () => {
-      cont.querySelectorAll('.faq-item.open').forEach(el => {
-        const a = el.querySelector('.faq-a');
-        const inner = el.querySelector('.faq-a-inner');
-        a.style.maxHeight = (inner.scrollHeight + 2) + 'px';
+    const recalc = () => {
+      acc.querySelectorAll('.faq-item.open .faq-a-inner').forEach(inner => {
+        const wrap = inner.parentElement;
+        wrap.style.maxHeight = (inner.scrollHeight + 2) + 'px';
       });
     };
-    window.addEventListener('resize', recalcOpenHeights, { passive: true });
-    cont.querySelectorAll('img').forEach(img => img.addEventListener('load', recalcOpenHeights, { once:true }));
+    window.addEventListener('resize', recalc, { passive: true });
+    acc.querySelectorAll('img').forEach(img => img.addEventListener('load', recalc, { once: true }));
+    return acc;
   }
 
-  // ищем «FAQ» в секционном аккордеоне
-  setTimeout(() => {
-    let faqContent = null;
-    document.querySelectorAll('.accordion-section').forEach(sec => {
-      const h = sec.querySelector('.accordion-header');
-      if (h && isFaqTitle(h.textContent)) {
-        faqContent = sec.querySelector('.accordion-content');
-      }
-    });
-    if (faqContent) buildFaqAccordion(faqContent);
-  }, 0);
-});
+  function injectJSONLD(qa) {
+    if (!qa.length) return;
+    const ld = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": qa.map(x => ({
+        "@type": "Question",
+        "name": x.q,
+        "acceptedAnswer": { "@type": "Answer", "text": x.a }
+      }))
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.id = 'auto-faq-jsonld';
+    s.textContent = JSON.stringify(ld);
+    document.head.appendChild(s);
+  }
+
+  function escapeHTML(str) {
+    return (str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const container = findFAQContainer();
+    if (!container) return;
+    const html = container.innerHTML || '';
+    const qa = extractQAFromHTML(html);
+    if (!qa.length) return;
+    const acc = buildAccordion(qa);
+    container.innerHTML = '';
+    container.appendChild(acc);
+    injectJSONLD(qa);
+  });
+})();
 </script>
