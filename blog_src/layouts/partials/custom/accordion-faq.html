@@ -85,7 +85,7 @@
       btn.type = 'button';
       btn.className = 'faq-q';
       btn.setAttribute('aria-expanded', idx === 0 ? 'true' : 'false');
-      btn.innerHTML = `<span class="label"><strong>Q:</strong> ${escapeHTML(item.q)}</span><span class="mark">+</span>`;
+      btn.innerHTML = `<h3 class="label"><strong style="font-size:1.5em;line-height:1;margin-right:.4rem;">Q</strong>${escapeHTML(item.q)}</h3><span class="mark">+</span>`;
       const aWrap = document.createElement('div');
       aWrap.className = 'faq-a';
       const inner = document.createElement('div');
