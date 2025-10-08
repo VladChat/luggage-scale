@@ -230,4 +230,25 @@
 }
 </style>
 
+<!-- ====== FAQPage JSON-LD (server-side) ======
+     Рендерится, если в фронт-маттере есть:
+     faq:
+       - question: "Q1?"
+         answer: "A1..."
+       - question: "Q2?"
+         answer: "A2..."
+-->
+{{- with .Params.faq -}}
+  <script type="application/ld+json">
+  {{- $items := slice -}}
+  {{- range . -}}
+    {{- $q := .question | plainify | htmlUnescape | chomp -}}
+    {{- $a := .answer   | markdownify | plainify | htmlUnescape | chomp -}}
+    {{- $item := dict "@type" "Question" "name" $q "acceptedAnswer" (dict "@type" "Answer" "text" $a) -}}
+    {{- $items = $items | append $item -}}
+  {{- end -}}
+  {{- dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $items | jsonify -}}
+  </script>
+{{- end -}}
+
 {{- end -}}
