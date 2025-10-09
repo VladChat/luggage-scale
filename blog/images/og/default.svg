@@ -1,0 +1,105 @@
+<!-- File: blog/images/og/default.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Ideas in Motion — Universal Open Graph Image</title>
+  <desc id="desc">Abstract blue gradient background with flowing waves, subtle dotted accents, and centered headline text.</desc>
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1446A0"/>
+      <stop offset="100%" stop-color="#00B8F0"/>
+    </linearGradient>
+
+    <linearGradient id="wave1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0F3B8B" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#0AAEE6" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <linearGradient id="wave2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0B2E70" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#19C6F3" stop-opacity="0.25"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="40" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Reusable dot -->
+    <circle id="dot" r="3" fill="#FFFFFF" opacity="0.9"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle radial glows -->
+  <g filter="url(#softGlow)" opacity="0.25">
+    <circle cx="1050" cy="110" r="180" fill="#3ED8FF"/>
+    <circle cx="180"  cy="520" r="220" fill="#3EC0FF"/>
+  </g>
+
+  <!-- Flowing waves -->
+  <g>
+    <!-- top sweep -->
+    <path fill="url(#wave1)" d="M0,140
+      C180,100 320,80 480,120
+      C680,170 860,80 1200,140
+      L1200,0 L0,0 Z" opacity="0.55"/>
+    <!-- mid sweep -->
+    <path fill="url(#wave2)" d="M0,350
+      C220,390 420,330 600,360
+      C820,400 980,360 1200,400
+      L1200,630 L0,630 Z" opacity="0.55"/>
+    <!-- bottom sweep -->
+    <path fill="url(#wave1)" d="M0,520
+      C200,500 360,560 560,540
+      C820,510 980,600 1200,560
+      L1200,630 L0,630 Z" opacity="0.5"/>
+  </g>
+
+  <!-- Corner dot matrices -->
+  <g opacity="0.85">
+    <!-- top-left 3x3 -->
+    <g transform="translate(64,64)">
+      <use href="#dot" x="0" y="0"/>
+      <use href="#dot" x="24" y="0"/>
+      <use href="#dot" x="48" y="0"/>
+      <use href="#dot" x="0" y="24"/>
+      <use href="#dot" x="24" y="24"/>
+      <use href="#dot" x="48" y="24"/>
+      <use href="#dot" x="0" y="48"/>
+      <use href="#dot" x="24" y="48"/>
+      <use href="#dot" x="48" y="48"/>
+    </g>
+    <!-- bottom-right 3x3 -->
+    <g transform="translate(1088,522)">
+      <use href="#dot" x="0" y="0"/>
+      <use href="#dot" x="-24" y="0"/>
+      <use href="#dot" x="-48" y="0"/>
+      <use href="#dot" x="0" y="-24"/>
+      <use href="#dot" x="-24" y="-24"/>
+      <use href="#dot" x="-48" y="-24"/>
+      <use href="#dot" x="0" y="-48"/>
+      <use href="#dot" x="-24" y="-48"/>
+      <use href="#dot" x="-48" y="-48"/>
+    </g>
+  </g>
+
+  <!-- Headline -->
+  <g aria-label="Ideas in Motion" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-weight="800" fill="#FFFFFF">
+    <!-- background soft shadow for legibility -->
+    <text x="600" y="315" text-anchor="middle" font-size="94" opacity="0.22">Ideas in Motion</text>
+    <!-- main text -->
+    <text x="600" y="310" text-anchor="middle" font-size="94">Ideas in Motion</text>
+  </g>
+
+  <!-- Optional tiny caption (invisible in small previews, helps balance) -->
+  <text x="600" y="370" text-anchor="middle"
+        font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-size="20" fill="#E6F6FF" opacity="0.65" letter-spacing="1.5">
+    Insights • Travel • Technology • Life
+  </text>
+</svg>
