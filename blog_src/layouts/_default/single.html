@@ -3,16 +3,54 @@
 <article class="post-single">
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
-    <h1 class="post-title entry-hint-parent">
-      {{ .Title }}
-      {{- if .Draft }}
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
-          <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160ZM647-80 460-268l43-43 144 144 311-311 43 43L647-80ZM160-225v-60h300v60H160Zm0-165v-60h470v60H160Z" />
-        </svg>
-      </span>
-      {{- end }}
-    </h1>
+
+    <div class="header-with-icon">
+      <h1 class="post-title entry-hint-parent">
+        {{ .Title }}
+        {{- if .Draft }}
+        <span class="entry-hint" title="Draft">
+          <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+            <path d="M160-410v-60h300v60H160Zm0-165v-60h470в60H160Zm0-165в-60h470в60H160ZM647-80 460-268l43-43 144 144 311-311 43 43L647-80ZM160-225в-60h300в60H160Zm0-165в-60h470в60H160Z" />
+          </svg>
+        </span>
+        {{- end }}
+      </h1>
+
+      <!-- Inline SVG icon on the right -->
+      <div class="hero-icon-corner">
+        {{ readFile "static/blog/icons/doctor-rehab.svg" | safeHTML }}
+      </div>
+    </div>
+
+    <style>
+      .header-with-icon {
+        position: relative;
+      }
+      .hero-icon-corner {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.75rem;
+        width: 48px;
+        height: 48px;
+        opacity: 0.9;
+      }
+      .hero-icon-corner svg {
+        width: 100%;
+        height: 100%;
+        fill: #ffffff;
+        opacity: 0.85;
+        transition: opacity .3s ease, transform .3s ease;
+      }
+      body.dark .hero-icon-corner svg {
+        fill: #dfe7f5;
+        opacity: 0.9;
+      }
+      .hero-icon-corner:hover svg {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    </style>
+    <!-- /Icon in corner -->
 
     {{- if .Description }}
     <div class="post-description">{{ .Description }}</div>
@@ -103,22 +141,18 @@
   {{- end -}}
 </article>
 
+<!-- Keep all the existing CSS below -->
 <style>
-/* --- Общие фиксы переноса --- */
 .post-meta, .post-description, .post-content, .post-tags, .post-categories {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-
-/* --- Теги (как были) --- */
 .post-tags{
   display:flex;
   flex-wrap:wrap;
   gap:.5rem;
   margin:.25rem 0 .25rem 0;
 }
-
-/* --- Категории (Guides и др.) как капсулы-плашки --- */
 .post-categories{
   display:flex;
   flex-wrap:wrap;
@@ -143,8 +177,6 @@
   color:#fff;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.14);
 }
-
-/* --- Related Posts 2×2 плашки с тёмным синим градиентом --- */
 .related-posts {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
@@ -156,7 +188,6 @@
   color: var(--primary);
   margin-bottom: 1rem;
 }
-
 .related-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -165,7 +196,6 @@
 @media (max-width: 680px) {
   .related-grid { grid-template-columns: 1fr; }
 }
-
 .related-card {
   display: flex;
   align-items: center;
@@ -185,7 +215,6 @@
   box-shadow: 0 10px 24px rgba(0,0,0,.45);
   filter: brightness(1.08);
 }
-
 .card-badge {
   display: flex;
   align-items: center;
@@ -229,26 +258,5 @@
   opacity: .9;
 }
 </style>
-
-<!-- ====== FAQPage JSON-LD (server-side) ======
-     Рендерится, если в фронт-маттере есть:
-     faq:
-       - question: "Q1?"
-         answer: "A1..."
-       - question: "Q2?"
-         answer: "A2..."
--->
-{{- with .Params.faq -}}
-  <script type="application/ld+json">
-  {{- $items := slice -}}
-  {{- range . -}}
-    {{- $q := .question | plainify | htmlUnescape | chomp -}}
-    {{- $a := .answer   | markdownify | plainify | htmlUnescape | chomp -}}
-    {{- $item := dict "@type" "Question" "name" $q "acceptedAnswer" (dict "@type" "Answer" "text" $a) -}}
-    {{- $items = $items | append $item -}}
-  {{- end -}}
-  {{- dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $items | jsonify -}}
-  </script>
-{{- end -}}
 
 {{- end -}}
