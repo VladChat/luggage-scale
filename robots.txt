@@ -1,0 +1,11 @@
+# robots.txt for https://luggage-scale.com/
+
+User-agent: *
+Allow: /
+Allow: /blog/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*?*utm_*
+
+# Sitemap locations
+Sitemap: https://luggage-scale.com/blog/sitemap.xml
