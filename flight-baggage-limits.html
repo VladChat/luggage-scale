@@ -1,16 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-59QGXXMJ');
+  </script>
+  <!-- End Google Tag Manager -->
+
   <meta charset="utf-8" />
-  <title>Flight Weight Limit— uPatch Luggage Scale</title>
+  <title>Flight Baggage Limits — uPatch Luggage Scale</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Favicon + tab color -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
   <meta name="theme-color" content="#0a1a2f">
-<body>
- <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flight Baggage Limits</title>
+
+  <!-- Page styles -->
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -39,9 +51,7 @@
       cursor: pointer;
       transition: background 0.2s ease;
     }
-    .airline-list li:hover {
-      background: #1a3a66;
-    }
+    .airline-list li:hover { background: #1a3a66; }
     .airline-list li h2 {
       font-size: 1.2rem;
       margin: 0;
@@ -70,40 +80,47 @@
       line-height: 1.4;
     }
 
-  /* Top 3-page tiles (Manual / Shop / Current page) */
-  .nav-tiles {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    margin: 0 0 1rem 0;
-  }
-  .tile {
-    background: #11294d;
-    color: #f0f8ff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0.9rem 1rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    font-weight: 600;
-    transition: background 0.2s ease, transform 0.1s ease;
-  }
-  .tile:hover { background: #1a3a66; transform: translateY(-1px); }
-  .tile svg { width: 22px; height: 22px; display: block; }
-  .tile.active {
-    background: #14335a;
-    outline: 2px solid #4db8ff;
-    cursor: default;
-  }
-  .tile.active:hover { background: #14335a; transform: none; }
-  @media (max-width: 640px) {
-    .nav-tiles { grid-template-columns: 1fr; }
-  }
-</style>
+    /* Top 3-page tiles (Manual / Shop / Current page) */
+    .nav-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 0 0 1rem 0;
+    }
+    .tile {
+      background: #11294d;
+      color: #f0f8ff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .tile:hover { background: #1a3a66; transform: translateY(-1px); }
+    .tile svg { width: 22px; height: 22px; display: block; }
+    .tile.active {
+      background: #14335a;
+      outline: 2px solid #4db8ff;
+      cursor: default;
+    }
+    .tile.active:hover { background: #14335a; transform: none; }
+    @media (max-width: 640px) {
+      .nav-tiles { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59QGXXMJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 
 <!-- PASTE this block directly ABOVE your <h1>🌏 Flight Baggage Limits</h1> -->
 <nav class="nav-tiles" role="navigation" aria-label="Top pages">
@@ -584,4 +601,5 @@
 
 
 </body>
+</html>
 

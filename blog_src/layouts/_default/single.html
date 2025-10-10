@@ -4,36 +4,53 @@
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
 
-    <div class="header-with-icon">
-      <h1 class="post-title entry-hint-parent">
-        {{ .Title }}
-        {{- if .Draft }}
-        <span class="entry-hint" title="Draft">
-          <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
-            <path d="M160-410v-60h300v60H160Zm0-165v-60h470в60H160Zm0-165в-60h470в60H160ZM647-80 460-268l43-43 144 144 311-311 43 43L647-80ZM160-225в-60h300в60H160Zm0-165в-60h470в60H160Z" />
-          </svg>
-        </span>
-        {{- end }}
-      </h1>
+    <h1 class="post-title entry-hint-parent">
+      {{ .Title }}
+      {{- if .Draft }}
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path d="M160-410v-60h300v60H160Zm0-165v-60h470в60H160Zm0-165в-60h470в60H160ZM647-80 460-268l43-43 144 144 311-311 43 43L647-80ZM160-225в-60h300в60H160Zm0-165в-60h470в60H160Z" />
+        </svg>
+      </span>
+      {{- end }}
+    </h1>
 
-      <!-- Inline SVG icon on the right -->
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta-with-icon">
+      <div class="post-meta">
+        {{- partial "post_meta.html" . -}}
+        {{- partial "translation_list.html" . -}}
+        {{- partial "edit_post.html" . -}}
+        {{- partial "post_canonical.html" . -}}
+      </div>
       <div class="hero-icon-corner">
         {{ readFile "static/blog/icons/doctor-rehab.svg" | safeHTML }}
       </div>
     </div>
+    {{- end }}
 
     <style>
-      .header-with-icon {
-        position: relative;
+      /* --- Icon near meta line --- */
+      .post-meta-with-icon {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.25rem;
       }
+
       .hero-icon-corner {
-        position: absolute;
-        top: 0.25rem;
-        right: 0.75rem;
-        width: 48px;
-        height: 48px;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
         opacity: 0.9;
       }
+
       .hero-icon-corner svg {
         width: 100%;
         height: 100%;
@@ -41,29 +58,29 @@
         opacity: 0.85;
         transition: opacity .3s ease, transform .3s ease;
       }
+
       body.dark .hero-icon-corner svg {
         fill: #dfe7f5;
         opacity: 0.9;
       }
+
       .hero-icon-corner:hover svg {
         opacity: 1;
         transform: scale(1.05);
       }
+
+      @media (max-width: 680px) {
+        .post-meta-with-icon {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .hero-icon-corner {
+          align-self: flex-end;
+          margin-top: 0.25rem;
+        }
+      }
     </style>
-    <!-- /Icon in corner -->
 
-    {{- if .Description }}
-    <div class="post-description">{{ .Description }}</div>
-    {{- end }}
-
-    {{- if not (.Param "hideMeta") }}
-    <div class="post-meta">
-      {{- partial "post_meta.html" . -}}
-      {{- partial "translation_list.html" . -}}
-      {{- partial "edit_post.html" . -}}
-      {{- partial "post_canonical.html" . -}}
-    </div>
-    {{- end }}
   </header>
 
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false -}}
