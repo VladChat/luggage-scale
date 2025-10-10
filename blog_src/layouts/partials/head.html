@@ -1,4 +1,4 @@
-<meta charset="utf-8">
+﻿<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
@@ -7,33 +7,22 @@
 <meta name="robots" content="noindex, nofollow">
 {{- end }}
 
-{{- /* ===== Title (safe word-trim, no repeats, total ≤ ~60) ===== */ -}}
-{{- $maxTotal := 60 -}}
+{{- /* ===== Title (safe word-trim, total ≤ ~60) ===== */ -}}
+{{- $brand := site.Title -}}
+{{- $sep := " " -}}
+{{- $suffix := printf "%s%s" $sep $brand -}}
+{{- $maxTotal := 58 -}}
+{{- $maxCore := sub $maxTotal (len $suffix) -}}
+{{- if lt $maxCore 0 }}{{- $maxCore = 0 -}}{{- end -}}
 {{- $tRaw := .Title | plainify -}}
 {{- $ts := newScratch -}}
 {{- $ts.Set "acc" "" -}}
-{{- $ts.Set "seen" (dict) -}}
 {{- range (split $tRaw " ") -}}
-  {{- $word := lower . -}}
-  {{- if not (isset ($ts.Get "seen") $word) -}}
-    {{- $cand := cond (eq ($ts.Get "acc") "") . (printf "%s %s" ($ts.Get "acc") .) -}}
-    {{- if le (len $cand) $maxTotal -}}
-      {{- $ts.Set "acc" $cand -}}
-      {{- $ts.SetInMap "seen" $word true -}}
-    {{- end -}}
-  {{- end -}}
+  {{- $cand := cond (eq ($ts.Get "acc") "") . (printf "%s %s" ($ts.Get "acc") .) -}}
+  {{- if le (len $cand) $maxCore -}} {{- $ts.Set "acc" $cand -}} {{- end -}}
 {{- end -}}
 {{- $titleCore := cond (gt (len $tRaw) 0) (($ts.Get "acc") | default $tRaw) "" -}}
-
-<title>
-  {{- if .IsHome -}}
-    {{- site.Title -}}
-  {{- else if .Title -}}
-    {{- $titleCore -}}
-  {{- else -}}
-    {{- site.Title -}}
-  {{- end -}}
-</title>
+<title>{{- if .IsHome -}}{{- $brand -}}{{- else -}}{{- if .Title -}}{{- $titleCore -}}{{- $sep -}}{{- end -}}{{- $brand -}}{{- end -}}</title>
 
 {{- /* ===== Meta ===== */ -}}
 {{- if .IsHome }}
@@ -44,7 +33,7 @@
       {{- range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- end -}}">
 {{- end }}
 
-{{- /* ===== Description (safe word-trim, no repeats, ≤ ~155) ===== */ -}}
+{{- /* ===== Description (safe word-trim, ≤ ~149, no ellipsis) ===== */ -}}
 {{- $ds := newScratch -}}
 {{- if .Description -}}
   {{- $ds.Set "base" (.Description | plainify) -}}
@@ -54,20 +43,13 @@
   {{- with site.Params.description }}{{ $ds.Set "base" (. | plainify) }}{{ end -}}
 {{- end -}}
 {{- if not ($ds.Get "base") -}}
-  {{- $ds.Set "base" $titleCore -}}
+  {{- $ds.Set "base" (printf "%s - %s" $titleCore $brand) -}}
 {{- end -}}
 {{- $ds.Set "acc" "" -}}
-{{- $ds.Set "seen" (dict) -}}
 {{- $maxDesc := 155 -}}
 {{- range (split ($ds.Get "base") " ") -}}
-  {{- $w := lower . -}}
-  {{- if not (isset ($ds.Get "seen") $w) -}}
-    {{- $cand := cond (eq ($ds.Get "acc") "") . (printf "%s %s" ($ds.Get "acc") .) -}}
-    {{- if le (len $cand) $maxDesc -}}
-      {{- $ds.Set "acc" $cand -}}
-      {{- $ds.SetInMap "seen" $w true -}}
-    {{- end -}}
-  {{- end -}}
+  {{- $cand := cond (eq ($ds.Get "acc") "") . (printf "%s %s" ($ds.Get "acc") .) -}}
+  {{- if le (len $cand) $maxDesc -}} {{- $ds.Set "acc" $cand -}} {{- end -}}
 {{- end -}}
 <meta name="description" content="{{- $ds.Get "acc" -}}">
 <meta name="author" content="{{ (partial "author.html" . ) }}">
@@ -86,23 +68,36 @@
 {{- end }}
 
 {{- /* Styles */}}
+
+{{- /* includes */}}
 {{- $includes := slice }}
 {{- $includes = $includes | append (" " | resources.FromString "assets/css/includes-blank.css")}}
+
 {{- if not (eq site.Params.assets.disableScrollBarStyle true) }}
   {{- $ScrollStyle := (resources.Get "css/includes/scroll-bar.css") }}
   {{- $includes = (append $ScrollStyle $includes) }}
 {{- end }}
+
 {{- $includes_all := $includes | resources.Concat "assets/css/includes.css" }}
+
 {{- $theme_vars := (resources.Get "css/core/theme-vars.css") }}
 {{- $reset := (resources.Get "css/core/reset.css") }}
 {{- $media := (resources.Get "css/core/zmedia.css") }}
 {{- $license_css := (resources.Get "css/core/license.css") }}
 {{- $common := (resources.Match "css/common/*.css") | resources.Concat "assets/css/common.css" }}
+
+{{- /* markup.highlight.noClasses should be set to `false` */}}
 {{- $chroma_styles := (resources.Get "css/includes/chroma-styles.css") }}
 {{- $chroma_mod := (resources.Get "css/includes/chroma-mod.css") }}
+
+{{- /* order is important */}}
 {{- $core := (slice $theme_vars $reset $common $chroma_styles $chroma_mod $includes_all $media) | resources.Concat "assets/css/core.css" | resources.Minify }}
 {{- $extended := (resources.Match "css/extended/*.css") | resources.Concat "assets/css/extended.css" | resources.Minify }}
+
+{{- /* bundle all required css */}}
+{{- /* Add extended css after theme style */ -}}
 {{- $stylesheet := (slice $license_css $core $extended) | resources.Concat "assets/css/stylesheet.css"  }}
+
 {{- if not site.Params.assets.disableFingerprinting }}
   {{- $stylesheet := $stylesheet | fingerprint }}
   <link crossorigin="anonymous" href="{{ $stylesheet.RelPermalink }}" integrity="{{ $stylesheet.Data.Integrity }}" rel="preload stylesheet" as="style">
@@ -110,17 +105,68 @@
   <link crossorigin="anonymous" href="{{ $stylesheet.RelPermalink }}" rel="preload stylesheet" as="style">
 {{- end }}
 
-{{- /* RSS & Misc */}}
+{{- /* Search */}}
+{{- if (eq .Layout `search`) -}}
+  <link crossorigin="anonymous" rel="preload" as="fetch" href="../index.json">
+  {{- $fastsearch := resources.Get "js/fastsearch.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify }}
+  {{- $fusejs := resources.Get "js/fuse.basic.min.js" }}
+  {{- $license_js := resources.Get "js/license.js" }}
+  {{- if not site.Params.assets.disableFingerprinting }}
+    {{- $search := (slice $fusejs $license_js $fastsearch ) | resources.Concat "assets/js/search.js" | fingerprint }}
+    <script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}"></script>
+  {{- else }}
+    {{- $search := (slice $fusejs $fastsearch ) | resources.Concat "assets/js/search.js" }}
+    <script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}"></script>
+  {{- end }}
+{{- end -}}
+
+{{- /* Favicons */}}
+<link rel="icon" href="{{ site.Params.assets.favicon | default "favicon.ico" | absURL }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ site.Params.assets.favicon16x16 | default "favicon-16x16.png" | absURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ site.Params.assets.favicon32x32 | default "favicon-32x32.png" | absURL }}">
+<link rel="apple-touch-icon" href="{{ site.Params.assets.apple_touch_icon | default "apple-touch-icon.png" | absURL }}">
+<link rel="mask-icon" href="{{ site.Params.assets.safari_pinned_tab | default "safari-pinned-tab.svg" | absURL }}">
+<meta name="theme-color" content="{{ site.Params.assets.theme_color | default "#2e2e33" }}">
+<meta name="msapplication-TileColor" content="{{ site.Params.assets.msapplication_TileColor | default "#2e2e33" }}">
+
+{{- /* RSS */}}
 {{- range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}" title="{{ .Name }}">
 {{- end -}}
 {{- range .AllTranslations -}}
 <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
 {{- end -}}
+
 <noscript>
-  <style>#theme-toggle,.top-link{display:none}</style>
+  <style>
+    #theme-toggle,
+    .top-link { display: none; }
+  </style>
+  {{- if (and (ne site.Params.defaultTheme "light") (ne site.Params.defaultTheme "dark")) }}
+  <style>
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme: rgb(29, 30, 32);
+        --entry: rgb(46, 46, 51);
+        --primary: rgb(218, 218, 219);
+        --secondary: rgb(155, 156, 157);
+        --tertiary: rgb(65, 66, 68);
+        --content: rgb(196, 196, 197);
+        --code-block-bg: rgb(46, 46, 51);
+        --code-bg: rgb(55, 56, 62);
+        --border: rgb(51, 51, 51);
+      }
+      .list { background: var(--theme); }
+      .list:not(.dark)::-webkit-scrollbar-track { background: 0 0; }
+      .list:not(.dark)::-webkit-scrollbar-thumb { border-color: var(--theme); }
+    }
+  </style>
+  {{- end }}
 </noscript>
+
 {{- partial "extend_head.html" . -}}
+
+{{- /* Misc */}}
 {{- if hugo.IsProduction | or (eq site.Params.env "production") }}
   {{- partial "google_analytics.html" . }}
   {{- partial "templates/opengraph.html" . }}

@@ -118,7 +118,3 @@ menu:
       name: Sitemap
       url: "/sitemap.xml"
       weight: 3
-      
-mediaTypes:
-  "text/html":
-    charset: "utf-8"
