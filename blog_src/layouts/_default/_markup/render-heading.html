@@ -1,0 +1,16 @@
+<!-- blog_src/layouts/_default/_markup/render-heading.html -->
+{{- /*
+  Purpose:
+    Enforce exactly one <h1> per page (the page title).
+    Any Markdown heading "# " inside post body becomes <h2> instead of <h1>.
+    All deeper levels (##, ###, etc.) remain unchanged.
+
+  Notes:
+    - Does NOT affect CSS or theme styling.
+    - Compatible with PaperMod and any custom partials.
+    - Uses Hugo’s render hook for Markdown headings.
+*/ -}}
+
+{{- $lvl := .Level -}}
+{{- $final := cond (eq $lvl 1) 2 $lvl -}}
+<h{{ $final }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</h{{ $final }}>
