@@ -4,9 +4,9 @@
 
 <!DOCTYPE html>
 <html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
-
 <head>
-    {{- partial "head.html" . }}
+  <meta charset="utf-8">
+  {{- partial "head.html" . }}
 </head>
 
 <body class="
@@ -17,13 +17,12 @@
 {{- print " dark" }}
 {{- end -}}
 " id="top">
-{{ partial "gtm-body.html" . }}
+  {{ partial "gtm-body.html" . }}
 
-    {{- partialCached "header.html" . .Page -}}
-    <main class="main">
-        {{- block "main" . }}{{ end }}
-    </main>
-    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
+  {{- partialCached "header.html" . .Page -}}
+  <main class="main">
+    {{- block "main" . }}{{ end }}
+  </main>
+  {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
 </body>
-
 </html>
