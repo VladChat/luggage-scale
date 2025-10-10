@@ -1,4 +1,5 @@
-﻿<meta charset="utf-8">
+﻿<!-- layouts/partials/head.html -->
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {{- if hugo.IsProduction | or (eq site.Params.env "production") | and (ne .Params.robotsNoIndex true) }}
@@ -136,6 +137,10 @@
 {{- range .AllTranslations -}}
 <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
 {{- end -}}
+
+<!-- Hreflang defaults for single-language site -->
+<link rel="alternate" href="{{ .Permalink }}" hreflang="x-default">
+<link rel="alternate" href="{{ .Permalink }}" hreflang="en">
 
 <noscript>
   <style>
