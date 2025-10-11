@@ -29,7 +29,6 @@ frontmatter:
     - :default
   lastmod:
     - lastmod
-    - :fileModTime
     - :default
 
 permalinks:
