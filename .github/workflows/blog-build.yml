@@ -37,13 +37,17 @@ jobs:
 
       - name: Build Hugo → /blog
         run: |
-          hugo --minify -s blog_src -d ../blog
+          # Полная пересборка блога с очисткой предыдущих артефактов
+          hugo --minify --cleanDestinationDir -s blog_src -d ../blog
+          # Проверка, что sitemap.xml создан успешно
+          test -f blog/sitemap.xml && echo "sitemap OK" || (echo "sitemap MISSING" && exit 1)
 
       - name: Commit & Push built blog
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f blog
+          # Добавляем все типы файлов (включая .xml, .json, .txt) и учитываем удаления
+          git add -Af blog/
           git commit -m "Update blog build [skip ci]" || echo "No changes"
           # HEAD теперь на ветке (не detached), обычный push работает
           git push
