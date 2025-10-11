@@ -1,13 +1,38 @@
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  {{- $now := now }}
+
+  <!-- Главная страница блога -->
+  <url>
+    <loc>{{ .Site.BaseURL }}</loc>
+    <lastmod>{{ $now.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
   {{- range .Site.RegularPages }}
   <url>
     <loc>{{ .Permalink }}</loc>
-    {{- if .Lastmod }}
-    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+
+    {{- with .Lastmod }}
+    <lastmod>{{ .Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
     {{- end }}
-    <changefreq>{{ .Sitemap.ChangeFreq | default "monthly" }}</changefreq>
-    <priority>{{ .Sitemap.Priority | default "0.5" }}</priority>
+
+    {{- $age := sub $now.Unix .Lastmod.Unix }}
+
+    {{- if lt $age 604800 }}
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+    {{- else if lt $age 2592000 }}
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    {{- else }}
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+    {{- end }}
   </url>
   {{- end }}
+
 </urlset>
