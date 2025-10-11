@@ -1,8 +1,7 @@
 ---
+title: "Terms of Service"
 layout: "page"
 ---
-
-## Terms of Service
 
 By using this website, you agree to the following terms and conditions.
 

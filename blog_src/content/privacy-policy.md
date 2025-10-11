@@ -1,8 +1,7 @@
 ---
+title: "Privacy Policy"
 layout: "page"
 ---
-
-## Privacy Policy
 
 We value your privacy. This Privacy Policy explains how we collect, use, and protect your information when you visit our website.
 
