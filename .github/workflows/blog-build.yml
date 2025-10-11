@@ -1,4 +1,4 @@
-﻿name: Build Blog
+name: Build Blog
 
 on:
   push:
@@ -41,6 +41,11 @@ jobs:
           hugo --minify --cleanDestinationDir -s blog_src -d ../blog
           # Проверка, что sitemap.xml создан успешно
           test -f blog/sitemap.xml && echo "sitemap OK" || (echo "sitemap MISSING" && exit 1)
+
+      - name: Debug sitemap files
+        run: |
+          echo "Sitemap files in build:"
+          find blog -type f -name "sitemap*.xml" -printf "%p (%TY-%Tm-%Td %TH:%TM)\n"
 
       - name: Commit & Push built blog
         run: |
