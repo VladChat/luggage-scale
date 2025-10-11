@@ -22,9 +22,15 @@ buildExpired: false
 enableGitInfo: true
 
 frontmatter:
-  lastmod:
+  date:
+    - :filename
+    - date
+    - publishDate
     - lastmod
+    - :default
+  lastmod:
     - :git
+    - lastmod
     - :fileModTime
     - :default
 
