@@ -19,17 +19,15 @@ buildDrafts: false
 buildFuture: true
 buildExpired: false
 
-enableGitInfo: true
+enableGitInfo: false  
 
 frontmatter:
   date:
     - :filename
     - date
     - publishDate
-    - lastmod
     - :default
   lastmod:
-    - :git
     - lastmod
     - :fileModTime
     - :default
