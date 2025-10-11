@@ -13,13 +13,16 @@ KEYWORDS_FILE = DATA_DIR / "keywords.json"
 STATE_FILE = DATA_DIR / "state.json"
 CONTENT_DIR = Path("blog_src/content/posts")
 
+
 def load_prompt_template() -> str:
     with open("blog_src/config/prompt_template.txt", "r", encoding="utf-8") as f:
         return f.read()
 
+
 def load_keywords() -> list:
     with open(KEYWORDS_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
+
 
 def load_state() -> dict:
     try:
@@ -28,36 +31,17 @@ def load_state() -> dict:
     except FileNotFoundError:
         return {"keyword_index": 0, "seen": []}
 
+
 def save_state(state: dict) -> None:
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2)
 
+
 def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
     return template.format(topic=f"{topic}\n\nContext: {summary}")
 
-# ⛔ DISABLED BLOCK: rephrase_title removed (merged into prompt)
-# def safe_title_text(raw_title: str) -> str:
-#     """
-#     Возвращает безопасный title не длиннее title_max_chars:
-#     пытается переписать через LLM, если слишком длинный; иначе — обрезает.
-#     """
-#     cfg = load_writer_config()
-#     max_len = int(cfg.get("generation", {}).get("title_max_chars", 60))
-#
-#     txt = (raw_title or "").strip()
-#     if len(txt) <= max_len:
-#         return txt
-#
-#     try:
-#         rewritten = llm.rephrase_title(txt, max_len)
-#         if rewritten:
-#             return rewritten.strip()
-#     except Exception as e:
-#         print(f"⚠️ Title rewrite failed: {e}")
-#
-#     return txt[:max_len].rstrip()
 
 def main():
     cfg = load_writer_config()
@@ -66,6 +50,20 @@ def main():
     topic, summary = get_latest_topic()
     topic = topic or "Travel update"
     summary = summary or ""
+
+    # 🧾 Расширенное логирование RSS и финального topic-context
+    print("───────────────────────────────")
+    print("📰 Extracted from RSS:")
+    print(f"Title: {topic}")
+    if summary:
+        print(f"Summary: {summary[:400]}{'...' if len(summary) > 400 else ''}")
+    else:
+        print("Summary: (no summary provided)")
+    print()
+    topic_context_str = f"{topic}\n\nContext: {summary}"
+    print("🧩 Final topic-context sent to GPT:")
+    print(topic_context_str[:600] + ("..." if len(topic_context_str) > 600 else ""))
+    print("───────────────────────────────")
 
     # 2) Ключевые слова и состояние
     try:
@@ -156,7 +154,6 @@ def main():
             print(f"⚠️ Attempt {attempt + 1} failed QA: {qa_result['errors']}")
 
     # Если мы здесь — три попытки не прошли.
-    # Если включён draft_if_fail — можно сохранить драфт (опционально).
     if cfg.get("draft_if_fail", True):
         now = datetime.utcnow()
         fallback_slug = posts.make_slug(f"{topic}-draft")
@@ -185,6 +182,7 @@ def main():
         print(f"📝 Saved draft: {out_path}")
     else:
         print("❌ Failed to generate a valid post after retries.")
+
 
 if __name__ == "__main__":
     main()
