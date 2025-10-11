@@ -4,7 +4,7 @@
 
   {{- $now := now }}
 
-  <!-- Главная страница блога -->
+  <!-- Главная блога -->
   <url>
     <loc>{{ .Site.BaseURL }}</loc>
     <lastmod>{{ $now.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
@@ -13,22 +13,24 @@
   </url>
 
   {{- range .Site.RegularPages }}
+  {{- $refDate := .Date }}
+  {{- if and .Lastmod (gt .Lastmod .Date) }}
+    {{- $refDate = .Lastmod }}
+  {{- end }}
+  {{- $age := sub $now.Unix $refDate.Unix }}
+  {{- if lt $age 0 }}{{ $age = 0 }}{{ end }}
+
   <url>
     <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ $refDate.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
 
-    {{- with .Lastmod }}
-    <lastmod>{{ .Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
-    {{- end }}
-
-    {{- $age := sub $now.Unix .Lastmod.Unix }}
-
-    {{- if lt $age 604800 }}
+    {{- if lt $age 604800 }}           <!-- < 7 дней -->
       <changefreq>daily</changefreq>
       <priority>0.9</priority>
-    {{- else if lt $age 2592000 }}
+    {{- else if lt $age 2592000 }}     <!-- 7–30 дней -->
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
-    {{- else }}
+    {{- else }}                        <!-- > 30 дней -->
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
     {{- end }}
