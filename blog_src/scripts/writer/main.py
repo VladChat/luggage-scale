@@ -37,26 +37,27 @@ def build_prompt(topic: str, summary: str) -> str:
     template = load_prompt_template()
     return template.format(topic=f"{topic}\n\nContext: {summary}")
 
-def safe_title_text(raw_title: str) -> str:
-    """
-    Возвращает безопасный title не длиннее title_max_chars:
-    пытается переписать через LLM, если слишком длинный; иначе — обрезает.
-    """
-    cfg = load_writer_config()
-    max_len = int(cfg.get("generation", {}).get("title_max_chars", 60))
-
-    txt = (raw_title or "").strip()
-    if len(txt) <= max_len:
-        return txt
-
-    try:
-        rewritten = llm.rephrase_title(txt, max_len)
-        if rewritten:
-            return rewritten.strip()
-    except Exception as e:
-        print(f"⚠️ Title rewrite failed: {e}")
-
-    return txt[:max_len].rstrip()
+# ⛔ DISABLED BLOCK: rephrase_title removed (merged into prompt)
+# def safe_title_text(raw_title: str) -> str:
+#     """
+#     Возвращает безопасный title не длиннее title_max_chars:
+#     пытается переписать через LLM, если слишком длинный; иначе — обрезает.
+#     """
+#     cfg = load_writer_config()
+#     max_len = int(cfg.get("generation", {}).get("title_max_chars", 60))
+#
+#     txt = (raw_title or "").strip()
+#     if len(txt) <= max_len:
+#         return txt
+#
+#     try:
+#         rewritten = llm.rephrase_title(txt, max_len)
+#         if rewritten:
+#             return rewritten.strip()
+#     except Exception as e:
+#         print(f"⚠️ Title rewrite failed: {e}")
+#
+#     return txt[:max_len].rstrip()
 
 def main():
     cfg = load_writer_config()
@@ -101,8 +102,8 @@ def main():
             out_path = CONTENT_DIR / f"{now.year}/{now.month:02d}/{slug}.md"
             out_path.parent.mkdir(parents=True, exist_ok=True)
 
-            # 6) Заголовок (с учётом лимита из конфига)
-            title = safe_title_text(topic)
+            # 6) Заголовок — напрямую используем topic (без повторного LLM)
+            title = (topic or "Travel article").strip()
             title_escaped = title.replace('"', '\\"')
 
             # 7) Категория по умолчанию из конфига (единичная)
@@ -162,7 +163,7 @@ def main():
         out_path = CONTENT_DIR / f"{now.year}/{now.month:02d}/{fallback_slug}.md"
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
-        title = safe_title_text(topic)
+        title = (topic or "Travel article").strip()
         title_escaped = title.replace('"', '\\"')
         default_category = cfg.get("default_category", "news")
         categories_json = f"['{default_category}']"

@@ -1,4 +1,10 @@
-﻿Write a comprehensive and detailed blog post in English.
+﻿Generate a clear, concise SEO title under 60 characters for the blog post.  
+The title must appear as the first line, formatted in Markdown as:
+# Your Title Here
+
+Then write the full article according to the following requirements.
+
+Write a comprehensive and detailed blog post in English.
 
 Requirements:
 - Word count: 1800–2000 words.
