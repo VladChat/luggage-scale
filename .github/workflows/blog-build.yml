@@ -38,6 +38,7 @@ jobs:
       - name: Build Hugo → /blog
         run: |
           # Полная пересборка блога с очисткой предыдущих артефактов
+          export GIT_DIR="$(pwd)/.git"
           hugo --minify --cleanDestinationDir -s blog_src -d ../blog
           # Проверка, что sitemap.xml создан успешно
           test -f blog/sitemap.xml && echo "sitemap OK" || (echo "sitemap MISSING" && exit 1)
