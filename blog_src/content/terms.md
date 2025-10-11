@@ -1,5 +1,4 @@
 ---
-title: "Terms of Service"
 layout: "page"
 ---
 
