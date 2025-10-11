@@ -47,6 +47,11 @@ jobs:
           echo "Sitemap files in build:"
           find blog -type f -name "sitemap*.xml" -printf "%p (%TY-%Tm-%Td %TH:%TM)\n"
 
+      - name: Show sitemap first lines
+        run: |
+          echo "==== sitemap preview ===="
+          head -n 10 blog/sitemap.xml || echo "sitemap not found"
+
       - name: Commit & Push built blog
         run: |
           git config user.name "github-actions[bot]"
