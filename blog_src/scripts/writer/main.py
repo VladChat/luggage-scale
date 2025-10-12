@@ -135,8 +135,14 @@ def main():
                 f"draft: false\n"
                 f"categories: {categories_json}\n"
                 f"tags: [{tags_yaml}]\n"
+                f'author: "uPatch Editorial"\n'
                 f"---\n\n"
             )
+
+            # 🧾 Вывод front-matter в лог для контроля
+            print("🧾 Front-matter preview:")
+            print(fm)
+            print("───────────────────────────────")
 
             with open(out_path, "w", encoding="utf-8") as f:
                 f.write(fm + md_raw)
@@ -172,6 +178,7 @@ def main():
             f"draft: true\n"
             f"categories: {categories_json}\n"
             f"tags: ['draft']\n"
+            f'author: "uPatch Editorial"\n'
             f"---\n\n"
             f"(Auto-saved draft after QA failures)\n\n"
         )
