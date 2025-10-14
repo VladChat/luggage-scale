@@ -1,0 +1,11 @@
+#reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--col-hex-0066cc), var(--col-hex-00c6ff));
+    box-shadow: 0 0 8px var(--col-55975756);
+    z-index: 9999;
+    transition: width 0.3s ease-in-out;
+  }

@@ -31,9 +31,11 @@ def get_latest_topic():
     feed = feedparser.parse(rss_url)
     if not feed.entries:
         raise RuntimeError(f"⚠️ No entries found in RSS: {rss_url}")
+
     latest_entry = feed.entries[0]
     topic = latest_entry.get("title", "Untitled")
     summary = latest_entry.get("summary", "")
+    link = latest_entry.get("link", "")  # ✅ добавлено
 
     # Keyword rotation
     keyword_index = (state.get("last_keyword", -1) + 1) % len(keywords)
@@ -47,4 +49,5 @@ def get_latest_topic():
     print(f"ℹ️ Using keyword: {keyword} (index {keyword_index})")
     print(f"ℹ️ From RSS feed: {rss_url}")
 
-    return f"{topic} — {keyword}", summary
+    # ✅ Возвращаем ссылку третьим аргументом
+    return f"{topic} — {keyword}", summary, link

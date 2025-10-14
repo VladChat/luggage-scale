@@ -1,0 +1,10 @@
+/* Совмещаем поведение с темой:
+     тема считает ширину .nav как calc(var(--nav-width) + var(--gap) * 2),
+     поэтому задаём то же, не сужая шапку относительно .main */
+  header.header > nav.nav {
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }

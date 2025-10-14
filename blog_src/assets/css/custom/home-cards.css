@@ -1,0 +1,100 @@
+/* ===== Стили карточек списка в духе дизайна поста ===== */
+
+  /* базовая карточка списка */
+  .post-list .post-entry,
+  .home .post-entry,
+  .terms .post-entry,
+  .list .post-entry,
+  .home .first-entry,
+  .list .first-entry {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .post-entry:hover,
+  .first-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px var(--col-19828488);
+  }
+
+  /* градиентная шапка карточки — как шапка секции в посте */
+  .post-entry .entry-header,
+  .first-entry .entry-header {
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-cyan));
+    color: var(--col-hex-fff);
+    padding: .9rem 1.05rem;
+    border-bottom: 1px solid var(--col-09648597);
+  }
+  .post-entry .entry-header a,
+  .first-entry .entry-header a {
+    color: var(--col-hex-fff) !important;
+    text-decoration: none;
+  }
+  .post-entry .entry-header h2,
+  .first-entry .entry-header h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  /* компактный бейдж статуса чтения слева от заголовка */
+  .read-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 .6rem;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    border-radius: 999px;
+    color: var(--col-hex-fff);
+    background: var(--col-53726406);
+    border: 1px solid var(--col-13548539);
+    box-shadow: 0 3px 10px var(--col-24547377);
+    flex-shrink: 0;
+  }
+  .read-pill.active {
+    background: var(--col-30026693);
+    border-color: var(--col-26208930);
+  }
+
+  /* контент и мета в карточке */
+  .post-entry .entry-content,
+  .first-entry .entry-content {
+    padding: 1rem 1.05rem;
+  }
+  .post-entry .entry-footer,
+  .first-entry .entry-footer {
+    padding: .7rem 1.05rem;
+    border-top: 1px solid var(--border);
+    color: var(--secondary);
+  }
+
+  /* адаптивные отступы */
+  @media (max-width: 480px) {
+    .post-entry .entry-header,
+    .first-entry .entry-header { padding: .8rem .85rem; }
+    .post-entry .entry-content,
+    .first-entry .entry-content { padding: .85rem .85rem; }
+    .post-entry .entry-footer,
+    .first-entry .entry-footer { padding: .6rem .85rem; }
+  }
+
+  /* плавное появление карточек (добавляется классом .fade-in) */
+  .post-entry, .first-entry {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .post-entry.fade-in, .first-entry.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: opacity .45s ease, transform .45s ease;
+  }

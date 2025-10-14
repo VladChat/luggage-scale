@@ -1,0 +1,21 @@
+/* badges-responsive-fix.css — DESKTOP ONLY (fix duplicate badges on mobile)
+   We scope the visibility enforcement to widths >= 641px.
+   Mobile already has its own vertical badge; the old badges must be hidden there.
+*/
+@media (min-width: 641px) {
+  .accordion-header .read-badge,
+  .accordion-header .status-badge,
+  .accordion-header .badge {
+    display: inline-flex !important;
+    align-items: center;
+    gap: .5rem;
+  }
+  /* Keep chevrons/icons white on gradient headers (desktop) */
+  .accordion-header svg,
+  .accordion-header .chevron,
+  .accordion-header .toggle {
+    color: #fff !important;
+    fill: currentColor !important;
+    opacity: .95;
+  }
+}

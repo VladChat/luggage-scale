@@ -1,0 +1,75 @@
+/* === GLOBAL HEADING STYLES — merged (from your archives) === */
+/* Place this file LAST in the CSS bundle so it overrides theme defaults. */
+
+/* Base rhythm for all headings inside post/page content */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6,
+.page-content  h1,
+.page-content  h2,
+.page-content  h3,
+.page-content  h4,
+.page-content  h5,
+.page-content  h6 {
+  color: var(--primary);
+  line-height: 1.25;
+  margin: 2rem 0 1rem;
+}
+
+/* H1/H2 scale (keeps PaperMod feel but restores your spacing) */
+.post-content h1, .page-content h1 { font-size: 1.9rem; font-weight: 800; }
+.post-content h2, .page-content h2 { font-size: 1.35rem; font-weight: 750; }
+
+/* === Restored H3 as in your original section-design === */
+.post-content h3, .page-content h3 {
+  position: relative;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin: 2rem 0 1rem;
+  padding: 10px 14px 10px 18px;
+  color: #0b2a4a;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(0,198,255,0.07) 0%, rgba(0,123,255,0.05) 100%);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.post-content h3::before, .page-content h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 70%;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--brand-cyan), var(--brand-blue));
+  box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 2px 6px rgba(0,0,0,.08);
+}
+
+/* H4–H6 restored to compact readable form (from your older setup) */
+.post-content h4, .page-content h4 { font-size: 1.05rem; font-weight: 650; }
+.post-content h5, .page-content h5 { font-size: 1.00rem; font-weight: 600; }
+.post-content h6, .page-content h6 { font-size: 0.95rem; font-weight: 600; opacity: .9; }
+
+/* Mobile tuning comparable to your previous CSS */
+@media (max-width: 640px) {
+  .post-content h1, .page-content h1 { font-size: 1.6rem; }
+  .post-content h2, .page-content h2 { font-size: 1.18rem; }
+  .post-content h3, .page-content h3 {
+    font-size: 1.05rem;
+    padding: 8px 12px 8px 16px;
+  }
+}
+
+/* Dark theme tweaks, matching your archive intent */
+body.dark .post-content h3,
+body.dark .page-content h3 {
+  color: #d8ebff;
+  background: linear-gradient(180deg, rgba(0,198,255,0.12) 0%, rgba(0,123,255,0.10) 100%);
+}

@@ -38,20 +38,32 @@ def save_state(state: dict) -> None:
         json.dump(state, f, indent=2)
 
 
-def build_prompt(topic: str, summary: str) -> str:
+def build_prompt(topic: str, summary: str, original_url: str | None = None) -> str:
+    """
+    Собирает текст промпта.
+    Если обнаружен URL оригинального источника — вставляем 'Original source: <url>' в блок topic.
+    """
     template = load_prompt_template()
-    return template.format(topic=f"{topic}\n\nContext: {summary}")
+    topic_block = topic
+    if original_url:
+        topic_block = f"{topic_block}\n\nOriginal source: {original_url}"
+    if summary:
+        topic_block = f"{topic_block}\n\nContext: {summary}"
+    else:
+        topic_block = f"{topic_block}\n\nContext: "
+    return template.format(topic=topic_block)
 
 
 def main():
     cfg = load_writer_config()
 
-    # 1) Тема и краткий контекст
-    topic, summary = get_latest_topic()
+    # 1️⃣ Получаем данные из RSS (теперь три значения)
+    topic, summary, original_url = get_latest_topic()
     topic = topic or "Travel update"
     summary = summary or ""
+    original_url = original_url or None
 
-    # 🧾 Расширенное логирование RSS и финального topic-context
+    # 🧾 Логирование RSS и финального topic-context
     print("───────────────────────────────")
     print("📰 Extracted from RSS:")
     print(f"Title: {topic}")
@@ -59,13 +71,19 @@ def main():
         print(f"Summary: {summary[:400]}{'...' if len(summary) > 400 else ''}")
     else:
         print("Summary: (no summary provided)")
+    print(f"Original source: {original_url if original_url else '(not detected)'}")
     print()
-    topic_context_str = f"{topic}\n\nContext: {summary}"
+
+    topic_context_str = topic
+    if original_url:
+        topic_context_str += f"\n\nOriginal source: {original_url}"
+    topic_context_str += f"\n\nContext: {summary}"
+
     print("🧩 Final topic-context sent to GPT:")
     print(topic_context_str[:600] + ("..." if len(topic_context_str) > 600 else ""))
     print("───────────────────────────────")
 
-    # 2) Ключевые слова и состояние
+    # 2️⃣ Ключевые слова и состояние
     try:
         keywords = load_keywords()
     except Exception as e:
@@ -81,18 +99,16 @@ def main():
     else:
         keyword = ""
 
-    # 3) Промпт
-    prompt = build_prompt(topic, summary)
+    # 3️⃣ Формируем промпт
+    prompt = build_prompt(topic, summary, original_url)
 
-    # 4) Генерация с QA-повтором
+    # 4️⃣ Генерация с QA-повтором
     max_attempts = 3
     for attempt in range(max_attempts):
         md_raw = llm.call_llm(prompt)
 
-        # posts.qa_check_proxy → единый QA из qa.py
         qa_result = posts.qa_check_proxy(md_raw)
         if qa_result["ok"]:
-            # 5) Формируем slug и путь
             slug_source = f"{topic} {keyword}".strip() if keyword else topic
             slug = posts.make_slug(slug_source)
 
@@ -100,15 +116,12 @@ def main():
             out_path = CONTENT_DIR / f"{now.year}/{now.month:02d}/{slug}.md"
             out_path.parent.mkdir(parents=True, exist_ok=True)
 
-            # 6) Заголовок — напрямую используем topic (без повторного LLM)
             title = (topic or "Travel article").strip()
             title_escaped = title.replace('"', '\\"')
 
-            # 7) Категория по умолчанию из конфига (единичная)
             default_category = cfg.get("default_category", "news")
             categories_json = f"['{default_category}']"
 
-            # 8) Теги — 4 общих ключевых + 1 динамический (если он уникален)
             common_tags = []
             try:
                 common_tags = [
@@ -127,7 +140,6 @@ def main():
                 tags_list = ["travel"]
             tags_yaml = ", ".join("'" + t.replace("'", "''") + "'" for t in tags_list)
 
-            # 9) YAML front matter
             fm = (
                 f"---\n"
                 f'title: "{title_escaped}"\n'
@@ -139,7 +151,6 @@ def main():
                 f"---\n\n"
             )
 
-            # 🧾 Вывод front-matter в лог для контроля
             print("🧾 Front-matter preview:")
             print(fm)
             print("───────────────────────────────")
@@ -149,7 +160,6 @@ def main():
 
             print(f"✓ New post: {out_path}")
 
-            # 10) Обновляем индекс keyword
             if keywords:
                 next_idx = (idx + 1) % len(keywords)
                 state["keyword_index"] = next_idx
@@ -159,7 +169,7 @@ def main():
         else:
             print(f"⚠️ Attempt {attempt + 1} failed QA: {qa_result['errors']}")
 
-    # Если мы здесь — три попытки не прошли.
+    # 5️⃣ Если не удалось — черновик
     if cfg.get("draft_if_fail", True):
         now = datetime.utcnow()
         fallback_slug = posts.make_slug(f"{topic}-draft")

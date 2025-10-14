@@ -1,8 +1,3 @@
-{{/* === Interactive Read Status Icons — Final Fix (Left-Aligned Titles) === */}}
-
-
-
-{{- $raw := `
 document.addEventListener("DOMContentLoaded", function () {
   const root = document.querySelector(".post-content");
   if (!root) return;
@@ -89,6 +84,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-` -}}
-
-

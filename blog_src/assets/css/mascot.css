@@ -1,0 +1,22 @@
+:root{ --head-size: clamp(110px, 11vw, 170px); --safe-gap: 56px; }
+  #mascot-guide{
+    position:fixed; right:calc(3vw + var(--safe-gap)); bottom:14vh;
+    width:var(--head-size); z-index:1000; pointer-events:none; transform-origin:50% 80%;
+  }
+  .mascot-svg{ width:100%; height:auto; filter:drop-shadow(0 6px 12px rgba(0,0,0,.25)); }
+
+  /* Моргание */
+  @keyframes blink{ 0%,92%,100%{ r:18 } 96%{ r:2 } }
+  .eye{ animation:blink 4.8s infinite; transform-origin:center; }
+
+  /* Покой */
+  @keyframes floaty{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-2px) } }
+  #mascot-guide.idle{ animation:floaty 3s ease-in-out infinite; }
+
+  /* Реакция на скролл — лёгкий наклон */
+  #mascot-guide.scrolling-down #head{ transform:rotate(6deg)  translateY(2px);  transform-origin:120px 96px; }
+  #mascot-guide.scrolling-up   #head{ transform:rotate(-6deg) translateY(-2px); transform-origin:120px 96px; }
+
+  @media (prefers-reduced-motion: reduce){
+    #mascot-guide, .eye, #head{ animation:none !important }
+  }

@@ -84,3 +84,43 @@ body.dark .post-single .post-header {
 <meta property="og:image:height" content="630">
 <meta name="twitter:image" content="{{ .Site.BaseURL }}images/og/default.webp">
 
+{{/* === BEGIN: auto-bundle (deterministic order for FAQ+badges) === */}}
+{{- $cssParts := slice -}}
+{{- with (resources.Get "css/custom/colors.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
+{{- with (resources.Get "css/custom/icons-progress.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
+{{- with (resources.Get "css/custom/progress.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
+{{- with (resources.Get "css/custom/accordion.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
+{{- with (resources.Get "css/custom/accordion-faq.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
+{{- /* Append any other custom css (excluding the ones above) */ -}}
+{{- range (resources.Match "css/custom/*.css") -}}
+  {{- if and (ne .Name "colors.css") (ne .Name "icons-progress.css") (ne .Name "progress.css") (ne .Name "accordion.css") (ne .Name "accordion-faq.css") (ne .Name "badges-responsive-fix.css") -}}
+    {{- $cssParts = $cssParts | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- /* Ensure our badge fix is LAST so it overrides if needed */ -}}
+{{- with (resources.Get "css/custom/badges-responsive-fix.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
+{{- if gt (len $cssParts) 0 -}}
+  {{- with (resources.Get "css/custom/typography-merged.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
+{{- with ($cssParts | resources.Concat "css/custom-bundle.css" | resources.Minify | fingerprint) -}}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{- end -}}
+{{- end -}}
+
+{{- /* JS order: base accordion first, then FAQ, then icons-progress, then progress */ -}}
+{{- $jsParts := slice -}}
+{{- with (resources.Get "js/custom/accordion.js") -}}  {{- $jsParts = $jsParts | append . -}}  {{- end -}}
+{{- with (resources.Get "js/custom/accordion-faq.js") -}}  {{- $jsParts = $jsParts | append . -}}  {{- end -}}
+{{- with (resources.Get "js/custom/icons-progress.js") -}}  {{- $jsParts = $jsParts | append . -}}  {{- end -}}
+{{- with (resources.Get "js/custom/progress.js") -}}  {{- $jsParts = $jsParts | append . -}}  {{- end -}}
+{{- /* Append any other custom js after */ -}}
+{{- range (resources.Match "js/custom/*.js") -}}
+  {{- if and (ne .Name "accordion.js") (ne .Name "accordion-faq.js") (ne .Name "icons-progress.js") (ne .Name "progress.js") -}}
+    {{- $jsParts = $jsParts | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- if gt (len $jsParts) 0 -}}
+  {{- with ($jsParts | resources.Concat "js/custom-bundle.js" | resources.Minify | fingerprint) -}}
+<script src="{{ .RelPermalink }}" defer integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- end -}}
+{{- end -}}
+{{/* === END: auto-bundle (deterministic order for FAQ+badges) === */}}
