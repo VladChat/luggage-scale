@@ -99,3 +99,18 @@ body.dark .post-content blockquote {
   text-align: justify;
   text-justify: inter-word;
 }
+
+/* === Blockquote Styling === */
+.post-content blockquote {
+  border-left: 4px solid var(--brand-cyan);
+  background: rgba(0, 184, 240, 0.08);
+  padding: 0.75rem 1rem;
+  font-style: italic;
+  border-radius: 6px;
+  margin: 1rem 0;
+  color: var(--primary);
+}
+
+.post-content blockquote p {
+  margin: 0;
+}
