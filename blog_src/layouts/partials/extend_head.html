@@ -1,8 +1,8 @@
-{{/* === Custom Head Extensions — final safe version === */}}
+﻿{{/* === Custom Head Extensions â€” final safe version === */}}
 <meta charset="UTF-8">
 {{ partial "gtm-head.html" . }}
 
-{{/* Подключаем всё по частям */}}
+{{/* ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ð²ÑÑ‘ Ð¿Ð¾ Ñ‡Ð°ÑÑ‚ÑÐ¼ */}}
 {{ partial "custom/header-fix.html" . }}
 {{ partial "custom/colors.html" . }}
 {{ partial "custom/accordion.html" . }}
@@ -17,23 +17,23 @@
 <!-- Global width override for PaperMod -->
 <style>
   /* 
-    ВАЖНО:
-    .main использует max-width: calc(var(--main-width) + var(--gap) * 2).
-    Если хочешь «итоговую» ширину ровно 1200px вместе с отступами (gap=24px),
-    поставь 1152px (= 1200 - 24*2). Если хочешь содержимое ~1200px + поля, ставь 1200px.
+    Ð’ÐÐ–ÐÐž:
+    .main Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ max-width: calc(var(--main-width) + var(--gap) * 2).
+    Ð•ÑÐ»Ð¸ Ñ…Ð¾Ñ‡ÐµÑˆÑŒ Â«Ð¸Ñ‚Ð¾Ð³Ð¾Ð²ÑƒÑŽÂ» ÑˆÐ¸Ñ€Ð¸Ð½Ñƒ Ñ€Ð¾Ð²Ð½Ð¾ 1200px Ð²Ð¼ÐµÑÑ‚Ðµ Ñ Ð¾Ñ‚ÑÑ‚ÑƒÐ¿Ð°Ð¼Ð¸ (gap=24px),
+    Ð¿Ð¾ÑÑ‚Ð°Ð²ÑŒ 1152px (= 1200 - 24*2). Ð•ÑÐ»Ð¸ Ñ…Ð¾Ñ‡ÐµÑˆÑŒ ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ð¾Ðµ ~1200px + Ð¿Ð¾Ð»Ñ, ÑÑ‚Ð°Ð²ÑŒ 1200px.
   */
   :root {
-    /* Вариант А: содержимое ~1200px + поля (итого ~1248px на десктопе) */
+    /* Ð’Ð°Ñ€Ð¸Ð°Ð½Ñ‚ Ð: ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ð¾Ðµ ~1200px + Ð¿Ð¾Ð»Ñ (Ð¸Ñ‚Ð¾Ð³Ð¾ ~1248px Ð½Ð° Ð´ÐµÑÐºÑ‚Ð¾Ð¿Ðµ) */
     --main-width: 1152px;
 
-    /* Чтобы шапка совпадала по ширине с контентом */
+    /* Ð§Ñ‚Ð¾Ð±Ñ‹ ÑˆÐ°Ð¿ÐºÐ° ÑÐ¾Ð²Ð¿Ð°Ð´Ð°Ð»Ð° Ð¿Ð¾ ÑˆÐ¸Ñ€Ð¸Ð½Ðµ Ñ ÐºÐ¾Ð½Ñ‚ÐµÐ½Ñ‚Ð¾Ð¼ */
     --nav-width: var(--main-width);
   }
 </style>
 
 <!-- Single Post Hero Styling (compact, full content width) -->
 <style>
-/* ===== Single Post — Compact Gradient Header ===== */
+/* ===== Single Post â€” Compact Gradient Header ===== */
 .post-single > header,
 .post-single .post-header {
   background: linear-gradient(135deg, var(--brand-blue), var(--brand-cyan));
@@ -101,7 +101,7 @@ body.dark .post-single .post-header {
 {{- with (resources.Get "css/custom/badges-responsive-fix.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
 {{- if gt (len $cssParts) 0 -}}
   {{- with (resources.Get "css/custom/typography-merged.css") -}}  {{- $cssParts = $cssParts | append . -}}  {{- end -}}
-{{- with ($cssParts | resources.Concat "css/custom-bundle.css" | resources.Minify | fingerprint) -}}
+{{- with ($cssParts | resources.Concat "css/custom-bundle.css" | resources.Minify | resources.Fingerprint) -}}
 <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
   {{- end -}}
 {{- end -}}
@@ -119,8 +119,9 @@ body.dark .post-single .post-header {
   {{- end -}}
 {{- end -}}
 {{- if gt (len $jsParts) 0 -}}
-  {{- with ($jsParts | resources.Concat "js/custom-bundle.js" | resources.Minify | fingerprint) -}}
+  {{- with ($jsParts | resources.Concat "js/custom-bundle.js" | resources.Minify | resources.Fingerprint) -}}
 <script src="{{ .RelPermalink }}" defer integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
   {{- end -}}
 {{- end -}}
 {{/* === END: auto-bundle (deterministic order for FAQ+badges) === */}}
+
