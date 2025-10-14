@@ -22,8 +22,10 @@
 
   {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
 
-  {{/* подключаем только JS переключателя темы */}}
-  {{- $jsTheme := resources.Get "blog/js/theme-toggle.js" | resources.Minify | fingerprint -}}
-  <script src="{{ $jsTheme.RelPermalink }}" defer></script>
+  {{/* подключаем только JS переключателя темы — безопасная версия */}}
+  {{- with resources.Get "js/theme-toggle.js" }}
+    {{- $min := . | resources.Minify | resources.Fingerprint -}}
+    <script src="{{ $min.RelPermalink }}" defer></script>
+  {{- end -}}
 </body>
 </html>
