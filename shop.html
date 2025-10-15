@@ -79,18 +79,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     ul.features{ margin:.4rem 0 0 1.1rem }
 
+    /* Product image */
+    .product-image {
+      display:block;
+      width:100%;
+      border-radius:8px;
+      box-shadow:0 3px 10px rgba(0,0,0,.4);
+      margin-bottom:1rem;
+    }
+
+    /* Video embed */
+    .video-embed {
+      position:relative;
+      width:100%;
+      padding-bottom:56.25%;
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow:0 3px 10px rgba(0,0,0,.4);
+      margin-top:1rem;
+    }
+    .video-embed iframe {
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      border:0;
+    }
+
+    /* Footer link row */
+    .footer-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin-top:.5rem;
+      justify-content:center;
+    }
+
     /* Mobile tweaks */
     @media (max-width:540px){
       body{ padding:.85rem }
-      .btn{ width:100%; text-align:center }    /* full-width buttons on phones */
+      .btn{ width:100%; text-align:center }
       .tile{ min-height:52px }
       ul.features{ margin-left:1rem }
     }
   </style>
-  <!-- Favicon + tab color -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="theme-color" content="#0a1a2f">
-
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="theme-color" content="#0a1a2f">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -100,7 +133,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <!-- Top tiles -->
     <nav class="nav-tiles" role="navigation" aria-label="Top pages">
-      <!-- Manual links to HOME (manual.html) -->
       <a href="manual.html" class="tile">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22V6.5z" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -109,7 +141,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="label">Manual</span>
       </a>
 
-      <!-- Shop (active) -->
       <span class="tile active" aria-current="page">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6 8h12l-1.2 11H7.2L6 8z" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -118,7 +149,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="label">Shop</span>
       </span>
 
-      <!-- Flight Baggage Limits -->
       <a href="flight-baggage-limits.html" class="tile">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <rect x="6" y="7" width="12" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -143,14 +173,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Large, easy-to-read display</li>
           </ul>
           <div class="btn-row">
-            <a class="btn" href="https://www.paypal.com/ncp/payment/U5Y8HGRG4APPU" target="_blank" rel="noopener">Buy via PayPal</a>
-            <a class="btn secondary" href="https://www.amazon.com/dp/B0FLF93G8D?maas=maas_adg_55CD02882428A473898A7E3BCFC45713_afap_abs&ref_=aa_maas&tag=maas" target="_blank" rel="noopener">Amazon</a>
-            <a class="btn secondary" href="https://goto.walmart.com/c/5610446/565706/9383?veh=aff&sharedid=mp_102900483_1086967761_gtq4t_mw5kvl6_E29A24D7A4AB3AA78FABD2CCBAD7A535&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F17792706032%3FselectedSellerId%3D102900483%26selectedOfferId%3DE29A24D7A4AB3AA78FABD2CCBAD7A535" target="_blank" rel="noopener">Walmart</a>
+            <a class="btn" href="https://www.paypal.com/ncp/payment/U5Y8HGRG4APPU" rel="noopener">Buy via PayPal</a>
+            <a class="btn secondary" href="https://www.amazon.com/dp/B0FLF93G8D" rel="noopener">Amazon</a>
+            <a class="btn secondary" href="https://goto.walmart.com/c/5610446/565706/9383?veh=aff&sharedid=mp_102900483_1086967761_gtq4t_mw5kvl6_E29A24D7A4AB3AA78FABD2CCBAD7A535&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F17792706032" rel="noopener">Walmart</a>
           </div>
           <p class="muted">Secure checkout via PayPal, Amazon or Walmart.</p>
+
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/gn0iKLbz6S8" title="uPatch Luggage Scale demonstration" allowfullscreen loading="lazy"></iframe>
+          </div>
         </div>
 
         <div class="section" style="background:var(--card-alt);">
+          <img src="img/Main-box-hand.jpg" alt="uPatch LogicScale battery-free luggage scale" class="product-image">
           <h2 style="font-size:1rem;margin-top:0;">Specs</h2>
           <p>Units: kg / lb</p>
           <p>Division: 50 g</p>
@@ -159,7 +194,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p>Includes: Hook Strap</p>
           <div class="btn-row" style="margin-top:.75rem;">
             <a class="btn" href="manual.html">View Manual</a>
-            <a class="btn secondary" href="https://youtu.be/gn0iKLbz6S8" target="_blank" rel="noopener">Watch Video</a>
+            <a class="btn secondary" href="https://youtu.be/gn0iKLbz6S8" rel="noopener">Watch Video</a>
           </div>
         </div>
       </div>
@@ -176,31 +211,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="muted">© <script>document.write(new Date().getFullYear())</script> uPatch</span>
       <a class="btn secondary" href="manual.html">Open Manual</a>
     </section>
-    <section class="section" role="contentinfo" aria-label="Company and brand">
-  <h2>About uPatch</h2>
-  <p>uPatch — battery-free luggage scale (shake to activate).</p>
-  <p><strong>Brand Owner:</strong> Allyexporter LLC</p>
-  <p>
-    <strong>Address:</strong><br>
-    130 Old Oak Dr.<br>
-    Buffalo Grove, IL 60089, USA
-  </p>
-  <p>
-    <strong>Email:</strong>
-    <a href="mailto:support@luggage-scale.com">support@luggage-scale.com</a>
-  </p>
-  <p>© 2025 uPatch</p>
-</section>
 
+    <section class="section" role="contentinfo" aria-label="Company and brand">
+      <h2>About uPatch</h2>
+      <p>uPatch — battery-free luggage scale (shake to activate).</p>
+      <p><strong>Brand Owner:</strong> Allyexporter LLC</p>
+      <p><strong>Address:</strong><br>130 Old Oak Dr.<br>Buffalo Grove, IL 60089, USA</p>
+      <p><strong>Email:</strong> <a href="mailto:support@luggage-scale.com">support@luggage-scale.com</a></p>
+      <p>© 2025 uPatch</p>
+      <div class="footer-links">
+        <a href="/blog" class="btn secondary">Luggage Scale Blog</a>
+        <a href="contact-us.html" class="btn secondary" rel="noopener">Contact Us</a>
+        <a href="about.html" class="btn secondary" rel="noopener">About</a>
+        <a href="shipping-returns.html" class="btn secondary" rel="noopener">Shipping &amp; Returns</a>
+        <a href="index.html" class="btn secondary">Home</a>
+        <a href="warranty.html" class="btn secondary">Warranty</a>
+</div>
+    </section>
   </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

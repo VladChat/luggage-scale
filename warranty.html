@@ -12,7 +12,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta charset="utf-8" />
   <title>uPatch Warranty & Returns</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- design tokens (same palette as Shop page) -->
   <style>
     :root{
       --bg:#0a1a2f; --card:#11294d; --card-alt:#0f2342; --text:#f0f8ff; --accent:#4db8ff;
@@ -31,7 +30,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:var(--accent); margin:0 0 1rem 0;
     }
 
-    /* Top tiles */
+    /* Tiles */
     .nav-tiles{
       display:grid; gap:.75rem; margin:0 0 1rem 0;
       grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -49,7 +48,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .tile.active{ background:#14335a; outline:2px solid var(--accent); cursor:default }
     .tile.active:hover{ background:#14335a; transform:none }
 
-    /* Cards */
+    /* Sections */
     .section{
       background:var(--card); margin-bottom:.75rem; padding:1rem;
       border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.4);
@@ -57,32 +56,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .section h2{
       margin:0 0 .5rem 0; font-size:clamp(1.05rem,1.2vw + .9rem,1.2rem); color:#fff;
     }
-    .section h3{
-      margin:.6rem 0 .35rem; font-size:1rem; color:#cfe6ff;
-    }
-    .section p{ margin:.35rem 0; line-height:1.6 }
-    .muted{ opacity:.85; font-style:italic }
-    ul.features{ margin:.35rem 0 0 1.1rem }
-    ol{ margin:.35rem 0 0 1.1rem }
+    .section h3{margin:.6rem 0 .35rem; font-size:1rem; color:#cfe6ff;}
+    .section p{margin:.35rem 0; line-height:1.6}
+    .muted{opacity:.85; font-style:italic}
+    ul.features{margin:.35rem 0 0 1.1rem}
+    ol{margin:.35rem 0 0 1.1rem}
 
     /* Buttons */
-    .btn-row{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.5rem }
+    .btn-row, .footer-links{
+      display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.5rem; justify-content:center;
+    }
     .btn{
       display:inline-block; background:var(--btn); color:#fff; text-decoration:none;
       padding:.6rem .9rem; border-radius:8px; font-weight:700;
       box-shadow:0 2px 6px rgba(0,0,0,.35);
       transition:transform .1s ease, background .2s ease;
     }
-    .btn:hover{ background:var(--btn-h); transform:translateY(-1px) }
-    .btn.secondary{ background:var(--btn-2) }
-    .btn.secondary:hover{ background:var(--btn-2h) }
+    .btn:hover{background:var(--btn-h); transform:translateY(-1px)}
+    .btn.secondary{background:var(--btn-2)}
+    .btn.secondary:hover{background:var(--btn-2h)}
 
-    /* Mobile tweaks */
     @media (max-width:540px){
-      body{ padding:.85rem }
-      .btn{ width:100%; text-align:center }
-      .tile{ min-height:52px }
-      ul.features{ margin-left:1rem }
+      body{padding:.85rem}
+      .btn{width:100%; text-align:center}
+      .tile{min-height:52px}
+      ul.features{margin-left:1rem}
     }
   </style>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -93,40 +91,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59QGXXMJ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
   <div class="container">
 
     <!-- Top tiles -->
     <nav class="nav-tiles" role="navigation" aria-label="Top pages">
-      <a href="manual.html" class="tile" aria-label="Manual">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22V6.5z" fill="none" stroke="currentColor" stroke-width="2"/>
-          <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4V20" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-        <span class="label">Manual</span>
+      <a href="manual.html" class="tile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 0 4 22V6.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4V20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <span>Manual</span>
       </a>
-
-      <a href="shop.html" class="tile" aria-label="Shop">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6 8h12l-1.2 11H7.2L6 8z" fill="none" stroke="currentColor" stroke-width="2"/>
-          <path d="M9 8a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-        <span class="label">Shop</span>
+      <a href="shop.html" class="tile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1.2 11H7.2L6 8z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 8a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <span>Shop</span>
       </a>
-
-      <a href="flight-baggage-limits.html" class="tile" aria-label="Flight Baggage Limits">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="6" y="7" width="12" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-          <path d="M9 7V5h6v2" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-        <span class="label">Flight Baggage Limits</span>
+      <a href="flight-baggage-limits.html" class="tile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="7" width="12" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7V5h6v2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <span>Flight Baggage Limits</span>
       </a>
-
       <span class="tile active" aria-current="page">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z" fill="none" stroke="currentColor" stroke-width="2"/>
-          <path d="M9 13l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2"/>
-        </svg>
-        <span class="label">Warranty</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 13l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <span>Warranty</span>
       </span>
     </nav>
 
@@ -134,70 +118,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <section class="section">
       <h2>What the Warranty Covers</h2>
-      <p>
-        At uPatch, we stand behind the quality of our products and want every customer to feel confident in their purchase.
-        That’s why every uPatch Luggage Scale is backed by a <strong>1-Year Limited Warranty</strong>.
-      </p>
-      <p>
-        This warranty covers defects in <strong>materials and workmanship</strong> under normal, intended use for a period of
-        one (1) year from the date of purchase.
-      </p>
+      <p>Every uPatch Luggage Scale is protected by a <strong>1-Year Limited Warranty</strong> covering defects in materials and workmanship under normal, intended use.</p>
       <ul class="features">
-        <li>LCD screen or display not functioning properly under normal conditions</li>
-        <li>Failure of the shake-to-charge mechanism</li>
-        <li>Strap or metal hook breaking under normal use within stated capacity limits</li>
-        <li>Manufacturing defects that affect the accuracy or safe operation of the scale</li>
+        <li>LCD display or electronics malfunction</li>
+        <li>Shake-to-charge mechanism failure</li>
+        <li>Strap or hook breakage under normal load (≤110 lb / 50 kg)</li>
+        <li>Manufacturing defects affecting accuracy or safety</li>
       </ul>
     </section>
 
     <section class="section">
       <h2>What the Warranty Does Not Cover</h2>
       <ul class="features">
-        <li>Damage caused by misuse, abuse, accidents, or unauthorized modifications</li>
-        <li>Normal wear and tear, cosmetic damage, or scratches</li>
-        <li>Damage caused by exceeding the <strong>110 lb / 50 kg</strong> weight capacity</li>
-        <li>Loss, theft, or improper storage conditions</li>
-        <li>Products purchased from unauthorized resellers</li>
+        <li>Misuse, abuse, accidents, or unauthorized repairs</li>
+        <li>Normal wear, cosmetic scratches, or aging</li>
+        <li>Overloading beyond rated capacity</li>
+        <li>Damage from improper storage or moisture</li>
+        <li>Purchases from non-authorized sellers</li>
       </ul>
     </section>
 
     <section class="section">
       <h2>Warranty Claim Process</h2>
       <ol>
-        <li>Contact our customer service team at <a href="mailto:support@luggage-scale.com">support@luggage-scale.com</a> with proof of purchase, product details, and a description of the issue.</li>
-        <li>Our team will review your request and provide troubleshooting steps or a return authorization if needed.</li>
-        <li>After inspection, defective items will be <strong>repaired or replaced</strong> at our discretion.</li>
-        <li>In some cases, replacement may be made with a refurbished product of equal or greater value.</li>
+        <li>Email <a href="mailto:support@luggage-scale.com">support@luggage-scale.com</a> with proof of purchase and issue details.</li>
+        <li>Our team reviews and provides troubleshooting or return instructions.</li>
+        <li>Defective units will be repaired or replaced at our discretion.</li>
+        <li>Replacement may be a refurbished item of equal or greater value.</li>
       </ol>
     </section>
 
     <section class="section">
       <h2>Customer Responsibilities</h2>
       <ul class="features">
-        <li>Proof of purchase (receipt, order confirmation, or invoice) is required for all claims</li>
-        <li>Customers are responsible for return shipping unless otherwise required by law</li>
-        <li>We recommend using a trackable shipping service for returns</li>
+        <li>Proof of purchase is required for all claims.</li>
+        <li>Customer pays return shipping unless required by law.</li>
+        <li>Use a trackable service when sending returns.</li>
       </ul>
     </section>
 
     <section class="section">
       <h2>Legal Disclaimer</h2>
-      <p class="muted">
-        This limited warranty gives you specific legal rights, and you may also have other rights which vary by state or country.
-        uPatch shall not be liable for incidental or consequential damages arising from the use of this product.
-      </p>
-      <p><strong>Travel smarter. Pack lighter. Always stay within limits—with the confidence of a 1-Year Warranty.</strong></p>
-
+      <p class="muted">This warranty gives you specific legal rights; you may have additional rights depending on your jurisdiction. uPatch is not liable for incidental or consequential damages.</p>
+      <p><strong>Travel smarter, lighter, and confidently — backed by our 1-Year Warranty.</strong></p>
       <div class="btn-row">
         <a class="btn" href="shop.html">Back to Shop</a>
         <a class="btn secondary" href="manual.html">Open Manual</a>
       </div>
     </section>
 
-    <!-- Footer -->
-    <section class="section" style="display:flex;justify-content:space-between;gap:.5rem;align-items:center;">
-      <span class="muted">© <script>document.write(new Date().getFullYear())</script> uPatch</span>
-      <a class="btn secondary" href="flight-baggage-limits.html">Flight Baggage Limits</a>
+    <!-- Footer links -->
+    <section class="section" style="text-align:center;">
+      <h2>Explore More</h2>
+      <div class="footer-links">
+        <a href="index.html" class="btn secondary">Home</a>
+        <a href="/blog" class="btn secondary">Blog</a>
+        <a href="contact-us.html" class="btn secondary">Contact Us</a>
+        <a href="about.html" class="btn secondary">About</a>
+        <a href="shipping-returns.html" class="btn secondary">Shipping &amp; Returns</a>
+        <a href="warranty.html" class="btn secondary">Warranty</a>
+      </div>
+      <p class="muted" style="margin-top:.8rem;">© <script>document.write(new Date().getFullYear())</script> uPatch</p>
     </section>
 
   </div>

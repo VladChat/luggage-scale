@@ -105,6 +105,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border:0;
     }
 
+    /* Footer link row */
+    .footer-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin-top:.5rem;
+      justify-content:center;
+    }
+
     /* Mobile tweaks */
     @media (max-width:540px){
       body{ padding:.85rem }
@@ -113,10 +122,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       ul.features{ margin-left:1rem }
     }
   </style>
-  <!-- Favicon + tab color -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="theme-color" content="#0a1a2f">
-
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="theme-color" content="#0a1a2f">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -166,20 +173,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Large, easy-to-read display</li>
           </ul>
           <div class="btn-row">
-            <a class="btn" href="https://www.paypal.com/ncp/payment/U5Y8HGRG4APPU" target="_blank" rel="noopener">Buy via PayPal</a>
-            <a class="btn secondary" href="https://www.amazon.com/dp/B0FLF93G8D" target="_blank" rel="noopener">Amazon</a>
-            <a class="btn secondary" href="https://goto.walmart.com/c/5610446/565706/9383?veh=aff&sharedid=mp_102900483_1086967761_gtq4t_mw5kvl6_E29A24D7A4AB3AA78FABD2CCBAD7A535&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F17792706032" target="_blank" rel="noopener">Walmart</a>
+            <a class="btn" href="https://www.paypal.com/ncp/payment/U5Y8HGRG4APPU" rel="noopener">Buy via PayPal</a>
+            <a class="btn secondary" href="https://www.amazon.com/dp/B0FLF93G8D" rel="noopener">Amazon</a>
+            <a class="btn secondary" href="https://goto.walmart.com/c/5610446/565706/9383?veh=aff&sharedid=mp_102900483_1086967761_gtq4t_mw5kvl6_E29A24D7A4AB3AA78FABD2CCBAD7A535&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F17792706032" rel="noopener">Walmart</a>
           </div>
           <p class="muted">Secure checkout via PayPal, Amazon or Walmart.</p>
 
-          <!-- Embedded YouTube video -->
           <div class="video-embed">
             <iframe src="https://www.youtube.com/embed/gn0iKLbz6S8" title="uPatch Luggage Scale demonstration" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
 
         <div class="section" style="background:var(--card-alt);">
-          <img src="img/main-box-hand.jpg" alt="uPatch LogicScale battery-free luggage scale" class="product-image">
+          <img src="img/Main-box-hand.jpg" alt="uPatch LogicScale battery-free luggage scale" class="product-image">
           <h2 style="font-size:1rem;margin-top:0;">Specs</h2>
           <p>Units: kg / lb</p>
           <p>Division: 50 g</p>
@@ -188,7 +194,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p>Includes: Hook Strap</p>
           <div class="btn-row" style="margin-top:.75rem;">
             <a class="btn" href="manual.html">View Manual</a>
-            <a class="btn secondary" href="https://youtu.be/gn0iKLbz6S8" target="_blank" rel="noopener">Watch Video</a>
+            <a class="btn secondary" href="https://youtu.be/gn0iKLbz6S8" rel="noopener">Watch Video</a>
           </div>
         </div>
       </div>
@@ -213,7 +219,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p><strong>Address:</strong><br>130 Old Oak Dr.<br>Buffalo Grove, IL 60089, USA</p>
       <p><strong>Email:</strong> <a href="mailto:support@luggage-scale.com">support@luggage-scale.com</a></p>
       <p>© 2025 uPatch</p>
-      <a href="/blog">Luggage Scale Blog</a>
+      <div class="footer-links">
+        <a href="/blog" class="btn secondary">Luggage Scale Blog</a>
+        <a href="contact-us.html" class="btn secondary" rel="noopener">Contact Us</a>
+        <a href="about.html" class="btn secondary" rel="noopener">About</a>
+        <a href="shipping-returns.html" class="btn secondary" rel="noopener">Shipping &amp; Returns</a>
+        <a href="index.html" class="btn secondary">Home</a>
+        <a href="warranty.html" class="btn secondary">Warranty</a>
+</div>
     </section>
   </div>
 </body>
