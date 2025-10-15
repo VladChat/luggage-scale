@@ -8,4 +8,5 @@ Disallow: /private/
 Disallow: /*?*utm_*
 
 # Sitemap locations
+Sitemap: https://luggage-scale.com/sitemap.xml
 Sitemap: https://luggage-scale.com/blog/sitemap.xml
