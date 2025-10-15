@@ -7,7 +7,10 @@
   <!-- Главная блога -->
   <url>
     <loc>{{ .Site.BaseURL }}</loc>
-    <lastmod>{{ $now.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+
+    <!-- ✅ Исправлено: формат lastmod приведён к строгому ISO 8601 без миллисекунд -->
+    <lastmod>{{ $now.Format "2006-01-02T15:04:05+00:00" }}</lastmod>
+
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -27,7 +30,9 @@
 
     <url>
       <loc>{{ .Permalink }}</loc>
-      <lastmod>{{ $lm.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+
+      <!-- ✅ Исправлено: принудительный формат lastmod по стандарту ISO 8601 (UTC) -->
+      <lastmod>{{ $lm.Format "2006-01-02T15:04:05+00:00" }}</lastmod>
 
       {{- if lt $age 604800 }}           <!-- < 7 дней -->
         <changefreq>daily</changefreq>
