@@ -10,8 +10,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 
   <meta charset="utf-8" />
-  <title>Shop — uPatch Luggage Scale</title>
+  <title>Shop — Battery-Free Luggage Scale, 110 lb / 50 kg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Buy a battery-free luggage scale you power by shaking. 110 lb / 50 kg capacity, lb/kg units, durable strap, and a compact, airline-friendly design.">
+  <link rel="canonical" href="https://luggage-scale.com/shop.html">
   <!-- v3 -->
   <style>
     :root{
@@ -121,9 +123,72 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .tile{ min-height:52px }
       ul.features{ margin-left:1rem }
     }
+
+    /* Accessible link styles: make text links visible on dark bg without affecting buttons/tiles */
+    a:not(.btn):not(.tile){
+      color:#9fd3ff;
+      text-decoration:underline;
+      text-underline-offset:2px;
+      text-decoration-thickness:1.5px;
+      text-decoration-color:rgba(159,211,255,.9);
+    }
+    a:not(.btn):not(.tile):visited{ color:#c2e4ff }
+    a:not(.btn):not(.tile):hover{
+      color:#e2f2ff;
+      text-decoration-thickness:2px;
+    }
+    a:not(.btn):not(.tile):focus-visible{
+      outline:2px dashed #9fd3ff;
+      outline-offset:2px;
+      text-decoration:none;
+    }
+
+    /* Minimal table styling for comparison section */
+    .compare{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:8px;
+      overflow:hidden;
+    }
+    .compare th, .compare td{
+      padding:.65rem .75rem;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      vertical-align:top;
+    }
+    .compare thead th{
+      background:var(--card-alt);
+      color:#fff; text-align:left;
+      font-size:.95rem;
+    }
+    .compare tbody tr:last-child td{ border-bottom:0 }
   </style>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta name="theme-color" content="#0a1a2f">
+
+  <!-- Product JSON-LD (no prices; clean, policy-safe) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "uPatch Battery-Free Luggage Scale",
+    "description": "A precise, battery-free luggage scale powered by shaking. 110 lb / 50 kg capacity with lb/kg units, durable strap, and compact travel design.",
+    "brand": { "@type": "Brand", "name": "uPatch" },
+    "sku": "UPATCH-LSCALE-NOBAT",
+    "gtin14": "00199284526549",
+    "category": "SportingGoods",
+    "url": "https://luggage-scale.com/shop.html",
+    "image": "https://luggage-scale.com/img/main-box-hand.webp",
+    "sameAs": [
+      "https://www.amazon.com/dp/B0FLF93G8D"
+    ],
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Allyexporter LLC"
+    }
+  }
+  </script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -161,7 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h1>Shop — uPatch Luggage Scale</h1>
 
     <!-- Featured product -->
-    <section class="section">
+    <section class="section" aria-label="Featured product">
       <h2>Featured</h2>
       <div class="grid">
         <div>
@@ -174,8 +239,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </ul>
           <div class="btn-row">
             <a class="btn" href="https://www.paypal.com/ncp/payment/U5Y8HGRG4APPU" rel="noopener">Buy via PayPal</a>
-            <a class="btn secondary" href="https://www.amazon.com/dp/B0FLF93G8D" rel="noopener">Amazon</a>
-            <a class="btn secondary" href="https://goto.walmart.com/c/5610446/565706/9383?veh=aff&sharedid=mp_102900483_1086967761_gtq4t_mw5kvl6_E29A24D7A4AB3AA78FABD2CCBAD7A535&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F17792706032" rel="noopener">Walmart</a>
+            <a class="btn secondary" href="https://www.amazon.com/dp/B0FLF93G8D" rel="noopener nofollow sponsored">Amazon</a>
+            <a class="btn secondary" href="https://goto.walmart.com/c/5610446/565706/9383?veh=aff&sharedid=mp_102900483_1086967761_gtq4t_mw5kvl6_E29A24D7A4ABD2CCBAD7A535&u=https%3A%2F%2Fwww.walmart.com%2Fip%2F17792706032" rel="noopener nofollow sponsored">Walmart</a>
           </div>
           <p class="muted">Secure checkout via PayPal, Amazon or Walmart.</p>
 
@@ -184,8 +249,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
 
-        <div class="section" style="background:var(--card-alt);">
-          <img src="img/main-box-hand.webp" alt="uPatch LogicScale battery-free luggage scale" class="product-image">
+        <div class="section" style="background:var(--card-alt);" aria-label="Specs card">
+          <img src="img/main-box-hand.webp" alt="uPatch battery-free luggage scale held by hand" class="product-image">
           <h2 style="font-size:1rem;margin-top:0;">Specs</h2>
           <p>Units: kg / lb</p>
           <p>Division: 50 g</p>
@@ -200,10 +265,127 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
+    <!-- New content blocks (added without changing existing design) -->
+    <section class="section" aria-label="Why travelers choose this scale">
+      <h2>Why Travelers Choose This Scale</h2>
+      <ul class="features">
+        <li><strong>Battery-free power:</strong> Shake to charge—no coin cells required.</li>
+        <li><strong>110 lb / 50 kg capacity:</strong> Ideal for international trips.</li>
+        <li><strong>Fast readings:</strong> Clear display with lb/kg toggle.</li>
+        <li><strong>Compact &amp; durable:</strong> Packs easily; reinforced strap and buckle.</li>
+      </ul>
+      <p class="muted">Need airline rules? See our <a href="flight-baggage-limits.html">Baggage Weight Guide</a>.</p>
+    </section>
+
+    <section class="section" aria-label="What’s included">
+      <h2>What’s in the Box</h2>
+      <ul class="features">
+        <li>Luggage scale (battery-free)</li>
+        <li>Detachable strap with buckle</li>
+        <li>Quick start card</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-label="Who it’s for">
+      <h2>Who It’s For</h2>
+      <ul class="features">
+        <li>Frequent flyers who don’t want to hunt for coin batteries</li>
+        <li>Carry-on minimalist travelers watching every pound/kilogram</li>
+        <li>Families managing multiple bags</li>
+        <li>Cruise and train travelers with strict weight checks</li>
+      </ul>
+    </section>
+
+    <!-- Accuracy tips (added) -->
+    <section class="section" aria-label="How to measure accurately">
+      <h2>How to Measure Accurately</h2>
+      <ul class="features">
+        <li>Charge first: give the scale a few firm shakes until the screen lights up.</li>
+        <li>Hook correctly: loop the strap through a sturdy handle and confirm the buckle is fully engaged.</li>
+        <li>Lift smoothly: raise the bag in one motion and hold steady for 2–3 seconds while the reading stabilizes.</li>
+        <li>Mind the units: switch to lb or kg to match your airline’s format.</li>
+        <li>Double-check: if you’re near the limit, weigh twice and use the average for peace of mind.</li>
+      </ul>
+      <p class="muted">New to the product? The full instructions are in the <a href="manual.html">User Manual</a>.</p>
+    </section>
+
+    <!-- Comparison table (added) -->
+    <section class="section" aria-label="Battery-free vs battery-powered">
+      <h2>Battery-Free vs Battery-Powered Scales</h2>
+      <table class="compare" aria-describedby="bf-vs-bp">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Battery-Free (uPatch)</th>
+            <th>Battery-Powered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Power Source</td>
+            <td>Shake-to-charge kinetic power; always ready</td>
+            <td>Requires coin cells; can die in storage</td>
+          </tr>
+          <tr>
+            <td>Travel Readiness</td>
+            <td>No replacements needed; works anywhere</td>
+            <td>Need spares; risk of leakage/corrosion</td>
+          </tr>
+          <tr>
+            <td>Sustainability</td>
+            <td>No disposable batteries to discard</td>
+            <td>Ongoing battery waste and purchases</td>
+          </tr>
+          <tr>
+            <td>Speed &amp; Simplicity</td>
+            <td>Shake, lift, read; minimal maintenance</td>
+            <td>Replace batteries, then operate as usual</td>
+          </tr>
+          <tr>
+            <td>Accuracy Practice</td>
+            <td>Best with steady lifts and brief hold</td>
+            <td>Similar technique; dependent on battery health</td>
+          </tr>
+        </tbody>
+      </table>
+      <p id="bf-vs-bp" class="muted">Both types can be accurate. Battery-free avoids downtime and consumables—useful for frequent travelers.</p>
+    </section>
+
     <!-- Shipping / Returns -->
-    <section class="section">
+    <section class="section" aria-label="Shipping & Returns">
       <h2>Shipping &amp; Returns</h2>
       <p>Fast domestic shipping. Hassle-free returns within 30 days of delivery. Policies may vary by marketplace—please check the listing page for details.</p>
+    </section>
+
+    <!-- FAQ (added ~250–300 words) -->
+    <section class="section" aria-label="FAQ">
+      <h2>Shop FAQ</h2>
+      <h3 style="margin-top:.4rem;">How long should I shake the scale to power it?</h3>
+      <p>Typically a few seconds are enough to illuminate the display and complete several back-to-back measurements. If the screen dims during use, give it another brief shake and continue weighing. The internal kinetic generator stores just enough energy for practical, on-the-go sessions—no cables or sockets required.</p>
+
+      <h3>Is it accurate near the airline limit?</h3>
+      <p>Yes, provided you use good technique. Lift smoothly, keep the bag clear of the ground, and hold still for two to three seconds. If your suitcase is close to the limit, take two readings and use the average. Remember that airport scales are the final authority, so keep a small safety buffer (0.5–1 kg or 1–2 lb).</p>
+
+      <h3>Can I switch between pounds and kilograms?</h3>
+      <p>Absolutely. Press the unit button to toggle between lb and kg at any time. Matching the airline’s preferred units is one of the easiest ways to avoid confusion during check-in.</p>
+
+      <h3>Does it work after long storage?</h3>
+      <p>Yes. Because there are no disposable batteries to drain or leak, the scale remains ready. Simply shake to charge and weigh. This is especially helpful for travelers who pack the scale only a few times a year.</p>
+
+      <h3>What’s included and how do I care for it?</h3>
+      <p>The box includes the battery-free scale, a detachable strap with a secure buckle, and a quick start card. Store the device in a dry compartment; avoid harsh solvents; and detach the strap when packing to prevent snags.</p>
+
+      <p class="muted">For full operating details and troubleshooting, see the <a href="manual.html">User Manual</a> and our <a href="flight-baggage-limits.html">Baggage Weight Guide</a>.</p>
+    </section>
+
+    <section class="section" aria-label="Good to know">
+      <h2>Good to Know</h2>
+      <p>Airline policies change. Always confirm baggage rules with your carrier before traveling. Use our practical <a href="flight-baggage-limits.html">Baggage Weight Guide</a> and the <a href="manual.html">User Manual</a> for accuracy tips.</p>
+    </section>
+
+    <section class="section" aria-label="Affiliate disclosure">
+      <h2>Disclosure</h2>
+      <p class="muted">As an Amazon Associate, we earn from qualifying purchases. Some outbound links may be affiliate links.</p>
     </section>
 
     <!-- Footer -->
@@ -220,13 +402,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p><strong>Email:</strong> <a href="mailto:support@luggage-scale.com">support@luggage-scale.com</a></p>
       <p>© 2025 uPatch</p>
       <div class="footer-links">
-        <a href="/blog" class="btn secondary">Luggage Scale Blog</a>
+        <a href="/blog/" class="btn secondary">Luggage Scale Blog</a>
         <a href="contact-us.html" class="btn secondary" rel="noopener">Contact Us</a>
         <a href="about.html" class="btn secondary" rel="noopener">About</a>
         <a href="shipping-returns.html" class="btn secondary" rel="noopener">Shipping &amp; Returns</a>
         <a href="index.html" class="btn secondary">Home</a>
         <a href="warranty.html" class="btn secondary">Warranty</a>
-</div>
+      </div>
     </section>
   </div>
 </body>
