@@ -1,3 +1,47 @@
+.post-meta-with-icon {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.25rem;
+      }
+
+      .hero-icon-corner {
+        flex-shrink: 0;
+        width: 65px;
+        height: 65px;
+        opacity: 0.9;
+      }
+
+      .hero-icon-corner svg {
+        width: 100%;
+        height: 100%;
+        fill: #ffffff;
+        opacity: 0.85;
+        transition: opacity .3s ease, transform .3s ease;
+      }
+
+      body.dark .hero-icon-corner svg {
+        fill: #dfe7f5;
+        opacity: 0.9;
+      }
+
+      .hero-icon-corner:hover svg {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 680px) {
+        .post-meta-with-icon {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .hero-icon-corner {
+          align-self: flex-end;
+          margin-top: 0.25rem;
+        }
+}
 .related-posts {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
