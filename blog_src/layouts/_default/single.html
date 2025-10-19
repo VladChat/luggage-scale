@@ -83,7 +83,6 @@
     </style>
 
   </header>
-
   {{ partial "custom/aff-rotator.html" . }}
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false -}}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) -}}
@@ -97,13 +96,9 @@
     {{- if not (.Param "disableAnchoredHeadings") -}}
       {{- partial "anchored_headings.html" .Content -}}
     {{- else -}}
-      {{/* ✳️ Удаляем оригинальный FAQ из контента перед выводом */}}
-      {{ $clean := replaceRE "(?is)<h2[^>]*>\\s*Frequently\\s+Asked\\s+Questions.*" "" .Content }}
-      {{ $clean | safeHTML }}
+      {{ .Content }}
     {{- end -}}
   </div>
-
-  {{/* ✳️ Добавляем интерактивный FAQ только один раз */}}
   {{ partial "custom/accordion-faq.html" . }}
 
   {{- end }}
@@ -115,6 +110,28 @@
 
     {{/* ──────────────────────────────────────────────────────────────
        БЛОК ТЕГОВ И КАТЕГОРИЙ ОТКЛЮЧЁН (оставлен для истории)
+
+    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" -}}
+    {{- $categories := .Language.Params.Taxonomies.category | default "categories" -}}
+
+    {{- $termsTags := $.GetTerms $tags -}}
+    {{- if $termsTags -}}
+      <ul class="post-tags">
+        {{- range $termsTags -}}
+          <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+        {{- end -}}
+      </ul>
+    {{- end -}}
+
+    {{- $termsCats := $.GetTerms $categories -}}
+    {{- if $termsCats -}}
+      <div class="post-categories">
+        {{- range $termsCats -}}
+          <a class="category-pill" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        {{- end -}}
+      </div>
+    {{- end -}}
+
     ─────────────────────────────────────────────────────────────── */}}
 
     {{- if (.Param "ShowPostNavLinks") -}}
@@ -152,5 +169,7 @@
     {{- partial "comments.html" . -}}
   {{- end -}}
 </article>
+
+
 
 {{- end -}}
