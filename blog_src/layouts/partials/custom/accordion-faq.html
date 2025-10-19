@@ -1,4 +1,102 @@
 <!-- layouts/partials/custom/accordion-faq.html -->
+{{- /* 
+  Usage:
+  In your page front matter (e.g., .md):
+  faq:
+    - question: "Do most people actually need protein powder?"
+      answer: "Not necessarily. Many adults can meet protein needs with food..."
+    - question: "How can I reduce the risk of heavy metals in powders?"
+      answerHtml: "<p>Choose brands with <strong>third-party testing</strong> (NSF, Informed Choice, USP)...</p>"
+
+  Notes:
+  - If 'answerHtml' (or 'answer_html') is present, it will be rendered as HTML (safe).
+  - Otherwise 'answer' is passed through markdownify.
+  - No CSS changes are required; styling can be handled by existing global styles.
+*/ -}}
+
+{{- $faq := .Params.faq -}}
+{{- if and $faq (gt (len $faq) 0) -}}
+
+<section class="faq-section" id="faq">
+  <h2>Frequently Asked Questions (FAQ)</h2>
+
+  {{- range $faq }}
+    {{- $q := .question | default "" -}}
+    {{- $a := .answer | default "" -}}
+    {{- $aHtml := or .answerHtml .answer_html -}}
+
+    {{- if $q }}
+    <details>
+      <summary>{{ $q | plainify }}</summary>
+
+      {{- if $aHtml }}
+        <div class="faq-answer">
+          {{ $aHtml | safeHTML }}
+        </div>
+      {{- else if $a }}
+        <div class="faq-answer">
+          {{ $a | markdownify }}
+        </div>
+      {{- end }}
+
+    </details>
+    {{- end }}
+  {{- end }}
+
+</section>
+
+{{- /* JSON-LD: FAQPage */ -}}
+{{- /* We produce a single FAQPage block reflecting the same questions/answers. */ -}}
+{{- $items := slice -}}
+{{- range $faq }}
+  {{- $q := .question | default "" -}}
+  {{- if $q }}
+    {{- $aText := "" -}}
+    {{- if .answerHtml }}
+      {{- $aText = (.answerHtml | plainify) -}}
+    {{- else if .answer_html }}
+      {{- $aText = (.answer_html | plainify) -}}
+    {{- else if .answer }}
+      {{- /* Render markdown to HTML then strip to text for JSON-LD */ -}}
+      {{- $aText = (.answer | markdownify | plainify) -}}
+    {{- end -}}
+
+    {{- $items = $items | append (dict
+        "@type" "Question"
+        "name" ($q | plainify)
+        "acceptedAnswer" (dict
+          "@type" "Answer"
+          "text" $aText
+        )
+      )
+    -}}
+  {{- end }}
+{{- end -}}
+
+{{- if gt (len $items) 0 -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{- $last := sub (len $items) 1 -}}
+    {{- range $i, $it := $items -}}
+    {
+      "@type": "Question",
+      "name": {{ $it.name | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ $it.acceptedAnswer.text | jsonify }}
+      }
+    }{{ if lt $i $last }},{{ end }}
+    {{- end -}}
+  ]
+}
+</script>
+{{- end -}}
+
+{{- end -}}
+<!-- layouts/partials/custom/accordion-faq.html -->
 
 
 
