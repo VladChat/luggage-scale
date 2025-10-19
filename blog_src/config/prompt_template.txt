@@ -21,7 +21,7 @@ Your task:
 - **Structure:**
   - Begin with an **emotionally vivid narrative intro** (max 500–550 words) inspired by the source article. Include real or sensory details to engage readers immediately.
   - Follow with a **bolded Quick Summary** inside blockquotes.
-  - Use **7–9 H2 sections** (under 60 characters each); add **H3** where it improves flow.
+  - Use **5-7 H2 sections** (under 60 characters each); add **H3** where it improves flow.
   - End with a reflective, natural closing section (e.g., “Why It Matters”), not a “Conclusion”.
   - Finish with a `## Frequently Asked Questions (FAQ)` block containing **3–5 Q/A pairs**.
 
