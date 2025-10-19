@@ -14,23 +14,54 @@
     return null;
   }
 
-  // Улучшенный парсер: извлекает Q/A даже из HTML (<p>, <br> и т.п.)
+  // --- FIXED: устойчивый парсер Q:/A: с поддержкой заголовков "Q:" на отдельной строке ---
   function extractQAFromHTML(html) {
-    const text = html
+    // 1) Превращаем <p> и <br> в \n, убираем прочие теги
+    let text = (html || '')
       .replace(/<\/p>|<br\s*\/?>/gi, '\n')
       .replace(/<[^>]+>/g, '')
       .replace(/\r/g, '')
+      .replace(/\u00a0/g, ' ') // NBSP -> space
       .trim();
-    const parts = text.split(/(?=\bQ\s*:)/i);
+
+    // 2) Нормализуем многострочные отступы
+    text = text
+      .replace(/[ \t]+\n/g, '\n') // хвостовые пробелы перед переносами
+      .replace(/\n{3,}/g, '\n\n') // слишком много пустых строк -> двойной перенос
+      .trim();
+
+    // 3) Регэксп, который выдёргивает каждую пару Q/A, останавливаясь перед след. Q: или концом
+    // Поддерживает:
+    //   Q:
+    //   Вопрос здесь...
+    //   A:
+    //   Ответ здесь...
+    //
+    // и компактный вариант:
+    //   Q: Вопрос здесь... A: Ответ здесь...
+    const re = /(?:^|\n)\s*Q\s*:\s*([\s\S]*?)(?:\n+|\s+)A\s*:\s*([\s\S]*?)(?=\n\s*Q\s*:|$)/gi;
+
     const qa = [];
-    for (const part of parts) {
-      const match = part.match(/Q\s*:\s*(.+?)(?:\s*A\s*:\s*([\s\S]+))?$/i);
-      if (match) {
-        const q = match[1].trim();
-        const a = (match[2] || '').trim();
-        if (q && a) qa.push({ q, a });
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      const q = (m[1] || '').trim().replace(/\n+/g, ' ').replace(/\s{2,}/g, ' ');
+      const a = (m[2] || '').trim().replace(/\n{2,}/g, '\n').replace(/[ \t]{2,}/g, ' ');
+      if (q && a) qa.push({ q, a });
+    }
+
+    // Фолбэк: если по какой-то причине ничего не собрано, пробуем старую мягкую схему
+    if (!qa.length) {
+      const softParts = text.split(/(?=\bQ\s*:)/i);
+      for (const part of softParts) {
+        const m2 = part.match(/Q\s*:\s*([\s\S]*?)(?:\n+|\s+)A\s*:\s*([\s\S]*?)$/i);
+        if (m2) {
+          const q2 = (m2[1] || '').trim().replace(/\n+/g, ' ').replace(/\s{2,}/g, ' ');
+          const a2 = (m2[2] || '').trim().replace(/\n{2,}/g, '\n').replace(/[ \t]{2,}/g, ' ');
+          if (q2 && a2) qa.push({ q: q2, a: a2 });
+        }
       }
     }
+
     return qa;
   }
 
@@ -44,12 +75,15 @@
       btn.type = 'button';
       btn.className = 'faq-q';
       btn.setAttribute('aria-expanded', idx === 0 ? 'true' : 'false');
-      btn.innerHTML = `<h3 class="label"><strong style="font-size:1.5em;line-height:1;margin-right:.4rem;">Q</strong>${escapeHTML(item.q)}</h3><span class="mark">+</span>`;
+      btn.innerHTML =
+        `<h3 class="label"><strong style="font-size:1.5em;line-height:1;margin-right:.4rem;">Q</strong>${escapeHTML(item.q)}</h3><span class="mark">+</span>`;
       const aWrap = document.createElement('div');
       aWrap.className = 'faq-a';
       const inner = document.createElement('div');
       inner.className = 'faq-a-inner';
-      inner.innerHTML = `<p>${escapeHTML(item.a)}</p>`;
+      // Ответ может содержать переносы строк — превращаем в <p> с br
+      const safeA = escapeHTML(item.a).replace(/\n/g, '<br>');
+      inner.innerHTML = `<p>${safeA}</p>`;
       aWrap.appendChild(inner);
       requestAnimationFrame(() => {
         aWrap.style.maxHeight = idx === 0 ? (inner.scrollHeight + 2) + 'px' : '0px';
@@ -85,6 +119,10 @@
 
   function injectJSONLD(qa) {
     if (!qa.length) return;
+    // Не дублируем, если уже вставлен
+    const prev = document.getElementById('auto-faq-jsonld');
+    if (prev && prev.parentNode) prev.parentNode.removeChild(prev);
+
     const ld = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
