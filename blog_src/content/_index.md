@@ -1,5 +1,5 @@
 ﻿---
-title: "Luggage Scale Blog"
+title: "UPATCH Luggage Scale Blog"
 ---
 
-Welcome! Here you'll find updates, travel tips, and smart packing advice.
+Get the latest travel updates, packing hacks, and smart advice for effortless, organized trips.
