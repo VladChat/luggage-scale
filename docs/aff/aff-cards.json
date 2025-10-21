@@ -1,0 +1,47 @@
+{
+  "disclosure": "As an Amazon Associate, we earn from qualifying purchases.",
+  "cards": [
+    {
+      "title": "Compact Digital Luggage Scale with Backlit Display",
+      "img": "luggage-scale.webp",
+      "alt": "Compact Digital Luggage Scale",
+      "desc": "Small but powerful — this travel scale features a bright LCD screen, one-touch operation, and precise weight readings up to 110 lb or 50 kg.",
+      "link": "https://amzn.to/3KLd7VN"
+    },
+    {
+      "title": "Motion-Charge Luggage Weigher",
+      "img": "luggage-scale1.webp",
+      "alt": "Motion-Charge Luggage Weigher",
+      "desc": "Check your bag weight instantly with this motion-activated luggage scale — shake to power up and measure your suitcase in seconds.",
+      "link": "https://amzn.to/3KLd7VN"
+    },
+    {
+      "title": "Eco Travel Scale – No Batteries Needed",
+      "img": "luggage-scale2.webp",
+      "alt": "Eco Travel Luggage Scale",
+      "desc": "A sustainable travel companion with quick kinetic charging. Lightweight and accurate, perfect for carry-on or checked bags.",
+      "link": "https://amzn.to/3KLd7VN"
+    },
+    {
+      "title": "Kinetic Energy Digital Weighing Scale",
+      "img": "luggage-scale3.webp",
+      "alt": "Kinetic Digital Luggage Scale",
+      "desc": "Designed for frequent flyers, this kinetic energy scale provides precise results without power loss — reliable even on long trips.",
+      "link": "https://amzn.to/3KLd7VN"
+    },
+    {
+      "title": "Ergonomic Hand-Powered Luggage Scale",
+      "img": "luggage-scale4.webp",
+      "alt": "Ergonomic Luggage Scale",
+      "desc": "An ergonomic design that fits comfortably in your hand — charge manually and get fast, stable readings in both pounds and kilograms.",
+      "link": "https://amzn.to/3KLd7VN"
+    },
+    {
+      "title": "Durable Travel Luggage Scale with Hook and Strap",
+      "img": "luggage-scale5.webp",
+      "alt": "Durable Travel Luggage Scale",
+      "desc": "A tough digital travel scale with a stainless-steel hook, strong nylon strap, and blue backlit screen — ideal for both home and airport use.",
+      "link": "https://amzn.to/3KLd7VN"
+    }
+  ]
+}
