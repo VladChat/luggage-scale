@@ -1,8 +1,4 @@
 baseURL: "https://luggage-scale.com/blog/"
-title: "uPatch"
-params:
-  tagline: "Luggage Scale"
-  description: "Travel smarter with real-time updates, expert packing guides, and practical tips for efficient, organized journeys."
 theme: "PaperMod"
 publishDir: "../blog"
 
@@ -47,9 +43,9 @@ taxonomies:
 
 params:
   env: production
-  title: "uPatch Luggage Scale"
+  title: "uPatch"
   tagline: "Luggage Scale"
-  description: "Discover airline baggage limits, smart packing tips, and flight travel resources. Learn how to avoid overweight fees with the uPatch Luggage Scale — your reliable, battery-free travel companion."
+  description: "Travel smarter with real-time updates, expert packing guides, and practical tips for efficient, organized journeys. Luggage Scale"
   keywords: ["airline baggage limits", "carry-on size guide", "checked luggage rules", "travel weight scale", "uPatch luggage scale", "smart packing tips", "flight baggage allowance", "overweight luggage fees", "travel essentials", "battery-free luggage scale"]
   author: "uPatch Editorial"
   customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
