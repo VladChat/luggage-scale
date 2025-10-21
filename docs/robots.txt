@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: https://blog.nailak.com/sitemap.xml
+Sitemap: https://luggage-scale.com/blog/sitemap.xml
