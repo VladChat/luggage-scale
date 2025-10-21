@@ -8,10 +8,19 @@
 <meta name="robots" content="noindex, nofollow">
 {{- end }}
 
-{{- /* ===== Title (universal, safe for home/posts) ===== */ -}}
+{{- /* ===== Title (safe word-trim, total ≤ ~60) ===== */ -}}
+{{- /* Бренды: полный (для главной) и короткий (для постов) */ -}}
 {{- $brandFull := site.Title -}}                               {{/* e.g. "Nailak Blog – Beauty and Wellness Tips" */}}
-{{- $brand := site.Params.title | default site.Title -}}       {{/* e.g. "Nailak Blog" */}}
+{{- $brand := site.Params.title | default site.Title -}}       {{/* e.g. "Nailak Blog" (короткий бренд) */}}
+
+{{- /* Разделитель между названием поста и брендом */ -}}
 {{- $sepTitle := " — " -}}
+
+{{- /* Ограничение длины только для ЧАСТИ поста, чтобы не резать бренд */ -}}
+{{- $maxTotal := 58 -}}
+{{- $suffix := printf "%s%s" $sepTitle $brand -}}
+{{- $maxCore := sub $maxTotal (len $suffix) -}}
+{{- if lt $maxCore 0 }}{{- $maxCore = 0 -}}{{- end -}}
 
 {{- /* Трим по словам для названия поста */ -}}
 {{- $tRaw := .Title | plainify -}}
@@ -19,17 +28,17 @@
 {{- $ts.Set "acc" "" -}}
 {{- range (split $tRaw " ") -}}
   {{- $cand := cond (eq ($ts.Get "acc") "") . (printf "%s %s" ($ts.Get "acc") .) -}}
-  {{- if le (len $cand) 58 -}} {{- $ts.Set "acc" $cand -}} {{- end -}}
+  {{- if le (len $cand) $maxCore -}} {{- $ts.Set "acc" $cand -}} {{- end -}}
 {{- end -}}
 {{- $titleCore := cond (gt (len $tRaw) 0) (($ts.Get "acc") | default $tRaw) "" -}}
 
 <title>
-  {{- if eq .Kind "home" -}}
+  {{- if .IsHome -}}
+    {{- /* Главная: полный слоган */ -}}
     {{- $brandFull -}}
-  {{- else if eq .Kind "page" -}}
-    {{- if .Title -}}{{- $titleCore -}}{{- $sepTitle -}}{{- end -}}{{- $brand -}}
   {{- else -}}
-    {{- $brand -}}
+    {{- /* Посты/страницы: "Название — Короткий бренд" */ -}}
+    {{- if .Title -}}{{- $titleCore -}}{{- $sepTitle -}}{{- end -}}{{- $brand -}}
   {{- end -}}
 </title>
 
