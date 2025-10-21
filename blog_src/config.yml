@@ -1,26 +1,25 @@
-baseURL: "https://blog.nailak.com/"
-title: "Nailak Blog – Beauty and Wellness Tips"
-description: "Discover expert beauty advice from the Nailak team — learn how to use cuticle oil, strengthen nails, and create salon-quality results at home."
+baseURL: "https://luggage-scale.com/blog/"
+title: "uPatch"
+params:
+  tagline: "Luggage Scale"
+  description: "Travel smarter with real-time updates, expert packing guides, and practical tips for efficient, organized journeys."
 theme: "PaperMod"
-publishDir: "../docs"
+publishDir: "../blog"
 
-# URL настройки
 canonifyURLs: true
-relativeURLs: true
+relativeURLs: false
 uglyURLs: false
 layoutDir: "layouts"
 
 server:
   baseURLRedirects: false
-
 pagination:
   pagerSize: 10
-
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: true
 buildExpired: false
-enableGitInfo: true
+enableGitInfo: false
 
 frontmatter:
   date:
@@ -36,41 +35,88 @@ permalinks:
   posts: "/posts/:year/:month/:day/:slug/"
 
 outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON
-    - Sitemap
+  home: [HTML, RSS, JSON, Sitemap]
+  section: [HTML, RSS, Sitemap]
+  taxonomy: [HTML, RSS, Sitemap]
+  term: [HTML, RSS, Sitemap]
+  page: [HTML]
 
 taxonomies:
   category: categories
   tag: tags
 
 params:
-  disableAnchoredHeadings: true
   env: production
-  title: "Nailak Blog"
-  description: "Expert tips on nail and cuticle care, product insights, and self-care routines from Nailak — vegan, cruelty-free nail oil made in the USA."
-  keywords: ["nail care", "cuticle oil", "nail oil", "vegan nail oil", "nail health", "Nailak", "hand care", "natural oils", "vitamin E", "squalane"]
-  customFooterText: "© 2025 Nailak Blog. All rights reserved."
+  title: "uPatch Luggage Scale"
+  tagline: "Luggage Scale"
+  description: "Discover airline baggage limits, smart packing tips, and flight travel resources. Learn how to avoid overweight fees with the uPatch Luggage Scale — your reliable, battery-free travel companion."
+  keywords: ["airline baggage limits", "carry-on size guide", "checked luggage rules", "travel weight scale", "uPatch luggage scale", "smart packing tips", "flight baggage allowance", "overweight luggage fees", "travel essentials", "battery-free luggage scale"]
+  author: "uPatch Editorial"
+  customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
   defaultTheme: auto
   ShowReadingTime: true
   ShowWordCount: true
   centerTheme: true
-  author: "Nailak Editorial"
-
+  disableAnchoredHeadings: true
+  disableGA: true
   label:
-    text: "Nailak"
+    text: "Luggage Scale"
     icon: "favicon.svg"
-    iconHeight: 38
-
+    iconHeight: 32
   assets:
     favicon: "favicon.svg"
-
-  disableGA: true
   ShowRelatedPosts: true
   relatedPosts:
     count: 4
     threshold: 0
     includeNewer: true
     sortByDate: false
+
+privacy:
+  googleAnalytics:
+    anonymizeIP: true
+  youtube:
+    privacyEnhanced: true
+
+related:
+  threshold: 60
+  includeNewer: true
+  toLower: false
+  indices:
+    - name: tags
+      weight: 100
+    - name: categories
+      weight: 80
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+
+menu:
+  main:
+    - identifier: home
+      name: Home
+      url: "/"
+      weight: 1
+    - identifier: shop
+      name: Shop
+      url: "https://luggage-scale.com/shop.html"
+      weight: 2
+
+  footer:
+    - identifier: privacy
+      name: Privacy Policy
+      url: "/privacy-policy/"
+      weight: 1
+    - identifier: terms
+      name: Terms of Service
+      url: "/terms/"
+      weight: 2
+    - identifier: sitemap
+      name: Sitemap
+      url: "https://luggage-scale.com/blog/sitemap.xml"
+      weight: 3
