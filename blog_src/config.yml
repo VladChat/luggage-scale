@@ -1,10 +1,12 @@
-baseURL: "https://luggage-scale.com/blog/"
-title: "Luggage Scale"
+baseURL: "https://blog.nailak.com/"
+title: "Nailak Blog – Beauty and Wellness Tips"
+description: "Discover expert beauty advice from the Nailak team — learn how to use cuticle oil, strengthen nails, and create salon-quality results at home."
 theme: "PaperMod"
-publishDir: "../blog"
+publishDir: "../docs"
 
-canonifyURLs: false
-relativeURLs: false
+# URL настройки
+canonifyURLs: true
+relativeURLs: true
 uglyURLs: false
 layoutDir: "layouts"
 
@@ -18,8 +20,7 @@ enableRobotsTXT: true
 buildDrafts: false
 buildFuture: true
 buildExpired: false
-
-enableGitInfo: false  
+enableGitInfo: true
 
 frontmatter:
   date:
@@ -35,11 +36,11 @@ permalinks:
   posts: "/posts/:year/:month/:day/:slug/"
 
 outputs:
-  home: [HTML, RSS, JSON, Sitemap]
-  section: [HTML, RSS, Sitemap]
-  taxonomy: [HTML, RSS, Sitemap]
-  term: [HTML, RSS, Sitemap]
-  page: [HTML]
+  home:
+    - HTML
+    - RSS
+    - JSON
+    - Sitemap
 
 taxonomies:
   category: categories
@@ -48,76 +49,28 @@ taxonomies:
 params:
   disableAnchoredHeadings: true
   env: production
-  title: "uPatch Luggage Scale"
-  description: "Discover airline baggage limits, smart packing tips, and flight travel resources. Learn how to avoid overweight fees with the uPatch Luggage Scale — your reliable, battery-free travel companion."
-  keywords: ["airline baggage limits", "carry-on size guide", "checked luggage rules", "travel weight scale", "uPatch luggage scale", "smart packing tips", "flight baggage allowance", "overweight luggage fees", "travel essentials", "battery-free luggage scale"]
-  author: "uPatch Editorial"
-  customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
+  title: "Nailak Blog"
+  description: "Expert tips on nail and cuticle care, product insights, and self-care routines from Nailak — vegan, cruelty-free nail oil made in the USA."
+  keywords: ["nail care", "cuticle oil", "nail oil", "vegan nail oil", "nail health", "Nailak", "hand care", "natural oils", "vitamin E", "squalane"]
+  customFooterText: "© 2025 Nailak Blog. All rights reserved."
   defaultTheme: auto
   ShowReadingTime: true
   ShowWordCount: true
   centerTheme: true
+  author: "Nailak Editorial"
+
   label:
-    text: "Luggage Scale"
+    text: "Nailak"
     icon: "favicon.svg"
-    iconHeight: 32
+    iconHeight: 38
+
   assets:
     favicon: "favicon.svg"
-  disableGA: true
 
-  # 👇 вот эти две строки теперь точно работают
+  disableGA: true
   ShowRelatedPosts: true
   relatedPosts:
     count: 4
     threshold: 0
     includeNewer: true
     sortByDate: false
-
-privacy:
-  googleAnalytics:
-    anonymizeIP: true
-  youtube:
-    privacyEnhanced: true
-
-related:
-  threshold: 60          # чувствительность; можно 80 если хочешь более строгую релевантность
-  includeNewer: true     # разрешить искать и более новые статьи
-  toLower: false
-  indices:
-    - name: tags
-      weight: 100
-    - name: categories
-      weight: 80
-
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-  tableOfContents:
-    startLevel: 2
-    endLevel: 3
-
-menu:
-  main:
-    - identifier: home
-      name: Home
-      url: "/"
-      weight: 1
-    - identifier: shop
-      name: Shop
-      url: "../shop.html"
-      weight: 2
-
-  footer:
-    - identifier: privacy
-      name: Privacy Policy
-      url: "/privacy-policy/"
-      weight: 1
-    - identifier: terms
-      name: Terms of Service
-      url: "/terms/"
-      weight: 2
-    - identifier: sitemap
-      name: Sitemap
-      url: "/sitemap.xml"
-      weight: 3
