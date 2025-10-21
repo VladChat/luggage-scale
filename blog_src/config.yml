@@ -1,21 +1,25 @@
 baseURL: "https://luggage-scale.com/blog/"
+title: "Luggage Scale"
 theme: "PaperMod"
 publishDir: "../blog"
 
-canonifyURLs: true
+canonifyURLs: false
 relativeURLs: false
 uglyURLs: false
 layoutDir: "layouts"
 
 server:
   baseURLRedirects: false
+
 pagination:
   pagerSize: 10
+
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: true
 buildExpired: false
-enableGitInfo: false
+
+enableGitInfo: false  
 
 frontmatter:
   date:
@@ -42,10 +46,10 @@ taxonomies:
   tag: tags
 
 params:
+  disableAnchoredHeadings: true
   env: production
-  title: "uPatch"
-  tagline: "Luggage Scale"
-  description: "Travel smarter with real-time updates, expert packing guides, and practical tips for efficient, organized journeys. Luggage Scale"
+  title: "uPatch Luggage Scale"
+  description: "Get the latest travel updates, packing hacks, and smart advice for effortless, organized trips. uPatch Luggage Scale — your reliable, battery-free travel companion."
   keywords: ["airline baggage limits", "carry-on size guide", "checked luggage rules", "travel weight scale", "uPatch luggage scale", "smart packing tips", "flight baggage allowance", "overweight luggage fees", "travel essentials", "battery-free luggage scale"]
   author: "uPatch Editorial"
   customFooterText: "© 2025 Luggage Scale Blog. All rights reserved."
@@ -53,14 +57,15 @@ params:
   ShowReadingTime: true
   ShowWordCount: true
   centerTheme: true
-  disableAnchoredHeadings: true
-  disableGA: true
   label:
     text: "Luggage Scale"
     icon: "favicon.svg"
-    iconHeight: 32
+    iconHeight: 38
   assets:
     favicon: "favicon.svg"
+  disableGA: true
+
+  # 👇 вот эти две строки теперь точно работают
   ShowRelatedPosts: true
   relatedPosts:
     count: 4
@@ -75,8 +80,8 @@ privacy:
     privacyEnhanced: true
 
 related:
-  threshold: 60
-  includeNewer: true
+  threshold: 60          # чувствительность; можно 80 если хочешь более строгую релевантность
+  includeNewer: true     # разрешить искать и более новые статьи
   toLower: false
   indices:
     - name: tags
@@ -100,7 +105,7 @@ menu:
       weight: 1
     - identifier: shop
       name: Shop
-      url: "https://luggage-scale.com/shop.html"
+      url: "../shop.html"
       weight: 2
 
   footer:
@@ -114,5 +119,5 @@ menu:
       weight: 2
     - identifier: sitemap
       name: Sitemap
-      url: "https://luggage-scale.com/blog/sitemap.xml"
+      url: "/sitemap.xml"
       weight: 3
