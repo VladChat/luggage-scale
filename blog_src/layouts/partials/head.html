@@ -1,4 +1,4 @@
-﻿<!-- layouts/partials/head.html -->
+<!-- layouts/partials/head.html -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,12 +9,20 @@
 {{- end }}
 
 {{- /* ===== Title (safe word-trim, total ≤ ~60) ===== */ -}}
-{{- $brand := site.Title -}}
-{{- $sep := " " -}}
-{{- $suffix := printf "%s%s" $sep $brand -}}
+{{- /* Бренды: полный (для главной) и короткий (для постов) */ -}}
+{{- $brandFull := site.Title -}}                               {{/* e.g. "Nailak Blog – Beauty and Wellness Tips" */}}
+{{- $brand := site.Params.title | default site.Title -}}       {{/* e.g. "Nailak Blog" (короткий бренд) */}}
+
+{{- /* Разделитель между названием поста и брендом */ -}}
+{{- $sepTitle := " — " -}}
+
+{{- /* Ограничение длины только для ЧАСТИ поста, чтобы не резать бренд */ -}}
 {{- $maxTotal := 58 -}}
+{{- $suffix := printf "%s%s" $sepTitle $brand -}}
 {{- $maxCore := sub $maxTotal (len $suffix) -}}
 {{- if lt $maxCore 0 }}{{- $maxCore = 0 -}}{{- end -}}
+
+{{- /* Трим по словам для названия поста */ -}}
 {{- $tRaw := .Title | plainify -}}
 {{- $ts := newScratch -}}
 {{- $ts.Set "acc" "" -}}
@@ -23,16 +31,65 @@
   {{- if le (len $cand) $maxCore -}} {{- $ts.Set "acc" $cand -}} {{- end -}}
 {{- end -}}
 {{- $titleCore := cond (gt (len $tRaw) 0) (($ts.Get "acc") | default $tRaw) "" -}}
-<title>{{- if .IsHome -}}{{- $brand -}}{{- else -}}{{- if .Title -}}{{- $titleCore -}}{{- $sep -}}{{- end -}}{{- $brand -}}{{- end -}}</title>
+
+<title>
+  {{- if .IsHome -}}
+    {{- /* Главная: полный слоган */ -}}
+    {{- $brandFull -}}
+  {{- else -}}
+    {{- /* Посты/страницы: "Название — Короткий бренд" */ -}}
+    {{- if .Title -}}{{- $titleCore -}}{{- $sepTitle -}}{{- end -}}{{- $brand -}}
+  {{- end -}}
+</title>
+
 
 {{- /* ===== Meta ===== */ -}}
-{{- if .IsHome }}
-  {{ with site.Params.keywords -}}<meta name="keywords" content="{{- range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">{{- end }}
-{{- else }}
-  <meta name="keywords" content="{{ if .Params.keywords -}}
-      {{- range $i, $e := .Params.keywords }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- else }}
-      {{- range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}{{ $e }}{{ end }} {{- end -}}">
-{{- end }}
+
+<!-- 🔽 BEGIN FIXED KEYWORDS BLOCK (stable, no apply) -->
+{{- $kws := slice -}}
+{{- if .IsHome -}}
+  {{- if site.Params.keywords -}}
+    {{- if (reflect.IsSlice site.Params.keywords) -}}
+      {{- $kws = site.Params.keywords -}}
+    {{- else -}}
+      {{- $kws = (split site.Params.keywords ",") -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- if .Params.keywords -}}
+    {{- if (reflect.IsSlice .Params.keywords) -}}
+      {{- $kws = .Params.keywords -}}
+    {{- else -}}
+      {{- $kws = (split .Params.keywords ",") -}}
+    {{- end -}}
+  {{- else if .Params.tags -}}
+    {{- $kws = .Params.tags -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* trim + фильтрация пустых + уникализация */ -}}
+{{- $clean := slice -}}
+{{- range $kws -}}
+  {{- $v := trim . " \t\r\n" -}}
+  {{- if $v -}}
+    {{- $clean = $clean | append $v -}}
+  {{- end -}}
+{{- end -}}
+{{- $clean = uniq $clean -}}
+
+{{- /* ручная нормализация без apply */ -}}
+{{- $normalized := slice -}}
+{{- range $clean -}}
+  {{- $normalized = $normalized | append (trim . " \t\r\n") -}}
+{{- end -}}
+
+{{- if gt (len $normalized) 0 -}}
+  <meta name="keywords" content="{{ delimit $normalized ", " | safeHTML }}">
+{{- end -}}
+<!-- 🔼 END FIXED KEYWORDS BLOCK -->
+
+
+
 
 {{- /* ===== Description (safe word-trim, ≤ ~149, no ellipsis) ===== */ -}}
 {{- $ds := newScratch -}}
@@ -100,7 +157,7 @@
 {{- $stylesheet := (slice $license_css $core $extended) | resources.Concat "assets/css/stylesheet.css"  }}
 
 {{- if not site.Params.assets.disableFingerprinting }}
-  {{- $stylesheet := $stylesheet | fingerprint }}
+  {{- $stylesheet := $stylesheet | resources.Fingerprint }}
   <link crossorigin="anonymous" href="{{ $stylesheet.RelPermalink }}" integrity="{{ $stylesheet.Data.Integrity }}" rel="preload stylesheet" as="style">
 {{- else }}
   <link crossorigin="anonymous" href="{{ $stylesheet.RelPermalink }}" rel="preload stylesheet" as="style">
@@ -113,7 +170,7 @@
   {{- $fusejs := resources.Get "js/fuse.basic.min.js" }}
   {{- $license_js := resources.Get "js/license.js" }}
   {{- if not site.Params.assets.disableFingerprinting }}
-    {{- $search := (slice $fusejs $license_js $fastsearch ) | resources.Concat "assets/js/search.js" | fingerprint }}
+    {{- $search := (slice $fusejs $license_js $fastsearch ) | resources.Concat "assets/js/search.js" | resources.Fingerprint }}
     <script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}"></script>
   {{- else }}
     {{- $search := (slice $fusejs $fastsearch ) | resources.Concat "assets/js/search.js" }}
@@ -175,5 +232,7 @@
   {{- partial "google_analytics.html" . }}
   {{- partial "templates/opengraph.html" . }}
   {{- partial "templates/twitter_cards.html" . }}
-  {{- partial "templates/schema_json.html" . }}
+  {{- if (and (not .Params.blogPosting) (not .Params.faq)) -}}
+    {{- partial "templates/schema_json.html" . }}
+  {{- end -}}
 {{- end -}}
