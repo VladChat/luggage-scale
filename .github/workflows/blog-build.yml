@@ -14,10 +14,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: blog-build-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   build:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
@@ -36,59 +32,54 @@ jobs:
           hugo-version: '0.150.1'
           extended: true
 
-      # CNAME готовим ДО сборки (попадёт в /docs автоматически)
-      - name: Ensure CNAME before build
+      # КЛЮЧ: дать Hugo доступ к истории коммитов репозитория из blog_src/
+      - name: Link .git into blog_src for GitInfo
         run: |
-          mkdir -p blog_src/static
-          echo "blog.nailak.com" > blog_src/static/CNAME
-          echo "CNAME prepared inside static/"
+          if [ ! -e "blog_src/.git" ]; then
+            ln -s "$(pwd)/.git" "blog_src/.git"
+          fi
+          git -C blog_src rev-parse --is-inside-work-tree
+          git -C blog_src log -1 --format="Git last commit in blog_src: %h %cI"
 
-      # Очистка Hugo cache перед сборкой (важно для обновления head.html и partials)
-      - name: Clean Hugo cache
-        run: |
-          echo "Cleaning Hugo generated resources..."
-          rm -rf blog_src/resources/_gen
-          rm -rf blog_src/.hugo_cache
-          echo "Cache cleaned."
-
-      # Сборка из blog_src в /docs
-      - name: Build Hugo → /docs
+      # Собираем из blog_src; publishDir берём из config.yml (../blog)
+      - name: Build Hugo → /blog
         working-directory: blog_src
         run: |
-          mkdir -p ../docs
-          hugo --destination ../docs \
-               --minify --cleanDestinationDir --enableGitInfo \
-               --noBuildLock
-          # Проверка sitemap по publishDir ("../docs")
-          test -f ../docs/sitemap.xml && echo "sitemap OK" || (echo "sitemap MISSING" && exit 1)
+          # Полная пересборка + GitInfo
+          hugo --minify --cleanDestinationDir --enableGitInfo
+          # Проверка sitemap по publishDir ("../blog")
+          test -f ../blog/sitemap.xml && echo "sitemap OK" || (echo "sitemap MISSING" && exit 1)
 
       - name: Debug sitemap files
         run: |
           echo "Sitemap files in build:"
-          find docs -type f -name "sitemap*.xml" -printf "%p (%TY-%Tm-%Td %TH:%TM)\n"
+          find blog -type f -name "sitemap*.xml" -printf "%p (%TY-%Tm-%Td %TH:%TM)\n"
 
+      # Показываем самую свежую дату в sitemap (а не первые строки)
       - name: Show newest <lastmod> in sitemap
         run: |
           echo "==== newest <lastmod> in sitemap ===="
-          grep -oP "(?<=<lastmod>).*?(?=</lastmod>)" docs/sitemap.xml | sort | tail -n 1 || echo "no lastmod found"
+          grep -oP "(?<=<lastmod>).*?(?=</lastmod>)" blog/sitemap.xml | sort | tail -n 1 || echo "no lastmod found"
 
+      # Для контекста — первые строки
       - name: Show sitemap first lines
         run: |
           echo "==== sitemap preview (first 10 lines) ===="
-          head -n 10 docs/sitemap.xml || echo "sitemap not found"
+          head -n 10 blog/sitemap.xml || echo "sitemap not found"
 
+      # Доп. sanity-check: нет ли exclude и попадает ли свежий пост
       - name: Sanity check (sitemap exclude + recent content presence)
         run: |
           echo "==== search for 'sitemap: exclude' in content ===="
           (grep -RIn "sitemap:" blog_src/content || true) | sed -n '1,200p'
           (grep -RIn "exclude:" blog_src/content | grep -i sitemap || true) | sed -n '1,200p'
           echo "==== recent posts in output (last 3 by mtime) ===="
-          find docs/posts -type d -printf "%T@ %p\n" | sort -n | tail -n 3 | awk '{print $2}'
+          find blog/posts -type d -printf "%T@ %p\n" | sort -n | tail -n 3 | awk '{print $2}'
 
-      - name: Commit & Push built docs
+      - name: Commit & Push built blog
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -Af docs/
-          git commit -m "Update docs build [skip ci]" || echo "No changes"
+          git add -Af blog/
+          git commit -m "Update blog build [skip ci]" || echo "No changes"
           git push
