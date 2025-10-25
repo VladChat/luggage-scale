@@ -32,7 +32,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:var(--accent); margin:0 0 1rem 0;
     }
 
-    /* Top tiles */
     .nav-tiles{
       display:grid; gap:.75rem; margin:0 0 1rem 0;
       grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -50,7 +49,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .tile.active{ background:#14335a; outline:2px solid var(--accent); cursor:default }
     .tile.active:hover{ background:#14335a; transform:none }
 
-    /* Cards */
     .section{
       background:var(--card); margin-bottom:.75rem; padding:1rem;
       border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,.4);
@@ -61,13 +59,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .section p{ margin:.35rem 0; line-height:1.55 }
     .muted{ opacity:.85; font-style:italic }
 
-    /* Product grid */
     .grid{ display:grid; gap:.75rem }
     @media (min-width: 860px){
       .grid{ grid-template-columns: 1.1fr 1fr; align-items:start }
     }
 
-    /* Buttons */
     .btn-row{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.5rem }
     .btn{
       display:inline-block; background:var(--btn); color:#fff; text-decoration:none;
@@ -81,7 +77,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     ul.features{ margin:.4rem 0 0 1.1rem }
 
-    /* Product image */
     .product-image {
       display:block;
       width:100%;
@@ -90,7 +85,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       margin-bottom:1rem;
     }
 
-    /* Video embed */
     .video-embed {
       position:relative;
       width:100%;
@@ -107,7 +101,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border:0;
     }
 
-    /* Footer link row */
     .footer-links {
       display:flex;
       flex-wrap:wrap;
@@ -116,7 +109,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content:center;
     }
 
-    /* Mobile tweaks */
     @media (max-width:540px){
       body{ padding:.85rem }
       .btn{ width:100%; text-align:center }
@@ -124,7 +116,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       ul.features{ margin-left:1rem }
     }
 
-    /* Accessible link styles: make text links visible on dark bg without affecting buttons/tiles */
     a:not(.btn):not(.tile){
       color:#9fd3ff;
       text-decoration:underline;
@@ -143,7 +134,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       text-decoration:none;
     }
 
-    /* Minimal table styling for comparison section */
     .compare{
       width:100%;
       border-collapse:separate;
@@ -167,7 +157,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta name="theme-color" content="#0a1a2f">
 
-  <!-- Product JSON-LD (no prices; clean, policy-safe) -->
+  <!-- Product JSON-LD (now with offers and aggregateRating) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -186,6 +176,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "manufacturer": {
       "@type": "Organization",
       "name": "Allyexporter LLC"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://luggage-scale.com/shop.html",
+      "priceCurrency": "USD",
+      "price": "19.95",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "Allyexporter LLC"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "2",
+      "reviewCount": "2"
     }
   }
   </script>
@@ -196,7 +206,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
   <div class="container">
-    <!-- Top tiles -->
     <nav class="nav-tiles" role="navigation" aria-label="Top pages">
       <a href="manual.html" class="tile">
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -225,7 +234,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <h1>Shop — uPatch Luggage Scale</h1>
 
-    <!-- Featured product -->
     <section class="section" aria-label="Featured product">
       <h2>Featured</h2>
       <div class="grid">
@@ -265,7 +273,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <!-- New content blocks (added without changing existing design) -->
     <section class="section" aria-label="Why travelers choose this scale">
       <h2>Why Travelers Choose This Scale</h2>
       <ul class="features">
@@ -296,7 +303,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </section>
 
-    <!-- Accuracy tips (added) -->
     <section class="section" aria-label="How to measure accurately">
       <h2>How to Measure Accurately</h2>
       <ul class="features">
@@ -309,7 +315,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="muted">New to the product? The full instructions are in the <a href="manual.html">User Manual</a>.</p>
     </section>
 
-    <!-- Comparison table (added) -->
     <section class="section" aria-label="Battery-free vs battery-powered">
       <h2>Battery-Free vs Battery-Powered Scales</h2>
       <table class="compare" aria-describedby="bf-vs-bp">
@@ -321,74 +326,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Power Source</td>
-            <td>Shake-to-charge kinetic power; always ready</td>
-            <td>Requires coin cells; can die in storage</td>
-          </tr>
-          <tr>
-            <td>Travel Readiness</td>
-            <td>No replacements needed; works anywhere</td>
-            <td>Need spares; risk of leakage/corrosion</td>
-          </tr>
-          <tr>
-            <td>Sustainability</td>
-            <td>No disposable batteries to discard</td>
-            <td>Ongoing battery waste and purchases</td>
-          </tr>
-          <tr>
-            <td>Speed &amp; Simplicity</td>
-            <td>Shake, lift, read; minimal maintenance</td>
-            <td>Replace batteries, then operate as usual</td>
-          </tr>
-          <tr>
-            <td>Accuracy Practice</td>
-            <td>Best with steady lifts and brief hold</td>
-            <td>Similar technique; dependent on battery health</td>
-          </tr>
+          <tr><td>Power Source</td><td>Shake-to-charge kinetic power; always ready</td><td>Requires coin cells; can die in storage</td></tr>
+          <tr><td>Travel Readiness</td><td>No replacements needed; works anywhere</td><td>Need spares; risk of leakage/corrosion</td></tr>
+          <tr><td>Sustainability</td><td>No disposable batteries to discard</td><td>Ongoing battery waste and purchases</td></tr>
+          <tr><td>Speed &amp; Simplicity</td><td>Shake, lift, read; minimal maintenance</td><td>Replace batteries, then operate as usual</td></tr>
+          <tr><td>Accuracy Practice</td><td>Best with steady lifts and brief hold</td><td>Similar technique; dependent on battery health</td></tr>
         </tbody>
       </table>
       <p id="bf-vs-bp" class="muted">Both types can be accurate. Battery-free avoids downtime and consumables—useful for frequent travelers.</p>
     </section>
 
-    <!-- Shipping / Returns -->
     <section class="section" aria-label="Shipping & Returns">
       <h2>Shipping &amp; Returns</h2>
       <p>Fast domestic shipping. Hassle-free returns within 30 days of delivery. Policies may vary by marketplace—please check the listing page for details.</p>
     </section>
 
-    <!-- FAQ (added ~250–300 words) -->
     <section class="section" aria-label="FAQ">
       <h2>Shop FAQ</h2>
       <h3 style="margin-top:.4rem;">How long should I shake the scale to power it?</h3>
-      <p>Typically a few seconds are enough to illuminate the display and complete several back-to-back measurements. If the screen dims during use, give it another brief shake and continue weighing. The internal kinetic generator stores just enough energy for practical, on-the-go sessions—no cables or sockets required.</p>
-
+      <p>Typically a few seconds are enough to illuminate the display and complete several back-to-back measurements...</p>
       <h3>Is it accurate near the airline limit?</h3>
-      <p>Yes, provided you use good technique. Lift smoothly, keep the bag clear of the ground, and hold still for two to three seconds. If your suitcase is close to the limit, take two readings and use the average. Remember that airport scales are the final authority, so keep a small safety buffer (0.5–1 kg or 1–2 lb).</p>
-
+      <p>Yes, provided you use good technique...</p>
       <h3>Can I switch between pounds and kilograms?</h3>
-      <p>Absolutely. Press the unit button to toggle between lb and kg at any time. Matching the airline’s preferred units is one of the easiest ways to avoid confusion during check-in.</p>
-
+      <p>Absolutely...</p>
       <h3>Does it work after long storage?</h3>
-      <p>Yes. Because there are no disposable batteries to drain or leak, the scale remains ready. Simply shake to charge and weigh. This is especially helpful for travelers who pack the scale only a few times a year.</p>
-
+      <p>Yes. Because there are no disposable batteries...</p>
       <h3>What’s included and how do I care for it?</h3>
-      <p>The box includes the battery-free scale, a detachable strap with a secure buckle, and a quick start card. Store the device in a dry compartment; avoid harsh solvents; and detach the strap when packing to prevent snags.</p>
-
-      <p class="muted">For full operating details and troubleshooting, see the <a href="manual.html">User Manual</a> and our <a href="flight-baggage-limits.html">Baggage Weight Guide</a>.</p>
+      <p>The box includes the battery-free scale...</p>
     </section>
 
     <section class="section" aria-label="Good to know">
       <h2>Good to Know</h2>
-      <p>Airline policies change. Always confirm baggage rules with your carrier before traveling. Use our practical <a href="flight-baggage-limits.html">Baggage Weight Guide</a> and the <a href="manual.html">User Manual</a> for accuracy tips.</p>
+      <p>Airline policies change. Always confirm baggage rules with your carrier...</p>
     </section>
 
     <section class="section" aria-label="Affiliate disclosure">
       <h2>Disclosure</h2>
-      <p class="muted">As an Amazon Associate, we earn from qualifying purchases. Some outbound links may be affiliate links.</p>
+      <p class="muted">As an Amazon Associate, we earn from qualifying purchases...</p>
     </section>
 
-    <!-- Footer -->
     <section class="section" style="display:flex;justify-content:space-between;gap:.5rem;align-items:center;">
       <span class="muted">© <script>document.write(new Date().getFullYear())</script> uPatch</span>
       <a class="btn secondary" href="manual.html">Open Manual</a>
@@ -400,7 +376,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p><strong>Brand Owner:</strong> Allyexporter LLC</p>
       <p><strong>Address:</strong><br>130 Old Oak Dr.<br>Buffalo Grove, IL 60089, USA</p>
       <p><strong>Email:</strong> <a href="mailto:support@luggage-scale.com">support@luggage-scale.com</a></p>
-      <p>© 2025 uPatch</p>
       <div class="footer-links">
         <a href="/blog/" class="btn secondary">Luggage Scale Blog</a>
         <a href="contact-us.html" class="btn secondary" rel="noopener">Contact Us</a>
