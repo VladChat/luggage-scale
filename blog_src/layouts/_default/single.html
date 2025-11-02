@@ -37,7 +37,7 @@
 
 
   </header>
-  {{ partial "custom/aff-rotator.html" . }}
+   <!--   {{ partial "custom/aff-rotator.html" . }} -->
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false -}}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) -}}
 
@@ -60,7 +60,7 @@
   <footer class="post-footer">
 
     <!-- 🔸 Рекламный блок (Affiliate) — вместо тегов и категорий -->
-    {{ partial "custom/aff-rotator.html" . }}
+     <!--   {{ partial "custom/aff-rotator.html" . }} -->
 
     {{/* ──────────────────────────────────────────────────────────────
        БЛОК ТЕГОВ И КАТЕГОРИЙ ОТКЛЮЧЁН (оставлен для истории)
@@ -125,3 +125,4 @@
 </article>
 
 {{- end -}}
+
