@@ -1,3 +1,7 @@
+// ============================================================
+// File: blog_src/assets/js/custom/accordion.js
+// ============================================================
+
 document.addEventListener("DOMContentLoaded", function () {
   const postContent = document.querySelector(".post-content");
   if (!postContent) return;
@@ -10,7 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (node.tagName === "H2") {
       if (cur) sections.push(cur);
       cur = { h: node, body: [] };
-    } else if (cur) cur.body.push(node);
+    } else if (cur) {
+      cur.body.push(node);
+    }
   });
   if (cur) sections.push(cur);
   if (sections.length < 2) return;
@@ -18,13 +24,15 @@ document.addEventListener("DOMContentLoaded", function () {
   postContent.innerHTML = "";
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const SCROLL_OFFSET = parseInt(getComputedStyle(document.documentElement)
-    .getPropertyValue("--accordion-offset")) || 96;
+  const SCROLL_OFFSET =
+    parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue("--accordion-offset")
+    ) || 96;
 
   sections.forEach((sec, idx) => {
     const wrapper = document.createElement("section");
     wrapper.className = "accordion-section" + (idx === 0 ? " open" : "");
-    wrapper.dataset.status = (idx === 0) ? "reading" : "toread";
+    wrapper.dataset.status = idx === 0 ? "reading" : "toread";
     wrapper.style.scrollMarginTop = SCROLL_OFFSET + "px";
 
     const header = document.createElement("button");
@@ -43,52 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
     content.style.overflow = "hidden";
     content.style.transition = "max-height 320ms cubic-bezier(.2,.7,.3,1)";
     content.style.maxHeight = "0px";
+
     sec.body.forEach(el => content.appendChild(el));
-	
-// 🔸 Вставляем рекламный блок после первой секции (idx === 0)
-if (idx === 0) {
-  const aff = document.createElement("div");
-  aff.innerHTML = `
-    <div data-aff-rotator
-         data-json="/blog/aff/aff-cards.json"
-         data-img-base="/blog/aff/img/88"
-         data-img-base2x="/blog/aff/img/176"
-         data-mode="random"
-         data-count="1"></div>
-  `;
-  content.appendChild(aff);
-
-  // 🔹 Принудительно запустить ротатор после вставки
-  if (window.affRotatorRun) {
-    window.affRotatorRun();
-  } else if (window.runAffRotator) {
-    window.runAffRotator();
-  } else {
-    try {
-      const script = document.createElement("script");
-      script.src = "/blog/aff/aff-rotator.js";
-      document.body.appendChild(script);
-    } catch (e) {
-      console.warn("Aff rotator re-init failed:", e);
-    }
-  }
-
-  // 🔹 Пересчёт max-height, когда ротатор подгрузил контент
-  // Проверяем каждые 300 мс, пока баннер не займёт реальную высоту
-  const fixHeight = setInterval(() => {
-    if (wrapper.classList.contains("open")) {
-      const visibleHeight = content.scrollHeight;
-      if (visibleHeight > parseInt(content.style.maxHeight || 0)) {
-        content.style.maxHeight = visibleHeight + "px";
-      }
-    }
-  }, 300);
-
-  // Останавливаем проверку через 3 секунды
-  setTimeout(() => clearInterval(fixHeight), 3000);
-}
-
-	
 
     requestAnimationFrame(() => {
       if (idx === 0) {
@@ -113,7 +77,7 @@ if (idx === 0) {
       if (willOpen) {
         wrapper.classList.add("open");
         content.style.maxHeight = "0px";
-        content.offsetHeight;
+        content.offsetHeight; // force reflow
         content.style.maxHeight = content.scrollHeight + "px";
 
         const scrollAfter = () =>
