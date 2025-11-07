@@ -1,89 +1,41 @@
-# ============================================================
-# File: .github/workflows/blog-writer.yml
-# Purpose: Run the blog writer 2–4 random times per day
-# ============================================================
-
 name: Blog Writer
 
 on:
-  workflow_dispatch:             # позволяет запускать вручную при необходимости
+  workflow_dispatch:
   schedule:
-    - cron: '0 14 * * *'         # каждый день в 13:00 UTC (~09:00 по CST)
-                                 # можно изменить при необходимости, но оставляем 1 запуск в день
+    - cron: '0 13 * * *'   # каждый день в 13:00 UTC
 
 permissions:
   contents: write
-
-concurrency:
-  group: blog-writer
-  cancel-in-progress: true
 
 jobs:
   writer:
     runs-on: ubuntu-latest
 
     steps:
-      # === 1. Проверяем и скачиваем репозиторий ===
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # === 2. Настраиваем Python ===
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
-      # === 3. Устанавливаем зависимости ===
-      - name: Install Python dependencies
-        env:
-          PIP_DISABLE_PIP_VERSION_CHECK: '1'
-          PIP_NO_INPUT: '1'
+      - name: Install Python deps
         run: |
           python -m pip install --upgrade pip
           pip install -r blog_src/scripts/requirements.txt
 
-      # === 4. Запускаем writer случайное количество раз с паузами ===
-      - name: Run writer randomly 1–2 times during the day
+      - name: Run generator (create Markdown posts)
         env:
-          TZ: America/Chicago   # чтобы sleep ориентировался по центральному времени
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          # ===========================================
-          # 🔹 Количество запусков в день (изменить по желанию)
-          # Здесь выбирается случайное число от 0 до 2
-          runs=$((1 + RANDOM % 2))
-          echo "📅 Will run the blog writer $runs times today."
+          python -m blog_src.scripts.writer.main
 
-          # 🔹 Минимальная и максимальная задержка между запусками (в минутах)
-          # min_delay — минимальное ожидание (например, 90 мин)
-          # max_delay — максимальное ожидание (например, 360 мин = 6 часов)
-          min_delay=45
-          max_delay=360
-
-          # ===========================================
-          for ((i=1; i<=runs; i++)); do
-            if [ $i -gt 1 ]; then
-              # для второго и последующих запусков добавляем случайную задержку
-              delay=$((min_delay + RANDOM % (max_delay - min_delay)))
-              echo "⏳ Waiting $delay minutes before next run..."
-              sleep $((delay * 60))
-            fi
-
-            echo "🕒 $(date '+%H:%M:%S') — starting blog writer run #$i..."
-            python blog_src/scripts/main.py || echo "⚠️ Run #$i failed, continuing..."
-            echo "✅ Completed run #$i at $(date '+%H:%M:%S')."
-            echo "----------------------------------------"
-          done
-
-      # === 5. Проверяем синтаксис после выполнения ===
-      - name: Syntax check
-        run: python -m py_compile $(find blog_src/scripts -name '*.py')
-
-      # === 6. Коммитим новые посты, если они были созданы ===
-      - name: Commit and push new posts
+      - name: Commit & Push new posts
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog_src/content/posts || true
-          git commit -m "🤖 Auto-generated new blog posts" || echo "No new posts to commit"
-          git push || echo "Nothing to push"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add blog_src/content/posts blog_src/data/state.json
+          git commit -m "Add new blog post [skip ci]" || echo "No changes"
+          git push
