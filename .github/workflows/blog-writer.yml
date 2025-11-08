@@ -2,8 +2,8 @@ name: Blog Writer
 
 on:
   workflow_dispatch:
-  # schedule:                    # ⛔ отключено — расписание перенесено в отдельный blog-trigger.yml
-  #   - cron: '0 13,14,15,16 * * *'   # (удалено, чтобы не дублировался запуск)
+  schedule:
+    - cron: '0 13 * * *'   # каждый день в 13:00 UTC
 
 permissions:
   contents: write
